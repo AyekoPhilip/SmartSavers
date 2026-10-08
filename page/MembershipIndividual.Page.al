@@ -1174,32 +1174,8 @@ page 50791 "Membership Individual"
         HrDates: Codeunit "Date Conversion";
     begin
 
-        lblIDVisible := true;
-        lblDOBVisible := true;
-        lblRegNoVisible := false;
-        lblRegDateVisible := false;
-        lblGenderVisible := true;
-        txtGenderVisible := true;
-        lblMaritalVisible := true;
-        txtMaritalVisible := true;
-
-        if RecoveryCategoryReviewRequired() then begin
-            lblIDVisible := false;
-            lblDOBVisible := false;
-            lblRegNoVisible := true;
-            lblRegDateVisible := true;
-            lblGenderVisible := false;
-            txtGenderVisible := false;
-            lblMaritalVisible := false;
-            txtMaritalVisible := false;
-        end;
-
-        if Rec."Global Dimension 1 Code" <> 'MICRO' then begin
-            GroupDetailsVisible := false;
-            txtMaritalVisible := false;
-        end else begin
-            GroupDetailsVisible := true;
-        end;
+        // Member roles do not determine whether an account is a group.
+        GroupControls();
 
         if Rec."Date of Birth" <> 0D then
             MembAge := HrDates.DetermineAge(Rec."Date of Birth", Today) else
@@ -1217,32 +1193,8 @@ page 50791 "Membership Individual"
 
     end;
 
-    trigger OnInit()
-    begin
-
-        txtMaritalVisible := true;
-        lblMaritalVisible := true;
-        txtGenderVisible := true;
-        lblGenderVisible := true;
-        lblRegDateVisible := true;
-        lblRegNoVisible := true;
-        lblDOBVisible := true;
-        lblIDVisible := true;
-    end;
-
-    trigger OnModifyRecord(): Boolean
-    begin
-        if Rec."Global Dimension 1 Code" <> 'MICRO' then begin
-            GroupDetailsVisible := false;
-            txtMaritalVisible := false;
-        end else begin
-            GroupDetailsVisible := true;
-        end;
-    end;
-
     trigger OnOpenPage()
     begin
-        //RecoveryCategoryReviewRequired();
         LoanArrear := 0;
 
         if Rec.Hide = true then begin
@@ -1251,36 +1203,12 @@ page 50791 "Membership Individual"
                     Error('You do not have permissions to view this account information.');
             end;
         end;
-        GroupControls;
-        if Rec."Global Dimension 1 Code" <> 'MICRO' then begin
-            GroupDetailsVisible := false;
-            txtMaritalVisible := false;
-        end else begin
-            GroupDetailsVisible := true;
-        end;
+        GroupControls();
     end;
 
     var
-
-        lblIDVisible: Boolean;
-
-        lblDOBVisible: Boolean;
-
-        lblRegNoVisible: Boolean;
-
-        lblRegDateVisible: Boolean;
-
-        lblGenderVisible: Boolean;
-
-        txtGenderVisible: Boolean;
-
-        lblMaritalVisible: Boolean;
-
-        txtMaritalVisible: Boolean;
         ErrorOnTxtUnpApplic: Label 'There is still open/pending application %1 that is still in the process.';
         GroupAccout: Boolean;
-        GroupDetails: Boolean;
-        GroupDetailsVisible: Boolean;
         CustMembr: Record Member;
         UserSetup: Record "User Setup";
         AccountSignatories: Record "Account Signatories";
@@ -1294,13 +1222,7 @@ page 50791 "Membership Individual"
 
     local procedure GroupControls()
     begin
-        if Rec."Group Type" <> Rec."Group Type"::" " then begin
-            GroupAccout := false;
-            GroupDetails := true;
-        end else begin
-            GroupAccout := true;
-            GroupDetails := false;
-        end;
+        GroupAccout := Rec."Group Type" = Rec."Group Type"::" ";
     end;
 
     local procedure ConfirmPost(): Integer
@@ -1320,12 +1242,6 @@ page 50791 "Membership Individual"
         if Selection = 0 then
             exit;
         exit(PassInt);
-    end;
-    // User-requested recovery block: donor ProductDimension has no confirmed mapping
-    // to SmartSaver Member/Staff Members/Board Members/Delegates categories.
-    local procedure RecoveryCategoryReviewRequired(): Boolean
-    begin
-        Error('This membership page is temporarily blocked during SmartSaver recovery. Its account-category logic must be reviewed before use.');
     end;
 }
 

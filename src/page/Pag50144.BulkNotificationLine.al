@@ -5,6 +5,7 @@ page 50144 "Bulk Notification Line"
     SourceTable = "Bulk Notification Line";
     ApplicationArea = All;
     Editable = false;
+    ModifyAllowed = false;
     InsertAllowed = false;
     DeleteAllowed = false;
     layout
@@ -21,8 +22,4 @@ page 50144 "Bulk Notification Line"
             }
         }
     }
-    trigger OnOpenPage()
-    begin
-        Error('Bulk notifications are temporarily blocked during SmartSaver recovery until the original notification logic is reviewed.');
-    end;
 }
