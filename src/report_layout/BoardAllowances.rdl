@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="Startdate">
+          <DataField>Startdate</DataField>
+        </Field>
+        <Field Name="endDate">
+          <DataField>endDate</DataField>
+        </Field>
+        <Field Name="Taxamount">
+          <DataField>Taxamount</DataField>
+        </Field>
+        <Field Name="TaxamountFormat">
+          <DataField>TaxamountFormat</DataField>
+        </Field>
+        <Field Name="IESATAXAMOUNT">
+          <DataField>IESATAXAMOUNT</DataField>
+        </Field>
+        <Field Name="IESATAXAMOUNTFormat">
+          <DataField>IESATAXAMOUNTFormat</DataField>
+        </Field>
+        <Field Name="BOSATAXAMOUNT">
+          <DataField>BOSATAXAMOUNT</DataField>
+        </Field>
+        <Field Name="BOSATAXAMOUNTFormat">
+          <DataField>BOSATAXAMOUNTFormat</DataField>
+        </Field>
+        <Field Name="BoardSittingallowances">
+          <DataField>BoardSittingallowances</DataField>
+        </Field>
+        <Field Name="BoardSittingallowancesFormat">
+          <DataField>BoardSittingallowancesFormat</DataField>
+        </Field>
+        <Field Name="staffTravellAllowances">
+          <DataField>staffTravellAllowances</DataField>
+        </Field>
+        <Field Name="staffTravellAllowancesFormat">
+          <DataField>staffTravellAllowancesFormat</DataField>
+        </Field>
+        <Field Name="BoardsAgmAllowances">
+          <DataField>BoardsAgmAllowances</DataField>
+        </Field>
+        <Field Name="BoardsAgmAllowancesFormat">
+          <DataField>BoardsAgmAllowancesFormat</DataField>
+        </Field>
+        <Field Name="Boardspsittingallowances">
+          <DataField>Boardspsittingallowances</DataField>
+        </Field>
+        <Field Name="BoardspsittingallowancesFormat">
+          <DataField>BoardspsittingallowancesFormat</DataField>
+        </Field>
+        <Field Name="BoardTravelling">
+          <DataField>BoardTravelling</DataField>
+        </Field>
+        <Field Name="BoardTravellingFormat">
+          <DataField>BoardTravellingFormat</DataField>
+        </Field>
+        <Field Name="BoardEducation">
+          <DataField>BoardEducation</DataField>
+        </Field>
+        <Field Name="BoardEducationFormat">
+          <DataField>BoardEducationFormat</DataField>
+        </Field>
+        <Field Name="TravellAllowances">
+          <DataField>TravellAllowances</DataField>
+        </Field>
+        <Field Name="TravellAllowancesFormat">
+          <DataField>TravellAllowancesFormat</DataField>
+        </Field>
+        <Field Name="IESABoardEducationBoardSittingallowances">
+          <DataField>IESABoardEducationBoardSittingallowances</DataField>
+        </Field>
+        <Field Name="IESABoardEducationBoardSittingallowancesFormat">
+          <DataField>IESABoardEducationBoardSittingallowancesFormat</DataField>
+        </Field>
+        <Field Name="iesastaffTravellAllowances">
+          <DataField>iesastaffTravellAllowances</DataField>
+        </Field>
+        <Field Name="iesastaffTravellAllowancesFormat">
+          <DataField>iesastaffTravellAllowancesFormat</DataField>
+        </Field>
+        <Field Name="iesaBoardsAgmAllowances">
+          <DataField>iesaBoardsAgmAllowances</DataField>
+        </Field>
+        <Field Name="iesaBoardsAgmAllowancesFormat">
+          <DataField>iesaBoardsAgmAllowancesFormat</DataField>
+        </Field>
+        <Field Name="iesaBoardspsittingallowances">
+          <DataField>iesaBoardspsittingallowances</DataField>
+        </Field>
+        <Field Name="iesaBoardspsittingallowancesFormat">
+          <DataField>iesaBoardspsittingallowancesFormat</DataField>
+        </Field>
+        <Field Name="iesaBoardTravelling">
+          <DataField>iesaBoardTravelling</DataField>
+        </Field>
+        <Field Name="iesaBoardTravellingFormat">
+          <DataField>iesaBoardTravellingFormat</DataField>
+        </Field>
+        <Field Name="iesaBoardEducation">
+          <DataField>iesaBoardEducation</DataField>
+        </Field>
+        <Field Name="iesaBoardEducationFormat">
+          <DataField>iesaBoardEducationFormat</DataField>
+        </Field>
+        <Field Name="iesaBoardSittingallowances">
+          <DataField>iesaBoardSittingallowances</DataField>
+        </Field>
+        <Field Name="iesaBoardSittingallowancesFormat">
+          <DataField>iesaBoardSittingallowancesFormat</DataField>
+        </Field>
+        <Field Name="IESATravellAllowances">
+          <DataField>IESATravellAllowances</DataField>
+        </Field>
+        <Field Name="IESATravellAllowancesFormat">
+          <DataField>IESATravellAllowancesFormat</DataField>
+        </Field>
+        <Field Name="IESATOTALAMOUNT">
+          <DataField>IESATOTALAMOUNT</DataField>
+        </Field>
+        <Field Name="IESATOTALAMOUNTFormat">
+          <DataField>IESATOTALAMOUNTFormat</DataField>
+        </Field>
+        <Field Name="BOSATOTALAMOUNT">
+          <DataField>BOSATOTALAMOUNT</DataField>
+        </Field>
+        <Field Name="BOSATOTALAMOUNTFormat">
+          <DataField>BOSATOTALAMOUNTFormat</DataField>
+        </Field>
+        <Field Name="totalamountpaid">
+          <DataField>totalamountpaid</DataField>
+        </Field>
+        <Field Name="totalamountpaidFormat">
+          <DataField>totalamountpaidFormat</DataField>
+        </Field>
+        <Field Name="netamount">
+          <DataField>netamount</DataField>
+        </Field>
+        <Field Name="netamountFormat">
+          <DataField>netamountFormat</DataField>
+        </Field>
+        <Field Name="activity">
+          <DataField>activity</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

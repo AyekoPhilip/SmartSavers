@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="Product_Type">
+          <DataField>Product_Type</DataField>
+        </Field>
+        <Field Name="Product_Description">
+          <DataField>Product_Description</DataField>
+        </Field>
+        <Field Name="ApprovedAmount">
+          <DataField>ApprovedAmount</DataField>
+        </Field>
+        <Field Name="ApprovedAmountFormat">
+          <DataField>ApprovedAmountFormat</DataField>
+        </Field>
+        <Field Name="PostedBy">
+          <DataField>PostedBy</DataField>
+        </Field>
+        <Field Name="OutstandingBalance">
+          <DataField>OutstandingBalance</DataField>
+        </Field>
+        <Field Name="OutstandingBalanceFormat">
+          <DataField>OutstandingBalanceFormat</DataField>
+        </Field>
+        <Field Name="OutstandingInsurance">
+          <DataField>OutstandingInsurance</DataField>
+        </Field>
+        <Field Name="OutstandingInsuranceFormat">
+          <DataField>OutstandingInsuranceFormat</DataField>
+        </Field>
+        <Field Name="OutstandingInterest">
+          <DataField>OutstandingInterest</DataField>
+        </Field>
+        <Field Name="OutstandingInterestFormat">
+          <DataField>OutstandingInterestFormat</DataField>
+        </Field>
+        <Field Name="OutstandingPrincipal">
+          <DataField>OutstandingPrincipal</DataField>
+        </Field>
+        <Field Name="OutstandingPrincipalFormat">
+          <DataField>OutstandingPrincipalFormat</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo">
+          <DataField>PayrollStaffNo</DataField>
+        </Field>
+        <Field Name="OutstandingBill">
+          <DataField>OutstandingBill</DataField>
+        </Field>
+        <Field Name="OutstandingBillFormat">
+          <DataField>OutstandingBillFormat</DataField>
+        </Field>
+        <Field Name="EmployerCode">
+          <DataField>EmployerCode</DataField>
+        </Field>
+        <Field Name="Installments">
+          <DataField>Installments</DataField>
+        </Field>
+        <Field Name="CompInformation">
+          <DataField>CompInformation</DataField>
+        </Field>
+        <Field Name="CompanyInformationPicture">
+          <DataField>CompanyInformationPicture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+        </Field>
+        <Field Name="StaffNo">
+          <DataField>StaffNo</DataField>
+        </Field>
+        <Field Name="CustAddress">
+          <DataField>CustAddress</DataField>
+        </Field>
+        <Field Name="Loan_No_">
+          <DataField>Loan_No_</DataField>
+        </Field>
+        <Field Name="Account_No_">
+          <DataField>Account_No_</DataField>
+        </Field>
+        <Field Name="Amount_Guaranteed">
+          <DataField>Amount_Guaranteed</DataField>
+        </Field>
+        <Field Name="Amount_GuaranteedFormat">
+          <DataField>Amount_GuaranteedFormat</DataField>
+        </Field>
+        <Field Name="Deposit_Shares">
+          <DataField>Deposit_Shares</DataField>
+        </Field>
+        <Field Name="Deposit_SharesFormat">
+          <DataField>Deposit_SharesFormat</DataField>
+        </Field>
+        <Field Name="Member_No_">
+          <DataField>Member_No_</DataField>
+        </Field>
+        <Field Name="Member_No___Loanee_">
+          <DataField>Member_No___Loanee_</DataField>
+        </Field>
+        <Field Name="No__of_Loans_Guaranteed">
+          <DataField>No__of_Loans_Guaranteed</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="Product_TypeG">
+          <DataField>Product_TypeG</DataField>
+        </Field>
+        <Field Name="Substituted">
+          <DataField>Substituted</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

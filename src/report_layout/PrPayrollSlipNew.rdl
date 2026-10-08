@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="NHIFNo">
+          <DataField>NHIFNo</DataField>
+        </Field>
+        <Field Name="NSSFNo">
+          <DataField>NSSFNo</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="JobID">
+          <DataField>JobID</DataField>
+        </Field>
+        <Field Name="JobTitle">
+          <DataField>JobTitle</DataField>
+        </Field>
+        <Field Name="DepartmentCode">
+          <DataField>DepartmentCode</DataField>
+        </Field>
+        <Field Name="SocialSecurityNo">
+          <DataField>SocialSecurityNo</DataField>
+        </Field>
+        <Field Name="HELBNo">
+          <DataField>HELBNo</DataField>
+        </Field>
+        <Field Name="IDNo">
+          <DataField>IDNo</DataField>
+        </Field>
+        <Field Name="PIN_No_">
+          <DataField>PIN_No_</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code">
+          <DataField>GlobalDimension1Code</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code">
+          <DataField>GlobalDimension2Code</DataField>
+        </Field>
+        <Field Name="Grade">
+          <DataField>Grade</DataField>
+        </Field>
+        <Field Name="BankAcc">
+          <DataField>BankAcc</DataField>
+        </Field>
+        <Field Name="BankBranch">
+          <DataField>BankBranch</DataField>
+        </Field>
+        <Field Name="BankCode">
+          <DataField>BankCode</DataField>
+        </Field>
+        <Field Name="CompanyInfoPicture">
+          <DataField>CompanyInfoPicture</DataField>
+        </Field>
+        <Field Name="CompanyInfoName">
+          <DataField>CompanyInfoName</DataField>
+        </Field>
+        <Field Name="CompanyInfoAddress">
+          <DataField>CompanyInfoAddress</DataField>
+        </Field>
+        <Field Name="CompanyInfoemail">
+          <DataField>CompanyInfoemail</DataField>
+        </Field>
+        <Field Name="CompanyInfoPhone">
+          <DataField>CompanyInfoPhone</DataField>
+        </Field>
+        <Field Name="CompanyInfoHomePage">
+          <DataField>CompanyInfoHomePage</DataField>
+        </Field>
+        <Field Name="PeriodName">
+          <DataField>PeriodName</DataField>
+        </Field>
+        <Field Name="Netpay">
+          <DataField>Netpay</DataField>
+        </Field>
+        <Field Name="NetpayFormat">
+          <DataField>NetpayFormat</DataField>
+        </Field>
+        <Field Name="grosspay">
+          <DataField>grosspay</DataField>
+        </Field>
+        <Field Name="grosspayFormat">
+          <DataField>grosspayFormat</DataField>
+        </Field>
+        <Field Name="totdeduction">
+          <DataField>totdeduction</DataField>
+        </Field>
+        <Field Name="totdeductionFormat">
+          <DataField>totdeductionFormat</DataField>
+        </Field>
+        <Field Name="Transaction_Type">
+          <DataField>Transaction_Type</DataField>
+        </Field>
+        <Field Name="Statutory_category">
+          <DataField>Statutory_category</DataField>
+        </Field>
+        <Field Name="Transaction_Code">
+          <DataField>Transaction_Code</DataField>
+        </Field>
+        <Field Name="Group_Text">
+          <DataField>Group_Text</DataField>
+        </Field>
+        <Field Name="Group_Order">
+          <DataField>Group_Order</DataField>
+        </Field>
+        <Field Name="Transaction_Name">
+          <DataField>Transaction_Name</DataField>
+        </Field>
+        <Field Name="Hours_Units">
+          <DataField>Hours_Units</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="Payroll_Period">
+          <DataField>Payroll_Period</DataField>
+        </Field>
+        <Field Name="Period_Year">
+          <DataField>Period_Year</DataField>
+        </Field>
+        <Field Name="Period_Month">
+          <DataField>Period_Month</DataField>
+        </Field>
+        <Field Name="Balance">
+          <DataField>Balance</DataField>
+        </Field>
+        <Field Name="Coop_Parameters">
+          <DataField>Coop_Parameters</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

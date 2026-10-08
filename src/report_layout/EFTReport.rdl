@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="EFTTransferHeader_RecordTotal">
+          <DataField>EFTTransferHeader_RecordTotal</DataField>
+        </Field>
+        <Field Name="EFTTransferHeader_RecordTotalFormat">
+          <DataField>EFTTransferHeader_RecordTotalFormat</DataField>
+        </Field>
+        <Field Name="EFTTransferHeader_CreatedBy">
+          <DataField>EFTTransferHeader_CreatedBy</DataField>
+        </Field>
+        <Field Name="Record_Count">
+          <DataField>Record_Count</DataField>
+        </Field>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="EFT_Options">
+          <DataField>EFT_Options</DataField>
+        </Field>
+        <Field Name="NumberText">
+          <DataField>NumberText</DataField>
+        </Field>
+        <Field Name="Document_Type">
+          <DataField>Document_Type</DataField>
+        </Field>
+        <Field Name="ProdDescription">
+          <DataField>ProdDescription</DataField>
+        </Field>
+        <Field Name="Product_Type">
+          <DataField>Product_Type</DataField>
+        </Field>
+        <Field Name="Account_No_">
+          <DataField>Account_No_</DataField>
+        </Field>
+        <Field Name="Account_Name">
+          <DataField>Account_Name</DataField>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+        </Field>
+        <Field Name="Date_Entered">
+          <DataField>Date_Entered</DataField>
+        </Field>
+        <Field Name="EntryNo_EFTTransferLines">
+          <DataField>EntryNo_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="Mobile_Phone_No_">
+          <DataField>Mobile_Phone_No_</DataField>
+        </Field>
+        <Field Name="EFTProduct_Type">
+          <DataField>EFTProduct_Type</DataField>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+        </Field>
+        <Field Name="Member_No_">
+          <DataField>Member_No_</DataField>
+        </Field>
+        <Field Name="Loan_No_">
+          <DataField>Loan_No_</DataField>
+        </Field>
+        <Field Name="IBAN_No_">
+          <DataField>IBAN_No_</DataField>
+        </Field>
+        <Field Name="Picture">
+          <DataField>Picture</DataField>
+        </Field>
+        <Field Name="Recipient_Reference">
+          <DataField>Recipient_Reference</DataField>
+        </Field>
+        <Field Name="DocumentNo_EFTTransferLines">
+          <DataField>DocumentNo_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="EnteredBy_EFTTransferLines">
+          <DataField>EnteredBy_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="AccountType_EFTTransferLines">
+          <DataField>AccountType_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="AccountNo_EFTTransferLines">
+          <DataField>AccountNo_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="AccountName_EFTTransferLines">
+          <DataField>AccountName_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="MemberNo_EFTTransferLines">
+          <DataField>MemberNo_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="ExternalAccountName_EFTTransferLines">
+          <DataField>ExternalAccountName_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="ChargeAmount_EFTTransferLines">
+          <DataField>ChargeAmount_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="ChargeAmount_EFTTransferLinesFormat">
+          <DataField>ChargeAmount_EFTTransferLinesFormat</DataField>
+        </Field>
+        <Field Name="DontCharge_EFTTransferLines">
+          <DataField>DontCharge_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="PhoneNo_EFTTransferLines">
+          <DataField>PhoneNo_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="Amount_EFTTransferLines">
+          <DataField>Amount_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="Amount_EFTTransferLinesFormat">
+          <DataField>Amount_EFTTransferLinesFormat</DataField>
+        </Field>
+        <Field Name="AmountText_EFTTransferLines">
+          <DataField>AmountText_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="BankCode_EFTTransferLines">
+          <DataField>BankCode_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="BranchCode_EFTTransferLines">
+          <DataField>BranchCode_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="BankName_EFTTransferLines">
+          <DataField>BankName_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="OverDrawn_EFTTransferLines">
+          <DataField>OverDrawn_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="StandingOrderNo_EFTTransferLines">
+          <DataField>StandingOrderNo_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="StandingOrderRegisterNo_EFTTransferLines">
+          <DataField>StandingOrderRegisterNo_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="NotAvailable_EFTTransferLines">
+          <DataField>NotAvailable_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="ChargeAccount_EFTTransferLines">
+          <DataField>ChargeAccount_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="Transferred_EFTTransferLines">
+          <DataField>Transferred_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="ExportFormat_EFTTransferLines">
+          <DataField>ExportFormat_EFTTransferLines</DataField>
+        </Field>
+        <Field Name="ExternalAccountNo_EFTTransferLines">
+          <DataField>ExternalAccountNo_EFTTransferLines</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

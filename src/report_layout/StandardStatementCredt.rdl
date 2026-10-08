@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="EmployerCode">
+          <DataField>EmployerCode</DataField>
+        </Field>
+        <Field Name="Old_Member_No_">
+          <DataField>Old_Member_No_</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo">
+          <DataField>PayrollStaffNo</DataField>
+        </Field>
+        <Field Name="OldMemberNo">
+          <DataField>OldMemberNo</DataField>
+        </Field>
+        <Field Name="CompInformation">
+          <DataField>CompInformation</DataField>
+        </Field>
+        <Field Name="CompanyInformationPicture">
+          <DataField>CompanyInformationPicture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+        </Field>
+        <Field Name="AccountType">
+          <DataField>AccountType</DataField>
+        </Field>
+        <Field Name="ShowBosaAc">
+          <DataField>ShowBosaAc</DataField>
+        </Field>
+        <Field Name="ShowFosaAc">
+          <DataField>ShowFosaAc</DataField>
+        </Field>
+        <Field Name="ShowLoanAc">
+          <DataField>ShowLoanAc</DataField>
+        </Field>
+        <Field Name="AccNo">
+          <DataField>AccNo</DataField>
+        </Field>
+        <Field Name="CredProduct_Type">
+          <DataField>CredProduct_Type</DataField>
+        </Field>
+        <Field Name="CredProduct_Name">
+          <DataField>CredProduct_Name</DataField>
+        </Field>
+        <Field Name="CredAccBalBF">
+          <DataField>CredAccBalBF</DataField>
+        </Field>
+        <Field Name="CredAccBalBFFormat">
+          <DataField>CredAccBalBFFormat</DataField>
+        </Field>
+        <Field Name="CredPosting_Date">
+          <DataField>CredPosting_Date</DataField>
+        </Field>
+        <Field Name="CredDocument_No_">
+          <DataField>CredDocument_No_</DataField>
+        </Field>
+        <Field Name="CredAmount">
+          <DataField>CredAmount</DataField>
+        </Field>
+        <Field Name="CredAmountFormat">
+          <DataField>CredAmountFormat</DataField>
+        </Field>
+        <Field Name="CredDebit_Amount">
+          <DataField>CredDebit_Amount</DataField>
+        </Field>
+        <Field Name="CredDebit_AmountFormat">
+          <DataField>CredDebit_AmountFormat</DataField>
+        </Field>
+        <Field Name="CredCredit_Amount">
+          <DataField>CredCredit_Amount</DataField>
+        </Field>
+        <Field Name="CredCredit_AmountFormat">
+          <DataField>CredCredit_AmountFormat</DataField>
+        </Field>
+        <Field Name="CredDescriptionTxt">
+          <DataField>CredDescriptionTxt</DataField>
+        </Field>
+        <Field Name="CredAccRunBalance">
+          <DataField>CredAccRunBalance</DataField>
+        </Field>
+        <Field Name="CredAccRunBalanceFormat">
+          <DataField>CredAccRunBalanceFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

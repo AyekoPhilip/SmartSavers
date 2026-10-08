@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="Rcpt">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Rcpt</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Rcpt</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="RcptNo">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>RcptNo</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>RcptNo</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="RcptD">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>RcptD</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>RcptD</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Date">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Date</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Date</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PayMode">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>PayMode</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>PayMode</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="RFrom">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>RFrom</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>RFrom</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CDate">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CDate</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CDate</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="SumOf">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>SumOf</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>SumOf</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="BeingP">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>BeingP</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>BeingP</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Amount">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Amount</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Amount</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="WThanks">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>WThanks</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>WThanks</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Comp_Address">
+          <DataField>Comp_Address</DataField>
+        </Field>
+        <Field Name="Comp_Picture">
+          <DataField>Comp_Picture</DataField>
+        </Field>
+        <Field Name="PostingDate">
+          <DataField>PostingDate</DataField>
+        </Field>
+        <Field Name="ChequeNo">
+          <DataField>ChequeNo</DataField>
+        </Field>
+        <Field Name="ReceivedFrom">
+          <DataField>ReceivedFrom</DataField>
+        </Field>
+        <Field Name="NumberText_1">
+          <DataField>NumberText_1</DataField>
+        </Field>
+        <Field Name="NumberText_2">
+          <DataField>NumberText_2</DataField>
+        </Field>
+        <Field Name="Desc">
+          <DataField>Desc</DataField>
+        </Field>
+        <Field Name="AmoountInFigures">
+          <DataField>AmoountInFigures</DataField>
+        </Field>
+        <Field Name="Comp_Name">
+          <DataField>Comp_Name</DataField>
+        </Field>
+        <Field Name="DocumentNo">
+          <DataField>DocumentNo</DataField>
+        </Field>
+        <Field Name="Pay_Mode">
+          <DataField>Pay_Mode</DataField>
+        </Field>
+        <Field Name="Number">
+          <DataField>Number</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

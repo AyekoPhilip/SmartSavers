@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompInformation">
+          <DataField>CompInformation</DataField>
+        </Field>
+        <Field Name="CompanyInformationPicture">
+          <DataField>CompanyInformationPicture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="AccountDimension">
+          <DataField>AccountDimension</DataField>
+        </Field>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="AllocatedAmount">
+          <DataField>AllocatedAmount</DataField>
+        </Field>
+        <Field Name="AllocatedAmountFormat">
+          <DataField>AllocatedAmountFormat</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="ApprovalStatus">
+          <DataField>ApprovalStatus</DataField>
+        </Field>
+        <Field Name="AttemptedSelfTransaction">
+          <DataField>AttemptedSelfTransaction</DataField>
+        </Field>
+        <Field Name="AvailableBalance">
+          <DataField>AvailableBalance</DataField>
+        </Field>
+        <Field Name="AvailableBalanceFormat">
+          <DataField>AvailableBalanceFormat</DataField>
+        </Field>
+        <Field Name="BankAccount">
+          <DataField>BankAccount</DataField>
+        </Field>
+        <Field Name="BankedBy">
+          <DataField>BankedBy</DataField>
+        </Field>
+        <Field Name="BankersChequeNo">
+          <DataField>BankersChequeNo</DataField>
+        </Field>
+        <Field Name="BookBalance">
+          <DataField>BookBalance</DataField>
+        </Field>
+        <Field Name="BookBalanceFormat">
+          <DataField>BookBalanceFormat</DataField>
+        </Field>
+        <Field Name="Cashier">
+          <DataField>Cashier</DataField>
+        </Field>
+        <Field Name="ChangeLog">
+          <DataField>ChangeLog</DataField>
+        </Field>
+        <Field Name="ChequeDate">
+          <DataField>ChequeDate</DataField>
+        </Field>
+        <Field Name="ChequeIssueingBank">
+          <DataField>ChequeIssueingBank</DataField>
+        </Field>
+        <Field Name="ChequeNo">
+          <DataField>ChequeNo</DataField>
+        </Field>
+        <Field Name="ChequeStatus">
+          <DataField>ChequeStatus</DataField>
+        </Field>
+        <Field Name="ChequeType">
+          <DataField>ChequeType</DataField>
+        </Field>
+        <Field Name="ClearedBy">
+          <DataField>ClearedBy</DataField>
+        </Field>
+        <Field Name="CurrencyCode">
+          <DataField>CurrencyCode</DataField>
+        </Field>
+        <Field Name="DateBanked">
+          <DataField>DateBanked</DataField>
+        </Field>
+        <Field Name="DateCleared">
+          <DataField>DateCleared</DataField>
+        </Field>
+        <Field Name="DatePosted">
+          <DataField>DatePosted</DataField>
+        </Field>
+        <Field Name="DiscountedAmount">
+          <DataField>DiscountedAmount</DataField>
+        </Field>
+        <Field Name="DiscountedAmountFormat">
+          <DataField>DiscountedAmountFormat</DataField>
+        </Field>
+        <Field Name="DiscountingAmount">
+          <DataField>DiscountingAmount</DataField>
+        </Field>
+        <Field Name="DiscountingAmountFormat">
+          <DataField>DiscountingAmountFormat</DataField>
+        </Field>
+        <Field Name="DraweeBankBranch">
+          <DataField>DraweeBankBranch</DataField>
+        </Field>
+        <Field Name="DraweeBankCode">
+          <DataField>DraweeBankCode</DataField>
+        </Field>
+        <Field Name="Dublicate">
+          <DataField>Dublicate</DataField>
+        </Field>
+        <Field Name="EmployerCode">
+          <DataField>EmployerCode</DataField>
+        </Field>
+        <Field Name="ExpectedMaturityDate">
+          <DataField>ExpectedMaturityDate</DataField>
+        </Field>
+        <Field Name="ExpiryDate">
+          <DataField>ExpiryDate</DataField>
+        </Field>
+        <Field Name="FingerPrintVerified">
+          <DataField>FingerPrintVerified</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code">
+          <DataField>GlobalDimension1Code</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code">
+          <DataField>GlobalDimension2Code</DataField>
+        </Field>
+        <Field Name="IDNo">
+          <DataField>IDNo</DataField>
+        </Field>
+        <Field Name="JournalBatchName">
+          <DataField>JournalBatchName</DataField>
+        </Field>
+        <Field Name="JournalTemplateName">
+          <DataField>JournalTemplateName</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="NewAccountBalance">
+          <DataField>NewAccountBalance</DataField>
+        </Field>
+        <Field Name="NewAccountBalanceFormat">
+          <DataField>NewAccountBalanceFormat</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="NoSeries">
+          <DataField>NoSeries</DataField>
+        </Field>
+        <Field Name="Overdraft">
+          <DataField>Overdraft</DataField>
+        </Field>
+        <Field Name="Payee">
+          <DataField>Payee</DataField>
+        </Field>
+        <Field Name="PostDated">
+          <DataField>PostDated</DataField>
+        </Field>
+        <Field Name="Posted">
+          <DataField>Posted</DataField>
+        </Field>
+        <Field Name="PostedBy">
+          <DataField>PostedBy</DataField>
+        </Field>
+        <Field Name="Printed">
+          <DataField>Printed</DataField>
+        </Field>
+        <Field Name="ProductCategory">
+          <DataField>ProductCategory</DataField>
+        </Field>
+        <Field Name="ProductType">
+          <DataField>ProductType</DataField>
+        </Field>
+        <Field Name="ProtectedAccount">
+          <DataField>ProtectedAccount</DataField>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+        </Field>
+        <Field Name="ResponsibilityCentre">
+          <DataField>ResponsibilityCentre</DataField>
+        </Field>
+        <Field Name="Select">
+          <DataField>Select</DataField>
+        </Field>
+        <Field Name="SigningInstructions">
+          <DataField>SigningInstructions</DataField>
+        </Field>
+        <Field Name="TillCode">
+          <DataField>TillCode</DataField>
+        </Field>
+        <Field Name="TillName">
+          <DataField>TillName</DataField>
+        </Field>
+        <Field Name="TimeBanked">
+          <DataField>TimeBanked</DataField>
+        </Field>
+        <Field Name="TimeCleared">
+          <DataField>TimeCleared</DataField>
+        </Field>
+        <Field Name="TimePosted">
+          <DataField>TimePosted</DataField>
+        </Field>
+        <Field Name="TransactionDate">
+          <DataField>TransactionDate</DataField>
+        </Field>
+        <Field Name="TransactionDescription">
+          <DataField>TransactionDescription</DataField>
+        </Field>
+        <Field Name="TransactionTime">
+          <DataField>TransactionTime</DataField>
+        </Field>
+        <Field Name="TransactionType">
+          <DataField>TransactionType</DataField>
+        </Field>
+        <Field Name="Type">
+          <DataField>Type</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="CompanyInformation">
+          <DataField>CompanyInformation</DataField>
+        </Field>
+        <Field Name="CompanyInformationPicture">
+          <DataField>CompanyInformationPicture</DataField>
+        </Field>
+        <Field Name="Date">
+          <DataField>Date</DataField>
+        </Field>
+        <Field Name="Date_Posted">
+          <DataField>Date_Posted</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="PayrollNo">
+          <DataField>PayrollNo</DataField>
+        </Field>
+        <Field Name="BalanceLCY">
+          <DataField>BalanceLCY</DataField>
+        </Field>
+        <Field Name="BalanceLCYFormat">
+          <DataField>BalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="LoanBalanceLCY">
+          <DataField>LoanBalanceLCY</DataField>
+        </Field>
+        <Field Name="LoanBalanceLCYFormat">
+          <DataField>LoanBalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="AccountType">
+          <DataField>AccountType</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="TransactionType">
+          <DataField>TransactionType</DataField>
+        </Field>
+        <Field Name="Type">
+          <DataField>Type</DataField>
+        </Field>
+        <Field Name="PayMode">
+          <DataField>PayMode</DataField>
+        </Field>
+        <Field Name="ProductCategory">
+          <DataField>ProductCategory</DataField>
+        </Field>
+        <Field Name="ProductDescription">
+          <DataField>ProductDescription</DataField>
+        </Field>
+        <Field Name="ProductType">
+          <DataField>ProductType</DataField>
+        </Field>
+        <Field Name="ReceivedFrom">
+          <DataField>ReceivedFrom</DataField>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+        </Field>
+        <Field Name="LoanNo">
+          <DataField>LoanNo</DataField>
+        </Field>
+        <Field Name="InterestBalance">
+          <DataField>InterestBalance</DataField>
+        </Field>
+        <Field Name="InterestBalanceFormat">
+          <DataField>InterestBalanceFormat</DataField>
+        </Field>
+        <Field Name="OnBehalfOf">
+          <DataField>OnBehalfOf</DataField>
+        </Field>
+        <Field Name="ChequeDepositSlipBank">
+          <DataField>ChequeDepositSlipBank</DataField>
+        </Field>
+        <Field Name="ChequeDepositSlipDate">
+          <DataField>ChequeDepositSlipDate</DataField>
+        </Field>
+        <Field Name="ChequeDepositSlipNo">
+          <DataField>ChequeDepositSlipNo</DataField>
+        </Field>
+        <Field Name="ChequeDepositSlipType">
+          <DataField>ChequeDepositSlipType</DataField>
+        </Field>
+        <Field Name="Balance">
+          <DataField>Balance</DataField>
+        </Field>
+        <Field Name="BalanceFormat">
+          <DataField>BalanceFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

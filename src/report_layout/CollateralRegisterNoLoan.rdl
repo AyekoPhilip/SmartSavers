@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="AnnualPremiumAmount">
+          <DataField>AnnualPremiumAmount</DataField>
+        </Field>
+        <Field Name="AnnualPremiumAmountFormat">
+          <DataField>AnnualPremiumAmountFormat</DataField>
+        </Field>
+        <Field Name="ApplicationDate">
+          <DataField>ApplicationDate</DataField>
+        </Field>
+        <Field Name="ChasisNo">
+          <DataField>ChasisNo</DataField>
+        </Field>
+        <Field Name="Collateral">
+          <DataField>Collateral</DataField>
+        </Field>
+        <Field Name="CollateralLimit">
+          <DataField>CollateralLimit</DataField>
+        </Field>
+        <Field Name="CollateralLimitFormat">
+          <DataField>CollateralLimitFormat</DataField>
+        </Field>
+        <Field Name="CollateralMultiplier">
+          <DataField>CollateralMultiplier</DataField>
+        </Field>
+        <Field Name="CollateralName">
+          <DataField>CollateralName</DataField>
+        </Field>
+        <Field Name="CollateralPerfected">
+          <DataField>CollateralPerfected</DataField>
+        </Field>
+        <Field Name="CollateralType">
+          <DataField>CollateralType</DataField>
+        </Field>
+        <Field Name="CollateralValue">
+          <DataField>CollateralValue</DataField>
+        </Field>
+        <Field Name="CollateralValueFormat">
+          <DataField>CollateralValueFormat</DataField>
+        </Field>
+        <Field Name="DatePosted">
+          <DataField>DatePosted</DataField>
+        </Field>
+        <Field Name="DatePremiumLastPaid">
+          <DataField>DatePremiumLastPaid</DataField>
+        </Field>
+        <Field Name="EngineNo">
+          <DataField>EngineNo</DataField>
+        </Field>
+        <Field Name="ForcedSaleValue">
+          <DataField>ForcedSaleValue</DataField>
+        </Field>
+        <Field Name="ForcedSaleValueFormat">
+          <DataField>ForcedSaleValueFormat</DataField>
+        </Field>
+        <Field Name="InsuranceValue">
+          <DataField>InsuranceValue</DataField>
+        </Field>
+        <Field Name="InsuranceValueFormat">
+          <DataField>InsuranceValueFormat</DataField>
+        </Field>
+        <Field Name="InwardOutward">
+          <DataField>InwardOutward</DataField>
+        </Field>
+        <Field Name="JointOwnership">
+          <DataField>JointOwnership</DataField>
+        </Field>
+        <Field Name="LastValuationDate">
+          <DataField>LastValuationDate</DataField>
+        </Field>
+        <Field Name="NextValuationDate">
+          <DataField>NextValuationDate</DataField>
+        </Field>
+        <Field Name="PINNo">
+          <DataField>PINNo</DataField>
+        </Field>
+        <Field Name="PhoneNo">
+          <DataField>PhoneNo</DataField>
+        </Field>
+        <Field Name="PolicyEndDate">
+          <DataField>PolicyEndDate</DataField>
+        </Field>
+        <Field Name="PolicyNo">
+          <DataField>PolicyNo</DataField>
+        </Field>
+        <Field Name="PolicyStartDate">
+          <DataField>PolicyStartDate</DataField>
+        </Field>
+        <Field Name="PostedBy">
+          <DataField>PostedBy</DataField>
+        </Field>
+        <Field Name="PropertyType">
+          <DataField>PropertyType</DataField>
+        </Field>
+        <Field Name="RegistrationNo">
+          <DataField>RegistrationNo</DataField>
+        </Field>
+        <Field Name="YearofManufacture">
+          <DataField>YearofManufacture</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

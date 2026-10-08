@@ -1,0 +1,1079 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="CompInfoName">
+          <DataField>CompInfoName</DataField>
+        </Field>
+        <Field Name="ShowChargeDetails">
+          <DataField>ShowChargeDetails</DataField>
+        </Field>
+        <Field Name="ShowRefinedDetail">
+          <DataField>ShowRefinedDetail</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="ReferenceText">
+          <DataField>ReferenceText</DataField>
+        </Field>
+        <Field Name="WarningsTxtThirdRule">
+          <DataField>WarningsTxtThirdRule</DataField>
+        </Field>
+        <Field Name="WarningsTxtSecurity">
+          <DataField>WarningsTxtSecurity</DataField>
+        </Field>
+        <Field Name="Deposit_Mutiplier">
+          <DataField>Deposit_Mutiplier</DataField>
+        </Field>
+        <Field Name="Deposit_MutiplierFormat">
+          <DataField>Deposit_MutiplierFormat</DataField>
+        </Field>
+        <Field Name="Account_Balance">
+          <DataField>Account_Balance</DataField>
+        </Field>
+        <Field Name="Account_BalanceFormat">
+          <DataField>Account_BalanceFormat</DataField>
+        </Field>
+        <Field Name="Account_Category">
+          <DataField>Account_Category</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="Minute_No_">
+          <DataField>Minute_No_</DataField>
+        </Field>
+        <Field Name="A_third_Rule_Violation">
+          <DataField>A_third_Rule_Violation</DataField>
+        </Field>
+        <Field Name="Loan_Not_fully_Secured">
+          <DataField>Loan_Not_fully_Secured</DataField>
+        </Field>
+        <Field Name="LoanNo">
+          <DataField>LoanNo</DataField>
+        </Field>
+        <Field Name="ShowLoanNo">
+          <DataField>ShowLoanNo</DataField>
+        </Field>
+        <Field Name="Net_Utilisable_Amount">
+          <DataField>Net_Utilisable_Amount</DataField>
+        </Field>
+        <Field Name="Net_Utilisable_AmountFormat">
+          <DataField>Net_Utilisable_AmountFormat</DataField>
+        </Field>
+        <Field Name="BankAccount">
+          <DataField>BankAccount</DataField>
+        </Field>
+        <Field Name="RiskText001">
+          <DataField>RiskText001</DataField>
+        </Field>
+        <Field Name="RiskText002">
+          <DataField>RiskText002</DataField>
+        </Field>
+        <Field Name="BankName">
+          <DataField>BankName</DataField>
+        </Field>
+        <Field Name="Net_utilizable">
+          <DataField>Net_utilizable</DataField>
+        </Field>
+        <Field Name="Net_utilizableFormat">
+          <DataField>Net_utilizableFormat</DataField>
+        </Field>
+        <Field Name="ShowSalaryDetails">
+          <DataField>ShowSalaryDetails</DataField>
+        </Field>
+        <Field Name="Max__Loan_Amount">
+          <DataField>Max__Loan_Amount</DataField>
+        </Field>
+        <Field Name="Max__Loan_AmountFormat">
+          <DataField>Max__Loan_AmountFormat</DataField>
+        </Field>
+        <Field Name="Total_Stop_Order_Amount">
+          <DataField>Total_Stop_Order_Amount</DataField>
+        </Field>
+        <Field Name="Total_Stop_Order_AmountFormat">
+          <DataField>Total_Stop_Order_AmountFormat</DataField>
+        </Field>
+        <Field Name="Qualification__Business_">
+          <DataField>Qualification__Business_</DataField>
+        </Field>
+        <Field Name="Qualification__Business_Format">
+          <DataField>Qualification__Business_Format</DataField>
+        </Field>
+        <Field Name="Net_On_Salary">
+          <DataField>Net_On_Salary</DataField>
+        </Field>
+        <Field Name="Net_On_SalaryFormat">
+          <DataField>Net_On_SalaryFormat</DataField>
+        </Field>
+        <Field Name="New_Excess_Amount">
+          <DataField>New_Excess_Amount</DataField>
+        </Field>
+        <Field Name="New_Excess_AmountFormat">
+          <DataField>New_Excess_AmountFormat</DataField>
+        </Field>
+        <Field Name="New_Net_Salary">
+          <DataField>New_Net_Salary</DataField>
+        </Field>
+        <Field Name="New_Net_SalaryFormat">
+          <DataField>New_Net_SalaryFormat</DataField>
+        </Field>
+        <Field Name="Total__Deductions_">
+          <DataField>Total__Deductions_</DataField>
+        </Field>
+        <Field Name="Total__Deductions_Format">
+          <DataField>Total__Deductions_Format</DataField>
+        </Field>
+        <Field Name="CustomerAge">
+          <DataField>CustomerAge</DataField>
+        </Field>
+        <Field Name="CompInfoAddress">
+          <DataField>CompInfoAddress</DataField>
+        </Field>
+        <Field Name="CompInfoPhone">
+          <DataField>CompInfoPhone</DataField>
+        </Field>
+        <Field Name="CompInfoPicture">
+          <DataField>CompInfoPicture</DataField>
+        </Field>
+        <Field Name="Due_Application">
+          <DataField>Due_Application</DataField>
+        </Field>
+        <Field Name="Due_ApplicationFormat">
+          <DataField>Due_ApplicationFormat</DataField>
+        </Field>
+        <Field Name="Total_Commitment">
+          <DataField>Total_Commitment</DataField>
+        </Field>
+        <Field Name="Total_CommitmentFormat">
+          <DataField>Total_CommitmentFormat</DataField>
+        </Field>
+        <Field Name="Commitment__">
+          <DataField>Commitment__</DataField>
+        </Field>
+        <Field Name="Commitment__Format">
+          <DataField>Commitment__Format</DataField>
+        </Field>
+        <Field Name="Total_Exposure">
+          <DataField>Total_Exposure</DataField>
+        </Field>
+        <Field Name="Total_ExposureFormat">
+          <DataField>Total_ExposureFormat</DataField>
+        </Field>
+        <Field Name="Deposit_Purchase">
+          <DataField>Deposit_Purchase</DataField>
+        </Field>
+        <Field Name="Deposit_PurchaseFormat">
+          <DataField>Deposit_PurchaseFormat</DataField>
+        </Field>
+        <Field Name="Gross_Pay__">
+          <DataField>Gross_Pay__</DataField>
+        </Field>
+        <Field Name="Gross_Pay__Format">
+          <DataField>Gross_Pay__Format</DataField>
+        </Field>
+        <Field Name="External_Commitment">
+          <DataField>External_Commitment</DataField>
+        </Field>
+        <Field Name="External_CommitmentFormat">
+          <DataField>External_CommitmentFormat</DataField>
+        </Field>
+        <Field Name="Consolidated_Loans_External_">
+          <DataField>Consolidated_Loans_External_</DataField>
+        </Field>
+        <Field Name="Consolidated_Loans_External_Format">
+          <DataField>Consolidated_Loans_External_Format</DataField>
+        </Field>
+        <Field Name="Consolidated_Loans_Sacco_">
+          <DataField>Consolidated_Loans_Sacco_</DataField>
+        </Field>
+        <Field Name="Consolidated_Loans_Sacco_Format">
+          <DataField>Consolidated_Loans_Sacco_Format</DataField>
+        </Field>
+        <Field Name="Balance__LCY_">
+          <DataField>Balance__LCY_</DataField>
+        </Field>
+        <Field Name="Balance__LCY_Format">
+          <DataField>Balance__LCY_Format</DataField>
+        </Field>
+        <Field Name="Applicant_Age">
+          <DataField>Applicant_Age</DataField>
+        </Field>
+        <Field Name="EntryNo_LoanAppraisalParameters">
+          <DataField>EntryNo_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="No_LoanAppraisalParameters">
+          <DataField>No_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="Property_Type">
+          <DataField>Property_Type</DataField>
+        </Field>
+        <Field Name="Property_Description">
+          <DataField>Property_Description</DataField>
+        </Field>
+        <Field Name="Valuation_Amount">
+          <DataField>Valuation_Amount</DataField>
+        </Field>
+        <Field Name="Valuation_AmountFormat">
+          <DataField>Valuation_AmountFormat</DataField>
+        </Field>
+        <Field Name="Repayment">
+          <DataField>Repayment</DataField>
+        </Field>
+        <Field Name="RepaymentFormat">
+          <DataField>RepaymentFormat</DataField>
+        </Field>
+        <Field Name="Gross_Pay">
+          <DataField>Gross_Pay</DataField>
+        </Field>
+        <Field Name="Gross_PayFormat">
+          <DataField>Gross_PayFormat</DataField>
+        </Field>
+        <Field Name="Net_Pay">
+          <DataField>Net_Pay</DataField>
+        </Field>
+        <Field Name="Net_PayFormat">
+          <DataField>Net_PayFormat</DataField>
+        </Field>
+        <Field Name="External_Effects">
+          <DataField>External_Effects</DataField>
+        </Field>
+        <Field Name="External_EffectsFormat">
+          <DataField>External_EffectsFormat</DataField>
+        </Field>
+        <Field Name="Sacco_Deductions">
+          <DataField>Sacco_Deductions</DataField>
+        </Field>
+        <Field Name="Sacco_DeductionsFormat">
+          <DataField>Sacco_DeductionsFormat</DataField>
+        </Field>
+        <Field Name="Excess_of_a_Third">
+          <DataField>Excess_of_a_Third</DataField>
+        </Field>
+        <Field Name="Excess_of_a_ThirdFormat">
+          <DataField>Excess_of_a_ThirdFormat</DataField>
+        </Field>
+        <Field Name="Third_of_Net_Basic">
+          <DataField>Third_of_Net_Basic</DataField>
+        </Field>
+        <Field Name="Third_of_Net_BasicFormat">
+          <DataField>Third_of_Net_BasicFormat</DataField>
+        </Field>
+        <Field Name="Commitment">
+          <DataField>Commitment</DataField>
+        </Field>
+        <Field Name="CommitmentFormat">
+          <DataField>CommitmentFormat</DataField>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+        </Field>
+        <Field Name="No__of_Loan_Guaranteed">
+          <DataField>No__of_Loan_Guaranteed</DataField>
+        </Field>
+        <Field Name="Qualifying_Dividend">
+          <DataField>Qualifying_Dividend</DataField>
+        </Field>
+        <Field Name="Qualifying_DividendFormat">
+          <DataField>Qualifying_DividendFormat</DataField>
+        </Field>
+        <Field Name="DepositMutiplier_LoanAppraisalParameters">
+          <DataField>DepositMutiplier_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="DepositMutiplier_LoanAppraisalParametersFormat">
+          <DataField>DepositMutiplier_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="Multiplier_LoanAppraisalParameters">
+          <DataField>Multiplier_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="Multiplier_LoanAppraisalParametersFormat">
+          <DataField>Multiplier_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="QualificationShares_LoanAppraisalParameters">
+          <DataField>QualificationShares_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="QualificationShares_LoanAppraisalParametersFormat">
+          <DataField>QualificationShares_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="QualificationSalary_LoanAppraisalParameters">
+          <DataField>QualificationSalary_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="QualificationSalary_LoanAppraisalParametersFormat">
+          <DataField>QualificationSalary_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="QualificationSecurity_LoanAppraisalParameters">
+          <DataField>QualificationSecurity_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="QualificationSecurity_LoanAppraisalParametersFormat">
+          <DataField>QualificationSecurity_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="RelatedBalance_LoanAppraisalParameters">
+          <DataField>RelatedBalance_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="RelatedBalance_LoanAppraisalParametersFormat">
+          <DataField>RelatedBalance_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="MaxCreditAvailable_LoanAppraisalParameters">
+          <DataField>MaxCreditAvailable_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="MaxCreditAvailable_LoanAppraisalParametersFormat">
+          <DataField>MaxCreditAvailable_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="TotalTopup_LoanAppraisalParameters">
+          <DataField>TotalTopup_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="TotalTopup_LoanAppraisalParametersFormat">
+          <DataField>TotalTopup_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="BoostingCharges_LoanAppraisalParameters">
+          <DataField>BoostingCharges_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="BoostingCharges_LoanAppraisalParametersFormat">
+          <DataField>BoostingCharges_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="AmountRecommended_LoanAppraisalParameters">
+          <DataField>AmountRecommended_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="AmountRecommended_LoanAppraisalParametersFormat">
+          <DataField>AmountRecommended_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="AmountNetTakeHome_LoanAppraisalParameters">
+          <DataField>AmountNetTakeHome_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="AmountNetTakeHome_LoanAppraisalParametersFormat">
+          <DataField>AmountNetTakeHome_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="AmountTotalCharges_LoanAppraisalParameters">
+          <DataField>AmountTotalCharges_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="AmountTotalCharges_LoanAppraisalParametersFormat">
+          <DataField>AmountTotalCharges_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="SharesDeposits_LoanAppraisalParameters">
+          <DataField>SharesDeposits_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="SharesDeposits_LoanAppraisalParametersFormat">
+          <DataField>SharesDeposits_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="AverageInterest_LoanAppraisalParameters">
+          <DataField>AverageInterest_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="AverageInterest_LoanAppraisalParametersFormat">
+          <DataField>AverageInterest_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="NetOnDeposit_LoanAppraisalParameters">
+          <DataField>NetOnDeposit_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="NetOnDeposit_LoanAppraisalParametersFormat">
+          <DataField>NetOnDeposit_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="TotalBasic_LoanAppraisalParameters">
+          <DataField>TotalBasic_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="TotalBasic_LoanAppraisalParametersFormat">
+          <DataField>TotalBasic_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="TotalAllowance_LoanAppraisalParameters">
+          <DataField>TotalAllowance_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="TotalAllowance_LoanAppraisalParametersFormat">
+          <DataField>TotalAllowance_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="TotalDeductions_LoanAppraisalParameters">
+          <DataField>TotalDeductions_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="TotalDeductions_LoanAppraisalParametersFormat">
+          <DataField>TotalDeductions_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="TotalEarnings_LoanAppraisalParameters">
+          <DataField>TotalEarnings_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="TotalEarnings_LoanAppraisalParametersFormat">
+          <DataField>TotalEarnings_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="TotalExternalDeduct_LoanAppraisalParameters">
+          <DataField>TotalExternalDeduct_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="TotalExternalDeduct_LoanAppraisalParametersFormat">
+          <DataField>TotalExternalDeduct_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="ExternalEffects_LoanAppraisalParameters">
+          <DataField>ExternalEffects_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="ExternalEffects_LoanAppraisalParametersFormat">
+          <DataField>ExternalEffects_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="NetSalary_LoanAppraisalParameters">
+          <DataField>NetSalary_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="NetSalary_LoanAppraisalParametersFormat">
+          <DataField>NetSalary_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="NetOnSalary_LoanAppraisalParameters">
+          <DataField>NetOnSalary_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="NetOnSalary_LoanAppraisalParametersFormat">
+          <DataField>NetOnSalary_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="LoanNetAmount_LoanAppraisalParameters">
+          <DataField>LoanNetAmount_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="LoanNetAmount_LoanAppraisalParametersFormat">
+          <DataField>LoanNetAmount_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="TotAmtGuaranteed_LoanAppraisalParameters">
+          <DataField>TotAmtGuaranteed_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="TotAmtGuaranteed_LoanAppraisalParametersFormat">
+          <DataField>TotAmtGuaranteed_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="TotalLoan_LoanAppraisalParameters">
+          <DataField>TotalLoan_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="TotalLoan_LoanAppraisalParametersFormat">
+          <DataField>TotalLoan_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="QualifyingAmount_LoanAppraisalParameters">
+          <DataField>QualifyingAmount_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="QualifyingAmount_LoanAppraisalParametersFormat">
+          <DataField>QualifyingAmount_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="TopUpCommission_LoanAppraisalParameters">
+          <DataField>TopUpCommission_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="TopUpCommission_LoanAppraisalParametersFormat">
+          <DataField>TopUpCommission_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="ProductType_LoanAppraisalParameters">
+          <DataField>ProductType_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="AmountRequested_LoanAppraisalParameters">
+          <DataField>AmountRequested_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="AmountRequested_LoanAppraisalParametersFormat">
+          <DataField>AmountRequested_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="AccountNo_LoanAppraisalParameters">
+          <DataField>AccountNo_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="AccountName_LoanAppraisalParameters">
+          <DataField>AccountName_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="ApplicationDate_LoanAppraisalParameters">
+          <DataField>ApplicationDate_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="CreatedBy_LoanAppraisalParameters">
+          <DataField>CreatedBy_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="LastModifiedBy_LoanAppraisalParameters">
+          <DataField>LastModifiedBy_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="LastModifiedDate_LoanAppraisalParameters">
+          <DataField>LastModifiedDate_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="AmountApproved_LoanAppraisalParameters">
+          <DataField>AmountApproved_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="AmountApproved_LoanAppraisalParametersFormat">
+          <DataField>AmountApproved_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo_LoanAppraisalParameters">
+          <DataField>PayrollStaffNo_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="EmployerCode_LoanAppraisalParameters">
+          <DataField>EmployerCode_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="Installments_LoanAppraisalParameters">
+          <DataField>Installments_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="Interest_LoanAppraisalParameters">
+          <DataField>Interest_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="Interest_LoanAppraisalParametersFormat">
+          <DataField>Interest_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="RepaymentStartDate_LoanAppraisalParameters">
+          <DataField>RepaymentStartDate_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="ExpectedCompletionDate_LoanAppraisalParameters">
+          <DataField>ExpectedCompletionDate_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="ProductName_LoanAppraisalParameters">
+          <DataField>ProductName_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="ExciseDutyCharges_LoanAppraisalParameters">
+          <DataField>ExciseDutyCharges_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="ExciseDutyCharges_LoanAppraisalParametersFormat">
+          <DataField>ExciseDutyCharges_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="DepositPurchase_LoanAppraisalParameters">
+          <DataField>DepositPurchase_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="DepositPurchase_LoanAppraisalParametersFormat">
+          <DataField>DepositPurchase_LoanAppraisalParametersFormat</DataField>
+        </Field>
+        <Field Name="Sector_LoanAppraisalParameters">
+          <DataField>Sector_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="SubSector_LoanAppraisalParameters">
+          <DataField>SubSector_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="LoanPurpose_LoanAppraisalParameters">
+          <DataField>LoanPurpose_LoanAppraisalParameters</DataField>
+        </Field>
+        <Field Name="Salary_Remittance">
+          <DataField>Salary_Remittance</DataField>
+        </Field>
+        <Field Name="Salary_RemittanceFormat">
+          <DataField>Salary_RemittanceFormat</DataField>
+        </Field>
+        <Field Name="Salary_Remittance_Multiplier">
+          <DataField>Salary_Remittance_Multiplier</DataField>
+        </Field>
+        <Field Name="Salary_Remittance_MultiplierFormat">
+          <DataField>Salary_Remittance_MultiplierFormat</DataField>
+        </Field>
+        <Field Name="SectorTxt">
+          <DataField>SectorTxt</DataField>
+        </Field>
+        <Field Name="SubSectorTxt">
+          <DataField>SubSectorTxt</DataField>
+        </Field>
+        <Field Name="LoanPurposeTxt">
+          <DataField>LoanPurposeTxt</DataField>
+        </Field>
+        <Field Name="PhoneNo">
+          <DataField>PhoneNo</DataField>
+        </Field>
+        <Field Name="EmployerName">
+          <DataField>EmployerName</DataField>
+        </Field>
+        <Field Name="CustStation">
+          <DataField>CustStation</DataField>
+        </Field>
+        <Field Name="TermsofEmployment">
+          <DataField>TermsofEmployment</DataField>
+        </Field>
+        <Field Name="PostCode">
+          <DataField>PostCode</DataField>
+        </Field>
+        <Field Name="ExistLoanNo">
+          <DataField>ExistLoanNo</DataField>
+        </Field>
+        <Field Name="Product_Type">
+          <DataField>Product_Type</DataField>
+        </Field>
+        <Field Name="Product_Description">
+          <DataField>Product_Description</DataField>
+        </Field>
+        <Field Name="ExistLoanRepayment">
+          <DataField>ExistLoanRepayment</DataField>
+        </Field>
+        <Field Name="ExistLoanRepaymentFormat">
+          <DataField>ExistLoanRepaymentFormat</DataField>
+        </Field>
+        <Field Name="Outstanding_Balance">
+          <DataField>Outstanding_Balance</DataField>
+        </Field>
+        <Field Name="Outstanding_BalanceFormat">
+          <DataField>Outstanding_BalanceFormat</DataField>
+        </Field>
+        <Field Name="Outstanding_Insurance">
+          <DataField>Outstanding_Insurance</DataField>
+        </Field>
+        <Field Name="Outstanding_InsuranceFormat">
+          <DataField>Outstanding_InsuranceFormat</DataField>
+        </Field>
+        <Field Name="Outstanding_Interest">
+          <DataField>Outstanding_Interest</DataField>
+        </Field>
+        <Field Name="Outstanding_InterestFormat">
+          <DataField>Outstanding_InterestFormat</DataField>
+        </Field>
+        <Field Name="Outstanding_Principal">
+          <DataField>Outstanding_Principal</DataField>
+        </Field>
+        <Field Name="Outstanding_PrincipalFormat">
+          <DataField>Outstanding_PrincipalFormat</DataField>
+        </Field>
+        <Field Name="Outstanding_Bill">
+          <DataField>Outstanding_Bill</DataField>
+        </Field>
+        <Field Name="Outstanding_BillFormat">
+          <DataField>Outstanding_BillFormat</DataField>
+        </Field>
+        <Field Name="Expected_Date_of_Completion">
+          <DataField>Expected_Date_of_Completion</DataField>
+        </Field>
+        <Field Name="Application_No_">
+          <DataField>Application_No_</DataField>
+        </Field>
+        <Field Name="Type">
+          <DataField>Type</DataField>
+        </Field>
+        <Field Name="MCAmount">
+          <DataField>MCAmount</DataField>
+        </Field>
+        <Field Name="MCAmountFormat">
+          <DataField>MCAmountFormat</DataField>
+        </Field>
+        <Field Name="extAccount_Type">
+          <DataField>extAccount_Type</DataField>
+        </Field>
+        <Field Name="Entry_No_">
+          <DataField>Entry_No_</DataField>
+        </Field>
+        <Field Name="EFT_Options">
+          <DataField>EFT_Options</DataField>
+        </Field>
+        <Field Name="ExtAccount_Name">
+          <DataField>ExtAccount_Name</DataField>
+        </Field>
+        <Field Name="ExtAccount_No_">
+          <DataField>ExtAccount_No_</DataField>
+        </Field>
+        <Field Name="Bank_Name">
+          <DataField>Bank_Name</DataField>
+        </Field>
+        <Field Name="ExtAmount">
+          <DataField>ExtAmount</DataField>
+        </Field>
+        <Field Name="ExtAmountFormat">
+          <DataField>ExtAmountFormat</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="Bank_Code">
+          <DataField>Bank_Code</DataField>
+        </Field>
+        <Field Name="Monthly_Deduction">
+          <DataField>Monthly_Deduction</DataField>
+        </Field>
+        <Field Name="Monthly_DeductionFormat">
+          <DataField>Monthly_DeductionFormat</DataField>
+        </Field>
+        <Field Name="Payment_Destination">
+          <DataField>Payment_Destination</DataField>
+        </Field>
+        <Field Name="Payment_Destination_Code">
+          <DataField>Payment_Destination_Code</DataField>
+        </Field>
+        <Field Name="External_Account_No_">
+          <DataField>External_Account_No_</DataField>
+        </Field>
+        <Field Name="External_Account_Name">
+          <DataField>External_Account_Name</DataField>
+        </Field>
+        <Field Name="Recipient_Reference">
+          <DataField>Recipient_Reference</DataField>
+        </Field>
+        <Field Name="Own_Reference">
+          <DataField>Own_Reference</DataField>
+        </Field>
+        <Field Name="Branch_Code">
+          <DataField>Branch_Code</DataField>
+        </Field>
+        <Field Name="Member_No_">
+          <DataField>Member_No_</DataField>
+        </Field>
+        <Field Name="Mobile_Phone_No_">
+          <DataField>Mobile_Phone_No_</DataField>
+        </Field>
+        <Field Name="No_Security">
+          <DataField>No_Security</DataField>
+        </Field>
+        <Field Name="AccountNo_Security">
+          <DataField>AccountNo_Security</DataField>
+        </Field>
+        <Field Name="Name_Security">
+          <DataField>Name_Security</DataField>
+        </Field>
+        <Field Name="DepositShares_Security">
+          <DataField>DepositShares_Security</DataField>
+        </Field>
+        <Field Name="DepositShares_SecurityFormat">
+          <DataField>DepositShares_SecurityFormat</DataField>
+        </Field>
+        <Field Name="NoofLoansGuaranteed_Security">
+          <DataField>NoofLoansGuaranteed_Security</DataField>
+        </Field>
+        <Field Name="Substituted_Security">
+          <DataField>Substituted_Security</DataField>
+        </Field>
+        <Field Name="Date_Security">
+          <DataField>Date_Security</DataField>
+        </Field>
+        <Field Name="AmountGuaranteed_Security">
+          <DataField>AmountGuaranteed_Security</DataField>
+        </Field>
+        <Field Name="AmountGuaranteed_SecurityFormat">
+          <DataField>AmountGuaranteed_SecurityFormat</DataField>
+        </Field>
+        <Field Name="SelfGuaranteed_Security">
+          <DataField>SelfGuaranteed_Security</DataField>
+        </Field>
+        <Field Name="IDNo_Security">
+          <DataField>IDNo_Security</DataField>
+        </Field>
+        <Field Name="OutstandingBalance_Security">
+          <DataField>OutstandingBalance_Security</DataField>
+        </Field>
+        <Field Name="OutstandingBalance_SecurityFormat">
+          <DataField>OutstandingBalance_SecurityFormat</DataField>
+        </Field>
+        <Field Name="MemberGuaranteed_Security">
+          <DataField>MemberGuaranteed_Security</DataField>
+        </Field>
+        <Field Name="AvailableShares_Security">
+          <DataField>AvailableShares_Security</DataField>
+        </Field>
+        <Field Name="AvailableShares_SecurityFormat">
+          <DataField>AvailableShares_SecurityFormat</DataField>
+        </Field>
+        <Field Name="MemberNo_Security">
+          <DataField>MemberNo_Security</DataField>
+        </Field>
+        <Field Name="ProductType_Security">
+          <DataField>ProductType_Security</DataField>
+        </Field>
+        <Field Name="GuaranteedBalance_Security">
+          <DataField>GuaranteedBalance_Security</DataField>
+        </Field>
+        <Field Name="GuaranteedBalance_SecurityFormat">
+          <DataField>GuaranteedBalance_SecurityFormat</DataField>
+        </Field>
+        <Field Name="SecurityType_Security">
+          <DataField>SecurityType_Security</DataField>
+        </Field>
+        <Field Name="CollateralRegNo_Security">
+          <DataField>CollateralRegNo_Security</DataField>
+        </Field>
+        <Field Name="CollateralValue_Security">
+          <DataField>CollateralValue_Security</DataField>
+        </Field>
+        <Field Name="CollateralValue_SecurityFormat">
+          <DataField>CollateralValue_SecurityFormat</DataField>
+        </Field>
+        <Field Name="Total_Loan_Balance">
+          <DataField>Total_Loan_Balance</DataField>
+        </Field>
+        <Field Name="Total_Loan_BalanceFormat">
+          <DataField>Total_Loan_BalanceFormat</DataField>
+        </Field>
+        <Field Name="No_LoanTopup">
+          <DataField>No_LoanTopup</DataField>
+        </Field>
+        <Field Name="LoanTopUp_LoanTopup">
+          <DataField>LoanTopUp_LoanTopup</DataField>
+        </Field>
+        <Field Name="AccountNo_LoanTopup">
+          <DataField>AccountNo_LoanTopup</DataField>
+        </Field>
+        <Field Name="ProductType_LoanTopup">
+          <DataField>ProductType_LoanTopup</DataField>
+        </Field>
+        <Field Name="OutstandingPrinciple_LoanTopup">
+          <DataField>OutstandingPrinciple_LoanTopup</DataField>
+        </Field>
+        <Field Name="OutstandingPrinciple_LoanTopupFormat">
+          <DataField>OutstandingPrinciple_LoanTopupFormat</DataField>
+        </Field>
+        <Field Name="LoanTopOutstandingInsurance">
+          <DataField>LoanTopOutstandingInsurance</DataField>
+        </Field>
+        <Field Name="LoanTopOutstandingInsuranceFormat">
+          <DataField>LoanTopOutstandingInsuranceFormat</DataField>
+        </Field>
+        <Field Name="OutstandingInterest_LoanTopup">
+          <DataField>OutstandingInterest_LoanTopup</DataField>
+        </Field>
+        <Field Name="OutstandingInterest_LoanTopupFormat">
+          <DataField>OutstandingInterest_LoanTopupFormat</DataField>
+        </Field>
+        <Field Name="TotalOutstandingAmount_LoanTopup">
+          <DataField>TotalOutstandingAmount_LoanTopup</DataField>
+        </Field>
+        <Field Name="TotalOutstandingAmount_LoanTopupFormat">
+          <DataField>TotalOutstandingAmount_LoanTopupFormat</DataField>
+        </Field>
+        <Field Name="OutstandingBalance_LoanTopup">
+          <DataField>OutstandingBalance_LoanTopup</DataField>
+        </Field>
+        <Field Name="OutstandingBalance_LoanTopupFormat">
+          <DataField>OutstandingBalance_LoanTopupFormat</DataField>
+        </Field>
+        <Field Name="Commision_LoanTopup">
+          <DataField>Commision_LoanTopup</DataField>
+        </Field>
+        <Field Name="Commision_LoanTopupFormat">
+          <DataField>Commision_LoanTopupFormat</DataField>
+        </Field>
+        <Field Name="OutstandingBill_LoanTopup">
+          <DataField>OutstandingBill_LoanTopup</DataField>
+        </Field>
+        <Field Name="OutstandingBill_LoanTopupFormat">
+          <DataField>OutstandingBill_LoanTopupFormat</DataField>
+        </Field>
+        <Field Name="UntransferedInterest_LoanTopup">
+          <DataField>UntransferedInterest_LoanTopup</DataField>
+        </Field>
+        <Field Name="UntransferedInterest_LoanTopupFormat">
+          <DataField>UntransferedInterest_LoanTopupFormat</DataField>
+        </Field>
+        <Field Name="OutstandingFee_LoanTopup">
+          <DataField>OutstandingFee_LoanTopup</DataField>
+        </Field>
+        <Field Name="OutstandingFee_LoanTopupFormat">
+          <DataField>OutstandingFee_LoanTopupFormat</DataField>
+        </Field>
+        <Field Name="Total_Total_Up">
+          <DataField>Total_Total_Up</DataField>
+        </Field>
+        <Field Name="Total_Total_UpFormat">
+          <DataField>Total_Total_UpFormat</DataField>
+        </Field>
+        <Field Name="NoLoanTopup">
+          <DataField>NoLoanTopup</DataField>
+        </Field>
+        <Field Name="LoanTopUpLoanTopup">
+          <DataField>LoanTopUpLoanTopup</DataField>
+        </Field>
+        <Field Name="AccountNoLoanTopup">
+          <DataField>AccountNoLoanTopup</DataField>
+        </Field>
+        <Field Name="QProductTypeLoanTopup">
+          <DataField>QProductTypeLoanTopup</DataField>
+        </Field>
+        <Field Name="QOutstandingPrincipleLoanTopup">
+          <DataField>QOutstandingPrincipleLoanTopup</DataField>
+        </Field>
+        <Field Name="QOutstandingPrincipleLoanTopupFormat">
+          <DataField>QOutstandingPrincipleLoanTopupFormat</DataField>
+        </Field>
+        <Field Name="QTopOutstandingInsurance">
+          <DataField>QTopOutstandingInsurance</DataField>
+        </Field>
+        <Field Name="QTopOutstandingInsuranceFormat">
+          <DataField>QTopOutstandingInsuranceFormat</DataField>
+        </Field>
+        <Field Name="QOutstandingInterestLoanTopup">
+          <DataField>QOutstandingInterestLoanTopup</DataField>
+        </Field>
+        <Field Name="QOutstandingInterestLoanTopupFormat">
+          <DataField>QOutstandingInterestLoanTopupFormat</DataField>
+        </Field>
+        <Field Name="QTotalOutstandingAmountLoanTopup">
+          <DataField>QTotalOutstandingAmountLoanTopup</DataField>
+        </Field>
+        <Field Name="QTotalOutstandingAmountLoanTopupFormat">
+          <DataField>QTotalOutstandingAmountLoanTopupFormat</DataField>
+        </Field>
+        <Field Name="QOutstandingBalanceLoanTopup">
+          <DataField>QOutstandingBalanceLoanTopup</DataField>
+        </Field>
+        <Field Name="QOutstandingBalanceLoanTopupFormat">
+          <DataField>QOutstandingBalanceLoanTopupFormat</DataField>
+        </Field>
+        <Field Name="QCommisionLoanTopup">
+          <DataField>QCommisionLoanTopup</DataField>
+        </Field>
+        <Field Name="QCommisionLoanTopupFormat">
+          <DataField>QCommisionLoanTopupFormat</DataField>
+        </Field>
+        <Field Name="QOutstandingBillLoanTopup">
+          <DataField>QOutstandingBillLoanTopup</DataField>
+        </Field>
+        <Field Name="QOutstandingBillLoanTopupFormat">
+          <DataField>QOutstandingBillLoanTopupFormat</DataField>
+        </Field>
+        <Field Name="QUntransferedInterestLoanTopup">
+          <DataField>QUntransferedInterestLoanTopup</DataField>
+        </Field>
+        <Field Name="QUntransferedInterestLoanTopupFormat">
+          <DataField>QUntransferedInterestLoanTopupFormat</DataField>
+        </Field>
+        <Field Name="QOutstandingFeeLoanTopup">
+          <DataField>QOutstandingFeeLoanTopup</DataField>
+        </Field>
+        <Field Name="QOutstandingFeeLoanTopupFormat">
+          <DataField>QOutstandingFeeLoanTopupFormat</DataField>
+        </Field>
+        <Field Name="QTotalTotalUp">
+          <DataField>QTotalTotalUp</DataField>
+        </Field>
+        <Field Name="QTotalTotalUpFormat">
+          <DataField>QTotalTotalUpFormat</DataField>
+        </Field>
+        <Field Name="PChargeAmt">
+          <DataField>PChargeAmt</DataField>
+        </Field>
+        <Field Name="PChargeAmtFormat">
+          <DataField>PChargeAmtFormat</DataField>
+        </Field>
+        <Field Name="ChargeCode_LoanCharges">
+          <DataField>ChargeCode_LoanCharges</DataField>
+        </Field>
+        <Field Name="ChargeDescription_LoanCharges">
+          <DataField>ChargeDescription_LoanCharges</DataField>
+        </Field>
+        <Field Name="ChargeAmount_LoanCharges">
+          <DataField>ChargeAmount_LoanCharges</DataField>
+        </Field>
+        <Field Name="ChargeAmount_LoanChargesFormat">
+          <DataField>ChargeAmount_LoanChargesFormat</DataField>
+        </Field>
+        <Field Name="UsePercentage_LoanCharges">
+          <DataField>UsePercentage_LoanCharges</DataField>
+        </Field>
+        <Field Name="Percentage_LoanCharges">
+          <DataField>Percentage_LoanCharges</DataField>
+        </Field>
+        <Field Name="Percentage_LoanChargesFormat">
+          <DataField>Percentage_LoanChargesFormat</DataField>
+        </Field>
+        <Field Name="ChargeType_LoanCharges">
+          <DataField>ChargeType_LoanCharges</DataField>
+        </Field>
+        <Field Name="ChargingOption_LoanCharges">
+          <DataField>ChargingOption_LoanCharges</DataField>
+        </Field>
+        <Field Name="ProductCode_LoanCharges">
+          <DataField>ProductCode_LoanCharges</DataField>
+        </Field>
+        <Field Name="AccountNo_LoanCharges">
+          <DataField>AccountNo_LoanCharges</DataField>
+        </Field>
+        <Field Name="Minimum_LoanCharges">
+          <DataField>Minimum_LoanCharges</DataField>
+        </Field>
+        <Field Name="Minimum_LoanChargesFormat">
+          <DataField>Minimum_LoanChargesFormat</DataField>
+        </Field>
+        <Field Name="Maximum_LoanCharges">
+          <DataField>Maximum_LoanCharges</DataField>
+        </Field>
+        <Field Name="Maximum_LoanChargesFormat">
+          <DataField>Maximum_LoanChargesFormat</DataField>
+        </Field>
+        <Field Name="EffectExciseDuty_LoanCharges">
+          <DataField>EffectExciseDuty_LoanCharges</DataField>
+        </Field>
+        <Field Name="ClientCode_AppraisalSalaryDetails">
+          <DataField>ClientCode_AppraisalSalaryDetails</DataField>
+        </Field>
+        <Field Name="Code_AppraisalSalaryDetails">
+          <DataField>Code_AppraisalSalaryDetails</DataField>
+        </Field>
+        <Field Name="Description_AppraisalSalaryDetails">
+          <DataField>Description_AppraisalSalaryDetails</DataField>
+        </Field>
+        <Field Name="Type_AppraisalSalaryDetails">
+          <DataField>Type_AppraisalSalaryDetails</DataField>
+        </Field>
+        <Field Name="Amount_AppraisalSalaryDetails">
+          <DataField>Amount_AppraisalSalaryDetails</DataField>
+        </Field>
+        <Field Name="Amount_AppraisalSalaryDetailsFormat">
+          <DataField>Amount_AppraisalSalaryDetailsFormat</DataField>
+        </Field>
+        <Field Name="No_AppraisalSalaryDetails">
+          <DataField>No_AppraisalSalaryDetails</DataField>
+        </Field>
+        <Field Name="LoanApplicationNo_AppraisalSalaryDetails">
+          <DataField>LoanApplicationNo_AppraisalSalaryDetails</DataField>
+        </Field>
+        <Field Name="LoancategoryNo">
+          <DataField>LoancategoryNo</DataField>
+        </Field>
+        <Field Name="LoancategoryProductDescription">
+          <DataField>LoancategoryProductDescription</DataField>
+        </Field>
+        <Field Name="LoancategoryOutstandingBalance">
+          <DataField>LoancategoryOutstandingBalance</DataField>
+        </Field>
+        <Field Name="LoancategoryOutstandingBalanceFormat">
+          <DataField>LoancategoryOutstandingBalanceFormat</DataField>
+        </Field>
+        <Field Name="PerformanceIndicator">
+          <DataField>PerformanceIndicator</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

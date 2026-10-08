@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CustomerNo_LoanApplicationCreditScore">
+          <DataField>CustomerNo_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="ProductCode_LoanApplicationCreditScore">
+          <DataField>ProductCode_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="ParameterCode_LoanApplicationCreditScore">
+          <DataField>ParameterCode_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="Score_LoanApplicationCreditScore">
+          <DataField>Score_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="Score_LoanApplicationCreditScoreFormat">
+          <DataField>Score_LoanApplicationCreditScoreFormat</DataField>
+        </Field>
+        <Field Name="CalculatedSuccess_LoanApplicationCreditScore">
+          <DataField>CalculatedSuccess_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="CalculatedSuccess_LoanApplicationCreditScoreFormat">
+          <DataField>CalculatedSuccess_LoanApplicationCreditScoreFormat</DataField>
+        </Field>
+        <Field Name="CalculatedFailure_LoanApplicationCreditScore">
+          <DataField>CalculatedFailure_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="CalculatedFailure_LoanApplicationCreditScoreFormat">
+          <DataField>CalculatedFailure_LoanApplicationCreditScoreFormat</DataField>
+        </Field>
+        <Field Name="RequestedAmount_LoanApplicationCreditScore">
+          <DataField>RequestedAmount_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="RequestedAmount_LoanApplicationCreditScoreFormat">
+          <DataField>RequestedAmount_LoanApplicationCreditScoreFormat</DataField>
+        </Field>
+        <Field Name="QualifyingAmount_LoanApplicationCreditScore">
+          <DataField>QualifyingAmount_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="QualifyingAmount_LoanApplicationCreditScoreFormat">
+          <DataField>QualifyingAmount_LoanApplicationCreditScoreFormat</DataField>
+        </Field>
+        <Field Name="RequestTime_LoanApplicationCreditScore">
+          <DataField>RequestTime_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="GeneralOutput_LoanApplicationCreditScore">
+          <DataField>GeneralOutput_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="LoanNo_LoanApplicationCreditScore">
+          <DataField>LoanNo_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="ParameterCalculation_LoanApplicationCreditScore">
+          <DataField>ParameterCalculation_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="Priority_LoanApplicationCreditScore">
+          <DataField>Priority_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="Variable_LoanApplicationCreditScore">
+          <DataField>Variable_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="QualificationType_LoanApplicationCreditScore">
+          <DataField>QualificationType_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="SystemGenScore_LoanApplicationCreditScore">
+          <DataField>SystemGenScore_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="SystemGenScore_LoanApplicationCreditScoreFormat">
+          <DataField>SystemGenScore_LoanApplicationCreditScoreFormat</DataField>
+        </Field>
+        <Field Name="AmtI">
+          <DataField>AmtI</DataField>
+        </Field>
+        <Field Name="AmtIFormat">
+          <DataField>AmtIFormat</DataField>
+        </Field>
+        <Field Name="VeryLow_LoanApplicationCreditScore">
+          <DataField>VeryLow_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="VeryLow_LoanApplicationCreditScoreFormat">
+          <DataField>VeryLow_LoanApplicationCreditScoreFormat</DataField>
+        </Field>
+        <Field Name="Low_LoanApplicationCreditScore">
+          <DataField>Low_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="Low_LoanApplicationCreditScoreFormat">
+          <DataField>Low_LoanApplicationCreditScoreFormat</DataField>
+        </Field>
+        <Field Name="Moderate_LoanApplicationCreditScore">
+          <DataField>Moderate_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="Moderate_LoanApplicationCreditScoreFormat">
+          <DataField>Moderate_LoanApplicationCreditScoreFormat</DataField>
+        </Field>
+        <Field Name="High_LoanApplicationCreditScore">
+          <DataField>High_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="High_LoanApplicationCreditScoreFormat">
+          <DataField>High_LoanApplicationCreditScoreFormat</DataField>
+        </Field>
+        <Field Name="VeryHigh_LoanApplicationCreditScore">
+          <DataField>VeryHigh_LoanApplicationCreditScore</DataField>
+        </Field>
+        <Field Name="VeryHigh_LoanApplicationCreditScoreFormat">
+          <DataField>VeryHigh_LoanApplicationCreditScoreFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="No_MemberApplication">
+          <DataField>No_MemberApplication</DataField>
+        </Field>
+        <Field Name="AccountType_MemberApplication">
+          <DataField>AccountType_MemberApplication</DataField>
+        </Field>
+        <Field Name="Name_MemberApplication">
+          <DataField>Name_MemberApplication</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code_MemberApplication">
+          <DataField>GlobalDimension1Code_MemberApplication</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code_MemberApplication">
+          <DataField>GlobalDimension2Code_MemberApplication</DataField>
+        </Field>
+        <Field Name="RegistrationDate_MemberApplication">
+          <DataField>RegistrationDate_MemberApplication</DataField>
+        </Field>
+        <Field Name="EmployerCode_MemberApplication">
+          <DataField>EmployerCode_MemberApplication</DataField>
+        </Field>
+        <Field Name="Nationality_MemberApplication">
+          <DataField>Nationality_MemberApplication</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo_MemberApplication">
+          <DataField>PayrollStaffNo_MemberApplication</DataField>
+        </Field>
+        <Field Name="PhoneNo_MemberApplication">
+          <DataField>PhoneNo_MemberApplication</DataField>
+        </Field>
+        <Field Name="IDNumber_MemberApplication">
+          <DataField>IDNumber_MemberApplication</DataField>
+        </Field>
+        <Field Name="GenderMemberApplication">
+          <DataField>GenderMemberApplication</DataField>
+        </Field>
+        <Field Name="DOBMemberApplication">
+          <DataField>DOBMemberApplication</DataField>
+        </Field>
+        <Field Name="SalespersonCode_MemberApplication">
+          <DataField>SalespersonCode_MemberApplication</DataField>
+        </Field>
+        <Field Name="MemberCategory_MemberApplication">
+          <DataField>MemberCategory_MemberApplication</DataField>
+        </Field>
+        <Field Name="CreatedBy_MemberApplication">
+          <DataField>CreatedBy_MemberApplication</DataField>
+        </Field>
+        <Field Name="CountryRegionMemberApplication">
+          <DataField>CountryRegionMemberApplication</DataField>
+        </Field>
+        <Field Name="EmailAdd">
+          <DataField>EmailAdd</DataField>
+        </Field>
+        <Field Name="SCount">
+          <DataField>SCount</DataField>
+        </Field>
+        <Field Name="PINMemberApplication">
+          <DataField>PINMemberApplication</DataField>
+        </Field>
+        <Field Name="DutyStationMemberApplication">
+          <DataField>DutyStationMemberApplication</DataField>
+        </Field>
+        <Field Name="IDTypeMemberApplication">
+          <DataField>IDTypeMemberApplication</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

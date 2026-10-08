@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Company_Name">
+          <DataField>Company_Name</DataField>
+        </Field>
+        <Field Name="Company_Address">
+          <DataField>Company_Address</DataField>
+        </Field>
+        <Field Name="Company_Picture">
+          <DataField>Company_Picture</DataField>
+        </Field>
+        <Field Name="Company_PostCode">
+          <DataField>Company_PostCode</DataField>
+        </Field>
+        <Field Name="No_GLAccount">
+          <DataField>No_GLAccount</DataField>
+        </Field>
+        <Field Name="Name_GLAccount">
+          <DataField>Name_GLAccount</DataField>
+        </Field>
+        <Field Name="BudgetedAmount_GLAccount">
+          <DataField>BudgetedAmount_GLAccount</DataField>
+        </Field>
+        <Field Name="BudgetedAmount_GLAccountFormat">
+          <DataField>BudgetedAmount_GLAccountFormat</DataField>
+        </Field>
+        <Field Name="NetChange_GLAccount">
+          <DataField>NetChange_GLAccount</DataField>
+        </Field>
+        <Field Name="NetChange_GLAccountFormat">
+          <DataField>NetChange_GLAccountFormat</DataField>
+        </Field>
+        <Field Name="Commitment_GLAccount">
+          <DataField>Commitment_GLAccount</DataField>
+        </Field>
+        <Field Name="Commitment_GLAccountFormat">
+          <DataField>Commitment_GLAccountFormat</DataField>
+        </Field>
+        <Field Name="DiffPct">
+          <DataField>DiffPct</DataField>
+        </Field>
+        <Field Name="DiffPctFormat">
+          <DataField>DiffPctFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

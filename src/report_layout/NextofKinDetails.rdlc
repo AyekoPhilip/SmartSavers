@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="EntryNo_NextofKIN">
+          <DataField>EntryNo_NextofKIN</DataField>
+        </Field>
+        <Field Name="AccountNo_NextofKIN">
+          <DataField>AccountNo_NextofKIN</DataField>
+        </Field>
+        <Field Name="Name_NextofKIN">
+          <DataField>Name_NextofKIN</DataField>
+        </Field>
+        <Field Name="Relationship_NextofKIN">
+          <DataField>Relationship_NextofKIN</DataField>
+        </Field>
+        <Field Name="Beneficiary_NextofKIN">
+          <DataField>Beneficiary_NextofKIN</DataField>
+        </Field>
+        <Field Name="DateofBirth_NextofKIN">
+          <DataField>DateofBirth_NextofKIN</DataField>
+        </Field>
+        <Field Name="Address_NextofKIN">
+          <DataField>Address_NextofKIN</DataField>
+        </Field>
+        <Field Name="Telephone_NextofKIN">
+          <DataField>Telephone_NextofKIN</DataField>
+        </Field>
+        <Field Name="Fax_NextofKIN">
+          <DataField>Fax_NextofKIN</DataField>
+        </Field>
+        <Field Name="Email_NextofKIN">
+          <DataField>Email_NextofKIN</DataField>
+        </Field>
+        <Field Name="IDNo_NextofKIN">
+          <DataField>IDNo_NextofKIN</DataField>
+        </Field>
+        <Field Name="Allocation_NextofKIN">
+          <DataField>Allocation_NextofKIN</DataField>
+        </Field>
+        <Field Name="Allocation_NextofKINFormat">
+          <DataField>Allocation_NextofKINFormat</DataField>
+        </Field>
+        <Field Name="Type_NextofKIN">
+          <DataField>Type_NextofKIN</DataField>
+        </Field>
+        <Field Name="Deceased_NextofKIN">
+          <DataField>Deceased_NextofKIN</DataField>
+        </Field>
+        <Field Name="BBFEntitlementCode_NextofKIN">
+          <DataField>BBFEntitlementCode_NextofKIN</DataField>
+        </Field>
+        <Field Name="BBFEntitlement_NextofKIN">
+          <DataField>BBFEntitlement_NextofKIN</DataField>
+        </Field>
+        <Field Name="BBFEntitlement_NextofKINFormat">
+          <DataField>BBFEntitlement_NextofKINFormat</DataField>
+        </Field>
+        <Field Name="AccountCategory_NextofKIN">
+          <DataField>AccountCategory_NextofKIN</DataField>
+        </Field>
+        <Field Name="OldMemberNo_NextofKIN">
+          <DataField>OldMemberNo_NextofKIN</DataField>
+        </Field>
+        <Field Name="OldAccountNo_NextofKIN">
+          <DataField>OldAccountNo_NextofKIN</DataField>
+        </Field>
+        <Field Name="Specify_NextofKIN">
+          <DataField>Specify_NextofKIN</DataField>
+        </Field>
+        <Field Name="CustName">
+          <DataField>CustName</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

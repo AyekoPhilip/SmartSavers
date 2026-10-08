@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="StartDate_DividendProgression">
+          <DataField>StartDate_DividendProgression</DataField>
+        </Field>
+        <Field Name="ProductType_DividendProgression">
+          <DataField>ProductType_DividendProgression</DataField>
+        </Field>
+        <Field Name="ProductName_DividendProgression">
+          <DataField>ProductName_DividendProgression</DataField>
+        </Field>
+        <Field Name="QualifyingShares_DividendProgression">
+          <DataField>QualifyingShares_DividendProgression</DataField>
+        </Field>
+        <Field Name="QualifyingShares_DividendProgressionFormat">
+          <DataField>QualifyingShares_DividendProgressionFormat</DataField>
+        </Field>
+        <Field Name="Shares_DividendProgression">
+          <DataField>Shares_DividendProgression</DataField>
+        </Field>
+        <Field Name="Shares_DividendProgressionFormat">
+          <DataField>Shares_DividendProgressionFormat</DataField>
+        </Field>
+        <Field Name="GrossDividends_DividendProgression">
+          <DataField>GrossDividends_DividendProgression</DataField>
+        </Field>
+        <Field Name="GrossDividends_DividendProgressionFormat">
+          <DataField>GrossDividends_DividendProgressionFormat</DataField>
+        </Field>
+        <Field Name="WitholdingTax_DividendProgression">
+          <DataField>WitholdingTax_DividendProgression</DataField>
+        </Field>
+        <Field Name="WitholdingTax_DividendProgressionFormat">
+          <DataField>WitholdingTax_DividendProgressionFormat</DataField>
+        </Field>
+        <Field Name="NetDividends_DividendProgression">
+          <DataField>NetDividends_DividendProgression</DataField>
+        </Field>
+        <Field Name="NetDividends_DividendProgressionFormat">
+          <DataField>NetDividends_DividendProgressionFormat</DataField>
+        </Field>
+        <Field Name="No_Members">
+          <DataField>No_Members</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

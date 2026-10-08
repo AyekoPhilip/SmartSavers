@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="TotalCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>TotalCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>TotalCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="QuantityCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>QuantityCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>QuantityCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="StmtNo_BankAccStmtCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>StmtNo_BankAccStmtCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>StmtNo_BankAccStmtCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Type_BankAccStmtLineCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Type_BankAccStmtLineCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Type_BankAccStmtLineCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LineDocNo_BankAccStmtCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LineDocNo_BankAccStmtCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LineDocNo_BankAccStmtCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AppliedEntr_BankAccStmtLineCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>AppliedEntr_BankAccStmtLineCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>AppliedEntr_BankAccStmtLineCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Amt1_BankAccStmtLineStmtCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Amt1_BankAccStmtLineStmtCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Amt1_BankAccStmtLineStmtCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="AppliedAmt1_BankAccStmtLineCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>AppliedAmt1_BankAccStmtLineCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>AppliedAmt1_BankAccStmtLineCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Desc_BankAccStmtLineCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Desc_BankAccStmtLineCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Desc_BankAccStmtLineCaption</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ComanyName">
+          <DataField>ComanyName</DataField>
+        </Field>
+        <Field Name="CompInformation">
+          <DataField>CompInformation</DataField>
+        </Field>
+        <Field Name="CompanyInformationPicture">
+          <DataField>CompanyInformationPicture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="BankAccStmtTableCaptFltr">
+          <DataField>BankAccStmtTableCaptFltr</DataField>
+        </Field>
+        <Field Name="BankAccStmtFilter">
+          <DataField>BankAccStmtFilter</DataField>
+        </Field>
+        <Field Name="StmtNo_BankAccStmt">
+          <DataField>StmtNo_BankAccStmt</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___Statement_Date_Caption">
+          <DataField>Bank_Acc__Reconciliation___Statement_Date_Caption</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___Statement_Date_">
+          <DataField>Bank_Acc__Reconciliation___Statement_Date_</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___Balance_Last_Statement_Caption">
+          <DataField>Bank_Acc__Reconciliation___Balance_Last_Statement_Caption</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___Balance_Last_Statement_">
+          <DataField>Bank_Acc__Reconciliation___Balance_Last_Statement_</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___Balance_Last_Statement_Format">
+          <DataField>Bank_Acc__Reconciliation___Balance_Last_Statement_Format</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___Statement_Ending_Balance_Caption">
+          <DataField>Bank_Acc__Reconciliation___Statement_Ending_Balance_Caption</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___Statement_Ending_Balance_">
+          <DataField>Bank_Acc__Reconciliation___Statement_Ending_Balance_</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___Statement_Ending_Balance_Format">
+          <DataField>Bank_Acc__Reconciliation___Statement_Ending_Balance_Format</DataField>
+        </Field>
+        <Field Name="G_L_BalanceCaption">
+          <DataField>G_L_BalanceCaption</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___TotalBalOnBankAccount">
+          <DataField>Bank_Acc__Reconciliation___TotalBalOnBankAccount</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___TotalBalOnBankAccountFormat">
+          <DataField>Bank_Acc__Reconciliation___TotalBalOnBankAccountFormat</DataField>
+        </Field>
+        <Field Name="Subtotal_Caption">
+          <DataField>Subtotal_Caption</DataField>
+        </Field>
+        <Field Name="GL_Subtotal">
+          <DataField>GL_Subtotal</DataField>
+        </Field>
+        <Field Name="GL_SubtotalFormat">
+          <DataField>GL_SubtotalFormat</DataField>
+        </Field>
+        <Field Name="Ending_G_L_BalanceCaption">
+          <DataField>Ending_G_L_BalanceCaption</DataField>
+        </Field>
+        <Field Name="Ending_GL_Balance">
+          <DataField>Ending_GL_Balance</DataField>
+        </Field>
+        <Field Name="Ending_GL_BalanceFormat">
+          <DataField>Ending_GL_BalanceFormat</DataField>
+        </Field>
+        <Field Name="Currency_CodeCaption">
+          <DataField>Currency_CodeCaption</DataField>
+        </Field>
+        <Field Name="Currency_Code">
+          <DataField>Currency_Code</DataField>
+        </Field>
+        <Field Name="BankName">
+          <DataField>BankName</DataField>
+        </Field>
+        <Field Name="BankAcctNo">
+          <DataField>BankAcctNo</DataField>
+        </Field>
+        <Field Name="Statement_BalanceCaption">
+          <DataField>Statement_BalanceCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransactionsCaption">
+          <DataField>Outstanding_BankTransactionsCaption</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___TotalOutstdBankTransactions">
+          <DataField>Bank_Acc__Reconciliation___TotalOutstdBankTransactions</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___TotalOutstdBankTransactionsFormat">
+          <DataField>Bank_Acc__Reconciliation___TotalOutstdBankTransactionsFormat</DataField>
+        </Field>
+        <Field Name="Statement_Subtotal">
+          <DataField>Statement_Subtotal</DataField>
+        </Field>
+        <Field Name="Statement_SubtotalFormat">
+          <DataField>Statement_SubtotalFormat</DataField>
+        </Field>
+        <Field Name="Outstanding_PaymentsCaption">
+          <DataField>Outstanding_PaymentsCaption</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___TotalOutstdPayments">
+          <DataField>Bank_Acc__Reconciliation___TotalOutstdPayments</DataField>
+        </Field>
+        <Field Name="Bank_Acc__Reconciliation___TotalOutstdPaymentsFormat">
+          <DataField>Bank_Acc__Reconciliation___TotalOutstdPaymentsFormat</DataField>
+        </Field>
+        <Field Name="Ending_BalanceCaption">
+          <DataField>Ending_BalanceCaption</DataField>
+        </Field>
+        <Field Name="Adjusted_Statement_Ending_Balance">
+          <DataField>Adjusted_Statement_Ending_Balance</DataField>
+        </Field>
+        <Field Name="Adjusted_Statement_Ending_BalanceFormat">
+          <DataField>Adjusted_Statement_Ending_BalanceFormat</DataField>
+        </Field>
+        <Field Name="Amt_BankAccStmtLineStmt">
+          <DataField>Amt_BankAccStmtLineStmt</DataField>
+        </Field>
+        <Field Name="Amt_BankAccStmtLineStmtFormat">
+          <DataField>Amt_BankAccStmtLineStmtFormat</DataField>
+        </Field>
+        <Field Name="AppliedAmt_BankAccStmtLine">
+          <DataField>AppliedAmt_BankAccStmtLine</DataField>
+        </Field>
+        <Field Name="AppliedAmt_BankAccStmtLineFormat">
+          <DataField>AppliedAmt_BankAccStmtLineFormat</DataField>
+        </Field>
+        <Field Name="BankAccNo_BankAccStmt">
+          <DataField>BankAccNo_BankAccStmt</DataField>
+        </Field>
+        <Field Name="BankAccStmtCapt">
+          <DataField>BankAccStmtCapt</DataField>
+        </Field>
+        <Field Name="CurrReportPAGENOCapt">
+          <DataField>CurrReportPAGENOCapt</DataField>
+        </Field>
+        <Field Name="BnkAccStmtLinTrstnDteCapt">
+          <DataField>BnkAccStmtLinTrstnDteCapt</DataField>
+        </Field>
+        <Field Name="BnkAcStmtLinValDteCapt">
+          <DataField>BnkAcStmtLinValDteCapt</DataField>
+        </Field>
+        <Field Name="GLBalanceCaption">
+          <DataField>GLBalanceCaption</DataField>
+        </Field>
+        <Field Name="CompletedPayments_SectionTitleCaption">
+          <DataField>CompletedPayments_SectionTitleCaption</DataField>
+        </Field>
+        <Field Name="Print_Outstanding_Transactions">
+          <DataField>Print_Outstanding_Transactions</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_SectionTitleCaption">
+          <DataField>Outstanding_BankTransaction_SectionTitleCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_PostingDateCaption">
+          <DataField>Outstanding_BankTransaction_PostingDateCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_DocTypeCaption">
+          <DataField>Outstanding_BankTransaction_DocTypeCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_DocNoCaption">
+          <DataField>Outstanding_BankTransaction_DocNoCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_DescriptionCaption">
+          <DataField>Outstanding_BankTransaction_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_AmountCaption">
+          <DataField>Outstanding_BankTransaction_AmountCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_SectionTitleCaption">
+          <DataField>Outstanding_Check_SectionTitleCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_PostingDateCaption">
+          <DataField>Outstanding_Check_PostingDateCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_DocTypeCaption">
+          <DataField>Outstanding_Check_DocTypeCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_CheckNoCaption">
+          <DataField>Outstanding_Check_CheckNoCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_DescriptionCaption">
+          <DataField>Outstanding_Check_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_AmountCaption">
+          <DataField>Outstanding_Check_AmountCaption</DataField>
+        </Field>
+        <Field Name="TrnsctnDte_BnkAcStmtLin">
+          <DataField>TrnsctnDte_BnkAcStmtLin</DataField>
+        </Field>
+        <Field Name="Type_BankAccStmtLine">
+          <DataField>Type_BankAccStmtLine</DataField>
+        </Field>
+        <Field Name="LineDocNo_BankAccStmt">
+          <DataField>LineDocNo_BankAccStmt</DataField>
+        </Field>
+        <Field Name="AppliedEntr_BankAccStmtLine">
+          <DataField>AppliedEntr_BankAccStmtLine</DataField>
+        </Field>
+        <Field Name="Amt1_BankAccStmtLineStmt">
+          <DataField>Amt1_BankAccStmtLineStmt</DataField>
+        </Field>
+        <Field Name="Amt1_BankAccStmtLineStmtFormat">
+          <DataField>Amt1_BankAccStmtLineStmtFormat</DataField>
+        </Field>
+        <Field Name="AppliedAmt1_BankAccStmtLine">
+          <DataField>AppliedAmt1_BankAccStmtLine</DataField>
+        </Field>
+        <Field Name="AppliedAmt1_BankAccStmtLineFormat">
+          <DataField>AppliedAmt1_BankAccStmtLineFormat</DataField>
+        </Field>
+        <Field Name="Desc_BankAccStmtLine">
+          <DataField>Desc_BankAccStmtLine</DataField>
+        </Field>
+        <Field Name="ValueDate_BankAccStmtLine">
+          <DataField>ValueDate_BankAccStmtLine</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_PostingDate">
+          <DataField>Outstanding_BankTransaction_PostingDate</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_DocType">
+          <DataField>Outstanding_BankTransaction_DocType</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_DocNo">
+          <DataField>Outstanding_BankTransaction_DocNo</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_Description">
+          <DataField>Outstanding_BankTransaction_Description</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_Amount">
+          <DataField>Outstanding_BankTransaction_Amount</DataField>
+        </Field>
+        <Field Name="Outstanding_BankTransaction_AmountFormat">
+          <DataField>Outstanding_BankTransaction_AmountFormat</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_PostingDate">
+          <DataField>Outstanding_Check_PostingDate</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_DocType">
+          <DataField>Outstanding_Check_DocType</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_CheckNo">
+          <DataField>Outstanding_Check_CheckNo</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_Description">
+          <DataField>Outstanding_Check_Description</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_Amount">
+          <DataField>Outstanding_Check_Amount</DataField>
+        </Field>
+        <Field Name="Outstanding_Check_AmountFormat">
+          <DataField>Outstanding_Check_AmountFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

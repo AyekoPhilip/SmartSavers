@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No_TreasuryCashierTransactions">
+          <DataField>No_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="TransactionDate_TreasuryCashierTransactions">
+          <DataField>TransactionDate_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="TransactionType_TreasuryCashierTransactions">
+          <DataField>TransactionType_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="FromAccount_TreasuryCashierTransactions">
+          <DataField>FromAccount_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="ToAccount_TreasuryCashierTransactions">
+          <DataField>ToAccount_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="Description_TreasuryCashierTransactions">
+          <DataField>Description_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="Amount_TreasuryCashierTransactions">
+          <DataField>Amount_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="Amount_TreasuryCashierTransactionsFormat">
+          <DataField>Amount_TreasuryCashierTransactionsFormat</DataField>
+        </Field>
+        <Field Name="Posted_TreasuryCashierTransactions">
+          <DataField>Posted_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="DatePosted_TreasuryCashierTransactions">
+          <DataField>DatePosted_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="TimePosted_TreasuryCashierTransactions">
+          <DataField>TimePosted_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="FromAccountName_TreasuryCashierTransactions">
+          <DataField>FromAccountName_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="ToAccountName_TreasuryCashierTransactions">
+          <DataField>ToAccountName_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="ActualCashAtHand_TreasuryCashierTransactions">
+          <DataField>ActualCashAtHand_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="ActualCashAtHand_TreasuryCashierTransactionsFormat">
+          <DataField>ActualCashAtHand_TreasuryCashierTransactionsFormat</DataField>
+        </Field>
+        <Field Name="ResponsibilityCenter_TreasuryCashierTransactions">
+          <DataField>ResponsibilityCenter_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="Status_TreasuryCashierTransactions">
+          <DataField>Status_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="Type_TreasuryCashierTransactions">
+          <DataField>Type_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="FromTill_TreasuryCashierTransactions">
+          <DataField>FromTill_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="ToTill_TreasuryCashierTransactions">
+          <DataField>ToTill_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="ExcessShortageAmount_TreasuryCashierTransactions">
+          <DataField>ExcessShortageAmount_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="ExcessShortageAmount_TreasuryCashierTransactionsFormat">
+          <DataField>ExcessShortageAmount_TreasuryCashierTransactionsFormat</DataField>
+        </Field>
+        <Field Name="DateIssued_TreasuryCashierTransactions">
+          <DataField>DateIssued_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="TimeIssued_TreasuryCashierTransactions">
+          <DataField>TimeIssued_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="IssueReceived_TreasuryCashierTransactions">
+          <DataField>IssueReceived_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="DateReceived_TreasuryCashierTransactions">
+          <DataField>DateReceived_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="TimeReceived_TreasuryCashierTransactions">
+          <DataField>TimeReceived_TreasuryCashierTransactions</DataField>
+        </Field>
+        <Field Name="KampInfoName">
+          <DataField>KampInfoName</DataField>
+        </Field>
+        <Field Name="KampInfoAddress">
+          <DataField>KampInfoAddress</DataField>
+        </Field>
+        <Field Name="KampInfoPicture">
+          <DataField>KampInfoPicture</DataField>
+        </Field>
+        <Field Name="No_Coinage">
+          <DataField>No_Coinage</DataField>
+        </Field>
+        <Field Name="Code_Coinage">
+          <DataField>Code_Coinage</DataField>
+        </Field>
+        <Field Name="Description_Coinage">
+          <DataField>Description_Coinage</DataField>
+        </Field>
+        <Field Name="Type_Coinage">
+          <DataField>Type_Coinage</DataField>
+        </Field>
+        <Field Name="Value_Coinage">
+          <DataField>Value_Coinage</DataField>
+        </Field>
+        <Field Name="Value_CoinageFormat">
+          <DataField>Value_CoinageFormat</DataField>
+        </Field>
+        <Field Name="Quantity_Coinage">
+          <DataField>Quantity_Coinage</DataField>
+        </Field>
+        <Field Name="TotalAmount_Coinage">
+          <DataField>TotalAmount_Coinage</DataField>
+        </Field>
+        <Field Name="TotalAmount_CoinageFormat">
+          <DataField>TotalAmount_CoinageFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

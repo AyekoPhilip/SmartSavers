@@ -1,0 +1,452 @@
+page 51006 "Account Card Credit"
+{
+    Caption = 'Account Card-Credit';
+    DeleteAllowed = false;
+    Editable = true;
+    InsertAllowed = false;
+    ModifyAllowed = false;
+    PageType = Card;
+    RefreshOnActivate = true;
+    SourceTable = "Account Credit";
+    ApplicationArea = All;
+
+    layout
+    {
+        area(content)
+        {
+            group(General)
+            {
+                Editable = false;
+                field("No."; Rec."No.")
+                {
+                    Importance = Promoted;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                    ApplicationArea = All;
+                }
+                field(Name; Rec.Name)
+                {
+                    Importance = Promoted;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                    ShowMandatory = true;
+                    ApplicationArea = All;
+
+                }
+                field("Member No."; Rec."Member No.")
+                {
+                    ApplicationArea = All;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
+                field("Employer Code"; Rec."Employer Code")
+                {
+                    ApplicationArea = All;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
+                field("Date of Birth"; Rec."Date of Birth")
+                {
+                    ApplicationArea = All;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
+
+                field("Product Type"; Rec."Product Type")
+                {
+                    ApplicationArea = All;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
+                field("Product Name"; Rec."Product Name")
+                {
+                    ApplicationArea = All;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = All;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
+                field(Blocked; Rec.Blocked)
+                {
+                    ApplicationArea = All;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
+
+                field("Balance (LCY)"; Rec."Balance (LCY)")
+                {
+                    Visible = false;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                    ApplicationArea = All;
+
+                    trigger OnDrillDown()
+                    var
+                        DtldCustLedgEntry: Record "Detailed Cust. Ledg. Entry";
+                        CustLedgEntry: Record "Cust. Ledger Entry";
+                    begin
+
+                    end;
+                }
+
+                field("Currency Code"; Rec."Currency Code")
+                {
+                    Editable = false;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                    Visible = false;
+                    Importance = Promoted;
+                    ApplicationArea = All;
+                }
+            }
+            group("Trail Information")
+            {
+                Editable = false;
+                field("Last Date Modified"; Rec."Last Date Modified")
+                {
+                    ApplicationArea = All;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
+                field("Created By"; Rec."Created By")
+                {
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                    ApplicationArea = All;
+                }
+                field("Responsibility Center"; Rec."Responsibility Center")
+                {
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                    ApplicationArea = All;
+
+                }
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                {
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                    ApplicationArea = All;
+
+                }
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
+                {
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                    ApplicationArea = All;
+
+                }
+
+
+            }
+        }
+        area(factboxes)
+        {
+            part(Control7; "Credit Statistics FactBox")
+            {
+                SubPageLink = "No." = FIELD("No."),
+                              "Currency Filter" = FIELD("Currency Filter"),
+                              "Date Filter" = FIELD("Date Filter"),
+                              "Global Dimension 1 Filter" = FIELD("Global Dimension 1 Filter"),
+                              "Global Dimension 2 Filter" = FIELD("Global Dimension 2 Filter");
+                Visible = true;
+                ApplicationArea = All;
+            }
+            part(Control12; "Member Picture")
+            {
+                SubPageLink = "Member No." = FIELD("Member No.");
+                ApplicationArea = All;
+            }
+            part(Control11; "Member Signature")
+            {
+                SubPageLink = "Member No." = FIELD("Member No.");
+                ApplicationArea = All;
+            }
+            part(Control9; "Sales Hist. Sell-to FactBox")
+            {
+                SubPageLink = "No." = FIELD("No."),
+                              "Currency Filter" = FIELD("Currency Filter"),
+                              "Date Filter" = FIELD("Date Filter"),
+                              "Global Dimension 1 Filter" = FIELD("Global Dimension 1 Filter"),
+                              "Global Dimension 2 Filter" = FIELD("Global Dimension 2 Filter");
+                Visible = false;
+                ApplicationArea = All;
+            }
+            part(Control8; "Sales Hist. Bill-to FactBox")
+            {
+                SubPageLink = "No." = FIELD("No."),
+                              "Currency Filter" = FIELD("Currency Filter"),
+                              "Date Filter" = FIELD("Date Filter"),
+                              "Global Dimension 1 Filter" = FIELD("Global Dimension 1 Filter"),
+                              "Global Dimension 2 Filter" = FIELD("Global Dimension 2 Filter");
+                Visible = false;
+                ApplicationArea = All;
+            }
+            part(Control6; "Dimensions FactBox")
+            {
+                SubPageLink = "Table ID" = CONST(18),
+                              "No." = FIELD("No.");
+                Visible = false;
+                ApplicationArea = All;
+            }
+            part(Control5; "Service Hist. Sell-to FactBox")
+            {
+                SubPageLink = "No." = FIELD("No."),
+                              "Currency Filter" = FIELD("Currency Filter"),
+                              "Date Filter" = FIELD("Date Filter"),
+                              "Global Dimension 1 Filter" = FIELD("Global Dimension 1 Filter"),
+                              "Global Dimension 2 Filter" = FIELD("Global Dimension 2 Filter");
+                Visible = false;
+                ApplicationArea = All;
+            }
+            part(Control4; "Service Hist. Bill-to FactBox")
+            {
+                SubPageLink = "No." = FIELD("No."),
+                              "Currency Filter" = FIELD("Currency Filter"),
+                              "Date Filter" = FIELD("Date Filter"),
+                              "Global Dimension 1 Filter" = FIELD("Global Dimension 1 Filter"),
+                              "Global Dimension 2 Filter" = FIELD("Global Dimension 2 Filter");
+                Visible = false;
+                ApplicationArea = All;
+            }
+            part(WorkflowStatus; "Workflow Status FactBox")
+            {
+                Editable = false;
+                Enabled = false;
+                ShowFilter = false;
+                Visible = ShowWorkflowStatus;
+                ApplicationArea = All;
+            }
+            systempart(Control2; Links)
+            {
+                Visible = true;
+                ApplicationArea = All;
+            }
+            systempart(Control1; Notes)
+            {
+                Visible = true;
+                ApplicationArea = All;
+            }
+        }
+    }
+
+    actions
+    {
+        area(navigation)
+        {
+            action("Member Page")
+            {
+                Image = Customer;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                begin
+                    CustMembr.Reset();
+                    CustMembr.SetRange("No.", Rec."Member No.");
+                    if CustMembr.FindFirst() then
+                        Page.Run(Page::"Membership Individual", CustMembr, CustMembr."No.");
+                end;
+            }
+
+        }
+        area(processing)
+        {
+            group(Reports)
+            {
+                Caption = 'Reports';
+            }
+            action(Statement)
+            {
+                Image = Customer;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    SavingsAccounts: Record "Account Banking";
+                begin
+
+                    CustMembr.RESET;
+                    CustMembr.SETRANGE("No.", Rec."Member No.");
+                    if CustMembr.Find('-') then
+                        REPORT.Run(Report::"Standard Statement-All Account", true, false, CustMembr);
+                end;
+            }
+            action(Signatories)
+            {
+                Image = Signature;
+                RunObject = Page "Signatories List";
+                RunPageLink = "Account No." = FIELD("Member No.");
+                ApplicationArea = All;
+            }
+            action("Member Monthly Contribution")
+            {
+                Image = CustomerGroup;
+                Caption = 'Monthly Contribution';
+                ApplicationArea = All;
+                RunObject = page "Member Contribution";
+                RunPageLink = "Account No." = field("Member No.");
+            }
+            action("Authorized Kin")
+            {
+                Image = CustomerGroup;
+                ApplicationArea = All;
+                RunObject = page "Account kin List";
+                RunPageLink = "Account No." = field("Member No.");
+            }
+            action(Email)
+            {
+                ApplicationArea = All;
+                Caption = 'Send Email';
+                Image = Email;
+                ToolTip = 'Send an email to the contact person for this account.';
+                trigger OnAction()
+                var
+                    TempEmailItem: Record "Email Item" temporary;
+                    EmailScenario: Enum "Email Scenario";
+                begin
+                    if CustMembr.Get(Rec."Member No.") then
+                        TempEmailItem.AddSourceDocument(Database::"Account Banking", Rec.SystemId);
+                    TempEmailitem."Send to" := CustMembr."E-Mail";
+                    TempEmailItem.Send(false, EmailScenario::Default);
+                end;
+            }
+            action("Account Statement")
+            {
+                Image = ServiceItemWorksheet;
+                ApplicationArea = All;
+                trigger OnAction()
+                var
+                    AccBank: Record "Account Credit";
+                begin
+
+            
+                    AccBank.SetRange("No.", Rec."No.");
+                    if AccBank.FindFirst() then
+                        Report.Run(Report::"Standard Statement Credit", true, false, AccBank);
+                end;
+
+            }
+            action("Loans Statement")
+            {
+                Image = ServiceItemWorksheet;
+                ApplicationArea = All;
+                trigger OnAction()
+                begin
+                    CustMembr.RESET;
+                    CustMembr.SETRANGE("No.", Rec."Member No.");
+                    IF CustMembr.FIND('-') THEN
+                        REPORT.RUN(REPORT::"Standard Statement-Loans", TRUE, FALSE, CustMembr);
+                end;
+            }
+
+        }
+        area(Promoted)
+        {
+            group(Category_Process)
+            {
+                Caption = 'Process', Comment = 'Generated from the PromotedActionCategories property index 1.';
+
+                actionref(Email_Promoted; Email)
+                {
+                }
+            }
+            group(Category_Report)
+            {
+                Caption = 'Statement', Comment = 'Generated from the PromotedActionCategories property index 2.';
+
+                actionref("Account Statement_Promoted"; "Account Statement")
+                {
+                }
+                actionref("Loans Statement_Promoted"; "Loans Statement")
+                {
+                }
+                actionref(Statement_Promoted; Statement)
+                {
+                }
+                actionref("Member Page_Promoted"; "Member Page")
+                {
+                }
+            }
+            group(Category_Category4)
+            {
+                Caption = 'Approve', Comment = 'Generated from the PromotedActionCategories property index 3.';
+
+                actionref("Member Monthly Contribution_Promoted"; "Member Monthly Contribution")
+                {
+                }
+                actionref("Authorized Kin_Promoted"; "Authorized Kin")
+                {
+                }
+                actionref(Signatories_Promoted; Signatories)
+                {
+                }
+            }
+            group(Category_Category5)
+            {
+                Caption = 'Request Approval', Comment = 'Generated from the PromotedActionCategories property index 4.';
+            }
+        }
+
+    }
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        SetControlApprearance;
+
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+
+    end;
+
+    trigger OnInit()
+    begin
+        ContactEditable := true;
+        MapPointVisible := true;
+    end;
+
+    trigger OnOpenPage()
+    var
+        MapMgt: Codeunit "Online Map Management";
+    begin
+        if not MapMgt.TestSetup then
+            MapPointVisible := false;
+
+    end;
+
+    var
+
+        MapPointVisible: Boolean;
+        ContactEditable: Boolean;
+        SocialListeningSetupVisible: Boolean;
+        ShowWorkflowStatus: Boolean;
+        IsFixedDeposit: Boolean;
+        SavingsAccounts: Record "Account Banking";
+        CustMembr: Record Member;
+
+    local procedure SetControlApprearance()
+    begin
+        if Rec."Product Type" = 'INVESTMENT' then
+            IsFixedDeposit := true
+        else
+            IsFixedDeposit := false;
+    end;
+
+    local procedure ContactOnAfterValidate()
+    begin
+        SetControlApprearance;
+    end;
+
+    local procedure SetSocialListeningFactboxVisibility()
+    begin
+
+    end;
+}
+
+
+
+

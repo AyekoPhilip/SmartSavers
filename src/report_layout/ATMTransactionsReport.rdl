@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ATMCardNo">
+          <DataField>ATMCardNo</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="AccountNoCredit">
+          <DataField>AccountNoCredit</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="CardAcceptorTerminalID">
+          <DataField>CardAcceptorTerminalID</DataField>
+        </Field>
+        <Field Name="ChargeAmount">
+          <DataField>ChargeAmount</DataField>
+        </Field>
+        <Field Name="ChargeAmountFormat">
+          <DataField>ChargeAmountFormat</DataField>
+        </Field>
+        <Field Name="ChargeCode">
+          <DataField>ChargeCode</DataField>
+        </Field>
+        <Field Name="CustomerNames">
+          <DataField>CustomerNames</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="EntryNo">
+          <DataField>EntryNo</DataField>
+        </Field>
+        <Field Name="ErrorLog">
+          <DataField>ErrorLog</DataField>
+        </Field>
+        <Field Name="IsCoopBank">
+          <DataField>IsCoopBank</DataField>
+        </Field>
+        <Field Name="POSVendor">
+          <DataField>POSVendor</DataField>
+        </Field>
+        <Field Name="PhoneNo">
+          <DataField>PhoneNo</DataField>
+        </Field>
+        <Field Name="Posted">
+          <DataField>Posted</DataField>
+        </Field>
+        <Field Name="PostedBy">
+          <DataField>PostedBy</DataField>
+        </Field>
+        <Field Name="PostingDate">
+          <DataField>PostingDate</DataField>
+        </Field>
+        <Field Name="Postings">
+          <DataField>Postings</DataField>
+        </Field>
+        <Field Name="ProcessCode">
+          <DataField>ProcessCode</DataField>
+        </Field>
+        <Field Name="ReferenceNo">
+          <DataField>ReferenceNo</DataField>
+        </Field>
+        <Field Name="ReversalTraceID">
+          <DataField>ReversalTraceID</DataField>
+        </Field>
+        <Field Name="Reversed">
+          <DataField>Reversed</DataField>
+        </Field>
+        <Field Name="ReversedPosted">
+          <DataField>ReversedPosted</DataField>
+        </Field>
+        <Field Name="Source">
+          <DataField>Source</DataField>
+        </Field>
+        <Field Name="TraceID">
+          <DataField>TraceID</DataField>
+        </Field>
+        <Field Name="TransTime">
+          <DataField>TransTime</DataField>
+        </Field>
+        <Field Name="TransactionChargeCode">
+          <DataField>TransactionChargeCode</DataField>
+        </Field>
+        <Field Name="TransactionDate">
+          <DataField>TransactionDate</DataField>
+        </Field>
+        <Field Name="TransactionDescription">
+          <DataField>TransactionDescription</DataField>
+        </Field>
+        <Field Name="TransactionTime">
+          <DataField>TransactionTime</DataField>
+        </Field>
+        <Field Name="TransactionType">
+          <DataField>TransactionType</DataField>
+        </Field>
+        <Field Name="TransactionTypeCharges">
+          <DataField>TransactionTypeCharges</DataField>
+        </Field>
+        <Field Name="UnitID">
+          <DataField>UnitID</DataField>
+        </Field>
+        <Field Name="WithdrawalLocation">
+          <DataField>WithdrawalLocation</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

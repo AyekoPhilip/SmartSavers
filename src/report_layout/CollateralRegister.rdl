@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="LoanNo">
+          <DataField>LoanNo</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="IDNo">
+          <DataField>IDNo</DataField>
+        </Field>
+        <Field Name="ProductType">
+          <DataField>ProductType</DataField>
+        </Field>
+        <Field Name="OutstandingBalance">
+          <DataField>OutstandingBalance</DataField>
+        </Field>
+        <Field Name="OutstandingBalanceFormat">
+          <DataField>OutstandingBalanceFormat</DataField>
+        </Field>
+        <Field Name="SecurityType">
+          <DataField>SecurityType</DataField>
+        </Field>
+        <Field Name="CollateralRegNo">
+          <DataField>CollateralRegNo</DataField>
+        </Field>
+        <Field Name="CollateralValue">
+          <DataField>CollateralValue</DataField>
+        </Field>
+        <Field Name="CollateralValueFormat">
+          <DataField>CollateralValueFormat</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="MemberNoLoanee">
+          <DataField>MemberNoLoanee</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="PolicyEndDate">
+          <DataField>PolicyEndDate</DataField>
+        </Field>
+        <Field Name="PolicyRefNo">
+          <DataField>PolicyRefNo</DataField>
+        </Field>
+        <Field Name="PolicyStartDate">
+          <DataField>PolicyStartDate</DataField>
+        </Field>
+        <Field Name="IssueDate">
+          <DataField>IssueDate</DataField>
+        </Field>
+        <Field Name="AppAmount">
+          <DataField>AppAmount</DataField>
+        </Field>
+        <Field Name="AppAmountFormat">
+          <DataField>AppAmountFormat</DataField>
+        </Field>
+        <Field Name="AnnualPremium">
+          <DataField>AnnualPremium</DataField>
+        </Field>
+        <Field Name="AnnualPremiumFormat">
+          <DataField>AnnualPremiumFormat</DataField>
+        </Field>
+        <Field Name="DateOfLastValuation">
+          <DataField>DateOfLastValuation</DataField>
+        </Field>
+        <Field Name="TittleNoRef">
+          <DataField>TittleNoRef</DataField>
+        </Field>
+        <Field Name="ReferenceNo">
+          <DataField>ReferenceNo</DataField>
+        </Field>
+        <Field Name="Collat">
+          <DataField>Collat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

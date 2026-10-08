@@ -1,0 +1,127 @@
+table 50552 "Changes Setup (Table)"
+{
+    Caption = 'Change Log Setup (Table)';
+    ReplicateData = false;
+    DataClassification = CustomerContent;
+
+    fields
+    {
+        field(50009; "Table No."; Integer)
+        {
+            Caption = 'Table No.';
+            TableRelation = AllObjWithCaption."Object ID" WHERE("Object Type" = CONST(Table));
+            DataClassification = CustomerContent;
+        }
+        field(50010; "Table Caption"; Text[250])
+        {
+            CalcFormula = Lookup(AllObjWithCaption."Object Caption" WHERE("Object Type" = CONST(Table),
+                                                                           "Object ID" = FIELD("Table No.")));
+            Caption = 'Table Caption';
+            FieldClass = FlowField;
+        }
+        field(50011; "Log Insertion"; Option)
+        {
+            Caption = 'Log Insertion';
+            OptionCaption = ' ,Some Fields,All Fields';
+            OptionMembers = " ","Some Fields","All Fields";
+            DataClassification = CustomerContent;
+        
+            trigger OnValidate()
+            var
+                ConfirmManagement: Codeunit "Confirm Management";
+            begin
+                /* if (xRec."Log Insertion" = xRec."Log Insertion"::"Some Fields") and (xRec."Log Insertion" <> "Log Insertion") then
+                    if ConfirmManagement.ConfirmProcess(
+                         StrSubstNo(
+                           Text001, xRec.FieldCaption("Log Insertion"), xRec."Log Insertion"), true)
+                    then
+                        DelChangeLogFields(0); */
+            end;
+        }
+        field(50012; "Log Modification"; Option)
+        {
+            Caption = 'Log Modification';
+            OptionCaption = ' ,Some Fields,All Fields';
+            OptionMembers = " ","Some Fields","All Fields";
+            DataClassification = CustomerContent;
+        
+            trigger OnValidate()
+            var
+                ConfirmManagement: Codeunit "Confirm Management";
+            begin
+                /* if (xRec."Log Modification" = xRec."Log Modification"::"Some Fields") and (xRec."Log Modification" <> "Log Modification") then
+                    if ConfirmManagement.ConfirmProcess(
+                         StrSubstNo(
+                           Text001, xRec.FieldCaption("Log Modification"), xRec."Log Modification"), true)
+                    then
+                        DelChangeLogFields(1); */
+            end;
+        }
+        field(50013; "Log Deletion"; Option)
+        {
+            Caption = 'Log Deletion';
+            OptionCaption = ' ,Some Fields,All Fields';
+            OptionMembers = " ","Some Fields","All Fields";
+            DataClassification = CustomerContent;
+        
+            trigger OnValidate()
+            var
+                ConfirmManagement: Codeunit "Confirm Management";
+            begin
+                /* if (xRec."Log Deletion" = xRec."Log Deletion"::"Some Fields") and (xRec."Log Deletion" <> "Log Deletion") then
+                    if ConfirmManagement.ConfirmProcess(
+                         StrSubstNo(
+                           Text001, xRec.FieldCaption("Log Deletion"), xRec."Log Deletion"),
+                         true)
+                    then
+                        DelChangeLogFields(2); */
+            end;
+        }
+    }
+
+    keys
+    {
+        key("Key1"; "Table No.")
+        {
+            Clustered = true;
+        }
+    }
+
+    fieldgroups
+    {
+    }
+
+    procedure DelChangeLogFields(InsModDel: Integer)
+    var
+        ChangeLogSetupField: Record "Change Log Setup (Field)";
+    begin
+        ChangeLogSetupField.SetRange("Table No.", "Table No.");
+        case InsModDel of
+            0:
+                ChangeLogSetupField.SetRange("Log Insertion", true);
+            1:
+                ChangeLogSetupField.SetRange("Log Modification", true);
+            2:
+                ChangeLogSetupField.SetRange("Log Deletion", true);
+        end;
+        if ChangeLogSetupField.Find('-') then
+            repeat
+                case InsModDel of
+                    0:
+                        ChangeLogSetupField."Log Insertion" := false;
+                    1:
+                        ChangeLogSetupField."Log Modification" := false;
+                    2:
+                        ChangeLogSetupField."Log Deletion" := false;
+                end;
+                if ChangeLogSetupField."Log Insertion" or ChangeLogSetupField."Log Modification" or ChangeLogSetupField."Log Deletion" then
+                    ChangeLogSetupField.Modify
+                else
+                    ChangeLogSetupField.Delete;
+            until ChangeLogSetupField.Next = 0;
+    end;
+}
+
+
+
+

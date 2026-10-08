@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="AccruedInterest">
+          <DataField>AccruedInterest</DataField>
+        </Field>
+        <Field Name="AccruedInterestFormat">
+          <DataField>AccruedInterestFormat</DataField>
+        </Field>
+        <Field Name="AmountGuaranteed">
+          <DataField>AmountGuaranteed</DataField>
+        </Field>
+        <Field Name="AmountGuaranteedFormat">
+          <DataField>AmountGuaranteedFormat</DataField>
+        </Field>
+        <Field Name="AmounttoDisburse">
+          <DataField>AmounttoDisburse</DataField>
+        </Field>
+        <Field Name="AmounttoDisburseFormat">
+          <DataField>AmounttoDisburseFormat</DataField>
+        </Field>
+        <Field Name="AmounttoPost">
+          <DataField>AmounttoPost</DataField>
+        </Field>
+        <Field Name="AmounttoPostFormat">
+          <DataField>AmounttoPostFormat</DataField>
+        </Field>
+        <Field Name="ApplicationDate">
+          <DataField>ApplicationDate</DataField>
+        </Field>
+        <Field Name="ApplicationNo">
+          <DataField>ApplicationNo</DataField>
+        </Field>
+        <Field Name="ApplicationSource">
+          <DataField>ApplicationSource</DataField>
+        </Field>
+        <Field Name="ApplicationType">
+          <DataField>ApplicationType</DataField>
+        </Field>
+        <Field Name="AppraisalParameterType">
+          <DataField>AppraisalParameterType</DataField>
+        </Field>
+        <Field Name="ApprovalDate">
+          <DataField>ApprovalDate</DataField>
+        </Field>
+        <Field Name="ApprovalStatus">
+          <DataField>ApprovalStatus</DataField>
+        </Field>
+        <Field Name="ApprovedAmount">
+          <DataField>ApprovedAmount</DataField>
+        </Field>
+        <Field Name="ApprovedAmountFormat">
+          <DataField>ApprovedAmountFormat</DataField>
+        </Field>
+        <Field Name="BatchNo">
+          <DataField>BatchNo</DataField>
+        </Field>
+        <Field Name="CRMApplicationNo">
+          <DataField>CRMApplicationNo</DataField>
+        </Field>
+        <Field Name="CRMCapturedBy">
+          <DataField>CRMCapturedBy</DataField>
+        </Field>
+        <Field Name="CRMCreated">
+          <DataField>CRMCreated</DataField>
+        </Field>
+        <Field Name="CRMDate">
+          <DataField>CRMDate</DataField>
+        </Field>
+        <Field Name="CapturedBy">
+          <DataField>CapturedBy</DataField>
+        </Field>
+        <Field Name="ChargeInterestonPosting">
+          <DataField>ChargeInterestonPosting</DataField>
+        </Field>
+        <Field Name="ChargesCommissions">
+          <DataField>ChargesCommissions</DataField>
+        </Field>
+        <Field Name="ChargesCommissionsFormat">
+          <DataField>ChargesCommissionsFormat</DataField>
+        </Field>
+        <Field Name="CurrencyCode">
+          <DataField>CurrencyCode</DataField>
+        </Field>
+        <Field Name="DatePosted">
+          <DataField>DatePosted</DataField>
+        </Field>
+        <Field Name="DateRescheduled">
+          <DataField>DateRescheduled</DataField>
+        </Field>
+        <Field Name="DepositPurchase">
+          <DataField>DepositPurchase</DataField>
+        </Field>
+        <Field Name="DepositPurchaseFormat">
+          <DataField>DepositPurchaseFormat</DataField>
+        </Field>
+        <Field Name="DepositPurchaseAccount">
+          <DataField>DepositPurchaseAccount</DataField>
+        </Field>
+        <Field Name="DepositsAppraisalParameter">
+          <DataField>DepositsAppraisalParameter</DataField>
+        </Field>
+        <Field Name="DisbursementAccountNo">
+          <DataField>DisbursementAccountNo</DataField>
+        </Field>
+        <Field Name="DisbursementDate">
+          <DataField>DisbursementDate</DataField>
+        </Field>
+        <Field Name="DisbursementDestination">
+          <DataField>DisbursementDestination</DataField>
+        </Field>
+        <Field Name="EmployerCode">
+          <DataField>EmployerCode</DataField>
+        </Field>
+        <Field Name="ExpectedDateofCompletion">
+          <DataField>ExpectedDateofCompletion</DataField>
+        </Field>
+        <Field Name="FullyDisbursed">
+          <DataField>FullyDisbursed</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code">
+          <DataField>GlobalDimension1Code</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code">
+          <DataField>GlobalDimension2Code</DataField>
+        </Field>
+        <Field Name="GracePeriodInterest">
+          <DataField>GracePeriodInterest</DataField>
+        </Field>
+        <Field Name="GracePeriodPrincipal">
+          <DataField>GracePeriodPrincipal</DataField>
+        </Field>
+        <Field Name="GroupCode">
+          <DataField>GroupCode</DataField>
+        </Field>
+        <Field Name="IDNo">
+          <DataField>IDNo</DataField>
+        </Field>
+        <Field Name="IgnoreRelatedBalance">
+          <DataField>IgnoreRelatedBalance</DataField>
+        </Field>
+        <Field Name="InstallmentPeriod">
+          <DataField>InstallmentPeriod</DataField>
+        </Field>
+        <Field Name="Installments">
+          <DataField>Installments</DataField>
+        </Field>
+        <Field Name="InterestCalculationMethod">
+          <DataField>InterestCalculationMethod</DataField>
+        </Field>
+        <Field Name="InterestPostingDate">
+          <DataField>InterestPostingDate</DataField>
+        </Field>
+        <Field Name="InterestRate">
+          <DataField>InterestRate</DataField>
+        </Field>
+        <Field Name="InterestRateFormat">
+          <DataField>InterestRateFormat</DataField>
+        </Field>
+        <Field Name="InterestRepayment">
+          <DataField>InterestRepayment</DataField>
+        </Field>
+        <Field Name="InterestRepaymentFormat">
+          <DataField>InterestRepaymentFormat</DataField>
+        </Field>
+        <Field Name="LastPayDate">
+          <DataField>LastPayDate</DataField>
+        </Field>
+        <Field Name="LoanAccount">
+          <DataField>LoanAccount</DataField>
+        </Field>
+        <Field Name="LoanCycle">
+          <DataField>LoanCycle</DataField>
+        </Field>
+        <Field Name="LoanRejectionReason">
+          <DataField>LoanRejectionReason</DataField>
+        </Field>
+        <Field Name="LoanRescheduled">
+          <DataField>LoanRescheduled</DataField>
+        </Field>
+        <Field Name="LoanSpan">
+          <DataField>LoanSpan</DataField>
+        </Field>
+        <Field Name="LoanStatus">
+          <DataField>LoanStatus</DataField>
+        </Field>
+        <Field Name="MinuteNo">
+          <DataField>MinuteNo</DataField>
+        </Field>
+        <Field Name="ModeofDisbursement">
+          <DataField>ModeofDisbursement</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="NoSeries">
+          <DataField>NoSeries</DataField>
+        </Field>
+        <Field Name="NoofInstallment">
+          <DataField>NoofInstallment</DataField>
+        </Field>
+        <Field Name="OldAccountNo">
+          <DataField>OldAccountNo</DataField>
+        </Field>
+        <Field Name="OutstandingBalance">
+          <DataField>OutstandingBalance</DataField>
+        </Field>
+        <Field Name="OutstandingBalanceFormat">
+          <DataField>OutstandingBalanceFormat</DataField>
+        </Field>
+        <Field Name="OutstandingBill">
+          <DataField>OutstandingBill</DataField>
+        </Field>
+        <Field Name="OutstandingBillFormat">
+          <DataField>OutstandingBillFormat</DataField>
+        </Field>
+        <Field Name="OutstandingInsurance">
+          <DataField>OutstandingInsurance</DataField>
+        </Field>
+        <Field Name="OutstandingInsuranceFormat">
+          <DataField>OutstandingInsuranceFormat</DataField>
+        </Field>
+        <Field Name="OutstandingInterest">
+          <DataField>OutstandingInterest</DataField>
+        </Field>
+        <Field Name="OutstandingInterestFormat">
+          <DataField>OutstandingInterestFormat</DataField>
+        </Field>
+        <Field Name="OutstandingPrincipal">
+          <DataField>OutstandingPrincipal</DataField>
+        </Field>
+        <Field Name="OutstandingPrincipalFormat">
+          <DataField>OutstandingPrincipalFormat</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo">
+          <DataField>PayrollStaffNo</DataField>
+        </Field>
+        <Field Name="PostApplicationAs">
+          <DataField>PostApplicationAs</DataField>
+        </Field>
+        <Field Name="PostedBy">
+          <DataField>PostedBy</DataField>
+        </Field>
+        <Field Name="PrincipleRepayment">
+          <DataField>PrincipleRepayment</DataField>
+        </Field>
+        <Field Name="PrincipleRepaymentFormat">
+          <DataField>PrincipleRepaymentFormat</DataField>
+        </Field>
+        <Field Name="ProductDescription">
+          <DataField>ProductDescription</DataField>
+        </Field>
+        <Field Name="ProductType">
+          <DataField>ProductType</DataField>
+        </Field>
+        <Field Name="PurposeofLoan">
+          <DataField>PurposeofLoan</DataField>
+        </Field>
+        <Field Name="RecommendedAmount">
+          <DataField>RecommendedAmount</DataField>
+        </Field>
+        <Field Name="RecommendedAmountFormat">
+          <DataField>RecommendedAmountFormat</DataField>
+        </Field>
+        <Field Name="RecoveryMode">
+          <DataField>RecoveryMode</DataField>
+        </Field>
+        <Field Name="RelatedBalance">
+          <DataField>RelatedBalance</DataField>
+        </Field>
+        <Field Name="RelatedBalanceFormat">
+          <DataField>RelatedBalanceFormat</DataField>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+        </Field>
+        <Field Name="Repayment">
+          <DataField>Repayment</DataField>
+        </Field>
+        <Field Name="RepaymentFormat">
+          <DataField>RepaymentFormat</DataField>
+        </Field>
+        <Field Name="RepaymentFrequency">
+          <DataField>RepaymentFrequency</DataField>
+        </Field>
+        <Field Name="RepaymentMode">
+          <DataField>RepaymentMode</DataField>
+        </Field>
+        <Field Name="RepaymentStartDate">
+          <DataField>RepaymentStartDate</DataField>
+        </Field>
+        <Field Name="RequestedAmount">
+          <DataField>RequestedAmount</DataField>
+        </Field>
+        <Field Name="RequestedAmountFormat">
+          <DataField>RequestedAmountFormat</DataField>
+        </Field>
+        <Field Name="RescheduleBy">
+          <DataField>RescheduleBy</DataField>
+        </Field>
+        <Field Name="ResponsibilityCentre">
+          <DataField>ResponsibilityCentre</DataField>
+        </Field>
+        <Field Name="SMSNotificationSent">
+          <DataField>SMSNotificationSent</DataField>
+        </Field>
+        <Field Name="Sectors">
+          <DataField>Sectors</DataField>
+        </Field>
+        <Field Name="SelfGuarantee">
+          <DataField>SelfGuarantee</DataField>
+        </Field>
+        <Field Name="SharesDeposit">
+          <DataField>SharesDeposit</DataField>
+        </Field>
+        <Field Name="SharesDepositFormat">
+          <DataField>SharesDepositFormat</DataField>
+        </Field>
+        <Field Name="Source">
+          <DataField>Source</DataField>
+        </Field>
+        <Field Name="SubSectors">
+          <DataField>SubSectors</DataField>
+        </Field>
+        <Field Name="TotalTopUp">
+          <DataField>TotalTopUp</DataField>
+        </Field>
+        <Field Name="TotalTopUpFormat">
+          <DataField>TotalTopUpFormat</DataField>
+        </Field>
+        <Field Name="IntRate">
+          <DataField>IntRate</DataField>
+        </Field>
+        <Field Name="IntRateFormat">
+          <DataField>IntRateFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

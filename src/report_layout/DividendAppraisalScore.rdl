@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="CompInformation">
+          <DataField>CompInformation</DataField>
+        </Field>
+        <Field Name="CompanyInformationPicture">
+          <DataField>CompanyInformationPicture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="BankingRemittance">
+          <DataField>BankingRemittance</DataField>
+        </Field>
+        <Field Name="CreditHistory">
+          <DataField>CreditHistory</DataField>
+        </Field>
+        <Field Name="DepositExposure">
+          <DataField>DepositExposure</DataField>
+        </Field>
+        <Field Name="EntryNo">
+          <DataField>EntryNo</DataField>
+        </Field>
+        <Field Name="IndividualScore">
+          <DataField>IndividualScore</DataField>
+        </Field>
+        <Field Name="MembershipAge">
+          <DataField>MembershipAge</DataField>
+        </Field>
+        <Field Name="MonthlyDeposit">
+          <DataField>MonthlyDeposit</DataField>
+        </Field>
+        <Field Name="Parameter">
+          <DataField>Parameter</DataField>
+        </Field>
+        <Field Name="RegistrationDate">
+          <DataField>RegistrationDate</DataField>
+        </Field>
+        <Field Name="ScoreMaxScore">
+          <DataField>ScoreMaxScore</DataField>
+        </Field>
+        <Field Name="TotalDeposits">
+          <DataField>TotalDeposits</DataField>
+        </Field>
+        <Field Name="Total_Score">
+          <DataField>Total_Score</DataField>
+        </Field>
+        <Field Name="Total_ScoreFormat">
+          <DataField>Total_ScoreFormat</DataField>
+        </Field>
+        <Field Name="Qualify_Amount">
+          <DataField>Qualify_Amount</DataField>
+        </Field>
+        <Field Name="Qualify_AmountFormat">
+          <DataField>Qualify_AmountFormat</DataField>
+        </Field>
+        <Field Name="Shares_Banding">
+          <DataField>Shares_Banding</DataField>
+        </Field>
+        <Field Name="Shares_BandingFormat">
+          <DataField>Shares_BandingFormat</DataField>
+        </Field>
+        <Field Name="Monthly_Contribution">
+          <DataField>Monthly_Contribution</DataField>
+        </Field>
+        <Field Name="Monthly_ContributionFormat">
+          <DataField>Monthly_ContributionFormat</DataField>
+        </Field>
+        <Field Name="ProdDescription">
+          <DataField>ProdDescription</DataField>
+        </Field>
+        <Field Name="ShowOutPut">
+          <DataField>ShowOutPut</DataField>
+        </Field>
+        <Field Name="Account_No_">
+          <DataField>Account_No_</DataField>
+        </Field>
+        <Field Name="Posting_Date">
+          <DataField>Posting_Date</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="Installment_No_">
+          <DataField>Installment_No_</DataField>
+        </Field>
+        <Field Name="Member_No_">
+          <DataField>Member_No_</DataField>
+        </Field>
+        <Field Name="Account_No">
+          <DataField>Account_No</DataField>
+        </Field>
+        <Field Name="Entry_No_">
+          <DataField>Entry_No_</DataField>
+        </Field>
+        <Field Name="ProductType">
+          <DataField>ProductType</DataField>
+        </Field>
+        <Field Name="Dividend_Calc__Method">
+          <DataField>Dividend_Calc__Method</DataField>
+        </Field>
+        <Field Name="Net_Dividends">
+          <DataField>Net_Dividends</DataField>
+        </Field>
+        <Field Name="Net_DividendsFormat">
+          <DataField>Net_DividendsFormat</DataField>
+        </Field>
+        <Field Name="Gross_Dividends">
+          <DataField>Gross_Dividends</DataField>
+        </Field>
+        <Field Name="Gross_DividendsFormat">
+          <DataField>Gross_DividendsFormat</DataField>
+        </Field>
+        <Field Name="Product_Name">
+          <DataField>Product_Name</DataField>
+        </Field>
+        <Field Name="Shares">
+          <DataField>Shares</DataField>
+        </Field>
+        <Field Name="SharesFormat">
+          <DataField>SharesFormat</DataField>
+        </Field>
+        <Field Name="Qualifying_Shares">
+          <DataField>Qualifying_Shares</DataField>
+        </Field>
+        <Field Name="Qualifying_SharesFormat">
+          <DataField>Qualifying_SharesFormat</DataField>
+        </Field>
+        <Field Name="End_Date">
+          <DataField>End_Date</DataField>
+        </Field>
+        <Field Name="Start_Date">
+          <DataField>Start_Date</DataField>
+        </Field>
+        <Field Name="Witholding_Tax">
+          <DataField>Witholding_Tax</DataField>
+        </Field>
+        <Field Name="Witholding_TaxFormat">
+          <DataField>Witholding_TaxFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

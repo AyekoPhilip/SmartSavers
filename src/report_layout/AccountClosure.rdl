@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompInformation">
+          <DataField>CompInformation</DataField>
+        </Field>
+        <Field Name="CompanyInformationPicture">
+          <DataField>CompanyInformationPicture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="ApplicationDate">
+          <DataField>ApplicationDate</DataField>
+        </Field>
+        <Field Name="ApprovalStatus">
+          <DataField>ApprovalStatus</DataField>
+        </Field>
+        <Field Name="BenevolentFund">
+          <DataField>BenevolentFund</DataField>
+        </Field>
+        <Field Name="BenevolentFundFormat">
+          <DataField>BenevolentFundFormat</DataField>
+        </Field>
+        <Field Name="CloseAccount">
+          <DataField>CloseAccount</DataField>
+        </Field>
+        <Field Name="ClosingDate">
+          <DataField>ClosingDate</DataField>
+        </Field>
+        <Field Name="ClosureType">
+          <DataField>ClosureType</DataField>
+        </Field>
+        <Field Name="DatePosted">
+          <DataField>DatePosted</DataField>
+        </Field>
+        <Field Name="DepositRefundable">
+          <DataField>DepositRefundable</DataField>
+        </Field>
+        <Field Name="DepositRefundableFormat">
+          <DataField>DepositRefundableFormat</DataField>
+        </Field>
+        <Field Name="EarlyExitCharges">
+          <DataField>EarlyExitCharges</DataField>
+        </Field>
+        <Field Name="EarlyExitChargesFormat">
+          <DataField>EarlyExitChargesFormat</DataField>
+        </Field>
+        <Field Name="EnteredBy">
+          <DataField>EnteredBy</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code">
+          <DataField>GlobalDimension1Code</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code">
+          <DataField>GlobalDimension2Code</DataField>
+        </Field>
+        <Field Name="IDNo">
+          <DataField>IDNo</DataField>
+        </Field>
+        <Field Name="IncludeCharges">
+          <DataField>IncludeCharges</DataField>
+        </Field>
+        <Field Name="LoanNo">
+          <DataField>LoanNo</DataField>
+        </Field>
+        <Field Name="LoansOption">
+          <DataField>LoansOption</DataField>
+        </Field>
+        <Field Name="MemberName">
+          <DataField>MemberName</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="MemberSavings">
+          <DataField>MemberSavings</DataField>
+        </Field>
+        <Field Name="MemberSavingsFormat">
+          <DataField>MemberSavingsFormat</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="NoticeMDate">
+          <DataField>NoticeMDate</DataField>
+        </Field>
+        <Field Name="NoticeNo">
+          <DataField>NoticeNo</DataField>
+        </Field>
+        <Field Name="OtherCharges">
+          <DataField>OtherCharges</DataField>
+        </Field>
+        <Field Name="OtherChargesFormat">
+          <DataField>OtherChargesFormat</DataField>
+        </Field>
+        <Field Name="OutstandingPrincipal">
+          <DataField>OutstandingPrincipal</DataField>
+        </Field>
+        <Field Name="OutstandingPrincipalFormat">
+          <DataField>OutstandingPrincipalFormat</DataField>
+        </Field>
+        <Field Name="Posted">
+          <DataField>Posted</DataField>
+        </Field>
+        <Field Name="PostedBy">
+          <DataField>PostedBy</DataField>
+        </Field>
+        <Field Name="ProductFactory">
+          <DataField>ProductFactory</DataField>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+        </Field>
+        <Field Name="ResponsibilityCenter">
+          <DataField>ResponsibilityCenter</DataField>
+        </Field>
+        <Field Name="SharesCapital">
+          <DataField>SharesCapital</DataField>
+        </Field>
+        <Field Name="SharesCapitalFormat">
+          <DataField>SharesCapitalFormat</DataField>
+        </Field>
+        <Field Name="TimePosted">
+          <DataField>TimePosted</DataField>
+        </Field>
+        <Field Name="TotalAmountLCY">
+          <DataField>TotalAmountLCY</DataField>
+        </Field>
+        <Field Name="TotalAmountLCYFormat">
+          <DataField>TotalAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="TotalInterest">
+          <DataField>TotalInterest</DataField>
+        </Field>
+        <Field Name="TotalInterestFormat">
+          <DataField>TotalInterestFormat</DataField>
+        </Field>
+        <Field Name="TotalLoan">
+          <DataField>TotalLoan</DataField>
+        </Field>
+        <Field Name="TotalLoanFormat">
+          <DataField>TotalLoanFormat</DataField>
+        </Field>
+        <Field Name="Transaction">
+          <DataField>Transaction</DataField>
+        </Field>
+        <Field Name="TransactionType">
+          <DataField>TransactionType</DataField>
+        </Field>
+        <Field Name="ReasonText">
+          <DataField>ReasonText</DataField>
+        </Field>
+        <Field Name="ProductDescription">
+          <DataField>ProductDescription</DataField>
+        </Field>
+        <Field Name="Producttype">
+          <DataField>Producttype</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

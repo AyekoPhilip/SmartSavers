@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo">
+          <DataField>PayrollStaffNo</DataField>
+        </Field>
+        <Field Name="CompInformation">
+          <DataField>CompInformation</DataField>
+        </Field>
+        <Field Name="CompanyInformationPicture">
+          <DataField>CompanyInformationPicture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="SharesCapital">
+          <DataField>SharesCapital</DataField>
+        </Field>
+        <Field Name="SharesCapitalFormat">
+          <DataField>SharesCapitalFormat</DataField>
+        </Field>
+        <Field Name="IdentityType">
+          <DataField>IdentityType</DataField>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+        </Field>
+        <Field Name="MonthName">
+          <DataField>MonthName</DataField>
+        </Field>
+        <Field Name="Employer_Code">
+          <DataField>Employer_Code</DataField>
+        </Field>
+        <Field Name="YearInt">
+          <DataField>YearInt</DataField>
+        </Field>
+        <Field Name="SharesDeposit">
+          <DataField>SharesDeposit</DataField>
+        </Field>
+        <Field Name="SharesDepositFormat">
+          <DataField>SharesDepositFormat</DataField>
+        </Field>
+        <Field Name="TotalLoans">
+          <DataField>TotalLoans</DataField>
+        </Field>
+        <Field Name="TotalLoansFormat">
+          <DataField>TotalLoansFormat</DataField>
+        </Field>
+        <Field Name="RegFees">
+          <DataField>RegFees</DataField>
+        </Field>
+        <Field Name="RegFeesFormat">
+          <DataField>RegFeesFormat</DataField>
+        </Field>
+        <Field Name="FosaContrib">
+          <DataField>FosaContrib</DataField>
+        </Field>
+        <Field Name="FosaContribFormat">
+          <DataField>FosaContribFormat</DataField>
+        </Field>
+        <Field Name="Jipange">
+          <DataField>Jipange</DataField>
+        </Field>
+        <Field Name="JipangeFormat">
+          <DataField>JipangeFormat</DataField>
+        </Field>
+        <Field Name="Junior">
+          <DataField>Junior</DataField>
+        </Field>
+        <Field Name="JuniorFormat">
+          <DataField>JuniorFormat</DataField>
+        </Field>
+        <Field Name="KinAccount">
+          <DataField>KinAccount</DataField>
+        </Field>
+        <Field Name="KinAccountFormat">
+          <DataField>KinAccountFormat</DataField>
+        </Field>
+        <Field Name="ChamaContrib">
+          <DataField>ChamaContrib</DataField>
+        </Field>
+        <Field Name="ChamaContribFormat">
+          <DataField>ChamaContribFormat</DataField>
+        </Field>
+        <Field Name="TotalAmountDeductable">
+          <DataField>TotalAmountDeductable</DataField>
+        </Field>
+        <Field Name="TotalAmountDeductableFormat">
+          <DataField>TotalAmountDeductableFormat</DataField>
+        </Field>
+        <Field Name="CustName">
+          <DataField>CustName</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

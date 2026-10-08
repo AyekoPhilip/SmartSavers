@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="Outstanding_Principal">
+          <DataField>Outstanding_Principal</DataField>
+        </Field>
+        <Field Name="Outstanding_PrincipalFormat">
+          <DataField>Outstanding_PrincipalFormat</DataField>
+        </Field>
+        <Field Name="Outstanding_Interest">
+          <DataField>Outstanding_Interest</DataField>
+        </Field>
+        <Field Name="Outstanding_InterestFormat">
+          <DataField>Outstanding_InterestFormat</DataField>
+        </Field>
+        <Field Name="Repayment_Start_Date">
+          <DataField>Repayment_Start_Date</DataField>
+        </Field>
+        <Field Name="Amount_In_Arrears">
+          <DataField>Amount_In_Arrears</DataField>
+        </Field>
+        <Field Name="Amount_In_ArrearsFormat">
+          <DataField>Amount_In_ArrearsFormat</DataField>
+        </Field>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+        </Field>
+        <Field Name="EmployerCode">
+          <DataField>EmployerCode</DataField>
+        </Field>
+        <Field Name="ProductType">
+          <DataField>ProductType</DataField>
+        </Field>
+        <Field Name="ProductDescription">
+          <DataField>ProductDescription</DataField>
+        </Field>
+        <Field Name="InterestCalculationMethod">
+          <DataField>InterestCalculationMethod</DataField>
+        </Field>
+        <Field Name="Installments">
+          <DataField>Installments</DataField>
+        </Field>
+        <Field Name="Repayment">
+          <DataField>Repayment</DataField>
+        </Field>
+        <Field Name="RepaymentFormat">
+          <DataField>RepaymentFormat</DataField>
+        </Field>
+        <Field Name="Employer_Code">
+          <DataField>Employer_Code</DataField>
+        </Field>
+        <Field Name="InterestRate">
+          <DataField>InterestRate</DataField>
+        </Field>
+        <Field Name="InterestRateFormat">
+          <DataField>InterestRateFormat</DataField>
+        </Field>
+        <Field Name="RepaymentFrequency">
+          <DataField>RepaymentFrequency</DataField>
+        </Field>
+        <Field Name="DisbursementDate">
+          <DataField>DisbursementDate</DataField>
+        </Field>
+        <Field Name="RequestedAmount">
+          <DataField>RequestedAmount</DataField>
+        </Field>
+        <Field Name="RequestedAmountFormat">
+          <DataField>RequestedAmountFormat</DataField>
+        </Field>
+        <Field Name="ApprovedAmount">
+          <DataField>ApprovedAmount</DataField>
+        </Field>
+        <Field Name="ApprovedAmountFormat">
+          <DataField>ApprovedAmountFormat</DataField>
+        </Field>
+        <Field Name="OutstandingBalance">
+          <DataField>OutstandingBalance</DataField>
+        </Field>
+        <Field Name="OutstandingBalanceFormat">
+          <DataField>OutstandingBalanceFormat</DataField>
+        </Field>
+        <Field Name="ExpectedDateofCompletion">
+          <DataField>ExpectedDateofCompletion</DataField>
+        </Field>
+        <Field Name="Sectors">
+          <DataField>Sectors</DataField>
+        </Field>
+        <Field Name="Sub_Sectors">
+          <DataField>Sub_Sectors</DataField>
+        </Field>
+        <Field Name="Purpose_of_Loan">
+          <DataField>Purpose_of_Loan</DataField>
+        </Field>
+        <Field Name="LastPayDate">
+          <DataField>LastPayDate</DataField>
+        </Field>
+        <Field Name="SharesDeposit">
+          <DataField>SharesDeposit</DataField>
+        </Field>
+        <Field Name="SharesDepositFormat">
+          <DataField>SharesDepositFormat</DataField>
+        </Field>
+        <Field Name="SharesDepositFilter">
+          <DataField>SharesDepositFilter</DataField>
+        </Field>
+        <Field Name="SharesDepositFilterFormat">
+          <DataField>SharesDepositFilterFormat</DataField>
+        </Field>
+        <Field Name="GuarantorDeposits">
+          <DataField>GuarantorDeposits</DataField>
+        </Field>
+        <Field Name="GuarantorDepositsFormat">
+          <DataField>GuarantorDepositsFormat</DataField>
+        </Field>
+        <Field Name="CollateralName">
+          <DataField>CollateralName</DataField>
+        </Field>
+        <Field Name="CollateralValue">
+          <DataField>CollateralValue</DataField>
+        </Field>
+        <Field Name="CollateralValueFormat">
+          <DataField>CollateralValueFormat</DataField>
+        </Field>
+        <Field Name="FirstApprover">
+          <DataField>FirstApprover</DataField>
+        </Field>
+        <Field Name="SecondApprover">
+          <DataField>SecondApprover</DataField>
+        </Field>
+        <Field Name="Appraiser">
+          <DataField>Appraiser</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

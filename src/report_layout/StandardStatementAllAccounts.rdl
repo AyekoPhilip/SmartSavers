@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="EmployerCode">
+          <DataField>EmployerCode</DataField>
+        </Field>
+        <Field Name="Old_Member_No_">
+          <DataField>Old_Member_No_</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo">
+          <DataField>PayrollStaffNo</DataField>
+        </Field>
+        <Field Name="OldMemberNo">
+          <DataField>OldMemberNo</DataField>
+        </Field>
+        <Field Name="CompInformation">
+          <DataField>CompInformation</DataField>
+        </Field>
+        <Field Name="CompanyInformationPicture">
+          <DataField>CompanyInformationPicture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+        </Field>
+        <Field Name="AccountType">
+          <DataField>AccountType</DataField>
+        </Field>
+        <Field Name="ShowBosaAc">
+          <DataField>ShowBosaAc</DataField>
+        </Field>
+        <Field Name="ShowFosaAc">
+          <DataField>ShowFosaAc</DataField>
+        </Field>
+        <Field Name="ShowLoanAc">
+          <DataField>ShowLoanAc</DataField>
+        </Field>
+        <Field Name="BankingNo">
+          <DataField>BankingNo</DataField>
+        </Field>
+        <Field Name="BankingProduct_Type">
+          <DataField>BankingProduct_Type</DataField>
+        </Field>
+        <Field Name="Product_Name">
+          <DataField>Product_Name</DataField>
+        </Field>
+        <Field Name="BankingCustName">
+          <DataField>BankingCustName</DataField>
+        </Field>
+        <Field Name="BankingBalBF">
+          <DataField>BankingBalBF</DataField>
+        </Field>
+        <Field Name="BankingBalBFFormat">
+          <DataField>BankingBalBFFormat</DataField>
+        </Field>
+        <Field Name="BnkPosting_Date">
+          <DataField>BnkPosting_Date</DataField>
+        </Field>
+        <Field Name="BnkDocument_No_">
+          <DataField>BnkDocument_No_</DataField>
+        </Field>
+        <Field Name="BnkAmount">
+          <DataField>BnkAmount</DataField>
+        </Field>
+        <Field Name="BnkAmountFormat">
+          <DataField>BnkAmountFormat</DataField>
+        </Field>
+        <Field Name="BnkDebit_Amount">
+          <DataField>BnkDebit_Amount</DataField>
+        </Field>
+        <Field Name="BnkDebit_AmountFormat">
+          <DataField>BnkDebit_AmountFormat</DataField>
+        </Field>
+        <Field Name="BnkCredit_Amount">
+          <DataField>BnkCredit_Amount</DataField>
+        </Field>
+        <Field Name="BnkCredit_AmountFormat">
+          <DataField>BnkCredit_AmountFormat</DataField>
+        </Field>
+        <Field Name="BnkDescriptionTxt">
+          <DataField>BnkDescriptionTxt</DataField>
+        </Field>
+        <Field Name="BankingRunBalance">
+          <DataField>BankingRunBalance</DataField>
+        </Field>
+        <Field Name="BankingRunBalanceFormat">
+          <DataField>BankingRunBalanceFormat</DataField>
+        </Field>
+        <Field Name="AccNo">
+          <DataField>AccNo</DataField>
+        </Field>
+        <Field Name="CredProduct_Type">
+          <DataField>CredProduct_Type</DataField>
+        </Field>
+        <Field Name="CredProduct_Name">
+          <DataField>CredProduct_Name</DataField>
+        </Field>
+        <Field Name="CredAccBalBF">
+          <DataField>CredAccBalBF</DataField>
+        </Field>
+        <Field Name="CredAccBalBFFormat">
+          <DataField>CredAccBalBFFormat</DataField>
+        </Field>
+        <Field Name="CredPosting_Date">
+          <DataField>CredPosting_Date</DataField>
+        </Field>
+        <Field Name="CredDocument_No_">
+          <DataField>CredDocument_No_</DataField>
+        </Field>
+        <Field Name="CredAmount">
+          <DataField>CredAmount</DataField>
+        </Field>
+        <Field Name="CredAmountFormat">
+          <DataField>CredAmountFormat</DataField>
+        </Field>
+        <Field Name="CredDebit_Amount">
+          <DataField>CredDebit_Amount</DataField>
+        </Field>
+        <Field Name="CredDebit_AmountFormat">
+          <DataField>CredDebit_AmountFormat</DataField>
+        </Field>
+        <Field Name="CredCredit_Amount">
+          <DataField>CredCredit_Amount</DataField>
+        </Field>
+        <Field Name="CredCredit_AmountFormat">
+          <DataField>CredCredit_AmountFormat</DataField>
+        </Field>
+        <Field Name="CredDescriptionTxt">
+          <DataField>CredDescriptionTxt</DataField>
+        </Field>
+        <Field Name="CredAccRunBalance">
+          <DataField>CredAccRunBalance</DataField>
+        </Field>
+        <Field Name="CredAccRunBalanceFormat">
+          <DataField>CredAccRunBalanceFormat</DataField>
+        </Field>
+        <Field Name="RepayNo">
+          <DataField>RepayNo</DataField>
+        </Field>
+        <Field Name="RepayAccProductName">
+          <DataField>RepayAccProductName</DataField>
+        </Field>
+        <Field Name="RepayBalanceBF">
+          <DataField>RepayBalanceBF</DataField>
+        </Field>
+        <Field Name="RepayBalanceBFFormat">
+          <DataField>RepayBalanceBFFormat</DataField>
+        </Field>
+        <Field Name="RepayAccPostingDate">
+          <DataField>RepayAccPostingDate</DataField>
+        </Field>
+        <Field Name="RepayAccDocumentNo">
+          <DataField>RepayAccDocumentNo</DataField>
+        </Field>
+        <Field Name="RepayAccAmountLCY">
+          <DataField>RepayAccAmountLCY</DataField>
+        </Field>
+        <Field Name="RepayAccAmountLCYFormat">
+          <DataField>RepayAccAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="RepayAccDebitAmount">
+          <DataField>RepayAccDebitAmount</DataField>
+        </Field>
+        <Field Name="RepayAccDebitAmountFormat">
+          <DataField>RepayAccDebitAmountFormat</DataField>
+        </Field>
+        <Field Name="RepayAccCreditAmount">
+          <DataField>RepayAccCreditAmount</DataField>
+        </Field>
+        <Field Name="RepayAccCreditAmountFormat">
+          <DataField>RepayAccCreditAmountFormat</DataField>
+        </Field>
+        <Field Name="RepayDescriptionTxt">
+          <DataField>RepayDescriptionTxt</DataField>
+        </Field>
+        <Field Name="RepayRunningBal">
+          <DataField>RepayRunningBal</DataField>
+        </Field>
+        <Field Name="RepayRunningBalFormat">
+          <DataField>RepayRunningBalFormat</DataField>
+        </Field>
+        <Field Name="LoanNo">
+          <DataField>LoanNo</DataField>
+        </Field>
+        <Field Name="Product_Description">
+          <DataField>Product_Description</DataField>
+        </Field>
+        <Field Name="Approved_Amount">
+          <DataField>Approved_Amount</DataField>
+        </Field>
+        <Field Name="Approved_AmountFormat">
+          <DataField>Approved_AmountFormat</DataField>
+        </Field>
+        <Field Name="Repayment">
+          <DataField>Repayment</DataField>
+        </Field>
+        <Field Name="RepaymentFormat">
+          <DataField>RepaymentFormat</DataField>
+        </Field>
+        <Field Name="Disbursement_Date">
+          <DataField>Disbursement_Date</DataField>
+        </Field>
+        <Field Name="Expected_Date_of_Completion">
+          <DataField>Expected_Date_of_Completion</DataField>
+        </Field>
+        <Field Name="LoanRunBalanceBF">
+          <DataField>LoanRunBalanceBF</DataField>
+        </Field>
+        <Field Name="LoanRunBalanceBFFormat">
+          <DataField>LoanRunBalanceBFFormat</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="Posting_Date">
+          <DataField>Posting_Date</DataField>
+        </Field>
+        <Field Name="Document_No_">
+          <DataField>Document_No_</DataField>
+        </Field>
+        <Field Name="Debit_Amount">
+          <DataField>Debit_Amount</DataField>
+        </Field>
+        <Field Name="Debit_AmountFormat">
+          <DataField>Debit_AmountFormat</DataField>
+        </Field>
+        <Field Name="Credit_Amount">
+          <DataField>Credit_Amount</DataField>
+        </Field>
+        <Field Name="Credit_AmountFormat">
+          <DataField>Credit_AmountFormat</DataField>
+        </Field>
+        <Field Name="Transaction_Type">
+          <DataField>Transaction_Type</DataField>
+        </Field>
+        <Field Name="LoanDescriptionTxt">
+          <DataField>LoanDescriptionTxt</DataField>
+        </Field>
+        <Field Name="LoanRunBalance">
+          <DataField>LoanRunBalance</DataField>
+        </Field>
+        <Field Name="LoanRunBalanceFormat">
+          <DataField>LoanRunBalanceFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

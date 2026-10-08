@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="ID_No_">
+          <DataField>ID_No_</DataField>
+        </Field>
+        <Field Name="Employer_Code">
+          <DataField>Employer_Code</DataField>
+        </Field>
+        <Field Name="sharecapital">
+          <DataField>sharecapital</DataField>
+        </Field>
+        <Field Name="sharecapitalFormat">
+          <DataField>sharecapitalFormat</DataField>
+        </Field>
+        <Field Name="saccodeposit">
+          <DataField>saccodeposit</DataField>
+        </Field>
+        <Field Name="saccodepositFormat">
+          <DataField>saccodepositFormat</DataField>
+        </Field>
+        <Field Name="iesasavings">
+          <DataField>iesasavings</DataField>
+        </Field>
+        <Field Name="iesasavingsFormat">
+          <DataField>iesasavingsFormat</DataField>
+        </Field>
+        <Field Name="MUSHARAKASAVINGS">
+          <DataField>MUSHARAKASAVINGS</DataField>
+        </Field>
+        <Field Name="MUSHARAKASAVINGSFormat">
+          <DataField>MUSHARAKASAVINGSFormat</DataField>
+        </Field>
+        <Field Name="holidaysaving">
+          <DataField>holidaysaving</DataField>
+        </Field>
+        <Field Name="holidaysavingFormat">
+          <DataField>holidaysavingFormat</DataField>
+        </Field>
+        <Field Name="UboraAmal">
+          <DataField>UboraAmal</DataField>
+        </Field>
+        <Field Name="UboraAmalFormat">
+          <DataField>UboraAmalFormat</DataField>
+        </Field>
+        <Field Name="BusinessLoan">
+          <DataField>BusinessLoan</DataField>
+        </Field>
+        <Field Name="BusinessLoanFormat">
+          <DataField>BusinessLoanFormat</DataField>
+        </Field>
+        <Field Name="DefaulterLoan">
+          <DataField>DefaulterLoan</DataField>
+        </Field>
+        <Field Name="DefaulterLoanFormat">
+          <DataField>DefaulterLoanFormat</DataField>
+        </Field>
+        <Field Name="IesaEmergone">
+          <DataField>IesaEmergone</DataField>
+        </Field>
+        <Field Name="IesaEmergoneFormat">
+          <DataField>IesaEmergoneFormat</DataField>
+        </Field>
+        <Field Name="Iesanormalloan">
+          <DataField>Iesanormalloan</DataField>
+        </Field>
+        <Field Name="IesanormalloanFormat">
+          <DataField>IesanormalloanFormat</DataField>
+        </Field>
+        <Field Name="IesaEmergtwo">
+          <DataField>IesaEmergtwo</DataField>
+        </Field>
+        <Field Name="IesaEmergtwoFormat">
+          <DataField>IesaEmergtwoFormat</DataField>
+        </Field>
+        <Field Name="makarabisholoan">
+          <DataField>makarabisholoan</DataField>
+        </Field>
+        <Field Name="makarabisholoanFormat">
+          <DataField>makarabisholoanFormat</DataField>
+        </Field>
+        <Field Name="musharakaNormloan">
+          <DataField>musharakaNormloan</DataField>
+        </Field>
+        <Field Name="musharakaNormloanFormat">
+          <DataField>musharakaNormloanFormat</DataField>
+        </Field>
+        <Field Name="Uboraschoolfeesloan">
+          <DataField>Uboraschoolfeesloan</DataField>
+        </Field>
+        <Field Name="UboraschoolfeesloanFormat">
+          <DataField>UboraschoolfeesloanFormat</DataField>
+        </Field>
+        <Field Name="uboracollageLoan">
+          <DataField>uboracollageLoan</DataField>
+        </Field>
+        <Field Name="uboracollageLoanFormat">
+          <DataField>uboracollageLoanFormat</DataField>
+        </Field>
+        <Field Name="Uboraemergencyloan">
+          <DataField>Uboraemergencyloan</DataField>
+        </Field>
+        <Field Name="UboraemergencyloanFormat">
+          <DataField>UboraemergencyloanFormat</DataField>
+        </Field>
+        <Field Name="uboradevloan">
+          <DataField>uboradevloan</DataField>
+        </Field>
+        <Field Name="uboradevloanFormat">
+          <DataField>uboradevloanFormat</DataField>
+        </Field>
+        <Field Name="nums">
+          <DataField>nums</DataField>
+        </Field>
+        <Field Name="iesanumber">
+          <DataField>iesanumber</DataField>
+        </Field>
+        <Field Name="uboracollagetwo">
+          <DataField>uboracollagetwo</DataField>
+        </Field>
+        <Field Name="uboracollagetwoFormat">
+          <DataField>uboracollagetwoFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

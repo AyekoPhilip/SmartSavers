@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompInfoName">
+          <DataField>CompInfoName</DataField>
+        </Field>
+        <Field Name="CompInfoAddress">
+          <DataField>CompInfoAddress</DataField>
+        </Field>
+        <Field Name="CompInfoPhoneNo">
+          <DataField>CompInfoPhoneNo</DataField>
+        </Field>
+        <Field Name="CompInfoPicture">
+          <DataField>CompInfoPicture</DataField>
+        </Field>
+        <Field Name="No_LoanDisbursementHeader">
+          <DataField>No_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="Date_LoanDisbursementHeader">
+          <DataField>Date_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="TotalAmount_LoanDisbursementHeader">
+          <DataField>TotalAmount_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="TotalAmount_LoanDisbursementHeaderFormat">
+          <DataField>TotalAmount_LoanDisbursementHeaderFormat</DataField>
+        </Field>
+        <Field Name="Status_LoanDisbursementHeader">
+          <DataField>Status_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="PaymentType_LoanDisbursementHeader">
+          <DataField>PaymentType_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code_LoanDisbursementHeader">
+          <DataField>GlobalDimension2Code_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="NoofLoans_LoanDisbursementHeader">
+          <DataField>NoofLoans_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="PostingRemarks_LoanDisbursementHeader">
+          <DataField>PostingRemarks_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="NumberText1">
+          <DataField>NumberText1</DataField>
+        </Field>
+        <Field Name="No_Loans">
+          <DataField>No_Loans</DataField>
+        </Field>
+        <Field Name="ApplicationDate_Loans">
+          <DataField>ApplicationDate_Loans</DataField>
+        </Field>
+        <Field Name="ProductType_Loans">
+          <DataField>ProductType_Loans</DataField>
+        </Field>
+        <Field Name="AccountNo_Loans">
+          <DataField>AccountNo_Loans</DataField>
+        </Field>
+        <Field Name="RequestedAmount_Loans">
+          <DataField>RequestedAmount_Loans</DataField>
+        </Field>
+        <Field Name="RequestedAmount_LoansFormat">
+          <DataField>RequestedAmount_LoansFormat</DataField>
+        </Field>
+        <Field Name="ApprovedAmount_Loans">
+          <DataField>ApprovedAmount_Loans</DataField>
+        </Field>
+        <Field Name="ApprovedAmount_LoansFormat">
+          <DataField>ApprovedAmount_LoansFormat</DataField>
+        </Field>
+        <Field Name="InterestRate_Loans">
+          <DataField>InterestRate_Loans</DataField>
+        </Field>
+        <Field Name="InterestRate_LoansFormat">
+          <DataField>InterestRate_LoansFormat</DataField>
+        </Field>
+        <Field Name="AccountName_Loans">
+          <DataField>AccountName_Loans</DataField>
+        </Field>
+        <Field Name="ApprovalDate_Loans">
+          <DataField>ApprovalDate_Loans</DataField>
+        </Field>
+        <Field Name="Installments_Loans">
+          <DataField>Installments_Loans</DataField>
+        </Field>
+        <Field Name="DisbursementDate_Loans">
+          <DataField>DisbursementDate_Loans</DataField>
+        </Field>
+        <Field Name="ModeofDisbursement_Loans">
+          <DataField>ModeofDisbursement_Loans</DataField>
+        </Field>
+        <Field Name="GracePeriodPrincipal_Loans">
+          <DataField>GracePeriodPrincipal_Loans</DataField>
+        </Field>
+        <Field Name="InstallmentPeriod_Loans">
+          <DataField>InstallmentPeriod_Loans</DataField>
+        </Field>
+        <Field Name="Repayment_Loans">
+          <DataField>Repayment_Loans</DataField>
+        </Field>
+        <Field Name="Repayment_LoansFormat">
+          <DataField>Repayment_LoansFormat</DataField>
+        </Field>
+        <Field Name="ProductDescription_Loans">
+          <DataField>ProductDescription_Loans</DataField>
+        </Field>
+        <Field Name="InterestRepayment_Loans">
+          <DataField>InterestRepayment_Loans</DataField>
+        </Field>
+        <Field Name="InterestRepayment_LoansFormat">
+          <DataField>InterestRepayment_LoansFormat</DataField>
+        </Field>
+        <Field Name="PrincipleRepayment_Loans">
+          <DataField>PrincipleRepayment_Loans</DataField>
+        </Field>
+        <Field Name="PrincipleRepayment_LoansFormat">
+          <DataField>PrincipleRepayment_LoansFormat</DataField>
+        </Field>
+        <Field Name="RepaymentStartDate_Loans">
+          <DataField>RepaymentStartDate_Loans</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

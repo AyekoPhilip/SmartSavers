@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="IDNumber">
+          <DataField>IDNumber</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo">
+          <DataField>PayrollStaffNo</DataField>
+        </Field>
+        <Field Name="AllocatedAmount">
+          <DataField>AllocatedAmount</DataField>
+        </Field>
+        <Field Name="AllocatedAmountFormat">
+          <DataField>AllocatedAmountFormat</DataField>
+        </Field>
+        <Field Name="AllowPartialDeduction">
+          <DataField>AllowPartialDeduction</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="ApplicationDate">
+          <DataField>ApplicationDate</DataField>
+        </Field>
+        <Field Name="ApprovalStatus">
+          <DataField>ApprovalStatus</DataField>
+        </Field>
+        <Field Name="AutoProcess">
+          <DataField>AutoProcess</DataField>
+        </Field>
+        <Field Name="Balance">
+          <DataField>Balance</DataField>
+        </Field>
+        <Field Name="BalanceFormat">
+          <DataField>BalanceFormat</DataField>
+        </Field>
+        <Field Name="BankAccountNo">
+          <DataField>BankAccountNo</DataField>
+        </Field>
+        <Field Name="BankCode">
+          <DataField>BankCode</DataField>
+        </Field>
+        <Field Name="BankName">
+          <DataField>BankName</DataField>
+        </Field>
+        <Field Name="BranchCode">
+          <DataField>BranchCode</DataField>
+        </Field>
+        <Field Name="CreatedBy">
+          <DataField>CreatedBy</DataField>
+        </Field>
+        <Field Name="DateReset">
+          <DataField>DateReset</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="DurationMonths">
+          <DataField>DurationMonths</DataField>
+        </Field>
+        <Field Name="Effected">
+          <DataField>Effected</DataField>
+        </Field>
+        <Field Name="EffectiveStartDate">
+          <DataField>EffectiveStartDate</DataField>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+        </Field>
+        <Field Name="FrequencyMonths">
+          <DataField>FrequencyMonths</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code">
+          <DataField>GlobalDimension1Code</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code">
+          <DataField>GlobalDimension2Code</DataField>
+        </Field>
+        <Field Name="IncomeType">
+          <DataField>IncomeType</DataField>
+        </Field>
+        <Field Name="Invalid">
+          <DataField>Invalid</DataField>
+        </Field>
+        <Field Name="NextRunDate">
+          <DataField>NextRunDate</DataField>
+        </Field>
+        <Field Name="NoSeries">
+          <DataField>NoSeries</DataField>
+        </Field>
+        <Field Name="Priority">
+          <DataField>Priority</DataField>
+        </Field>
+        <Field Name="PriorityFormat">
+          <DataField>PriorityFormat</DataField>
+        </Field>
+        <Field Name="ResponsibilityCentre">
+          <DataField>ResponsibilityCentre</DataField>
+        </Field>
+        <Field Name="SourceAccountName">
+          <DataField>SourceAccountName</DataField>
+        </Field>
+        <Field Name="SourceAccountNo">
+          <DataField>SourceAccountNo</DataField>
+        </Field>
+        <Field Name="SourceAccountType">
+          <DataField>SourceAccountType</DataField>
+        </Field>
+        <Field Name="StandingOrderType">
+          <DataField>StandingOrderType</DataField>
+        </Field>
+        <Field Name="SystemCreatedAt">
+          <DataField>SystemCreatedAt</DataField>
+        </Field>
+        <Field Name="SystemCreatedBy">
+          <DataField>SystemCreatedBy</DataField>
+        </Field>
+        <Field Name="SystemId">
+          <DataField>SystemId</DataField>
+        </Field>
+        <Field Name="SystemModifiedAt">
+          <DataField>SystemModifiedAt</DataField>
+        </Field>
+        <Field Name="SystemModifiedBy">
+          <DataField>SystemModifiedBy</DataField>
+        </Field>
+        <Field Name="TransactionBranch">
+          <DataField>TransactionBranch</DataField>
+        </Field>
+        <Field Name="TransactionType">
+          <DataField>TransactionType</DataField>
+        </Field>
+        <Field Name="TransferedtoEFT">
+          <DataField>TransferedtoEFT</DataField>
+        </Field>
+        <Field Name="Type">
+          <DataField>Type</DataField>
+        </Field>
+        <Field Name="Unrecovered">
+          <DataField>Unrecovered</DataField>
+        </Field>
+        <Field Name="Unsuccessfull">
+          <DataField>Unsuccessfull</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

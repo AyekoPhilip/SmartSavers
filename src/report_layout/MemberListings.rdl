@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInformationPicture">
+          <DataField>CompanyInformationPicture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="AccountCategory">
+          <DataField>AccountCategory</DataField>
+        </Field>
+        <Field Name="AccountDimension">
+          <DataField>AccountDimension</DataField>
+        </Field>
+        <Field Name="AccountType">
+          <DataField>AccountType</DataField>
+        </Field>
+        <Field Name="ApplicationNo">
+          <DataField>ApplicationNo</DataField>
+        </Field>
+        <Field Name="AreaServiceCenter">
+          <DataField>AreaServiceCenter</DataField>
+        </Field>
+        <Field Name="AssociatedMemberNo">
+          <DataField>AssociatedMemberNo</DataField>
+        </Field>
+        <Field Name="BankAccountNo">
+          <DataField>BankAccountNo</DataField>
+        </Field>
+        <Field Name="BankCode">
+          <DataField>BankCode</DataField>
+        </Field>
+        <Field Name="BaseCalendarCode">
+          <DataField>BaseCalendarCode</DataField>
+        </Field>
+        <Field Name="BirthCertificateNo">
+          <DataField>BirthCertificateNo</DataField>
+        </Field>
+        <Field Name="Blocked">
+          <DataField>Blocked</DataField>
+        </Field>
+        <Field Name="BranchCode">
+          <DataField>BranchCode</DataField>
+        </Field>
+        <Field Name="BusinessGroupLocation">
+          <DataField>BusinessGroupLocation</DataField>
+        </Field>
+        <Field Name="City">
+          <DataField>City</DataField>
+        </Field>
+        <Field Name="Classification">
+          <DataField>Classification</DataField>
+        </Field>
+        <Field Name="Comment">
+          <DataField>Comment</DataField>
+        </Field>
+        <Field Name="CompanyRegistrationNo">
+          <DataField>CompanyRegistrationNo</DataField>
+        </Field>
+        <Field Name="Contact">
+          <DataField>Contact</DataField>
+        </Field>
+        <Field Name="ContractType">
+          <DataField>ContractType</DataField>
+        </Field>
+        <Field Name="CountryRegion">
+          <DataField>CountryRegion</DataField>
+        </Field>
+        <Field Name="County">
+          <DataField>County</DataField>
+        </Field>
+        <Field Name="CurrentAddress">
+          <DataField>CurrentAddress</DataField>
+        </Field>
+        <Field Name="CurrentLocation">
+          <DataField>CurrentLocation</DataField>
+        </Field>
+        <Field Name="CurrentResidence">
+          <DataField>CurrentResidence</DataField>
+        </Field>
+        <Field Name="CustomerType">
+          <DataField>CustomerType</DataField>
+        </Field>
+        <Field Name="DateofBirth">
+          <DataField>DateofBirth</DataField>
+        </Field>
+        <Field Name="DateofBusinessReg">
+          <DataField>DateofBusinessReg</DataField>
+        </Field>
+        <Field Name="Designation">
+          <DataField>Designation</DataField>
+        </Field>
+        <Field Name="DividendPaymentMethod">
+          <DataField>DividendPaymentMethod</DataField>
+        </Field>
+        <Field Name="EMail">
+          <DataField>EMail</DataField>
+        </Field>
+        <Field Name="EmailPersonal">
+          <DataField>EmailPersonal</DataField>
+        </Field>
+        <Field Name="ElectrolZone">
+          <DataField>ElectrolZone</DataField>
+        </Field>
+        <Field Name="EmployerCode">
+          <DataField>EmployerCode</DataField>
+        </Field>
+        <Field Name="EmployersPostalAddress">
+          <DataField>EmployersPostalAddress</DataField>
+        </Field>
+        <Field Name="EmploymentOccupationDetail">
+          <DataField>EmploymentOccupationDetail</DataField>
+        </Field>
+        <Field Name="FaxNo">
+          <DataField>FaxNo</DataField>
+        </Field>
+        <Field Name="FileNo">
+          <DataField>FileNo</DataField>
+        </Field>
+        <Field Name="FirstName">
+          <DataField>FirstName</DataField>
+        </Field>
+        <Field Name="Gender">
+          <DataField>Gender</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code">
+          <DataField>GlobalDimension1Code</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code">
+          <DataField>GlobalDimension2Code</DataField>
+        </Field>
+        <Field Name="HomeAddress">
+          <DataField>HomeAddress</DataField>
+        </Field>
+        <Field Name="IDNo">
+          <DataField>IDNo</DataField>
+        </Field>
+        <Field Name="Idemnity">
+          <DataField>Idemnity</DataField>
+        </Field>
+        <Field Name="IdentificationType">
+          <DataField>IdentificationType</DataField>
+        </Field>
+        <Field Name="LastDateModified">
+          <DataField>LastDateModified</DataField>
+        </Field>
+        <Field Name="LastName">
+          <DataField>LastName</DataField>
+        </Field>
+        <Field Name="LastTransactionDate">
+          <DataField>LastTransactionDate</DataField>
+        </Field>
+        <Field Name="Location">
+          <DataField>Location</DataField>
+        </Field>
+        <Field Name="MPESAMobileNo">
+          <DataField>MPESAMobileNo</DataField>
+        </Field>
+        <Field Name="MaritalStatus">
+          <DataField>MaritalStatus</DataField>
+        </Field>
+        <Field Name="MemberCategory">
+          <DataField>MemberCategory</DataField>
+        </Field>
+        <Field Name="MemberSegment">
+          <DataField>MemberSegment</DataField>
+        </Field>
+        <Field Name="MemberStation">
+          <DataField>MemberStation</DataField>
+        </Field>
+        <Field Name="MemberType">
+          <DataField>MemberType</DataField>
+        </Field>
+        <Field Name="MembershipType">
+          <DataField>MembershipType</DataField>
+        </Field>
+        <Field Name="MobilePhoneNo">
+          <DataField>MobilePhoneNo</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="Name2">
+          <DataField>Name2</DataField>
+        </Field>
+        <Field Name="Nationality">
+          <DataField>Nationality</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="OfficeTelephoneNo">
+          <DataField>OfficeTelephoneNo</DataField>
+        </Field>
+        <Field Name="OldMemberNo">
+          <DataField>OldMemberNo</DataField>
+        </Field>
+        <Field Name="OtherAccountType">
+          <DataField>OtherAccountType</DataField>
+        </Field>
+        <Field Name="OtherBusinessType">
+          <DataField>OtherBusinessType</DataField>
+        </Field>
+        <Field Name="OtherName">
+          <DataField>OtherName</DataField>
+        </Field>
+        <Field Name="OurAccountNo">
+          <DataField>OurAccountNo</DataField>
+        </Field>
+        <Field Name="OwnershipType">
+          <DataField>OwnershipType</DataField>
+        </Field>
+        <Field Name="PINNo">
+          <DataField>PINNo</DataField>
+        </Field>
+        <Field Name="PassportNo">
+          <DataField>PassportNo</DataField>
+        </Field>
+        <Field Name="PayPoint">
+          <DataField>PayPoint</DataField>
+        </Field>
+        <Field Name="PayPointName">
+          <DataField>PayPointName</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo">
+          <DataField>PayrollStaffNo</DataField>
+        </Field>
+        <Field Name="PhoneNo">
+          <DataField>PhoneNo</DataField>
+        </Field>
+        <Field Name="Picture">
+          <DataField>Picture</DataField>
+        </Field>
+        <Field Name="PlotBldgStreetRoad">
+          <DataField>PlotBldgStreetRoad</DataField>
+        </Field>
+        <Field Name="PostCode">
+          <DataField>PostCode</DataField>
+        </Field>
+        <Field Name="PrimaryContactNo">
+          <DataField>PrimaryContactNo</DataField>
+        </Field>
+        <Field Name="PrincipalMemberNo">
+          <DataField>PrincipalMemberNo</DataField>
+        </Field>
+        <Field Name="ProtectedAccount">
+          <DataField>ProtectedAccount</DataField>
+        </Field>
+        <Field Name="RecruitedBy">
+          <DataField>RecruitedBy</DataField>
+        </Field>
+        <Field Name="RecruitedByName">
+          <DataField>RecruitedByName</DataField>
+        </Field>
+        <Field Name="RecruitedbyType">
+          <DataField>RecruitedbyType</DataField>
+        </Field>
+        <Field Name="RegistrationDate">
+          <DataField>RegistrationDate</DataField>
+        </Field>
+        <Field Name="Rejoined">
+          <DataField>Rejoined</DataField>
+        </Field>
+        <Field Name="Withdrwal_Date">
+          <DataField>Withdrwal_Date</DataField>
+        </Field>
+        <Field Name="RejoiningDate">
+          <DataField>RejoiningDate</DataField>
+        </Field>
+        <Field Name="RelatestoBusinessGroup">
+          <DataField>RelatestoBusinessGroup</DataField>
+        </Field>
+        <Field Name="RelationshipManager">
+          <DataField>RelationshipManager</DataField>
+        </Field>
+        <Field Name="ResonsforStatusChange">
+          <DataField>ResonsforStatusChange</DataField>
+        </Field>
+        <Field Name="ResponsibilityCenter">
+          <DataField>ResponsibilityCenter</DataField>
+        </Field>
+        <Field Name="Salutation">
+          <DataField>Salutation</DataField>
+        </Field>
+        <Field Name="SecondName">
+          <DataField>SecondName</DataField>
+        </Field>
+        <Field Name="SinglePartyMultiple">
+          <DataField>SinglePartyMultiple</DataField>
+        </Field>
+        <Field Name="Source">
+          <DataField>Source</DataField>
+        </Field>
+        <Field Name="StatementEMailFreq">
+          <DataField>StatementEMailFreq</DataField>
+        </Field>
+        <Field Name="StationDepartment">
+          <DataField>StationDepartment</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="TelexNo">
+          <DataField>TelexNo</DataField>
+        </Field>
+        <Field Name="TerritoryCode">
+          <DataField>TerritoryCode</DataField>
+        </Field>
+        <Field Name="Type">
+          <DataField>Type</DataField>
+        </Field>
+        <Field Name="TypeofBusiness">
+          <DataField>TypeofBusiness</DataField>
+        </Field>
+        <Field Name="StaffNo">
+          <DataField>StaffNo</DataField>
+        </Field>
+        <Field Name="FosaBalanceLCY">
+          <DataField>FosaBalanceLCY</DataField>
+        </Field>
+        <Field Name="FosaBalanceLCYFormat">
+          <DataField>FosaBalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="DepositsBalanceLCY">
+          <DataField>DepositsBalanceLCY</DataField>
+        </Field>
+        <Field Name="DepositsBalanceLCYFormat">
+          <DataField>DepositsBalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="SharesCapBalanceLCY">
+          <DataField>SharesCapBalanceLCY</DataField>
+        </Field>
+        <Field Name="SharesCapBalanceLCYFormat">
+          <DataField>SharesCapBalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="LaonsBalanceLCY">
+          <DataField>LaonsBalanceLCY</DataField>
+        </Field>
+        <Field Name="LaonsBalanceLCYFormat">
+          <DataField>LaonsBalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="EmpName">
+          <DataField>EmpName</DataField>
+        </Field>
+        <Field Name="LastDepositDate">
+          <DataField>LastDepositDate</DataField>
+        </Field>
+        <Field Name="LastTransDate">
+          <DataField>LastTransDate</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

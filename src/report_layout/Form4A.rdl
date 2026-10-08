@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="EntryNo">
+          <DataField>EntryNo</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="Date">
+          <DataField>Date</DataField>
+        </Field>
+        <Field Name="Decription">
+          <DataField>Decription</DataField>
+        </Field>
+        <Field Name="Found">
+          <DataField>Found</DataField>
+        </Field>
+        <Field Name="TotalMembership">
+          <DataField>TotalMembership</DataField>
+        </Field>
+        <Field Name="TotalUnspecifiedMembership">
+          <DataField>TotalUnspecifiedMembership</DataField>
+        </Field>
+        <Field Name="TotalMaleMembership">
+          <DataField>TotalMaleMembership</DataField>
+        </Field>
+        <Field Name="TotalFemaleMembership">
+          <DataField>TotalFemaleMembership</DataField>
+        </Field>
+        <Field Name="MaleCountCredAc">
+          <DataField>MaleCountCredAc</DataField>
+        </Field>
+        <Field Name="FemaleCountCredAc">
+          <DataField>FemaleCountCredAc</DataField>
+        </Field>
+        <Field Name="UnspecifiedCountCredAc">
+          <DataField>UnspecifiedCountCredAc</DataField>
+        </Field>
+        <Field Name="TotalCountCredAc">
+          <DataField>TotalCountCredAc</DataField>
+        </Field>
+        <Field Name="TotalMaleSavingCredAc">
+          <DataField>TotalMaleSavingCredAc</DataField>
+        </Field>
+        <Field Name="TotalMaleSavingCredAcFormat">
+          <DataField>TotalMaleSavingCredAcFormat</DataField>
+        </Field>
+        <Field Name="TotalFemaleSavingCredAc">
+          <DataField>TotalFemaleSavingCredAc</DataField>
+        </Field>
+        <Field Name="TotalFemaleSavingCredAcFormat">
+          <DataField>TotalFemaleSavingCredAcFormat</DataField>
+        </Field>
+        <Field Name="TotalUnspecifiedSavingCredAc">
+          <DataField>TotalUnspecifiedSavingCredAc</DataField>
+        </Field>
+        <Field Name="TotalUnspecifiedSavingCredAcFormat">
+          <DataField>TotalUnspecifiedSavingCredAcFormat</DataField>
+        </Field>
+        <Field Name="TotalSavingCredAc">
+          <DataField>TotalSavingCredAc</DataField>
+        </Field>
+        <Field Name="TotalSavingCredAcFormat">
+          <DataField>TotalSavingCredAcFormat</DataField>
+        </Field>
+        <Field Name="MaleCountBankingAc">
+          <DataField>MaleCountBankingAc</DataField>
+        </Field>
+        <Field Name="FemaleCountBankingAc">
+          <DataField>FemaleCountBankingAc</DataField>
+        </Field>
+        <Field Name="UnspecifiedCountBankingAc">
+          <DataField>UnspecifiedCountBankingAc</DataField>
+        </Field>
+        <Field Name="TotalCountBankingAc">
+          <DataField>TotalCountBankingAc</DataField>
+        </Field>
+        <Field Name="TotalMaleSavingBankingAc">
+          <DataField>TotalMaleSavingBankingAc</DataField>
+        </Field>
+        <Field Name="TotalMaleSavingBankingAcFormat">
+          <DataField>TotalMaleSavingBankingAcFormat</DataField>
+        </Field>
+        <Field Name="TotalFemaleSavingBankingAc">
+          <DataField>TotalFemaleSavingBankingAc</DataField>
+        </Field>
+        <Field Name="TotalFemaleSavingBankingAcFormat">
+          <DataField>TotalFemaleSavingBankingAcFormat</DataField>
+        </Field>
+        <Field Name="TotalUnspecifiedSavingbankingAc">
+          <DataField>TotalUnspecifiedSavingbankingAc</DataField>
+        </Field>
+        <Field Name="TotalUnspecifiedSavingbankingAcFormat">
+          <DataField>TotalUnspecifiedSavingbankingAcFormat</DataField>
+        </Field>
+        <Field Name="TotalSavingBankingAc">
+          <DataField>TotalSavingBankingAc</DataField>
+        </Field>
+        <Field Name="TotalSavingBankingAcFormat">
+          <DataField>TotalSavingBankingAcFormat</DataField>
+        </Field>
+        <Field Name="StaffMaleCount">
+          <DataField>StaffMaleCount</DataField>
+        </Field>
+        <Field Name="StaffFemaleCount">
+          <DataField>StaffFemaleCount</DataField>
+        </Field>
+        <Field Name="StaffUnspecifiedCount">
+          <DataField>StaffUnspecifiedCount</DataField>
+        </Field>
+        <Field Name="StaffTotalCount">
+          <DataField>StaffTotalCount</DataField>
+        </Field>
+        <Field Name="LoanDisbMaleCount">
+          <DataField>LoanDisbMaleCount</DataField>
+        </Field>
+        <Field Name="LoanDisbFemaleCount">
+          <DataField>LoanDisbFemaleCount</DataField>
+        </Field>
+        <Field Name="LoanDisbUnspecifiedCount">
+          <DataField>LoanDisbUnspecifiedCount</DataField>
+        </Field>
+        <Field Name="TotLoanDisbCount">
+          <DataField>TotLoanDisbCount</DataField>
+        </Field>
+        <Field Name="LoanDisbMaleAmt">
+          <DataField>LoanDisbMaleAmt</DataField>
+        </Field>
+        <Field Name="LoanDisbMaleAmtFormat">
+          <DataField>LoanDisbMaleAmtFormat</DataField>
+        </Field>
+        <Field Name="LoanDisbFemaleAmt">
+          <DataField>LoanDisbFemaleAmt</DataField>
+        </Field>
+        <Field Name="LoanDisbFemaleAmtFormat">
+          <DataField>LoanDisbFemaleAmtFormat</DataField>
+        </Field>
+        <Field Name="LoanDisbUnspecifiedAmt">
+          <DataField>LoanDisbUnspecifiedAmt</DataField>
+        </Field>
+        <Field Name="LoanDisbUnspecifiedAmtFormat">
+          <DataField>LoanDisbUnspecifiedAmtFormat</DataField>
+        </Field>
+        <Field Name="TotLoanDisbAmt">
+          <DataField>TotLoanDisbAmt</DataField>
+        </Field>
+        <Field Name="TotLoanDisbAmtFormat">
+          <DataField>TotLoanDisbAmtFormat</DataField>
+        </Field>
+        <Field Name="LoanPortFoliobMaleCount">
+          <DataField>LoanPortFoliobMaleCount</DataField>
+        </Field>
+        <Field Name="LoanPortFolioFemaleCount">
+          <DataField>LoanPortFolioFemaleCount</DataField>
+        </Field>
+        <Field Name="LoanPortFolioUnspCount">
+          <DataField>LoanPortFolioUnspCount</DataField>
+        </Field>
+        <Field Name="TotLoanPortFolioCount">
+          <DataField>TotLoanPortFolioCount</DataField>
+        </Field>
+        <Field Name="LoanPortFolioMaleAmt">
+          <DataField>LoanPortFolioMaleAmt</DataField>
+        </Field>
+        <Field Name="LoanPortFolioMaleAmtFormat">
+          <DataField>LoanPortFolioMaleAmtFormat</DataField>
+        </Field>
+        <Field Name="LoanPortFolioFemaleAmt">
+          <DataField>LoanPortFolioFemaleAmt</DataField>
+        </Field>
+        <Field Name="LoanPortFolioFemaleAmtFormat">
+          <DataField>LoanPortFolioFemaleAmtFormat</DataField>
+        </Field>
+        <Field Name="LoanPortFolioDisbUnspAmt">
+          <DataField>LoanPortFolioDisbUnspAmt</DataField>
+        </Field>
+        <Field Name="LoanPortFolioDisbUnspAmtFormat">
+          <DataField>LoanPortFolioDisbUnspAmtFormat</DataField>
+        </Field>
+        <Field Name="TotLoanPortFolioAmt">
+          <DataField>TotLoanPortFolioAmt</DataField>
+        </Field>
+        <Field Name="TotLoanPortFolioAmtFormat">
+          <DataField>TotLoanPortFolioAmtFormat</DataField>
+        </Field>
+        <Field Name="NoOfLoanToStaff">
+          <DataField>NoOfLoanToStaff</DataField>
+        </Field>
+        <Field Name="NoOfLoanToBoard">
+          <DataField>NoOfLoanToBoard</DataField>
+        </Field>
+        <Field Name="TotNoOfLoan">
+          <DataField>TotNoOfLoan</DataField>
+        </Field>
+        <Field Name="LoanToStaff">
+          <DataField>LoanToStaff</DataField>
+        </Field>
+        <Field Name="LoanToStaffFormat">
+          <DataField>LoanToStaffFormat</DataField>
+        </Field>
+        <Field Name="LoanToBoard">
+          <DataField>LoanToBoard</DataField>
+        </Field>
+        <Field Name="LoanToBoardFormat">
+          <DataField>LoanToBoardFormat</DataField>
+        </Field>
+        <Field Name="TotLoan">
+          <DataField>TotLoan</DataField>
+        </Field>
+        <Field Name="TotLoanFormat">
+          <DataField>TotLoanFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>
