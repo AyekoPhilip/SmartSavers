@@ -451,7 +451,7 @@ page 50791 "Membership Individual"
                 ApplicationArea = All;
                 SubPageLink = "No." = field("No.");
             }
-           
+
             part(Picture; "Member Picture")
             {
                 Caption = 'Picture';
@@ -643,7 +643,7 @@ page 50791 "Membership Individual"
                 ApplicationArea = All;
                 trigger OnAction()
                 var
-                   DivProcMgt: Codeunit "Dividend Process";
+                    DivProcMgt: Codeunit "Dividend Process";
                     Divprogression: Record "Dividend Progression";
                     DivProgressionslip: Report "Dividend Slip";
                     Dividendsetup: Record "Dividend SetUp";
@@ -1242,7 +1242,7 @@ page 50791 "Membership Individual"
 
     trigger OnOpenPage()
     begin
-        RecoveryCategoryReviewRequired();
+        //RecoveryCategoryReviewRequired();
         LoanArrear := 0;
 
         if Rec.Hide = true then begin
