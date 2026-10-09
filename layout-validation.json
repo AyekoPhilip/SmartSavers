@@ -1,0 +1,1002 @@
+[
+  {
+    "name": "Account Balances.rdl",
+    "items": 24,
+    "missingFields": []
+  },
+  {
+    "name": "AccountBankingListing.rdl",
+    "items": 28,
+    "missingFields": []
+  },
+  {
+    "name": "AccountChanges.rdl",
+    "items": 22,
+    "missingFields": []
+  },
+  {
+    "name": "AccountClosure.rdl",
+    "items": 58,
+    "missingFields": []
+  },
+  {
+    "name": "AccountCreditBalance.rdl",
+    "items": 35,
+    "missingFields": []
+  },
+  {
+    "name": "AccountFundsTransfer.rdl",
+    "items": 40,
+    "missingFields": []
+  },
+  {
+    "name": "AccountsApplicationRegister.rdl",
+    "items": 34,
+    "missingFields": []
+  },
+  {
+    "name": "AccountTransferReport.rdl",
+    "items": 87,
+    "missingFields": []
+  },
+  {
+    "name": "AltChannelMgtCustStatement.rdl",
+    "items": 109,
+    "missingFields": []
+  },
+  {
+    "name": "ApplicationAttachment.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "AppraisalReportLoans.rdlc",
+    "items": 149,
+    "missingFields": []
+  },
+  {
+    "name": "ATMTransactionsReport.rdl",
+    "items": 32,
+    "missingFields": []
+  },
+  {
+    "name": "AutomatedCard.rdl",
+    "items": 16,
+    "missingFields": []
+  },
+  {
+    "name": "BankAccDetailTrialBal.rdl",
+    "items": 30,
+    "missingFields": []
+  },
+  {
+    "name": "BankAccountStatementCopy.rdl",
+    "items": 55,
+    "missingFields": []
+  },
+  {
+    "name": "BankAccReconTestReport.rdl",
+    "items": 102,
+    "missingFields": []
+  },
+  {
+    "name": "BankersCheque.rdl",
+    "items": 47,
+    "missingFields": []
+  },
+  {
+    "name": "BankingAcRegister.rdl",
+    "items": 54,
+    "missingFields": []
+  },
+  {
+    "name": "BankStatementSummary.rdl",
+    "items": 55,
+    "missingFields": []
+  },
+  {
+    "name": "Birthdaymessages.rdlc",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "BoardAllowances.rdl",
+    "items": 148,
+    "missingFields": []
+  },
+  {
+    "name": "Boardexpenses.rdl",
+    "items": 73,
+    "missingFields": []
+  },
+  {
+    "name": "BosaTop10.rdl",
+    "items": 70,
+    "missingFields": []
+  },
+  {
+    "name": "BridgedLoanRegister.rdl",
+    "items": 43,
+    "missingFields": []
+  },
+  {
+    "name": "BudgetUtilization.rdlc",
+    "items": 21,
+    "missingFields": []
+  },
+  {
+    "name": "BudgetVariance.rdlc",
+    "items": 54,
+    "missingFields": []
+  },
+  {
+    "name": "CashflowProjectionCredit.rdlc",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "CashierCreditDepositSlip.rdl",
+    "items": 48,
+    "missingFields": []
+  },
+  {
+    "name": "CashierReceiptMember.rdl",
+    "items": 34,
+    "missingFields": []
+  },
+  {
+    "name": "CashierReceipts.rdl",
+    "items": 43,
+    "missingFields": []
+  },
+  {
+    "name": "CashierReportNew.rdl",
+    "items": 159,
+    "missingFields": []
+  },
+  {
+    "name": "CashierTransactions.rdlc",
+    "items": 31,
+    "missingFields": []
+  },
+  {
+    "name": "CertificateOfDeposit.rdl",
+    "items": 60,
+    "missingFields": []
+  },
+  {
+    "name": "ChangeLog.rdl",
+    "items": 18,
+    "missingFields": []
+  },
+  {
+    "name": "ChangeLogsPhoneNumbers.rdl",
+    "items": 18,
+    "missingFields": []
+  },
+  {
+    "name": "CheckoffMonthlyAdvise.rdl",
+    "items": 19,
+    "missingFields": []
+  },
+  {
+    "name": "CheckoffReconcilliation.rdl",
+    "items": 24,
+    "missingFields": []
+  },
+  {
+    "name": "CheckOffSummary.rdl.rdl",
+    "items": 16,
+    "missingFields": []
+  },
+  {
+    "name": "CheckoffVariance.rdl",
+    "items": 25,
+    "missingFields": []
+  },
+  {
+    "name": "ClientReport.rdlc",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "ClosureMembership.rdl",
+    "items": 45,
+    "missingFields": []
+  },
+  {
+    "name": "CollateralAppraisalSheet.rdl",
+    "items": 92,
+    "missingFields": []
+  },
+  {
+    "name": "CollateralRegister.rdl",
+    "items": 50,
+    "missingFields": []
+  },
+  {
+    "name": "CollateralRegisterNoLoan.rdl",
+    "items": 44,
+    "missingFields": []
+  },
+  {
+    "name": "CreditAcRegister.rdl",
+    "items": 47,
+    "missingFields": []
+  },
+  {
+    "name": "DailyCashTellerReport.rdl",
+    "items": 66,
+    "missingFields": []
+  },
+  {
+    "name": "DCSCreditScoringNew.rdlc",
+    "items": 45,
+    "missingFields": []
+  },
+  {
+    "name": "DeceasedMembers.rdl",
+    "items": 26,
+    "missingFields": []
+  },
+  {
+    "name": "DefaultedLoansRecovery.rdl",
+    "items": 34,
+    "missingFields": []
+  },
+  {
+    "name": "DefaulterNotice1.rdl",
+    "items": 28,
+    "missingFields": []
+  },
+  {
+    "name": "DefaulterNotice2.rdl",
+    "items": 30,
+    "missingFields": []
+  },
+  {
+    "name": "DefaulterNotice3.rdl",
+    "items": 25,
+    "missingFields": []
+  },
+  {
+    "name": "DefaultLoanlist.rdl",
+    "items": 25,
+    "missingFields": []
+  },
+  {
+    "name": "DemandLetter1.rdl",
+    "items": 28,
+    "missingFields": []
+  },
+  {
+    "name": "DemandLetter2.rdl",
+    "items": 26,
+    "missingFields": []
+  },
+  {
+    "name": "DemandLetter3.rdl",
+    "items": 29,
+    "missingFields": []
+  },
+  {
+    "name": "DemandLetterFinal.rdl",
+    "items": 28,
+    "missingFields": []
+  },
+  {
+    "name": "DepositInsuranceReport.rdl",
+    "items": 24,
+    "missingFields": []
+  },
+  {
+    "name": "DepositListing.rdl",
+    "items": 28,
+    "missingFields": []
+  },
+  {
+    "name": "DepositMultiplier.rdl",
+    "items": 7,
+    "missingFields": []
+  },
+  {
+    "name": "DepositReturns.rdl",
+    "items": 78,
+    "missingFields": []
+  },
+  {
+    "name": "DetailedCustAdviseAnalysis.rdl",
+    "items": 20,
+    "missingFields": []
+  },
+  {
+    "name": "DetailedPayrollSummary.rdl",
+    "items": 28,
+    "missingFields": []
+  },
+  {
+    "name": "DetailedStatementofAccount.rdl",
+    "items": 167,
+    "missingFields": []
+  },
+  {
+    "name": "DetailedStatementofAccount1.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "DisbursementSchedule.rdlc",
+    "items": 35,
+    "missingFields": []
+  },
+  {
+    "name": "Dividend Progression.rdl",
+    "items": 28,
+    "missingFields": []
+  },
+  {
+    "name": "DividendAppraisalScore.rdl",
+    "items": 35,
+    "missingFields": []
+  },
+  {
+    "name": "DividendRegister2.rdl",
+    "items": 35,
+    "missingFields": []
+  },
+  {
+    "name": "DividendSlip2.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "DividendStatement2.rdl",
+    "items": 66,
+    "missingFields": []
+  },
+  {
+    "name": "DivSlip2.rdl",
+    "items": 36,
+    "missingFields": []
+  },
+  {
+    "name": "DSCAppraisalScore.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "EFTBankDetails.rdl",
+    "items": 59,
+    "missingFields": []
+  },
+  {
+    "name": "EFTFile.rdl",
+    "items": 181,
+    "missingFields": []
+  },
+  {
+    "name": "EFTLoanSchedule.rdl",
+    "items": 118,
+    "missingFields": []
+  },
+  {
+    "name": "EFTPartialLoanSchedule.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "EFTReport.rdl",
+    "items": 88,
+    "missingFields": []
+  },
+  {
+    "name": "EFTTransferReport.rdl",
+    "items": 30,
+    "missingFields": []
+  },
+  {
+    "name": "Fixed Deposits.rdl",
+    "items": 64,
+    "missingFields": []
+  },
+  {
+    "name": "FixedAssetList.Rdl.rdl",
+    "items": 18,
+    "missingFields": []
+  },
+  {
+    "name": "FixedDepositCertificate.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "FixedDepositCertificateNew.rdlc",
+    "items": 26,
+    "missingFields": []
+  },
+  {
+    "name": "FixedDepositHistory.rdl",
+    "items": 59,
+    "missingFields": []
+  },
+  {
+    "name": "FixedDepositNotifications.rdlc",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "Form3B.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "Form4A.rdl",
+    "items": 92,
+    "missingFields": []
+  },
+  {
+    "name": "FosaTop10List.rdl",
+    "items": 58,
+    "missingFields": []
+  },
+  {
+    "name": "GenerateCRBData.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "GenerateLoanArrears.rdl",
+    "items": 47,
+    "missingFields": []
+  },
+  {
+    "name": "GenerateLoanrepaymentSchedules.rdl",
+    "items": 7,
+    "missingFields": []
+  },
+  {
+    "name": "GenerateLoanRepaySchedule.rdlc",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "GenForm3B.rdl",
+    "items": 30,
+    "missingFields": []
+  },
+  {
+    "name": "GenRemittanceFile.rdl",
+    "items": 9,
+    "missingFields": []
+  },
+  {
+    "name": "GlvsApprovalEntries.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "GrievanceForm.rdl",
+    "items": 12,
+    "missingFields": []
+  },
+  {
+    "name": "GroupedPayrollDeduction.rdl",
+    "items": 133,
+    "missingFields": []
+  },
+  {
+    "name": "GuarantorPaymentCertificate.rdl",
+    "items": 15,
+    "missingFields": []
+  },
+  {
+    "name": "IESALoanAppraisalParameter.rdl",
+    "items": 130,
+    "missingFields": []
+  },
+  {
+    "name": "IndividualPayslip.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "InsiderLending.rdl",
+    "items": 81,
+    "missingFields": []
+  },
+  {
+    "name": "InsiderLendingReport.rdlc",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "InsuranceReport.rdl",
+    "items": 39,
+    "missingFields": []
+  },
+  {
+    "name": "InterestVariantion.rdl",
+    "items": 26,
+    "missingFields": []
+  },
+  {
+    "name": "JournalApprovals.rdlc",
+    "items": 30,
+    "missingFields": []
+  },
+  {
+    "name": "JournalTest.rdl",
+    "items": 72,
+    "missingFields": []
+  },
+  {
+    "name": "LoanAccountRepaySchedule.rdl",
+    "items": 42,
+    "missingFields": []
+  },
+  {
+    "name": "LoanAgreementForm.rdl",
+    "items": 11,
+    "missingFields": []
+  },
+  {
+    "name": "LoanAppraisalDetails.rdl",
+    "items": 9,
+    "missingFields": []
+  },
+  {
+    "name": "LoanAppraisalParameters.rdl",
+    "items": 155,
+    "missingFields": []
+  },
+  {
+    "name": "LoanApprovedRegister.rdl",
+    "items": 38,
+    "missingFields": []
+  },
+  {
+    "name": "LoanCalcRepaymentSchedule.rdl",
+    "items": 64,
+    "missingFields": []
+  },
+  {
+    "name": "LoanDefaulterAging.rdl",
+    "items": 66,
+    "missingFields": []
+  },
+  {
+    "name": "LoanMinutesReport.rdl",
+    "items": 47,
+    "missingFields": []
+  },
+  {
+    "name": "LoanMismatch.rdl",
+    "items": 9,
+    "missingFields": []
+  },
+  {
+    "name": "LoanMonthlyAdvise.rdl",
+    "items": 21,
+    "missingFields": []
+  },
+  {
+    "name": "LoanNormalization.rdl",
+    "items": 31,
+    "missingFields": []
+  },
+  {
+    "name": "LoanProvisionProduct.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "LoanProvisionSummary.rdl",
+    "items": 60,
+    "missingFields": []
+  },
+  {
+    "name": "LoanRegister.rdl",
+    "items": 74,
+    "missingFields": []
+  },
+  {
+    "name": "Loansasra.rdl",
+    "items": 41,
+    "missingFields": []
+  },
+  {
+    "name": "LoansGLComparison.rdlc",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "LoansListing.rdl",
+    "items": 67,
+    "missingFields": []
+  },
+  {
+    "name": "LoansMatchingDeposits.rdl",
+    "items": 77,
+    "missingFields": []
+  },
+  {
+    "name": "LoansPaidWithinMonth.rdl",
+    "items": 32,
+    "missingFields": []
+  },
+  {
+    "name": "LoansTopupRegister.rdl",
+    "items": 52,
+    "missingFields": []
+  },
+  {
+    "name": "LoanVariance.rdl",
+    "items": 55,
+    "missingFields": []
+  },
+  {
+    "name": "MemberAccountBalances.rdl",
+    "items": 26,
+    "missingFields": []
+  },
+  {
+    "name": "MemberAdviseAnalysis.rdl",
+    "items": 72,
+    "missingFields": []
+  },
+  {
+    "name": "MemberAnalysis.rdl",
+    "items": 78,
+    "missingFields": []
+  },
+  {
+    "name": "MemberApplicationRegister.rdl",
+    "items": 43,
+    "missingFields": []
+  },
+  {
+    "name": "MemberListings.rdl",
+    "items": 97,
+    "missingFields": []
+  },
+  {
+    "name": "MemberLoanGuaranteed.rdl",
+    "items": 42,
+    "missingFields": []
+  },
+  {
+    "name": "MemberLoanGuarantors.rdl",
+    "items": 45,
+    "missingFields": []
+  },
+  {
+    "name": "MemberRegister.rdl",
+    "items": 47,
+    "missingFields": []
+  },
+  {
+    "name": "Membershareloanlisting.rdl",
+    "items": 70,
+    "missingFields": []
+  },
+  {
+    "name": "MembershipClosureReport.rdl",
+    "items": 81,
+    "missingFields": []
+  },
+  {
+    "name": "MemberWithdrawalReport.rdl",
+    "items": 35,
+    "missingFields": []
+  },
+  {
+    "name": "MobileAppraisalScore.rdl",
+    "items": 49,
+    "missingFields": []
+  },
+  {
+    "name": "MobileLoanStatusReport.rdl",
+    "items": 20,
+    "missingFields": []
+  },
+  {
+    "name": "MobilePaymentsReport.rdl",
+    "items": 35,
+    "missingFields": []
+  },
+  {
+    "name": "MobileRegistrationReport.rdl",
+    "items": 18,
+    "missingFields": []
+  },
+  {
+    "name": "NextofKinDetails.rdlc",
+    "items": 35,
+    "missingFields": []
+  },
+  {
+    "name": "OfficialReceipt.rdl",
+    "items": 67,
+    "missingFields": []
+  },
+  {
+    "name": "PaymentCertificate.rdl",
+    "items": 15,
+    "missingFields": []
+  },
+  {
+    "name": "PaymentsLine.rdl",
+    "items": 24,
+    "missingFields": []
+  },
+  {
+    "name": "PaymentvoucerListing.rdl",
+    "items": 19,
+    "missingFields": []
+  },
+  {
+    "name": "PaymentVoucher.rdl",
+    "items": 110,
+    "missingFields": []
+  },
+  {
+    "name": "PayrollAllowance.rdl",
+    "items": 27,
+    "missingFields": []
+  },
+  {
+    "name": "PayrollP9.rdl",
+    "items": 159,
+    "missingFields": []
+  },
+  {
+    "name": "PayrollSaccodeduction.rdl",
+    "items": 40,
+    "missingFields": []
+  },
+  {
+    "name": "PayrollStatutoryDeduct.rdl",
+    "items": 23,
+    "missingFields": []
+  },
+  {
+    "name": "PayrollSummaryReport.rdl",
+    "items": 59,
+    "missingFields": []
+  },
+  {
+    "name": "PayrollTransTypes.rdl",
+    "items": 23,
+    "missingFields": []
+  },
+  {
+    "name": "PostedCheckoffVariance.rdl",
+    "items": 25,
+    "missingFields": []
+  },
+  {
+    "name": "PrIndividualPayslip.rdl",
+    "items": 149,
+    "missingFields": []
+  },
+  {
+    "name": "PrPayrollSlipNew.rdl",
+    "items": 73,
+    "missingFields": []
+  },
+  {
+    "name": "Receipt.rdlc",
+    "items": 31,
+    "missingFields": []
+  },
+  {
+    "name": "ReceiptSummary.rdl",
+    "items": 29,
+    "missingFields": []
+  },
+  {
+    "name": "RegisteredLoan.rdl",
+    "items": 41,
+    "missingFields": []
+  },
+  {
+    "name": "RegisteredLoanlist.rdl",
+    "items": 28,
+    "missingFields": []
+  },
+  {
+    "name": "RepaymentSchedule.rdlc",
+    "items": 62,
+    "missingFields": []
+  },
+  {
+    "name": "RepaymentScheduleApplication.rdl",
+    "items": 71,
+    "missingFields": []
+  },
+  {
+    "name": "RiskAssessmentMatrix.rdl",
+    "items": 91,
+    "missingFields": []
+  },
+  {
+    "name": "RiskClaimAnalysis.rdl",
+    "items": 100,
+    "missingFields": []
+  },
+  {
+    "name": "SafeCustodyRegister.rdl",
+    "items": 26,
+    "missingFields": []
+  },
+  {
+    "name": "SalaryReport.rdlc",
+    "items": 21,
+    "missingFields": []
+  },
+  {
+    "name": "SasraSectoralLendingReport.rdlc",
+    "items": 66,
+    "missingFields": []
+  },
+  {
+    "name": "SectorialLending.rdl",
+    "items": 72,
+    "missingFields": []
+  },
+  {
+    "name": "ShareCapitalListing.rdl",
+    "items": 20,
+    "missingFields": []
+  },
+  {
+    "name": "StandardStatementAllAccounts.rdl",
+    "items": 109,
+    "missingFields": []
+  },
+  {
+    "name": "StandardStatementBanking.rdl",
+    "items": 44,
+    "missingFields": []
+  },
+  {
+    "name": "StandardStatementCredt.rdl",
+    "items": 42,
+    "missingFields": []
+  },
+  {
+    "name": "StandardStatementLoanAccount.rdl",
+    "items": 52,
+    "missingFields": []
+  },
+  {
+    "name": "StandardStatementLoans.rdl",
+    "items": 55,
+    "missingFields": []
+  },
+  {
+    "name": "Standing Order Sumarry.rdl",
+    "items": 20,
+    "missingFields": []
+  },
+  {
+    "name": "StandingOrder.rdl",
+    "items": 29,
+    "missingFields": []
+  },
+  {
+    "name": "StandingOrderDetailed.rdl",
+    "items": 26,
+    "missingFields": []
+  },
+  {
+    "name": "StandingOrderRegister.rdl",
+    "items": 66,
+    "missingFields": []
+  },
+  {
+    "name": "StatementLoans.rdl",
+    "items": 143,
+    "missingFields": []
+  },
+  {
+    "name": "StatementofAccountBanking.rdlc",
+    "items": 65,
+    "missingFields": []
+  },
+  {
+    "name": "StatementofAccountCredit.rdlc",
+    "items": 65,
+    "missingFields": []
+  },
+  {
+    "name": "StatementofAccountLoan.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "StatementofAccountLoanAc.rdlc",
+    "items": 69,
+    "missingFields": []
+  },
+  {
+    "name": "StatementofAccountRepayment.rdl",
+    "items": 42,
+    "missingFields": []
+  },
+  {
+    "name": "StockTakeVarianceReport.rdlc",
+    "items": 50,
+    "missingFields": []
+  },
+  {
+    "name": "StockTakingAdjustForm.rdlc",
+    "items": 39,
+    "missingFields": []
+  },
+  {
+    "name": "STORegister.rdl",
+    "items": 18,
+    "missingFields": []
+  },
+  {
+    "name": "STORegister1.rdl",
+    "items": 0,
+    "missingFields": []
+  },
+  {
+    "name": "TellerCHeqDepositSlip.rdl",
+    "items": 25,
+    "missingFields": []
+  },
+  {
+    "name": "TellerCheques.rdl",
+    "items": 76,
+    "missingFields": []
+  },
+  {
+    "name": "TellerDepositSlip.rdl",
+    "items": 25,
+    "missingFields": []
+  },
+  {
+    "name": "TellerTransactions.rdl",
+    "items": 29,
+    "missingFields": []
+  },
+  {
+    "name": "TellerWithdrawalSlip.rdl",
+    "items": 27,
+    "missingFields": []
+  },
+  {
+    "name": "Top10Borrowers&Savers.rdl",
+    "items": 54,
+    "missingFields": []
+  },
+  {
+    "name": "TreasuryCoinage.rdlc",
+    "items": 51,
+    "missingFields": []
+  },
+  {
+    "name": "UnclearedChequeReceipt.rdl",
+    "items": 71,
+    "missingFields": []
+  },
+  {
+    "name": "UnmarkedDefaulter.rdl",
+    "items": 12,
+    "missingFields": []
+  },
+  {
+    "name": "UserReviewsSummary.rdl",
+    "items": 20,
+    "missingFields": []
+  },
+  {
+    "name": "WithdrawnMembers.rdl",
+    "items": 24,
+    "missingFields": []
+  }
+]

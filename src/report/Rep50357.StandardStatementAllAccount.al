@@ -57,7 +57,7 @@ report 50357 "Standard Statement-All Account"
             dataitem("Account Banking"; "Account Banking")
             {
                 DataItemLink = "Member No." = field("No.");
-                DataItemTableView = where("Account Category" = filter(Junior | "Money Market" | "Specialty Savings" | "Islamic Banking"));
+                DataItemTableView = where("Loan Disbursement Account" = const(false));
                 column(BankingNo; "No.")
                 { }
                 column(BankingProduct_Type; "Product Type")
@@ -140,7 +140,7 @@ report 50357 "Standard Statement-All Account"
             dataitem("Account Credit"; "Account Credit")
             {
                 DataItemLink = "Member No." = field("No.");
-                DataItemTableView = where("Account Category" = filter("Shares Capital" | "Shares Deposit"));
+                DataItemTableView = where("Account Category" = filter("Shares Deposit" | "Shares Capital" | "Joint Savings" | "Registration Fee" | "Certificates of Deposit"));
                 column(AccNo; "No.")
                 { }
                 column(CredProduct_Type; "Product Type")

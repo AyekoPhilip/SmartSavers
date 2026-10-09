@@ -1,0 +1,18 @@
+Microsoft (R) AL Compiler version 18.0.43.1464
+Copyright (C) Microsoft Corporation. All rights reserved
+
+Compilation started for project 'SmartSaverDB' containing '1601' files at '15:52:40.949'.
+
+src\table\Tab50061.HRJobResponsibility.al(1,1): warning AL0789: Using directives are ignored if a namespace is not specified.
+src\table\Tab50062.HRJobs.al(1,1): warning AL0789: Using directives are ignored if a namespace is not specified.
+src\table\Tab50062.HRJobs.al(2,1): warning AL0789: Using directives are ignored if a namespace is not specified.
+src\table\Tab50065.HRSetup.al(1,1): warning AL0789: Using directives are ignored if a namespace is not specified.
+src\table\Tab50065.HRSetup.al(2,1): warning AL0789: Using directives are ignored if a namespace is not specified.
+src\report\Rep90002.DividendSlipPortal.al(12,32): warning AL0254: Sorting field 'Rcv Deposit Date' should be part of the keys for table 'Dividend Progression'. Add the field to a key definition to improve performance.
+src\report\Rep50059.PrPayrollSlipNew.al(48,37): warning AL0254: Sorting field 'Group Order' should be part of the keys for table 'Pr Period Transaction'. Add the field to a key definition to improve performance.
+src\tableextension\Tab-Ext50009.EmployeeTableExt.al(1,22): warning AL0915: Table extension 'EmployeeTableExt' adds 153 fields to table 'Employee'. Adding many fields in a single table extension might limit the ability of other extensions to add fields, as the total number of fields across a table and all its extensions cannot exceed the maximum number of columns allowed in SQL.
+src\table\Tab50489.InterestDuePeriod.al(38,46): warning AL0603: An implicit conversion is being performed from a value of type 'Enum Microsoft.Inventory.Costing."Average Cost Period Type"' to a value of type 'Option'. This conversion can lead to data loss and unexpected runtime issues.
+src\report\Rep50393.CreateTempAc.al(276,71): warning AL0603: An implicit conversion is being performed from a value of type 'Enum MemberStatus' to a value of type 'Option'. This conversion can lead to data loss and unexpected runtime issues.
+
+Compilation ended at '15:53:04.916'.
+
