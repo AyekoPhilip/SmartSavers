@@ -2,11 +2,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Your own server",
+            "name": "SmartSavers-Sacco",
             "request": "launch",
             "type": "al",
             "environmentType": "OnPrem",
             "server": "http://smartsavers-sacco.com/",
+            //"server": "https://smartsavers-sacco.com/SmartSaver/",
             "serverInstance": "Smartsaver",
             "authentication": "UserPassword",
             "port": 2049,
