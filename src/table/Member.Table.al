@@ -905,8 +905,8 @@ table 50361 "Member"
         
             trigger OnValidate()
             begin
-                if "Contract Expiry Date" < Today then Error('Expiry cannot be less than today');
-                TestField("Terms of Employment", "Terms of Employment"::Contract);
+                // if "Contract Expiry Date" < Today then Error('Expiry cannot be less than today');
+                // TestField("Terms of Employment", "Terms of Employment"::Contract);
             end;
         }
 

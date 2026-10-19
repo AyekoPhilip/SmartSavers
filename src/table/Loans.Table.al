@@ -1008,6 +1008,7 @@ table 50390 "Loans"
             OptionCaption = ' ,Individual Cheque,Multiple Cheque';
             OptionMembers = " ","Individual Cheque","Multiple Cheque";
             Caption = 'Cheque Options';
+            InitValue = "Individual Cheque";
             trigger OnValidate()
             var
 
@@ -1704,8 +1705,19 @@ table 50390 "Loans"
         "Interest Calculation Method" := LoanApplication."Interest Calculation Method";
     end;
 
+    procedure SetPostingChequeDetails()
+    begin
+        if "Cheque Option" = "Cheque Option"::" " then
+            "Cheque Option" := "Cheque Option"::"Individual Cheque";
+        if "Cheque Option" = "Cheque Option"::"Individual Cheque" then begin
+            TestField("No.");
+            // Loan numbers are posting references, not manually issued cheque numbers.
+            "Cheque No" := "No.";
+        end;
+    end;
     procedure fnTestFields()
     begin
+        SetPostingChequeDetails();
         TestField("Account No.");
         TestField("Product Type");
         TestField("Loan Account");

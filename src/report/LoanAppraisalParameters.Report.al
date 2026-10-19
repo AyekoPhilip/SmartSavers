@@ -160,7 +160,7 @@ report 50333 "Loan Appraisal Parameters"
             column(RelatedBalance_LoanAppraisalParameters; "Loan Appraisal Parameter"."Related Balance")
             {
             }
-            column(MaxCreditAvailable_LoanAppraisalParameters; "Loan Appraisal Parameter"."Max. Credit Available")
+            column(MaxCreditAvailable_LoanAppraisalParameters; "Loan Appraisal Parameter"."Deposit Mutiplier")
             {
             }
             column(TotalTopup_LoanAppraisalParameters; "Loan Appraisal Parameter"."Total Topup")
@@ -175,7 +175,7 @@ report 50333 "Loan Appraisal Parameters"
             column(AmountNetTakeHome_LoanAppraisalParameters; "Loan Appraisal Parameter"."Amount (Net Take Home)")
             {
             }
-            column(AmountTotalCharges_LoanAppraisalParameters; "Loan Appraisal Parameter"."Amount (Total Charges)")
+            column(AmountTotalCharges_LoanAppraisalParameters; "Amount (Total Charges)" - "TopUp Commission" + RefinanceCharges)
             {
             }
             column(SharesDeposits_LoanAppraisalParameters; "Loan Appraisal Parameter"."Shares Deposits")
@@ -223,7 +223,7 @@ report 50333 "Loan Appraisal Parameters"
             column(QualifyingAmount_LoanAppraisalParameters; "Loan Appraisal Parameter"."Qualifying Amount")
             {
             }
-            column(TopUpCommission_LoanAppraisalParameters; "Loan Appraisal Parameter"."TopUp Commission")
+            column(TopUpCommission_LoanAppraisalParameters; RefinanceCharges)
             {
             }
             column(ProductType_LoanAppraisalParameters; "Loan Appraisal Parameter"."Product Type")
@@ -543,7 +543,6 @@ report 50333 "Loan Appraisal Parameters"
                     FactoryProd: Record "Product Factory";
                 begin
                     ProdDescription := '';
-                    "Untransfered Interest" := Round("Untransfered Interest", 0.1, '=');
                     if FactoryProd.Get("Product Type") then
                         ProdDescription := FactoryProd.Description;
                     //if "Outstanding Principle" = 0 then ShowRefinedDetail := false else ShowRefinedDetail := true
@@ -628,61 +627,42 @@ report 50333 "Loan Appraisal Parameters"
                 trigger OnAfterGetRecord()
                 var
                     LoanApp: Record "Loan Application";
+                    NetChargeBase: Decimal;
                 begin
-
-                    LoanApp.Reset();
-                    LoanApp.SetRange("No.", "Application No.");
-                    if LoanApp.FindFirst() then begin
-                        LoanApp.CalcFields("Total TopUp", "Outstanding Total TopUp", "Total TopUp (Net)");
-                        if (LoanApp."Total TopUp" = 0) and ("Charge Code" = '00002') then CurrReport.Skip();
+                    // Saved refinance fees are emitted once below, not recalculated from product charges.
+                    if "Charge Type" in ["Charge Type"::"Top up", "Charge Type"::Restructure] then begin
+                        CurrReport.Skip();
+                        exit;
                     end;
-
-                    PChargeAmt := 0;
-
-                    if "Staggered Charge Code" = '' then begin
-
-                        if "Use Percentage" then begin
-                            case "Charge Type" of
-                                "Charge Type"::Restructure,
-                                    "Charge Type"::"Top up":
-                                    begin
-                                        PChargeAmt := (LoanApp."Total TopUp (Net)" * (Percentage / 100))
-                                    end;
-                                "Charge Type"::General:
-                                    begin
-                                        PChargeAmt := ("Loan Appraisal Parameter"."Amount Approved" * (Percentage / 100));
-                                    end;
-                                "Charge Type"::Boosting:
-                                    begin
-                                        PChargeAmt := ("Loan Appraisal Parameter"."Deposit Purchase" * (Percentage / 100));
-                                    end;
-                            end
-                        end else begin
-                            PChargeAmt := "Charge Amount";
-                        end;
-                    end else begin
-
-                        TransType.Reset();
-                        TransType.SetRange("Staggered Charge Code", "Staggered Charge Code");
-                        if TransType.FindFirst() then begin
-
-                            TieredChargeLine.Reset();
-                            TieredChargeLine.SetRange(code, TransType."Staggered Charge Code");
-                            if TieredChargeLine.FindSet() then begin
-                                repeat
-                                    if (LoanApp."Total TopUp (Net)" >= TieredChargeLine."Lower Limit") and (LoanApp."Total TopUp (Net)" <= TieredChargeLine."Upper Limit") then begin
-                                        if TieredChargeLine."Use Percentage" then begin
-                                            PChargeAmt := (LoanApp."Total TopUp (Net)" * (TieredChargeLine.Percentage / 100));
-                                        end else begin
-                                            PChargeAmt := TieredChargeLine."Charge Amount"
-                                        end;
-                                    end;
-                                until TieredChargeLine.Next() = 0;
-                            end;
-                        end;
+                    // Display the amount used in appraisal totals, including net-based tiers.
+                    if ("Charge Type" in ["Charge Type"::General, "Charge Type"::Boosting]) and ("Amount to Post" <> 0) then begin
+                        PChargeAmt := "Amount to Post";
+                        exit;
                     end;
+                    if LoanApp.Get("Application No.") then
+                        LoanApp.CalcFields("Total TopUp", "Total TopUp (Net)", "Total Liquidation");
+                    if (LoanApp."Total TopUp" = 0) and ("Charge Type" = "Charge Type"::"Top up") then begin
+                        CurrReport.Skip();
+                        exit;
+                    end;
+                    NetChargeBase := "Loan Appraisal Parameter"."Amount Approved" -
+                        ("Loan Appraisal Parameter"."Deposit Purchase" + LoanApp."Total TopUp" +
+                         LoanApp."Total Liquidation" + "Loan Appraisal Parameter"."Consolidated Loans(External)");
+                    PChargeAmt := LoanCharges.CalculateAppraisalAmount(
+                        "Loan Appraisal Parameter"."Amount Approved", NetChargeBase,
+                        LoanApp."Total TopUp (Net)", "Loan Appraisal Parameter"."Deposit Purchase");
+                end;
+            }
+            dataitem(RefinanceCharge; Integer)
+            {
+                DataItemTableView = sorting(Number) where(Number = const(1));
+                column(RefinanceChargeCode; 'REFINANCE') { }
+                column(RefinanceChargeAmount; RefinanceCharges) { }
 
-                    ///if PChargeAmt = 0 then ShowChargeDetails := false else ShowChargeDetails := true;
+                trigger OnPreDataItem()
+                begin
+                    if RefinanceCharges = 0 then
+                        CurrReport.Break();
                 end;
             }
             dataitem("Appraisal Salary Details"; "Appraisal Salary Details")
@@ -762,7 +742,14 @@ report 50333 "Loan Appraisal Parameters"
             }
 
             trigger OnAfterGetRecord()
+            var
+                RefinanceLine: Record "Loans Top up";
             begin
+                RefinanceLine.SetRange("No.", "No.");
+                RefinanceLine.SetRange("Account No.", "Account No.");
+                RefinanceLine.SetRange("Ignore Charges", false);
+                RefinanceLine.CalcSums(Commision);
+                RefinanceCharges := RefinanceLine.Commision;
                 PhoneNo := '';
                 PostCode := '';
                 EmployerName := '';
@@ -933,6 +920,7 @@ report 50333 "Loan Appraisal Parameters"
         ShowLoanNo: Boolean;
         LoanNo: Code[100];
         PChargeAmt: Decimal;
+        RefinanceCharges: Decimal;
         Segments: Record "Segment/County/Dividend/Signat";
         CustStation: Text[150];
         PostCode: Text[150];
@@ -957,8 +945,6 @@ report 50333 "Loan Appraisal Parameters"
         GeneralSetUp: Record "General Set-Up";
         RiskText002: Text[250];
         PhoneNo: Text[100];
-        TransType: Record "Transaction Charge";
-        TieredChargeLine: Record "Tiered Charges Line";
         EmployerName: Text[150];
         Employer: Record Customer;
         CustRecord: Record member;

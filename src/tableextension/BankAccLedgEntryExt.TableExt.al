@@ -25,7 +25,19 @@ tableextension 50003 "BankAccLedgEntryExt" extends "Bank Account Ledger Entry"
 
         }
     }
-}
+    procedure ResolveMemberNo()
+    var
+        Receipt: Record "Receipts Header";
+        Loan: Record Loans;
+    begin
+        if "Member No" <> '' then
+            exit;
+        if Receipt.Get("Document No.") then
+            "Member No" := Receipt."Member No."
+        else
+            if Loan.Get("Document No.") then
+                "Member No" := Loan."Account No.";
+    end;}
 
 
 

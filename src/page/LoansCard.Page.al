@@ -342,6 +342,7 @@ page 51027 "Loans Card"
                 }
                 field("Cheque No"; Rec."Cheque No")
                 {
+                    Visible = false;
                     ApplicationArea = All;
                     Style = StandardAccent;
                     StyleExpr = true;
@@ -1044,6 +1045,11 @@ page 51027 "Loans Card"
         LoanTopUp: Record "Loans Top up Posted";
     begin
         SetControlAppearance;
+        if (Rec."No." <> '') and (Rec."Cheque Option" = Rec."Cheque Option"::" ") and
+           (Rec."Approval Status" <> Rec."Approval Status"::Posted) then begin
+            Rec."Cheque Option" := Rec."Cheque Option"::"Individual Cheque";
+            Rec.Modify();
+        end;
 
         if ObjEmp.Get(Rec."Employer Code") then
             ObjName := UpperCase(ObjEmp.Name);
@@ -1064,13 +1070,7 @@ page 51027 "Loans Card"
 
         getApplicDetails(Rec."Application No.");
 
-        LoanTopUp.Reset();
-        LoanTopUp.SetRange("Loan No.", Rec."No.");
-        if LoanTopUp.FindSet() then begin
-            repeat
-                LoanTopUp.getAcruedInterest(Rec."No.");
-            until LoanTopUp.Next() = 0
-        end;
+        // Keep the approved top-up figures copied from the application.
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)

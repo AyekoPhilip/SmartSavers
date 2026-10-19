@@ -4,7 +4,7 @@ page 50829 "Loan Top Up"
     SourceTable = "Loans Top up";
     SourceTableView = where("Document Type" = const("Loan Topup"));
     ApplicationArea = All;
-    Editable =TRUE;
+    Editable = TRUE;
     layout
     {
         area(content)
@@ -27,7 +27,7 @@ page 50829 "Loan Top Up"
                 field("Product Type"; Rec."Product Type")
                 {
                     ApplicationArea = All;
-                    Editable = false;
+
                     Style = StandardAccent;
                     StyleExpr = true;
                 }
@@ -82,7 +82,8 @@ page 50829 "Loan Top Up"
                     Style = StandardAccent;
                     StyleExpr = true;
                     EDITABLE = TRUE;
-;                }
+                    ;
+                }
                 field(Commision; Rec.Commision)
                 {
                     ApplicationArea = All;
@@ -104,7 +105,7 @@ page 50829 "Loan Top Up"
                 }
                 field("No."; Rec."No.")
                 {
-                    Editable = false;
+
                     Style = StandardAccent;
                     StyleExpr = true;
                     Visible = false;
@@ -113,14 +114,14 @@ page 50829 "Loan Top Up"
                 }
                 field("Total Total Up"; Rec."Total Total Up")
                 {
-                    Editable = false;
+
                     Style = StandardAccent;
                     StyleExpr = true;
                     ApplicationArea = All;
                 }
                 field("Loan No."; Rec."Loan No.")
                 {
-                    Editable = false;
+
                     Style = StandardAccent;
                     StyleExpr = true;
                     Visible = false;

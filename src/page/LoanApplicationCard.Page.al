@@ -166,6 +166,7 @@ page 50818 "Loan Application Card"
                     Style = StandardAccent;
                     ShowMandatory = true;
                     StyleExpr = true;
+                    Visible = false;
                 }
                 field("Requested Amount"; Rec."Requested Amount")
                 {

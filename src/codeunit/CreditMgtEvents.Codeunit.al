@@ -1,5 +1,11 @@
 codeunit 50057 "CreditMgtEvents"
 {
+    [EventSubscriber(ObjectType::Table, Database::"Bank Account Ledger Entry", 'OnBeforeInsertEvent', '', false, false)]
+    local procedure SetBankLedgerMemberNo(var Rec: Record "Bank Account Ledger Entry"; RunTrigger: Boolean)
+    begin
+        Rec.ResolveMemberNo();
+    end;
+
 
     var
         GenJnlPostLine: Codeunit "Gen. Jnl.-Post Line";

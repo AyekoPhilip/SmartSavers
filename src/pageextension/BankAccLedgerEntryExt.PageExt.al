@@ -19,13 +19,7 @@ pageextension 50073 BankAccLedgerEntryExt extends "Bank Account Ledger Entries"
     trigger OnAfterGetRecord()
     begin
 
-        RecHeader.Reset();
-        RecHeader.SetRange("No.", Rec."Document No.");
-        if RecHeader.Find('-') then begin
-            Rec."Member No" := RecHeader."Member No.";
-        end else begin
-            Rec."Member No" := '';
-        end;
+        Rec.ResolveMemberNo();
     end;
 
     trigger OnAfterGetCurrRecord()
@@ -34,6 +28,4 @@ pageextension 50073 BankAccLedgerEntryExt extends "Bank Account Ledger Entries"
 
     end;
 
-    var
-        RecHeader: Record "Receipts Header";
 }

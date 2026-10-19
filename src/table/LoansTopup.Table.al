@@ -16,7 +16,7 @@ table 50403 "Loans Top up"
             TableRelation = Loans."No." where("Account No." = field("Account No."), "Outstanding Balance" = filter(> 0));
             Caption = 'Loan Top Up';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
 
@@ -35,7 +35,10 @@ table 50403 "Loans Top up"
                     LoanApp.TestField("Product Dimension", pfact."Product Dimension");
                 end;
 
-                CopyFromLoanEntries(Loans);
+                // Load balances only when selecting a different loan, not on appraisal/revalidation.
+                if ("Loan Top Up" <> xRec."Loan Top Up") or ("Product Type" = '') then
+                    CopyFromLoanEntries(Loans);
+                RecalculateTotals();
 
                 if ApplicLoan.Get("No.") then begin
                     ApplicLoan.TestField("Product Type");
@@ -85,14 +88,14 @@ table 50403 "Loans Top up"
         }
         field(50011; "Account No."; Code[20])
         {
-            Editable = false;
+            ;
             TableRelation = Member;
             Caption = 'Account No.';
             DataClassification = CustomerContent;
         }
         field(50012; "Product Type"; Code[20])
         {
-            Editable = false;
+            ;
             TableRelation = "Product Factory";
             Caption = 'Product Type';
             DataClassification = CustomerContent;
@@ -100,178 +103,187 @@ table 50403 "Loans Top up"
         field(50013; "Outstanding Principle"; Decimal)
         {
             Caption = 'Outstanding Principle';
-            Editable = false;
+            ;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
-
-                Gensetup.Get();
-
-                Loans.Reset();
-                Loans.SetRange("No.", "Loan Top Up");
-                if Loans.FindFirst() then begin
-                    Loans.CalcFields("Outstanding Balance", "Outstanding Principal");
-
-                    if "Outstanding Principle" > 0 then begin
-
-                        case Gensetup."Refinance Options" of
-                            Gensetup."Refinance Options"::"Partial Refinance":
-                                begin
-                                    if "Outstanding Principle" > Loans."Outstanding Principal" then
-                                        "Outstanding Principle" := Loans."Outstanding Principal";
-                                    "Total Outstanding Amount" := "Outstanding Principle" + "Untransfered Interest";
-                                    if not "Ignore Charges" then
-                                        "Total Total Up" := ("Total Outstanding Amount" + Commision + "Settlement Fee") else
-                                        "Total Total Up" := ("Total Outstanding Amount" + "Settlement Fee")
-                                end else begin
-                                if "Outstanding Principle" <> Loans."Outstanding Principal" then
-                                    "Outstanding Principle" := Loans."Outstanding Principal";
-                            end
-                        end
-                    end
-                end
+                RecalculateTotals();
             end;
         }
         field(50014; "Outstanding Interest"; Decimal)
         {
-            Editable = false;
+            ;
             Caption = 'Outstanding Interest';
             DataClassification = CustomerContent;
+            trigger OnValidate()
+            begin
+                RecalculateTotals();
+            end;
         }
         field(50015; "Total Outstanding Amount"; Decimal)
         {
             Editable = false;
+            ;
             Caption = 'Total Outstanding Amount';
             DataClassification = CustomerContent;
         }
         field(50016; "Outstanding Balance"; Decimal)
         {
-            Editable = false;
+            ;
             Caption = 'Outstanding Balance';
             DataClassification = CustomerContent;
         }
         field(50017; "Commision"; Decimal)
         {
-            Editable = false;
+            ;
             Caption = 'Fee & Charges';
             DataClassification = CustomerContent;
+            trigger OnValidate()
+            begin
+                RecalculateTotals();
+            end;
         }
         field(50018; "Outstanding Bill"; Decimal)
         {
-            Editable = false;
+            ;
             Caption = 'Outstanding Bill';
             DataClassification = CustomerContent;
+            trigger OnValidate()
+            begin
+                RecalculateTotals();
+            end;
         }
         field(50019; "Untransfered Interest"; Decimal)
         {
             Caption = 'Untransfered Interest';
-            Editable = false;
+            ;
             DataClassification = CustomerContent;
+            trigger OnValidate()
+            begin
+                RecalculateTotals();
+            end;
         }
         field(50020; "Outstanding Fee"; Decimal)
         {
             DataClassification = CustomerContent;
-            Editable = false;
+            ;
             Caption = 'Outstanding Fee';
+            trigger OnValidate()
+            begin
+                RecalculateTotals();
+            end;
         }
         field(50021; "Loan No."; Code[20])
         {
             DataClassification = CustomerContent;
             TableRelation = Loans;
-            Editable = false;
+            ;
             Caption = 'Loan No.';
         }
         field(50022; "Created By"; Code[100])
         {
             DataClassification = CustomerContent;
-            Editable = false;
+            ;
             TableRelation = "User Setup";
             Caption = 'Created By';
         }
         field(50023; "Date Created"; DateTime)
         {
             DataClassification = CustomerContent;
-            Editable = false;
+            ;
             Caption = 'Date Created';
         }
         field(50024; "Last Modified Date"; DateTime)
         {
             DataClassification = CustomerContent;
-            Editable = false;
+            ;
             Caption = 'Last Modified Date';
         }
         field(50025; "Last Modified By"; Code[100])
         {
             DataClassification = CustomerContent;
-            Editable = false;
+            ;
             TableRelation = "User Setup";
             Caption = 'Last Modified By';
         }
         field(50026; "Approval Status"; Enum "ApprovalStatus")
         {
             DataClassification = CustomerContent;
-            Editable = false;
+            ;
             Caption = 'Approval Status';
         }
         field(50027; "Monthly Repayment"; Decimal)
         {
             DataClassification = CustomerContent;
-            Editable = false;
+            ;
             Caption = 'Repayment';
         }
         field(50028; "Exclude From Related Balance"; Boolean)
         {
-            Editable = false;
+            ;
         }
         field(50029; "Ignore Related Balance"; Boolean)
         {
             DataClassification = CustomerContent;
             Caption = 'Ignore Related Balance';
-            Editable = false;
+            ;
         }
         field(50030; "Exclude Sacco Deduction"; Boolean)
         {
             DataClassification = CustomerContent;
-            Editable = false;
+            ;
         }
         field(50031; "Outstanding Insurance"; Decimal)
         {
-            Editable = false;
+            ;
             Caption = 'Outstanding Insurance';
             DataClassification = CustomerContent;
+            trigger OnValidate()
+            begin
+                RecalculateTotals();
+            end;
         }
         field(50032; "Total Total Up"; Decimal)
         {
             Editable = false;
+            ;
             DataClassification = CustomerContent;
         }
         field(50033; "Application Type"; Enum "LoanApplictionType")
         {
-            Editable = false;
+            ;
             Caption = 'Application Type';
             DataClassification = CustomerContent;
         }
         field(50034; "Settlement Fee"; Decimal)
         {
-            Editable = false;
+            ;
             DataClassification = CustomerContent;
+            trigger OnValidate()
+            begin
+                RecalculateTotals();
+            end;
         }
         field(50035; "Restructure Fee"; Decimal)
         {
-            Editable = false;
+            ;
             DataClassification = CustomerContent;
         }
         field(50036; "Ignore Charges"; Boolean)
         {
             DataClassification = CustomerContent;
-            Editable = false;
+            ;
+            trigger OnValidate()
+            begin
+                RecalculateTotals();
+            end;
         }
         field(50037; "Document Type"; Option)
         {
             DataClassification = CustomerContent;
             OptionMembers = "Loan Topup","Loan Liquidation";
-            Editable = false;
+            ;
         }
     }
     keys
@@ -279,7 +291,7 @@ table 50403 "Loans Top up"
         key("Key1"; "No.", "Loan Top Up", "Account No.")
         {
             Clustered = true;
-            SumIndexFields = "Total Outstanding Amount","Outstanding Principle";
+            SumIndexFields = "Total Outstanding Amount", "Outstanding Principle";
         }
         key("Key2"; "Outstanding Principle")
         {
@@ -324,6 +336,7 @@ table 50403 "Loans Top up"
 
     trigger OnInsert()
     begin
+        RecalculateTotals();
         "Date Created" := CurrentDateTime;
         "Created By" := UserId
     end;
@@ -331,6 +344,7 @@ table 50403 "Loans Top up"
     trigger OnModify()
     begin
         fnCheckValidRequirement("No.");
+        RecalculateTotals();
         "Last Modified Date" := CurrentDateTime;
         "Last Modified By" := UserId
     end;
@@ -379,6 +393,15 @@ table 50403 "Loans Top up"
         RegMngt.ComputeLoanCharges("Product Type", '', 0, "Total Outstanding Amount")
     end;
 
+    procedure RecalculateTotals()
+    begin
+        "Total Outstanding Amount" := "Outstanding Principle" + "Untransfered Interest" +
+            "Outstanding Interest" + "Outstanding Insurance" + "Outstanding Bill" + "Outstanding Fee";
+        "Outstanding Balance" := "Total Outstanding Amount";
+        "Total Total Up" := "Total Outstanding Amount" + "Settlement Fee";
+        if not "Ignore Charges" then
+            "Total Total Up" += Commision;
+    end;
     procedure CopyFromLoanEntries(Loans: Record Loans)
     var
         PLoan: Record Loans;
@@ -497,9 +520,7 @@ table 50403 "Loans Top up"
             until ApplicationCharge.Next() = 0;
         end;
 
-        if not "Ignore Charges" then
-            "Total Total Up" := ("Total Outstanding Amount" + Commision + "Settlement Fee" + Loans."Outstanding Interest") else
-            "Total Total Up" := ("Total Outstanding Amount" + "Settlement Fee" + Loans."Outstanding Interest")
+        RecalculateTotals();
     end;
 
     procedure fngetLoanAge(LoanNo: Code[100]): Integer

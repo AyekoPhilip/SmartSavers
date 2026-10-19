@@ -838,13 +838,7 @@ page 51038 "Loans"
             Rec.Modify(true);
         end;
 
-        LoanTopUp.Reset();
-        LoanTopUp.SetRange("Loan No.", Rec."No.");
-        if LoanTopUp.FindSet() then begin
-            repeat
-                LoanTopUp.getAcruedInterest(Rec."No.");
-            until LoanTopUp.Next() = 0
-        end;
+        // Keep the approved top-up figures copied from the application.
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)

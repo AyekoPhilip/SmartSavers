@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
-  <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>454f96c7-75dd-47b9-8267-631f00130a5e</rd:ReportID>
   <am:AuthoringMetadata>
     <am:CreatedBy>
       <am:Name>MSRB</am:Name>
@@ -9,18 +7,18 @@
     </am:CreatedBy>
     <am:UpdatedBy>
       <am:Name>MSRB</am:Name>
-      <am:Version>15.1.30001.02</am:Version>
+      <am:Version>15.0.20283.0</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-10-19T05:07:48.4187874Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-10-19T06:47:00.8327309Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
-      <rd:SecurityType>None</rd:SecurityType>
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString />
       </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>05db4a13-ca39-4ddf-af3c-1c19bd9af6b8</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -943,36 +941,6 @@
               <PaddingRight>2pt</PaddingRight>
             </Style>
           </Textbox>
-          <Textbox Name="AppraisalText37">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>="Outstanding Bal: " &amp; Format(First(Fields!RelatedBalance_LoanAppraisalParameters.Value, "DataSet_Result"), "#,##0.00")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>3.75382in</Top>
-            <Left>4.86498in</Left>
-            <Height>0.22in</Height>
-            <Width>2.4in</Width>
-            <ZIndex>31</ZIndex>
-            <Style>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
           <Textbox Name="AppraisalText38">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -996,7 +964,7 @@
             <Left>4.86498in</Left>
             <Height>0.22in</Height>
             <Width>2.4in</Width>
-            <ZIndex>32</ZIndex>
+            <ZIndex>31</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -1026,7 +994,7 @@
             <Left>4.86498in</Left>
             <Height>0.22in</Height>
             <Width>2.4in</Width>
-            <ZIndex>33</ZIndex>
+            <ZIndex>32</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -1056,7 +1024,7 @@
             <Left>4.86498in</Left>
             <Height>0.22in</Height>
             <Width>2.4in</Width>
-            <ZIndex>34</ZIndex>
+            <ZIndex>33</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -1086,7 +1054,7 @@
             <Left>4.86498in</Left>
             <Height>0.22in</Height>
             <Width>2.4in</Width>
-            <ZIndex>35</ZIndex>
+            <ZIndex>34</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -1117,9 +1085,9 @@
             <Left>0.06498in</Left>
             <Height>0.22in</Height>
             <Width>7.2in</Width>
-            <ZIndex>36</ZIndex>
+            <ZIndex>35</ZIndex>
             <Visibility>
-              <Hidden>=Not First(Fields!ShowChargeDetails.Value, "DataSet_Result")</Hidden>
+              <Hidden>=Not First(Fields!ShowChargeDetails.Value, "DataSet_Result") Or Sum(IIF(Len(Trim(Fields!ChargeCode_LoanCharges.Value &amp; Fields!RefinanceChargeCode.Value &amp; "")) &gt; 0, 1, 0), "DataSet_Result") = 0</Hidden>
             </Visibility>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
@@ -1150,7 +1118,7 @@
             <Left>0.06498in</Left>
             <Height>0.22in</Height>
             <Width>2.4in</Width>
-            <ZIndex>37</ZIndex>
+            <ZIndex>36</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -1180,7 +1148,7 @@
             <Left>0.06498in</Left>
             <Height>0.22in</Height>
             <Width>2.4in</Width>
-            <ZIndex>38</ZIndex>
+            <ZIndex>37</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -1210,7 +1178,7 @@
             <Left>0.06498in</Left>
             <Height>0.22in</Height>
             <Width>2.4in</Width>
-            <ZIndex>39</ZIndex>
+            <ZIndex>38</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -1240,37 +1208,7 @@
             <Left>0.06498in</Left>
             <Height>0.22in</Height>
             <Width>2.4in</Width>
-            <ZIndex>40</ZIndex>
-            <Style>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="AppraisalText23">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>="Sacco Consolidated Loan: " &amp; Format(First(Fields!Consolidated_Loans_Sacco_.Value, "DataSet_Result"), "#,##0.00")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>3.75382in</Top>
-            <Left>0.06498in</Left>
-            <Height>0.22in</Height>
-            <Width>2.4in</Width>
-            <ZIndex>41</ZIndex>
+            <ZIndex>39</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -1459,7 +1397,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ChargeCode_LoanCharges.Value</Value>
+                                  <Value>=Fields!ChargeCode_LoanCharges.Value &amp; Fields!RefinanceChargeCode.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -1487,7 +1425,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ChargeDescription_LoanCharges.Value</Value>
+                                  <Value>=IIF(Len(Fields!RefinanceChargeCode.Value &amp; "") &gt; 0, "Refinance charges", Fields!ChargeDescription_LoanCharges.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -1573,7 +1511,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PChargeAmt.Value</Value>
+                                  <Value>=IIF(Len(Fields!RefinanceChargeCode.Value &amp; "") &gt; 0, Fields!RefinanceChargeAmount.Value, Fields!PChargeAmt.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Format>#,##0.00</Format>
@@ -1725,7 +1663,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!PChargeAmt.Value)</Value>
+                                  <Value>=Sum(Fields!PChargeAmt.Value) + Sum(Fields!RefinanceChargeAmount.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1775,10 +1713,10 @@
             </TablixRowHierarchy>
             <Filters>
               <Filter>
-                <FilterExpression>=Fields!ChargeCode_LoanCharges.Value</FilterExpression>
-                <Operator>NotEqual</Operator>
+                <FilterExpression>=Len(Trim(Fields!ChargeCode_LoanCharges.Value &amp; Fields!RefinanceChargeCode.Value &amp; ""))</FilterExpression>
+                <Operator>GreaterThan</Operator>
                 <FilterValues>
-                  <FilterValue />
+                  <FilterValue DataType="Integer">0</FilterValue>
                 </FilterValues>
               </Filter>
             </Filters>
@@ -1786,9 +1724,9 @@
             <Left>0.06498in</Left>
             <Height>0.65146in</Height>
             <Width>7.2in</Width>
-            <ZIndex>42</ZIndex>
+            <ZIndex>40</ZIndex>
             <Visibility>
-              <Hidden>=Fields!ChargeDescription_LoanCharges.Value=""</Hidden>
+              <Hidden>=Not First(Fields!ShowChargeDetails.Value, "DataSet_Result") Or Sum(IIF(Len(Trim(Fields!ChargeCode_LoanCharges.Value &amp; Fields!RefinanceChargeCode.Value &amp; "")) &gt; 0, 1, 0), "DataSet_Result") = 0</Hidden>
             </Visibility>
             <Style>
               <TopBorder>
@@ -1821,9 +1759,9 @@
             <Left>0.06496in</Left>
             <Height>0.22in</Height>
             <Width>7.2in</Width>
-            <ZIndex>43</ZIndex>
+            <ZIndex>41</ZIndex>
             <Visibility>
-              <Hidden>=Not First(Fields!ShowRefinedDetail.Value, "DataSet_Result")</Hidden>
+              <Hidden>=Not First(Fields!ShowRefinedDetail.Value, "DataSet_Result") Or Sum(IIF(Len(Trim(Fields!LoanTopUp_LoanTopup.Value &amp; "")) &gt; 0, 1, 0), "DataSet_Result") = 0</Hidden>
             </Visibility>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
@@ -2421,10 +2359,10 @@
             </TablixRowHierarchy>
             <Filters>
               <Filter>
-                <FilterExpression>=Fields!LoanTopUp_LoanTopup.Value</FilterExpression>
-                <Operator>NotEqual</Operator>
+                <FilterExpression>=Len(Trim(Fields!LoanTopUp_LoanTopup.Value &amp; ""))</FilterExpression>
+                <Operator>GreaterThan</Operator>
                 <FilterValues>
-                  <FilterValue />
+                  <FilterValue DataType="Integer">0</FilterValue>
                 </FilterValues>
               </Filter>
             </Filters>
@@ -2432,9 +2370,9 @@
             <Left>0.06496in</Left>
             <Height>0.62542in</Height>
             <Width>7.2in</Width>
-            <ZIndex>44</ZIndex>
+            <ZIndex>42</ZIndex>
             <Visibility>
-              <Hidden>=Fields!ProductType_LoanTopup.Value=""</Hidden>
+              <Hidden>=Not First(Fields!ShowRefinedDetail.Value, "DataSet_Result") Or Sum(IIF(Len(Trim(Fields!LoanTopUp_LoanTopup.Value &amp; "")) &gt; 0, 1, 0), "DataSet_Result") = 0</Hidden>
             </Visibility>
             <Style>
               <TopBorder>
@@ -2799,7 +2737,7 @@
             <Left>0.06496in</Left>
             <Height>0.52in</Height>
             <Width>7.2in</Width>
-            <ZIndex>45</ZIndex>
+            <ZIndex>43</ZIndex>
             <Style>
               <TopBorder>
                 <Style>Solid</Style>
@@ -2830,7 +2768,7 @@
             <Left>0.06498in</Left>
             <Height>0.35in</Height>
             <Width>7.2in</Width>
-            <ZIndex>46</ZIndex>
+            <ZIndex>44</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -2860,7 +2798,7 @@
             <Left>0.06498in</Left>
             <Height>0.35in</Height>
             <Width>7.2in</Width>
-            <ZIndex>47</ZIndex>
+            <ZIndex>45</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -2890,7 +2828,7 @@
             <Left>0.06498in</Left>
             <Height>0.35in</Height>
             <Width>7.2in</Width>
-            <ZIndex>48</ZIndex>
+            <ZIndex>46</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -2920,7 +2858,7 @@
             <Left>0.06498in</Left>
             <Height>0.35in</Height>
             <Width>7.2in</Width>
-            <ZIndex>49</ZIndex>
+            <ZIndex>47</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -2950,7 +2888,7 @@
             <Left>0.06498in</Left>
             <Height>0.35in</Height>
             <Width>7.2in</Width>
-            <ZIndex>50</ZIndex>
+            <ZIndex>48</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -2980,7 +2918,7 @@
             <Left>0.06498in</Left>
             <Height>0.35in</Height>
             <Width>7.2in</Width>
-            <ZIndex>51</ZIndex>
+            <ZIndex>49</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -3010,7 +2948,7 @@
             <Left>0.06498in</Left>
             <Height>0.35in</Height>
             <Width>7.2in</Width>
-            <ZIndex>52</ZIndex>
+            <ZIndex>50</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -3041,7 +2979,7 @@
             <Left>0.76496in</Left>
             <Height>0.25in</Height>
             <Width>2.5in</Width>
-            <ZIndex>53</ZIndex>
+            <ZIndex>51</ZIndex>
             <Style>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
@@ -3055,11 +2993,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>="Date Printed: " &amp; Format(Globals!ExecutionTime, "dd/MM/yyyy HH:mm")</Value>
+                    <Value>Date Printed: </Value>
                     <Style>
                       <FontStyle>Italic</FontStyle>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>8pt</FontSize>
+                      <Format>ddd dd-MM-yyyy   HH:mm:ss</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Globals!ExecutionTime</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Format>ddd dd-MM-yyyy   HH:mm:ss</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3072,511 +3020,18 @@
             <Left>4.16498in</Left>
             <Height>0.25in</Height>
             <Width>3.1in</Width>
-            <ZIndex>54</ZIndex>
-            <Style>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="ParameterNotice0">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!ReferenceText.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>10.25798in</Top>
-            <Left>0.01498in</Left>
-            <Height>0.35in</Height>
-            <Width>7.25in</Width>
-            <ZIndex>55</ZIndex>
-            <Style>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="ParameterNotice1">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!WarningsTxtThirdRule.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>10.55798in</Top>
-            <Left>0.01498in</Left>
-            <Height>0.35in</Height>
-            <Width>7.25in</Width>
-            <ZIndex>56</ZIndex>
-            <Style>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="ParameterNotice2">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!WarningsTxtSecurity.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>10.85798in</Top>
-            <Left>0.01498in</Left>
-            <Height>0.35in</Height>
-            <Width>7.25in</Width>
-            <ZIndex>57</ZIndex>
-            <Style>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Tablix Name="Tablix8">
-            <TablixBody>
-              <TablixColumns>
-                <TablixColumn>
-                  <Width>0.78121in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>3.90765in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.30146in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.27467in</Width>
-                </TablixColumn>
-              </TablixColumns>
-              <TablixRows>
-                <TablixRow>
-                  <Height>0.22126in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox87">
-                          <rd:DefaultName>Textbox87</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Payslip Analysis</Value>
-                                  <Style>
-                                    <FontFamily>Segoe UI Semilight</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <TopBorder>
-                              <Style>Solid</Style>
-                            </TopBorder>
-                            <BackgroundColor>White</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <ColSpan>4</ColSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
-                  <Height>0.23399in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox68">
-                          <rd:DefaultName>Textbox68</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Code</Value>
-                                  <Style>
-                                    <FontFamily>Segoe UI Semilight</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>DimGray</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox72">
-                          <rd:DefaultName>Textbox72</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Description</Value>
-                                  <Style>
-                                    <FontFamily>Segoe UI Semilight</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>DimGray</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox78">
-                          <rd:DefaultName>Textbox78</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Type</Value>
-                                  <Style>
-                                    <FontFamily>Segoe UI Semilight</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>DimGray</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox80">
-                          <rd:DefaultName>Textbox80</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Amount</Value>
-                                  <Style>
-                                    <FontFamily>Segoe UI Semilight</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>DimGray</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
-                  <Height>0.23399in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Code_AppraisalSalaryDetails">
-                          <rd:DefaultName>Code_AppraisalSalaryDetails</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Code_AppraisalSalaryDetails.Value</Value>
-                                  <Style>
-                                    <FontFamily>Segoe UI Semilight</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>DimGray</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Description_AppraisalSalaryDetails">
-                          <rd:DefaultName>Description_AppraisalSalaryDetails</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Description_AppraisalSalaryDetails.Value</Value>
-                                  <Style>
-                                    <FontFamily>Segoe UI Semilight</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>DimGray</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Type_AppraisalSalaryDetails">
-                          <rd:DefaultName>Type_AppraisalSalaryDetails</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Type_AppraisalSalaryDetails.Value</Value>
-                                  <Style>
-                                    <FontFamily>Segoe UI Semilight</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>DimGray</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Amount_AppraisalSalaryDetails">
-                          <rd:DefaultName>Amount_AppraisalSalaryDetails</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Amount_AppraisalSalaryDetails.Value</Value>
-                                  <Style>
-                                    <FontFamily>Segoe UI Semilight</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <Format>n2</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>DimGray</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-              </TablixRows>
-            </TablixBody>
-            <TablixColumnHierarchy>
-              <TablixMembers>
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-              </TablixMembers>
-            </TablixColumnHierarchy>
-            <TablixRowHierarchy>
-              <TablixMembers>
-                <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <Group Name="Details4" />
-                </TablixMember>
-              </TablixMembers>
-            </TablixRowHierarchy>
-            <Filters>
-              <Filter>
-                <FilterExpression>=Fields!Code_AppraisalSalaryDetails.Value</FilterExpression>
-                <Operator>GreaterThan</Operator>
-                <FilterValues>
-                  <FilterValue>0</FilterValue>
-                </FilterValues>
-              </Filter>
-            </Filters>
-            <Top>11.27743in</Top>
-            <Height>0.68924in</Height>
-            <Width>7.26499in</Width>
-            <ZIndex>58</ZIndex>
-            <Visibility>
-              <Hidden>=Fields!ShowSalaryDetails.Value=FALSE</Hidden>
-            </Visibility>
+            <ZIndex>52</ZIndex>
             <Style>
               <Border>
-                <Color>DimGray</Color>
                 <Style>None</Style>
               </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
             </Style>
-          </Tablix>
+          </Textbox>
         </ReportItems>
-        <Height>30.39534cm</Height>
+        <Height>26.16201cm</Height>
         <Style />
       </Body>
       <Width>18.45307cm</Width>
@@ -3628,6 +3083,8 @@
     </ReportSection>
   </ReportSections>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>454f96c7-75dd-47b9-8267-631f00130a5e</rd:ReportID>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
@@ -4605,6 +4062,15 @@
         </Field>
         <Field Name="EffectExciseDuty_LoanCharges">
           <DataField>EffectExciseDuty_LoanCharges</DataField>
+        </Field>
+        <Field Name="RefinanceChargeCode">
+          <DataField>RefinanceChargeCode</DataField>
+        </Field>
+        <Field Name="RefinanceChargeAmount">
+          <DataField>RefinanceChargeAmount</DataField>
+        </Field>
+        <Field Name="RefinanceChargeAmountFormat">
+          <DataField>RefinanceChargeAmountFormat</DataField>
         </Field>
         <Field Name="ClientCode_AppraisalSalaryDetails">
           <DataField>ClientCode_AppraisalSalaryDetails</DataField>

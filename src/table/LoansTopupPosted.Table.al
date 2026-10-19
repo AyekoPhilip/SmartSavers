@@ -328,9 +328,16 @@ table 50559 "Loans Top up Posted"
             "Total Total Up" := ("Total Outstanding Amount" + "Settlement Fee" + Loans."Outstanding Interest")
     end;
 
+    procedure GetPayableCommission(): Decimal
+    begin
+        if "Ignore Charges" then
+            exit(0);
+        exit(Commision);
+    end;
     procedure CopyFromLoansTopup(LoansTopup: Record "Loans Top up")
 
     begin
+        LoansTopup.RecalculateTotals();
         "Product Type" := LoansTopup."Product Type";
         "Outstanding Principle" := LoansTopup."Outstanding Principle";
         "Outstanding Interest" := LoansTopup."Outstanding Interest";
@@ -339,7 +346,9 @@ table 50559 "Loans Top up Posted"
         Commision := LoansTopup.Commision;
         "Settlement Fee" := LoansTopup."Settlement Fee";
         "Untransfered Interest" := LoansTopup."Untransfered Interest";
-        "Outstanding Bill" := LoansTopup."Outstanding Balance";
+        "Outstanding Bill" := LoansTopup."Outstanding Bill";
+        "Outstanding Insurance" := LoansTopup."Outstanding Insurance";
+        "Total Outstanding Amount" := LoansTopup."Total Outstanding Amount";
         "Outstanding Fee" := LoansTopup."Outstanding Fee";
         "Total Total Up" := LoansTopup."Total Total Up";
         "Application Type" := LoansTopup."Application Type";

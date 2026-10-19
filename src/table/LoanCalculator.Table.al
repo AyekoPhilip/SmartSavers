@@ -10,11 +10,11 @@ table 50592 "Loan Calculator"
             Editable = false;
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
-                
+
             end;
         }
         field(50010; "Application Date"; Date)
@@ -29,7 +29,7 @@ table 50592 "Loan Calculator"
                                                                   Status = CONST(Active), "Responsibility Centre" = field("Responsibility Centre"));
             Caption = 'Product Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 CustEmp: Record Customer;
@@ -51,7 +51,7 @@ table 50592 "Loan Calculator"
             TableRelation = Member."No." where(Status = filter(Active), "Global Dimension 1 Code" = field("Global Dimension 1 Code"));
             Caption = 'Account No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ObjCust: Record Member;
@@ -81,7 +81,7 @@ table 50592 "Loan Calculator"
         {
             Caption = 'Requested Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Requested Amount" <> 0 then
@@ -92,7 +92,7 @@ table 50592 "Loan Calculator"
         {
             Caption = 'Approved Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 RSchedule: Record "Schedule of Loan Payment";
@@ -108,7 +108,7 @@ table 50592 "Loan Calculator"
             Editable = false;
             Caption = 'Interest Rate';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Product Type");
@@ -136,7 +136,7 @@ table 50592 "Loan Calculator"
         {
             Caption = 'Installments';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ErrorOnMaxThreshTxt: Label 'Member due to retire before loan repayment is complete. Do you wish to continue?';
@@ -169,7 +169,7 @@ table 50592 "Loan Calculator"
         {
             Caption = 'Disbursement Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ErrorDisbDate: Label 'Disbursement Date cannot be less than today';
@@ -352,7 +352,7 @@ table 50592 "Loan Calculator"
             Caption = 'Repayment Frequency';
             Editable = false;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 fnValidateFrequencyRepay("Repayment Frequency")
@@ -363,7 +363,7 @@ table 50592 "Loan Calculator"
             Editable = false;
             Caption = 'Approval Status';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 appStatus: Enum ApprovalStatus;
@@ -438,7 +438,7 @@ table 50592 "Loan Calculator"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Global Dimension 1 Code")
@@ -451,7 +451,7 @@ table 50592 "Loan Calculator"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Global Dimension 2 Code");
@@ -477,7 +477,7 @@ table 50592 "Loan Calculator"
             if ("Loan Payment Destination" = filter("Bank Account" | Supplier)) "EFT Transfer Header" where("Approval Status" = filter(Approved));
             Caption = 'Batch No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Approval Status", "Approval Status"::Approved);
@@ -488,7 +488,7 @@ table 50592 "Loan Calculator"
             Editable = false;
             Caption = 'Self Guarantee';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PFacts: Record "Product Factory";
@@ -532,7 +532,7 @@ table 50592 "Loan Calculator"
                                                            Created = CONST(false), "Approval Status" = FILTER(Open | Deffered));
             Caption = 'CRM Application No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 AttachCrmApplicationNo
@@ -565,7 +565,7 @@ table 50592 "Loan Calculator"
         {
             Caption = 'Deposit Purchase';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PFactory: Record "General Set-Up";
@@ -714,7 +714,7 @@ table 50592 "Loan Calculator"
         field(50096; "Comments"; Text[250])
         {
             Caption = 'Comment Line';
-        
+
             trigger OnValidate()
             begin
                 "Comment Date" := Today;
@@ -768,7 +768,7 @@ table 50592 "Loan Calculator"
         {
             DataClassification = CustomerContent;
             Caption = 'Account Dimension';
-        
+
             trigger OnValidate()
             begin
                 "Deposit Purchase Account" := '';
@@ -791,7 +791,7 @@ table 50592 "Loan Calculator"
             if ("Loan Payment Destination" = const(Supplier)) Vendor where("Account Type" = filter(<> Banking));
             DataClassification = CustomerContent;
             Caption = 'Payment Destination A/c';
-        
+
             trigger OnValidate()
             begin
 
@@ -804,7 +804,7 @@ table 50592 "Loan Calculator"
             if ("Loan Payment Destination" = const(Supplier)) Vendor where("Account Type" = filter(<> Banking));
             DataClassification = CustomerContent;
             Caption = 'Pay Point';
-        
+
             trigger OnValidate()
             var
                 AccBanking: Record "Account Banking";
@@ -830,7 +830,7 @@ table 50592 "Loan Calculator"
         field(50111; "Contract End Date"; Date)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Contract End Date" <= Today then
@@ -840,7 +840,7 @@ table 50592 "Loan Calculator"
         field(50112; "Old Loan No."; Code[100])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -850,7 +850,7 @@ table 50592 "Loan Calculator"
         {
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             begin
 
@@ -874,7 +874,7 @@ table 50592 "Loan Calculator"
         field(50117; "EFT Options"; Enum "EFTPaymentOptions")
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ProdFac.Get("Product Type");
@@ -977,7 +977,7 @@ table 50592 "Loan Calculator"
         end;
     end;
 
-    
+
     local procedure TestNoSeries()
     var
         RecRefHeader: Record "Loan Calculator";
@@ -1276,7 +1276,7 @@ table 50592 "Loan Calculator"
         ErrorOnNoBalTxt: Label 'Member does not have school fees savings balance';
         ErrorMembRegistrationDateTxt: Label 'Member has not met the minimum threshhold of %1 to qualify for loan application.';
     begin
-        
+
         GeneralSetUp.Get();
         if ProductFactory.Get("Product Type") then begin
 
@@ -1472,7 +1472,7 @@ table 50592 "Loan Calculator"
         end;
 
         //if fncheckMinLoanApplicationPeriod(Cust."No.") then
-         //   Error(ErrorOnMinPeriodTxt, ProdFact."Min. Re-application Period");
+        //   Error(ErrorOnMinPeriodTxt, ProdFact."Min. Re-application Period");
 
         ProdFact.fnCheckMinRequirements();
         //ProdFact.CheckBlockedProdOnJnls(ProdFact, ProdFact.Status, false);
@@ -1494,7 +1494,7 @@ table 50592 "Loan Calculator"
             if NoSeriesMgt.AreRelated(PFact.Minutes, xRec."Minutes No. Series") then
                 "No. Series" := xRec."Minutes No. Series";
             "No." := NoSeriesMgt.GetNextNo("Minutes No. Series");
-            
+
         end;
 
     end;
@@ -1948,8 +1948,8 @@ table 50592 "Loan Calculator"
                 end
         end;
         case Frequency of
-            
-            Frequency::Daily :
+
+            Frequency::Daily:
                 begin
                     if xRec.Installments < 12 then begin
                         if xRec."Repayment Frequency" = xRec."Repayment Frequency"::Monthly then
@@ -2120,7 +2120,7 @@ table 50592 "Loan Calculator"
         RegMngt.GetOperationAccBalanceTxt(ProdtCategory::"Shares Deposit", "Account No.", 2);
 
         TestField(Remarks);
-        TestField("Terms of Employment");
+        //TestField("Terms of Employment");
         if "Terms of Employment" = "Terms of Employment"::Contract then
             TestField("Contract End Date");
 
@@ -2523,15 +2523,15 @@ table 50592 "Loan Calculator"
         ErrorOnExistingLoanApplicationTxt: Label 'Member already has an existing outstanding facility running. Kindly Revolve and continue. %1 loan: %2 - %3.';
         LoanApp: Record Loans;
     begin
-        LoanApp.Reset();
-        LoanApp.SetRange("Account No.", Rec."Account No.");
-        LoanApp.SetRange("Product Type", Rec."Product Type");
-        LoanApp.SetFilter("Outstanding Balance", '>0');
-        if LoanApp.Find('-') then begin
-            LoanApp.CalcFields("Outstanding Balance");
-            if LoanApp."No." <> Rec."No." then
-                Error(ErrorOnExistingLoanApplicationTxt, LoanApp."Product Description", "Loan Account", LoanApp."No.");
-        end;
+        // LoanApp.Reset();
+        // LoanApp.SetRange("Account No.", Rec."Account No.");
+        // LoanApp.SetRange("Product Type", Rec."Product Type");
+        // LoanApp.SetFilter("Outstanding Balance", '>0');
+        // if LoanApp.Find('-') then begin
+        //     LoanApp.CalcFields("Outstanding Balance");
+        //     if LoanApp."No." <> Rec."No." then
+        //         Error(ErrorOnExistingLoanApplicationTxt, LoanApp."Product Description", "Loan Account", LoanApp."No.");
+        // end;
     end;
 
     procedure getMaxInstallmentPeriod(PeriodTxt: Integer): Integer
@@ -2550,8 +2550,8 @@ table 50592 "Loan Calculator"
         case PeriodTxt of
             0:
                 begin
-                    if CustRecord.Get("Account No.") then
-                        CustRecord.TestField("Terms of Employment");
+                    // if CustRecord.Get("Account No.") then
+                    //     CustRecord.TestField("Terms of Employment");
                     CustRecord.TestField("Date of Birth");
                     CustRecord.TestField("Member Category");
                     CustRecord.TestField("Member Segment");

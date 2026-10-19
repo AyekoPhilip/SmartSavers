@@ -86,6 +86,7 @@ codeunit 50035 "CSC Appraisal Parameters"
         TotAmtGuarant: Decimal;
         LoanType: Record "Product Factory";
         ChargeAmt: Decimal;
+        LineChargeAmt: Decimal;
         LoanNetAmount: Decimal;
         QualifyingDivAmt: Decimal;
         Varvariant: Variant;
@@ -157,6 +158,12 @@ codeunit 50035 "CSC Appraisal Parameters"
         LoanP: Record Loans;
 
     begin
+        // Rebuild appraisal details without losing the amounts on subsequent prints.
+        if not RecRef."Adjust Approved Amount" then begin
+            RecRef."Recommended Amount" := RecRef."Requested Amount";
+            RecRef.Validate("Approved Amount", RecRef."Requested Amount");
+        end;
+
         Initialize(RecRef);
 
         GeneralSetUp.Get();
@@ -206,21 +213,15 @@ codeunit 50035 "CSC Appraisal Parameters"
         SecurityWarning := false;
         ThirdWarning := false;
 
+        LoansTopUp.Reset();
+        LoansTopUp.SetRange("No.", RecRef."No.");
+        LoansTopUp.SetRange("Account No.", RecRef."Account No.");
+        if LoansTopUp.FindSet() then
+            repeat
+                LoansTopUp.RecalculateTotals();
+                LoansTopUp.Modify(true);
+            until LoansTopUp.Next() = 0;
         RecRef.CalcFields("Total TopUp", "Total TopUp (Net)");
-
-        if RecRef."Total TopUp" > 0 then begin
-
-            LoansTopUp.Reset();
-            LoansTopUp.SetRange("No.", RecRef."No.");
-            LoansTopUp.SetRange("Account No.", RecRef."Account No.");
-            if LoansTopup.FindSet() then begin
-                repeat
-                    LoansTopUp.Validate("Loan Top Up");
-                    LoansTopUp.Modify(true)
-                until LoansTopUp.Next() = 0
-            end;
-        end;
-
         case RecRef."Application Type" of RecRef."Application Type"::"Loan Restructure":
                 begin
 
@@ -924,7 +925,7 @@ codeunit 50035 "CSC Appraisal Parameters"
         if MaxAvailable < 0 then
             MaxAvailable := 0;
 
-        AppraisalParameter."Max. Credit Available" := MaxAvailable;
+        AppraisalParameter."Max. Credit Available" := DepositMultiplier;
         AppraisalParameter."Total (Basic)" := TBasic;
         AppraisalParameter."Total (Allowance)" := TAllowance;
         AppraisalParameter."Total (Deductions)" := TDeductions;
@@ -1199,72 +1200,38 @@ codeunit 50035 "CSC Appraisal Parameters"
         end;
 
 
-        if not RecRef."Adjust Approved Amount" then begin
-
-            case RecRef."Application Type" of
-                RecRef."Application Type"::Normal:
-                    RecRef."Recommended Amount" := Round(QualifyingAmount, 0.5, '<');
-                RecRef."Application Type"::"Loan Restructure":
-                    RecRef."Recommended Amount" := QualifyingAmount;
-            end;
-
-            if RecRef."Recommended Amount" < 0 then
-                RecRef."Recommended Amount" := 0;
-
-            if RecRef."Application Type" = RecRef."Application Type"::Normal then
-                if RecRef."Total TopUp" > RecRef."Recommended Amount" then
-                    RecRef."Recommended Amount" := 0;
-
-            RecRef."Approved Amount" := RecRef."Recommended Amount";
-            RecRef."Amount to Disburse" := RecRef."Recommended Amount";
-            AppraisalParameter."Qualification (Salary)" := LoanNetAmount;
-            AppraisalParameter."Qualification (Security)" := TotAmtGuarant;
-            AppraisalParameter."Qualification (Shares)" := DepositMultiplier;
-            AppraisalParameter."Qualification (Business)" := QualPerBusiness;
-            AppraisalParameter."Amount (Recommended)" := RecRef."Recommended Amount";
-            AppraisalParameter."Qualifying Amount" := QualifyingAmount;
-
-        end else begin
-
-            if RecRef."Recommended Amount" < 0 then
-                RecRef."Recommended Amount" := 0;
-
-            if RecRef."Total TopUp" > RecRef."Recommended Amount" then
-                RecRef."Recommended Amount" := 0;
-
-            RecRef."Approved Amount" := RecRef."Recommended Amount";
-            RecRef."Amount to Disburse" := RecRef."Recommended Amount";
-            AppraisalParameter."Qualification (Salary)" := LoanNetAmount;
-            AppraisalParameter."Qualification (Security)" := TotAmtGuarant;
-            AppraisalParameter."Qualification (Shares)" := DepositMultiplier;
-            AppraisalParameter."Amount (Recommended)" := RecRef."Recommended Amount";
-            AppraisalParameter."Qualifying Amount" := QualifyingAmount;
-
-        end;
-
+        // Qualification is informational; requested/adjusted amounts remain unchanged.
+        AppraisalParameter."Qualification (Salary)" := LoanNetAmount;
+        AppraisalParameter."Qualification (Security)" := TotAmtGuarant;
+        AppraisalParameter."Qualification (Shares)" := DepositMultiplier;
+        AppraisalParameter."Qualification (Business)" := QualPerBusiness;
+        AppraisalParameter."Amount (Recommended)" := RecRef."Recommended Amount";
+        AppraisalParameter."Qualifying Amount" := QualifyingAmount;
         LoanAppcharges.Reset;
         LoanAppcharges.SetRange("Post Charge", true);
         LoanAppcharges.SetRange("Application No.", RecRef."No.");
         LoanAppcharges.SetRange("Product Code", RecRef."Product Type");
         LoanAppcharges.SetRange("Charge Type", LoanAppcharges."Charge Type"::General);
+        LoanAppcharges.SetFilter("Charging Option", '<>%1', LoanAppcharges."Charging Option"::"On Net Amount");
         if LoanAppcharges.Find('-') then begin
             repeat
 
-                if LoanAppcharges."Use Percentage" then begin
-                    LoanAppcharges.TestField(Percentage);
-                    ChargeAmt := (ChargeAmt + (RecRef."Approved Amount" * (LoanAppcharges.Percentage / 100)));
-                end else begin
-                    // LoanAppcharges.TestField("Charge Amount");
-                    ChargeAmt := (ChargeAmt + LoanAppcharges."Charge Amount")
-                end;
+                RecRef.CalcFields("Total TopUp", "Total TopUp (Net)", "Total Liquidation");
+                NetOnChargeAmt := RecRef."Approved Amount" - (RecRef."Deposit Purchase" +
+                    RecRef."Total TopUp" + RecRef."Total Liquidation" + AppraisalParameter."Consolidated Loans(External)");
+                LineChargeAmt := LoanAppcharges.CalculateAppraisalAmount(RecRef."Approved Amount",
+                    NetOnChargeAmt, RecRef."Total TopUp (Net)", RecRef."Deposit Purchase");
+                LoanAppcharges."Amount to Post" := LineChargeAmt;
+                LoanAppcharges.Modify();
+                ChargeAmt += LineChargeAmt;
 
-                if LoanAppcharges."Effect Excise Duty" = LoanAppcharges."Effect Excise Duty"::Yes then begin
-                    ExciseDuty := (ExciseDuty + (ChargeAmt * GeneralSetUp."Excise Duty (%)" / 100));
-                end;
+                if LoanAppcharges."Effect Excise Duty" = LoanAppcharges."Effect Excise Duty"::Yes then
+                    ExciseDuty += LineChargeAmt * GeneralSetUp."Excise Duty (%)" / 100;
             until LoanAppcharges.Next = 0;
         end;
 
         Amts[1] := ExciseDuty;
+        ExciseDuty := 0;
 
         if RecRef."Deposit Purchase" > 0 then begin
             LoanAppcharges.Reset;
@@ -1272,16 +1239,13 @@ codeunit 50035 "CSC Appraisal Parameters"
             LoanAppcharges.SetRange("Charge Type", LoanAppcharges."Charge Type"::Boosting);
             if LoanAppcharges.FindSet then begin
                 repeat
-                    if LoanAppcharges."Use Percentage" then begin
-                        LoanAppcharges.TestField(Percentage);
-                        BoostAmt := Round((BoostAmt + (RecRef."Deposit Purchase" * (LoanAppcharges.Percentage / 100))), 0.5, '=');
-                    end else begin
-                  //      LoanAppcharges.TestField("Charge Amount");
-                        BoostAmt := (BoostAmt + LoanAppcharges."Charge Amount")
-                    end;
-                    if LoanAppcharges."Effect Excise Duty" = LoanAppcharges."Effect Excise Duty"::Yes then begin
-                        ExciseDuty := Round((ExciseDuty + (BoostAmt * GeneralSetUp."Excise Duty (%)" / 100)), 0.5, '=');
-                    end;
+                    LineChargeAmt := LoanAppcharges.CalculateAppraisalAmount(RecRef."Approved Amount",
+                        NetOnChargeAmt, RecRef."Total TopUp (Net)", RecRef."Deposit Purchase");
+                    LoanAppcharges."Amount to Post" := LineChargeAmt;
+                    LoanAppcharges.Modify();
+                    BoostAmt += LineChargeAmt;
+                    if LoanAppcharges."Effect Excise Duty" = LoanAppcharges."Effect Excise Duty"::Yes then
+                        ExciseDuty += LineChargeAmt * GeneralSetUp."Excise Duty (%)" / 100;
                 until LoanAppcharges.Next = 0;
             end;
         end;
@@ -1289,29 +1253,42 @@ codeunit 50035 "CSC Appraisal Parameters"
         Amts[2] := ExciseDuty;
         RecRef.CalcFields("Outstanding Total TopUp", "Total TopUp (Net)");
 
-        if RecRef."Total TopUp" > 0 then begin
-
-            LoansTopUp.Reset();
-            LoansTopUp.SetRange("No.", RecRef."No.");
-            LoansTopUp.SetRange("Ignore Charges", false);
-            LoansTopUp.SetRange("Account No.", RecRef."Account No.");
-            if LoansTopUp.FindSet() then begin
-                repeat
-                    LoansTopUp.TestField(Commision);
-                    TopUpComms := (TopUpComms + LoansTopUp.Commision);
-                until LoansTopUp.Next() = 0;
-            end;
-        end else begin
-            TopUpComms := 0
-        end;
-
-        Amts[3] := ExciseDuty;
+        // Refinance fees are the saved user amounts; Ignore Charges excludes them.
+        LoansTopUp.Reset();
+        LoansTopUp.SetRange("No.", RecRef."No.");
+        LoansTopUp.SetRange("Account No.", RecRef."Account No.");
+        LoansTopUp.SetRange("Ignore Charges", false);
+        LoansTopUp.CalcSums(Commision);
+        TopUpComms := LoansTopUp.Commision;
+        // Processing charges on net use take-home after other fees, before themselves.
+        // Excise has already been assigned to the general and boosting groups.
+        Amts[3] := 0;
+        RecRef.CalcFields("Total TopUp", "Total TopUp (Net)", "Total Liquidation");
+        LoanAppcharges.Reset();
+        LoanAppcharges.SetRange("Application No.", RecRef."No.");
+        LoanAppcharges.SetRange("Product Code", RecRef."Product Type");
+        LoanAppcharges.SetRange("Post Charge", true);
+        LoanAppcharges.SetRange("Charge Type", LoanAppcharges."Charge Type"::General);
+        LoanAppcharges.SetRange("Charging Option", LoanAppcharges."Charging Option"::"On Net Amount");
+        if LoanAppcharges.FindSet() then
+            repeat
+                NetOnChargeAmt := RecRef."Approved Amount" - (RecRef."Deposit Purchase" +
+                    RecRef."Total TopUp" + RecRef."Total Liquidation" + AppraisalParameter."Consolidated Loans(External)" +
+                    ChargeAmt + BoostAmt + Amts[1] + Amts[2]);
+                LineChargeAmt := LoanAppcharges.CalculateAppraisalAmount(RecRef."Approved Amount",
+                    NetOnChargeAmt, RecRef."Total TopUp (Net)", RecRef."Deposit Purchase");
+                LoanAppcharges."Amount to Post" := LineChargeAmt;
+                LoanAppcharges.Modify();
+                ChargeAmt += LineChargeAmt;
+                if LoanAppcharges."Effect Excise Duty" = LoanAppcharges."Effect Excise Duty"::Yes then
+                    Amts[1] += LineChargeAmt * GeneralSetUp."Excise Duty (%)" / 100;
+            until LoanAppcharges.Next() = 0;
 
         TotalAmtCharge := (TopUpComms + ChargeAmt + Amts[1] + Amts[2] + Amts[3] + BoostAmt);
 
         AppraisalParameter."Boosting (Charges)" := BoostAmt;
         AppraisalParameter."TopUp Commission" := TopUpComms;
-        AppraisalParameter."Excise Duty Charges" := Amts[1];
+        AppraisalParameter."Excise Duty Charges" := Amts[1] + Amts[2] + Amts[3];
         AppraisalParameter."No. of Loan Guaranteed" := RegMngt.getNoOfLoansGuarantor(RecRef."No.");
         AppraisalParameter.Repayment := RecRef.Repayment;
         AppraisalParameter."Amount (Total Charges)" := TotalAmtCharge;
@@ -1326,20 +1303,18 @@ codeunit 50035 "CSC Appraisal Parameters"
                 end;
             RecRef."Application Type"::Normal:
                 begin
-                    AppraisalParameter."Due Application" := RecRef."Approved Amount" - (RecRef."Deposit Purchase" + ChargeAmt + Amts[1] + Amts[2] + Amts[3] + BoostAmt + RecRef."Total TopUp" + RecRef."Total Liquidation" + AppraisalParameter."Consolidated Loans(External)");
-                    NetTakeHome := RecRef."Approved Amount" - Round((RecRef."Deposit Purchase" + ChargeAmt + Amts[1] + Amts[2] + Amts[3] + BoostAmt + RecRef."Total TopUp" + RecRef."Total Liquidation" + AppraisalParameter."Consolidated Loans(External)"));
+                    AppraisalParameter."Due Application" := RecRef."Approved Amount" - (RecRef."Deposit Purchase" + (TotalAmtCharge - TopUpComms) + RecRef."Total TopUp" + RecRef."Total Liquidation" + AppraisalParameter."Consolidated Loans(External)");
+                    NetTakeHome := RecRef."Approved Amount" - Round((RecRef."Deposit Purchase" + (TotalAmtCharge - TopUpComms) + RecRef."Total TopUp" + RecRef."Total Liquidation" + AppraisalParameter."Consolidated Loans(External)"));
                 end;
         end;
 
-        if NetTakeHome < 0 then begin
-            RecRef."Approved Amount" := 0;
+        if NetTakeHome < 0 then
             NetTakeHome := 0;
-        end;
 
+        RecRef.Validate("Approved Amount");
         RecRef."Amount to Disburse" := NetTakeHome;
         AppraisalParameter."Amount (Net Take Home)" := NetTakeHome;
 
-        RecRef.Validate("Approved Amount");
         AppraisalParameter.Repayment := RecRef.Repayment;
         RecRef.CalcFields("Total TopUp");
 
@@ -1379,6 +1354,7 @@ codeunit 50035 "CSC Appraisal Parameters"
         RecRef."Charges & Commissions" := (TopUpComms + BoostAmt + ChargeAmt);
         RecRef."Loan Status" := RecRef."Loan Status"::Appraisal;
         RecRef."Sacco Deductions" := RecRef."Sacco Deductions";
+        RecRef.Validate("Approved Amount");
         RecRef."Amount to Disburse" := NetTakeHome;
 
         if RecRef."Approved Amount" > 0 then begin

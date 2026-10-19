@@ -10,7 +10,7 @@ table 50554 "Loan Application"
             Editable = false;
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
@@ -32,7 +32,7 @@ table 50554 "Loan Application"
             "Product Factory"."Product ID" where("Product Class" = const(Loan), Status = const(Active), "Nature of Loan Type" = filter(Defaulter));
             Caption = 'Product Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 CustEmp: Record Customer;
@@ -48,7 +48,7 @@ table 50554 "Loan Application"
             TableRelation = Member."No." where(Status = filter(Active), "Global Dimension 1 Code" = field("Global Dimension 1 Code"));
             Caption = 'Account No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ObjCust: Record Member;
@@ -69,18 +69,23 @@ table 50554 "Loan Application"
         {
             Caption = 'Requested Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Requested Amount" <> 0 then
                     UpdateRequestAmt
+                else begin
+                    "Recommended Amount" := "Requested Amount";
+                    Validate("Approved Amount", "Requested Amount");
+                    "Amount to Disburse" := "Requested Amount";
+                end;
             end;
         }
         field(50014; "Approved Amount"; Decimal)
         {
             Caption = 'Approved Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 RSchedule: Record "Schedule of Loan Payment";
@@ -96,7 +101,7 @@ table 50554 "Loan Application"
             Editable = false;
             Caption = 'Interest Rate';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Product Type");
@@ -124,7 +129,7 @@ table 50554 "Loan Application"
         {
             Caption = 'Installments';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ErrorOnMaxThreshTxt: Label 'Member due to retire before loan repayment is complete. Do you wish to continue?';
@@ -157,7 +162,7 @@ table 50554 "Loan Application"
         {
             Caption = 'Disbursement Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ErrorDisbDate: Label 'Disbursement Date cannot be less than today';
@@ -338,7 +343,7 @@ table 50554 "Loan Application"
             Caption = 'Repayment Frequency';
             Editable = false;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 fnValidateFrequencyRepay("Repayment Frequency")
@@ -349,7 +354,7 @@ table 50554 "Loan Application"
             Editable = false;
             Caption = 'Approval Status';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 appStatus: Enum ApprovalStatus;
@@ -424,7 +429,7 @@ table 50554 "Loan Application"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Global Dimension 1 Code")
@@ -437,7 +442,7 @@ table 50554 "Loan Application"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Global Dimension 2 Code");
@@ -463,7 +468,7 @@ table 50554 "Loan Application"
             if ("Loan Payment Destination" = filter("Bank Account" | Supplier)) "EFT Transfer Header" where("Approval Status" = filter(Approved));
             Caption = 'Batch No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Approval Status", "Approval Status"::Approved);
@@ -474,7 +479,7 @@ table 50554 "Loan Application"
             Editable = false;
             Caption = 'Self Guarantee';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PFacts: Record "Product Factory";
@@ -518,7 +523,7 @@ table 50554 "Loan Application"
                                                            Created = CONST(false), "Approval Status" = FILTER(Open | Deffered));
             Caption = 'CRM Application No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 AttachCrmApplicationNo
@@ -551,7 +556,7 @@ table 50554 "Loan Application"
         {
             Caption = 'Deposit Purchase';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PFactory: Record "General Set-Up";
@@ -701,7 +706,7 @@ table 50554 "Loan Application"
         field(50096; "Comments"; Text[250])
         {
             Caption = 'Comment Line';
-        
+
             trigger OnValidate()
             begin
                 "Comment Date" := Today;
@@ -755,7 +760,7 @@ table 50554 "Loan Application"
         {
             DataClassification = CustomerContent;
             Caption = 'Account Dimension';
-        
+
             trigger OnValidate()
             begin
                 "Deposit Purchase Account" := '';
@@ -777,7 +782,7 @@ table 50554 "Loan Application"
             DataClassification = CustomerContent;
             Caption = 'Payment Destination A/c';
             Editable = false;
-        
+
             trigger OnValidate()
             begin
 
@@ -790,7 +795,7 @@ table 50554 "Loan Application"
             if ("Loan Payment Destination" = const(Supplier)) Vendor where("Account Type" = filter(<> Banking));
             DataClassification = CustomerContent;
             Caption = 'Pay Point';
-        
+
             trigger OnValidate()
             var
                 AccBanking: Record "Account Banking";
@@ -824,7 +829,7 @@ table 50554 "Loan Application"
         field(50111; "Contract End Date"; Date)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Contract End Date" <= Today then
@@ -834,7 +839,7 @@ table 50554 "Loan Application"
         field(50112; "Old Loan No."; Code[100])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -844,7 +849,7 @@ table 50554 "Loan Application"
         {
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             begin
 
@@ -869,7 +874,7 @@ table 50554 "Loan Application"
         {
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             begin
                 ProdFac.Get("Product Type");
@@ -962,7 +967,7 @@ table 50554 "Loan Application"
             FieldClass = FlowField;
             Caption = 'Total TopUp';
         }
-    
+
         field(50129; "Total TopUp (Charge)"; Decimal)
         {
             CalcFormula = Sum("Loans Top up"."Total Outstanding Amount" where("No." = field("No."), "Ignore Charges" = filter(false)));
@@ -1564,7 +1569,7 @@ table 50554 "Loan Application"
         if "Approved Amount" > 0 then
             Validate(Installments);
         PassDocumentNo;
-        
+
         OnAfterAccountNoOnValidateGetProduct(Rec, ProdFact, CurrFieldNo);
     end;
 
@@ -2280,7 +2285,7 @@ table 50554 "Loan Application"
             if CheckAccountExistApplic("Product Type", "Account No.") then Error(ErrorOnExistingLoan);
         end;
 
-        if ("Total TopUp" + "Deposit Purchase"+"Total Liquidation") > "Approved Amount" then
+        if ("Total TopUp" + "Deposit Purchase" + "Total Liquidation") > "Approved Amount" then
             Error(ErrorOnAmtGuarantMoreThanAppAmtTxt);
 
         if "Loan Status" = "Loan Status"::Appraisal then begin
@@ -2452,7 +2457,7 @@ table 50554 "Loan Application"
             if "Application Type" <> "Application Type"::Defaulter then begin
                 CustMember.TestField("Date of Birth");
                 CustMember.TestField("Member Category");
-                CustMember.TestField("Terms of Employment");
+                //CustMember.TestField("Terms of Employment");
             end;
 
             MembCategory.Reset();
@@ -2649,17 +2654,17 @@ table 50554 "Loan Application"
         ErrorOnExistingLoanApplicationTxt: Label 'Member already has an existing outstanding facility running. Kindly Revolve and continue. %1 loan: %2 - %3.';
         LoanApp: Record Loans;
     begin
-        LoanApp.CalcFields("Total TopUp");
-        if "Total TopUp" <= 0 then begin
-            LoanApp.Reset();
-            LoanApp.SetRange("Account No.", Rec."Account No.");
-            LoanApp.SetRange("Product Type", Rec."Product Type");
-            LoanApp.SetFilter("Outstanding Balance", '>0');
-            if LoanApp.Find('-') then begin
-                LoanApp.CalcFields("Outstanding Balance");
-                Error(ErrorOnExistingLoanApplicationTxt, LoanApp."Product Description", "Loan Account", LoanApp."No.");
-            end;
-        end
+        //LoanApp.CalcFields("Total TopUp");
+        // if "Total TopUp" <= 0 then begin
+        //     // LoanApp.Reset();
+        //     // LoanApp.SetRange("Account No.", Rec."Account No.");
+        //     // LoanApp.SetRange("Product Type", Rec."Product Type");
+        //     // LoanApp.SetFilter("Outstanding Balance", '>0');
+        //     // if LoanApp.Find('-') then begin
+        //     //     LoanApp.CalcFields("Outstanding Balance");
+        //     //     Error(ErrorOnExistingLoanApplicationTxt, LoanApp."Product Description", "Loan Account", LoanApp."No.");
+        //     // end;
+        // end
 
     end;
 
@@ -2680,12 +2685,12 @@ table 50554 "Loan Application"
             0:
                 begin
                     if CustRecord.Get("Account No.") then
-                        CustRecord.TestField("Terms of Employment");
+                        // CustRecord.TestField("Terms of Employment");
                     if "Application Type" <> "Application Type"::Defaulter then begin
-                        CustRecord.TestField("Date of Birth");
-                        CustRecord.TestField("Member Category");
-                        CustRecord.TestField("Member Segment");
-                    end;
+                            CustRecord.TestField("Date of Birth");
+                            CustRecord.TestField("Member Category");
+                            CustRecord.TestField("Member Segment");
+                        end;
 
                     MembCategory.Reset();
                     MembCategory.SetRange("No.", CustRecord."Member Category");

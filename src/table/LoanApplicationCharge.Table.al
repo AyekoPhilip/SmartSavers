@@ -18,6 +18,7 @@ table 50530 "Loan Application Charge"
                     "Charge Description" := LoanChg."Charge Description";
                     "Charge Amount" := LoanChg."Charge Amount";
                     "Charge Method" := LoanChg."Charge Method";
+                    "Staggered Charge Code" := LoanChg."Staggered Charge Code";
                     Percentage := LoanChg.Percentage;
                     "Charging Option" := LoanChg."Charging Option";
                     "Use Percentage" := LoanChg."Use Percentage";
@@ -221,6 +222,54 @@ table 50530 "Loan Application Charge"
         LoanChg: Record "Loan Charges";
 
 
+    procedure CalculateAppraisalAmount(ApprovedAmount: Decimal; NetAmount: Decimal; TopUpAmount: Decimal; DepositPurchase: Decimal): Decimal
+    var
+        Tier: Record "Tiered Charges Line";
+        ProductCharge: Record "Loan Product Charges";
+        ChargeBase: Decimal;
+        TierCode: Code[20];
+    begin
+        ChargeBase := ApprovedAmount;
+        case "Charge Type" of
+            "Charge Type"::"Top up", "Charge Type"::Restructure:
+                ChargeBase := TopUpAmount;
+            "Charge Type"::Boosting:
+                ChargeBase := DepositPurchase;
+        end;
+        case "Charging Option" of
+            "Charging Option"::"On Approved Amount":
+                ChargeBase := ApprovedAmount;
+            "Charging Option"::"On Net Amount":
+                ChargeBase := NetAmount;
+        end;
+        if ChargeBase < 0 then
+            ChargeBase := 0;
+
+        TierCode := "Staggered Charge Code";
+        // Older application charges may have been copied without the tier code.
+        if (TierCode = '') and ("Charge Method" = "Charge Method"::Staggered) then
+            if ProductCharge.Get("Charge Code", "Product Code") then
+                TierCode := ProductCharge."Staggered Charge Code";
+
+        if TierCode <> '' then begin
+            Tier.SetRange(Code, TierCode);
+            Tier.SetFilter("Lower Limit", '<=%1', ChargeBase);
+            // At a shared boundary, the band starting at that amount takes precedence.
+            if Tier.FindLast() then
+                if (Tier."Upper Limit" = 0) or (ChargeBase <= Tier."Upper Limit") then begin
+                    if Tier."Use Percentage" then
+                        exit(ChargeBase * Tier.Percentage / 100);
+                    exit(Tier."Charge Amount");
+                end;
+            Error('No staggered charge band in %1 covers amount %2.', TierCode, ChargeBase);
+        end;
+        if "Charge Method" = "Charge Method"::Staggered then
+            Error('Specify a staggered charge code for charge %1.', "Charge Code");
+        if "Use Percentage" then
+            exit(ChargeBase * Percentage / 100);
+        exit("Charge Amount");
+    end;
+
     procedure CopyFromLoanProductCharges(LoanChg: Record "Loan Product Charges")
     begin
         "Charge Code" := LoanChg."Charge Code";
@@ -228,6 +277,7 @@ table 50530 "Loan Application Charge"
         "Charge Description" := LoanChg."Charge Description";
         "Charge Amount" := LoanChg."Charge Amount";
         "Charge Method" := LoanChg."Charge Method";
+        "Staggered Charge Code" := LoanChg."Staggered Charge Code";
         Percentage := LoanChg.Percentage;
         "Charging Option" := LoanChg."Charging Option";
         "Use Percentage" := LoanChg."Use Percentage";

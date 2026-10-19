@@ -109,6 +109,7 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
     procedure InitPerformPost(RecRef: Record Loans; GTemplate: Code[10]; GBatch: Code[10]; PostDate: Date; ShortDim1: Code[10]; ShortDim2: Code[10])
     begin
         RecRef.fnTestFields();
+        RecRef.Modify();
         if not TellMngt.TestNoEntriesExist(RecRef."Account Name", RecRef."No.", 0) then begin
             CreateEntryOnRefLoan(RecRef, GTemplate, GBatch, PostDate, ShortDim1, ShortDim2);
             if RecRef."Check Line" then begin
@@ -164,6 +165,7 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
         AmountToDisburse := 0;
         ExtDocNo := '';
         ReferenceRec.fnTestFields();
+        ReferenceRec.Modify();
         if ReferenceRec."TopUp Loan" = '' then begin
             if TellMngt.TestNoEntriesExist(ReferenceRec."Account Name", ReferenceRec."No.", 0) then begin
                 Error(Text016, ReferenceRec."Account Name", ReferenceRec."No.");
@@ -495,6 +497,16 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
         end
     end;
 
+    local procedure GetBankPostingDescription(LoanNo: Code[20]): Text[100]
+    var
+        Loan: Record Loans;
+        PostingDescription: Text;
+    begin
+        PostingDescription := TextDescription + LoanNo;
+        if Loan.Get(LoanNo) then
+            PostingDescription += ' - ' + Loan."Account Name";
+        exit(CopyStr(PostingDescription, 1, MaxStrLen(GenJournal.Description)));
+    end;
     procedure InitDebitBankingAcc(AccNo: Code[100]; AmtoPost: Decimal; DocumentNo: Code[20]; PDate: Date; DActivity: Code[20]; DBranch: Code[20]; GnlTemplate: Code[20]; GnlJBatch: Code[20]; BalAccNo: Code[100]; LineNo: Integer; ExtDocNo: Code[100])
     var
         LoanT: Record Loans;
@@ -508,7 +520,7 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
                 LineNo := LineNo + 100;
                 JnPost.CreateJnl(GnlTemplate, GnlJBatch, LineNo,
                 Enum::"Gen. Journal Account Type"::Vendor,
-                DocumentNo, TextDescription + '-' + DocumentNo,
+                DocumentNo, GetBankPostingDescription(DocumentNo),
                 AccBanking."Balance (LCY)", AccNo, PDate,
                 Enum::"Gen. Journal Account Type"::"Bank Account",
                 BalAccNo, ExtDocNo, DActivity, DBranch,
@@ -555,7 +567,7 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
 
                     LineNo := LineNo + 100;
                     JnPost.CreateJnl(GnlTemplate, GnlJBatch, LineNo, Enum::"Gen. Journal Account Type"::Vendor, DocumentNo,
-                    TextDescription + '-' + DocumentNo, AmountPost, AccBanking."No.", PDate, OtherCommit."Account Type",
+                    GetBankPostingDescription(DocumentNo), AmountPost, AccBanking."No.", PDate, OtherCommit."Account Type",
                     OtherCommit."Account No.", OtherCommit."Bankers Cheque No",
                     DActivity, DBranch, Enum::"LoanTransactionType"::" ", '', '', '',
                     Enum::"Gen. Journal Document Type"::" ", '',
@@ -824,7 +836,7 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
     var
         ProductType: Record "Product Factory";
         LineNumber: Integer;
-        LoansTopupPosted: Record "Loans Top up";
+        LoansTopupPosted: Record "Loans Top up Posted";
         PostedLoan: Record Loans;
         TotalAccruedInt: Decimal;
         AccruedInt: Decimal;
@@ -849,7 +861,7 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
         if PostRevolveFund(Loans."No.") then begin
 
             LoansTopupPosted.Reset;
-            LoansTopupPosted.SetRange("No.", Loans."Application No.");
+            LoansTopupPosted.SetRange("Loan No.", Loans."No.");
             LoansTopupPosted.SetRange("Account No.", Loans."Account No.");
             LoansTopupPosted.SetFilter("Total Total Up", '>0');
             if LoansTopupPosted.Find('-') then begin
@@ -863,91 +875,61 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
 
                     PostedLoan.Reset();
                     if PostedLoan.Get(LoansTopupPosted."Loan Top Up") then begin
-                        PostedLoan.CalcFields("Outstanding Bill", "Outstanding Insurance",
-                        "Outstanding Interest", "Outstanding Principal", "Outstanding Balance");
+                        AccruedInt := LoansTopupPosted."Untransfered Interest";
 
-                        case GeneralSetUp."Interest Posting Method" of
-                            GeneralSetUp."Interest Posting Method"::"Charge Daily":
-                                begin
-
-                                    LnProdCharge.Reset();
-                                    LnProdCharge.SetRange("Product Code", LoansTopupPosted."Product Type");
-                                    LnProdCharge.SetRange("Charge Type", LnProdCharge."Charge Type"::"Top up");
-                                    if LnProdCharge.FindFirst() then begin
-                                        case LnProdCharge."Charging Option" of
-                                            LnProdCharge."Charging Option"::"On Outstanding Balance":
-                                                begin
-                                                    TotalAccruedInt := (PostedLoan."Outstanding Balance" + getAccruedInt(PostedLoan."No."));
-                                                end;
-                                            LnProdCharge."Charging Option"::"On Principle Balance":
-                                                begin
-                                                    TotalAccruedInt := (PostedLoan."Outstanding Principal" + getAccruedInt(PostedLoan."No."));
-                                                end;
-                                        end;
-                                    end;
-                                    AccruedInt := getAccruedInt(PostedLoan."No.");
-                                end else begin
-                                TotalAccruedInt := PostedLoan."Outstanding Balance";
-                                AccruedInt := 0;
-                            end;
-                        end;
-
-                        if getAccruedInt(PostedLoan."No.") > 0 then begin
+                        if LoansTopupPosted."Untransfered Interest" > 0 then begin
+                            LineNumber += 10000;
 
                             if Prodfact.Get(PostedLoan."Product Type") then
-                                JnPost.CreateJnl(JTemp, JBatchTemp, LineNumber + 10000, AcctType::Customer, Loans."No.",
-                                'Accrued Interest on-' + PostedLoan."No.", getAccruedInt(PostedLoan."No."),
+                                JnPost.CreateJnl(JTemp, JBatchTemp, LineNumber, AcctType::Customer, Loans."No.",
+                                'Accrued Interest on-' + PostedLoan."No.", LoansTopupPosted."Untransfered Interest",
                                 PostedLoan."Loan Account", PostDate, AcctType::"G/L Account",
                                  Prodfact."Interest Account (G/L)", PostedLoan."Account No.", ShortDim1, ShortDim2,
                                  TransacType::"Interest Due", PostedLoan."No.", '', '', DocType::" ", '',
                                  DocType::" ", PostedLoan."Product Type");
                         end;
 
-                        if (PostedLoan."Outstanding Interest" + AccruedInt) > 0 then begin
+                        if (LoansTopupPosted."Outstanding Interest" + AccruedInt) > 0 then begin
 
                             LineNumber := fnInitializeDebitCreditJnline(Loans."No.", PostDate,
                             TransacType::"Interest Paid", ShortDim1, ShortDim2, JTemp,
-                            JBatchTemp, (PostedLoan."Outstanding Interest" + getAccruedInt(PostedLoan."No.")),
+                            JBatchTemp, (LoansTopupPosted."Outstanding Interest" + LoansTopupPosted."Untransfered Interest"),
                             LineNumber + 10000, 0, PostedLoan."No.", true,
                             Enum::"Gen. Journal Account Type"::Vendor, PostedLoan."Disbursement Account No.", false);
                         end;
 
-                        if PostedLoan."Outstanding Insurance" > 0 then begin
+                        if LoansTopupPosted."Outstanding Insurance" > 0 then begin
 
                             LineNumber := fnInitializeDebitCreditJnline(Loans."No.", PostDate,
                               TransacType::"Insurance Paid", ShortDim1, ShortDim2, JTemp, JBatchTemp,
-                              PostedLoan."Outstanding Insurance", LineNumber + 10000, 0, PostedLoan."No.", true,
+                              LoansTopupPosted."Outstanding Insurance", LineNumber + 10000, 0, PostedLoan."No.", true,
                               Enum::"Gen. Journal Account Type"::Vendor, PostedLoan."Disbursement Account No.", false);
                         end;
 
-                        if PostedLoan."Outstanding Bill" > 0 then begin
+                        if LoansTopupPosted."Outstanding Bill" > 0 then begin
                             LineNumber := fnInitializeDebitCreditJnline(Loans."No.", PostDate,
                             TransacType::"Penalty Paid", ShortDim1, ShortDim2, JTemp,
-                            JBatchTemp, PostedLoan."Outstanding Bill", LineNumber + 10000, 0, PostedLoan."No.", true,
+                            JBatchTemp, LoansTopupPosted."Outstanding Bill", LineNumber + 10000, 0, PostedLoan."No.", true,
                             Enum::"Gen. Journal Account Type"::Vendor, PostedLoan."Disbursement Account No.", false);
 
                         end;
 
-                        if PostedLoan."Outstanding Principal" > 0 then begin
+                        if LoansTopupPosted."Outstanding Principle" > 0 then begin
 
-                            case GeneralSetUp."Refinance Options" of
-                                GeneralSetUp."Refinance Options"::"Full Refinance":
-                                    begin
-                                        PrncipBalance := PostedLoan."Outstanding Principal"
-                                    end;
-                                GeneralSetUp."Refinance Options"::"Partial Refinance":
-                                    begin
-                                        PrncipBalance := LoansTopupPosted."Outstanding Principle"
-                                    end;
-                            end;
+                            PrncipBalance := LoansTopupPosted."Outstanding Principle";
                             LineNumber := fnInitializeDebitCreditJnline(Loans."No.", PostDate,
                              TransacType::Repayment, ShortDim1, ShortDim2, JTemp, JBatchTemp,
                              PrncipBalance, LineNumber + 10000, 0, PostedLoan."No.", true,
                              Enum::"Gen. Journal Account Type"::Vendor, PostedLoan."Disbursement Account No.", false);
                         end;
 
-                        if not LoansTopupPosted."Ignore Charges" then begin
-                            LoansTopupPosted.TestField(Commision);
+                        if LoansTopupPosted."Outstanding Fee" > 0 then
+                            LineNumber := fnInitializeDebitCreditJnline(Loans."No.", PostDate,
+                                TransacType::"Ledger Fee Paid", ShortDim1, ShortDim2, JTemp, JBatchTemp,
+                                LoansTopupPosted."Outstanding Fee", LineNumber + 10000, 0, PostedLoan."No.", true,
+                                Enum::"Gen. Journal Account Type"::Vendor, PostedLoan."Disbursement Account No.", false);
+                        if ((not LoansTopupPosted."Ignore Charges") and (LoansTopupPosted.Commision <> 0)) or (LoansTopupPosted."Settlement Fee" <> 0) then begin
+
 
                             LineNumbr[2] := LineNumber;
                             LoanChargePosted.Reset();
@@ -959,40 +941,8 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
                                     LoanChargePosted.TestField("Account No.");
                                     ChargeAmt := 0;
 
-                                    case LoanChargePosted."Charge Method" of
-                                        LoanChargePosted."Charge Method"::"Flat Amount":
-                                            begin
-                                                LoanChargePosted.TestField("Charge Amount");
-                                                ChargeAmt := LoanChargePosted."Charge Amount";
-
-                                            end;
-                                        LoanChargePosted."Charge Method"::"% of Amount":
-                                            begin
-                                                LoanChargePosted.TestField(Percentage);
-                                                ChargeAmt := Round((PostedLoan."Outstanding Principal" * (LoanChargePosted.Percentage / 100)), 0.5, '=');
-                                            end;
-                                        LoanChargePosted."Charge Method"::Staggered:
-                                            begin
-                                                LoanChargePosted.TestField("Staggered Charge Code");
-
-                                                TariffDetails.Reset;
-                                                TariffDetails.SetRange(TariffDetails.Code, LoanChargePosted."Staggered Charge Code");
-                                                if TariffDetails.Find('-') then begin
-                                                    repeat
-
-                                                        if (PostedLoan."Outstanding Principal" >= TariffDetails."Lower Limit") and (PostedLoan."Outstanding Principal" <= TariffDetails."Upper Limit") then begin
-                                                            if TariffDetails."Use Percentage" = true then begin
-                                                                ChargeAmt := Round((PostedLoan."Outstanding Principal" * TariffDetails.Percentage * 0.01), 0.5, '=');
-                                                            end else begin
-                                                                ChargeAmt := TariffDetails."Charge Amount";
-                                                            end;
-                                                        end;
-                                                    until TariffDetails.Next = 0;
-                                                end;
-
-                                            end;
-                                    end;
-
+                                    ChargeAmt := GetSavedTopupChargeAmount(LoanChargePosted,
+                                        LoansTopupPosted.Commision, LoansTopupPosted."Settlement Fee", LoansTopupPosted."Ignore Charges");
                                     LineNumber := LineNumber + 11;
                                     JnlPostMngt.CreateJnl(JTemp, JBatchTemp, LineNumber,
                                     AcctType::Vendor, Loans."No.", LoanChargePosted."Charge Description",
@@ -1049,6 +999,7 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
                     PostedLoan.Reset();
                     PostedLoan.SetRange("No.", LoanNo);
                     if PostedLoan.FindFirst() then begin
+                        PostedLoan.SetPostingChequeDetails();
 
                         CrmApplic.Reset();
                         CrmApplic.SetRange("No.", PostedLoan."CRM Application No.");
@@ -1235,6 +1186,53 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
         exit(0)
     end;
 
+    local procedure GetSavedTopupChargeAmount(Charge: Record "Loan Charge Posted"; Commission: Decimal; SettlementFee: Decimal; IgnoreCharges: Boolean): Decimal
+    var
+        Charges: Record "Loan Charge Posted";
+        TargetAmount: Decimal;
+        TotalWeight: Decimal;
+        WeightBefore: Decimal;
+        Weight: Decimal;
+    begin
+        Charges.Copy(Charge);
+        if Charge."Charge Type" = Charge."Charge Type"::Prorate then begin
+            TargetAmount := SettlementFee;
+            Charges.SetRange("Charge Type", Charges."Charge Type"::Prorate);
+        end else begin
+            if IgnoreCharges then
+                exit(0);
+            TargetAmount := Commission;
+            Charges.SetFilter("Charge Type", '%1|%2', Charges."Charge Type"::"Top up", Charges."Charge Type"::Restructure);
+        end;
+        if TargetAmount = 0 then
+            exit(0);
+        // Retain the configured allocation between fee accounts, but use the saved total.
+        if Charges.FindSet() then
+            repeat
+                TotalWeight += GetTopupChargeWeight(Charges);
+            until Charges.Next() = 0;
+        if TotalWeight = 0 then
+            exit(0);
+        if Charges.FindSet() then
+            repeat
+                Weight := GetTopupChargeWeight(Charges);
+                if (Charges."Charge Code" = Charge."Charge Code") and (Charges."Product Code" = Charge."Product Code") then
+                    exit(Round(TargetAmount * (WeightBefore + Weight) / TotalWeight, 0.01) -
+                         Round(TargetAmount * WeightBefore / TotalWeight, 0.01));
+                WeightBefore += Weight;
+            until Charges.Next() = 0;
+    end;
+
+    local procedure GetTopupChargeWeight(Charge: Record "Loan Charge Posted"): Decimal
+    begin
+        if Charge."Amount to Post" <> 0 then
+            exit(Abs(Charge."Amount to Post"));
+        if Charge."Charge Amount" <> 0 then
+            exit(Abs(Charge."Charge Amount"));
+        if Charge.Percentage <> 0 then
+            exit(Abs(Charge.Percentage));
+        exit(1);
+    end;
     local procedure CreateEntryOnRefLoan(PostedLoan: Record Loans; GnlTemplate: Code[10]; GnlJBatch: Code[10]; PDate: Date; ShortDim1: Code[10]; ShortDim2: Code[10])
     var
 
@@ -1301,17 +1299,10 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
                     TotalAccruedInt := 0;
 
                     if RecRef.Get(LoansTopupPosted."Loan Top Up") then begin
-                        RecRef.CalcFields("Outstanding Balance", "Outstanding Bill", "Outstanding Insurance",
-                         "Outstanding Interest", "Outstanding Principal");
+                        if LoansTopupPosted."Total Total Up" > 0 then begin
 
-                        if RecRef."Outstanding Balance" > 0 then begin
-
-                            TotalAccruedInt := (RecRef."Outstanding Balance" + getAccruedInt(RecRef."No."));
-
-                            EndDate := Today;
-                            StartDate := CalcDate('-CM', Today);
-                            IntDays := (EndDate - StartDate) + 1;
-                            AccruedInt := PeriodAct.fnIntEntriesonSpecificLoan(RecRef, Today, RecRef."No.", 1, IntDays, StartDate);
+                            TotalAccruedInt := LoansTopupPosted."Total Outstanding Amount";
+                            AccruedInt := LoansTopupPosted."Untransfered Interest";
 
                             if AccruedInt > 0 then begin
                                 if Prodfact.Get(RecRef."Product Type") then begin
@@ -1331,41 +1322,46 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
 
                             LineNumber := LineNumber + 10;
 
-                            if (RecRef."Outstanding Interest" + AccruedInt) > 0 then begin
+                            if (LoansTopupPosted."Outstanding Interest" + AccruedInt) > 0 then begin
 
-                                fnInitializeDebitCreditJnline(PostedLoan."No.", Today,
+                                LineNumber := fnInitializeDebitCreditJnline(PostedLoan."No.", PDate,
                                 TransacType::"Interest Paid", ShortDim1, ShortDim2, GnlTemplate, GnlJBatch,
-                                (RecRef."Outstanding Interest" + AccruedInt), LineNumber, 0, RecRef."No.", true,
+                                (LoansTopupPosted."Outstanding Interest" + AccruedInt), LineNumber + 10, 0, RecRef."No.", true,
                                 Enum::"Gen. Journal Account Type"::Customer, PostedLoan."Loan Account", true);
                             end;
 
-                            if RecRef."Outstanding Insurance" > 0 then begin
+                            if LoansTopupPosted."Outstanding Insurance" > 0 then begin
 
-                                LineNumber := fnInitializeDebitCreditJnline(PostedLoan."No.", Today,
+                                LineNumber := fnInitializeDebitCreditJnline(PostedLoan."No.", PDate,
                                  TransacType::"Insurance Paid", ShortDim1, ShortDim2, GnlTemplate, GnlJBatch,
-                                 RecRef."Outstanding Insurance", LineNumber + 10, 0, RecRef."No.", true,
+                                 LoansTopupPosted."Outstanding Insurance", LineNumber + 10, 0, RecRef."No.", true,
                                  Enum::"Gen. Journal Account Type"::Customer, PostedLoan."Loan Account", true);
 
                             end;
 
-                            if RecRef."Outstanding Bill" > 0 then begin
+                            if LoansTopupPosted."Outstanding Bill" > 0 then begin
 
-                                LineNumber := fnInitializeDebitCreditJnline(PostedLoan."No.", Today,
+                                LineNumber := fnInitializeDebitCreditJnline(PostedLoan."No.", PDate,
                                  TransacType::"Penalty Paid", ShortDim1, ShortDim2, GnlTemplate, GnlJBatch,
-                                 RecRef."Outstanding Bill", LineNumber + 10, 0, RecRef."No.", true,
+                                 LoansTopupPosted."Outstanding Bill", LineNumber + 10, 0, RecRef."No.", true,
                                  Enum::"Gen. Journal Account Type"::Customer, PostedLoan."Loan Account", true);
 
                             end;
 
-                            if RecRef."Outstanding Principal" > 0 then begin
+                            if LoansTopupPosted."Outstanding Principle" > 0 then begin
 
-                                LineNumber := fnInitializeDebitCreditJnline(PostedLoan."No.", Today,
+                                LineNumber := fnInitializeDebitCreditJnline(PostedLoan."No.", PDate,
                                  TransacType::Repayment, ShortDim1, ShortDim2, GnlTemplate, GnlJBatch,
-                                 RecRef."Outstanding Principal", LineNumber + 10, 0, RecRef."No.", true,
+                                 LoansTopupPosted."Outstanding Principle", LineNumber + 10, 0, RecRef."No.", true,
                                  Enum::"Gen. Journal Account Type"::Customer, PostedLoan."Loan Account", true);
 
                             end;
 
+                            if LoansTopupPosted."Outstanding Fee" > 0 then
+                                LineNumber := fnInitializeDebitCreditJnline(PostedLoan."No.", PDate,
+                                    TransacType::"Ledger Fee Paid", ShortDim1, ShortDim2, GnlTemplate, GnlJBatch,
+                                    LoansTopupPosted."Outstanding Fee", LineNumber + 10, 0, RecRef."No.", true,
+                                    Enum::"Gen. Journal Account Type"::Customer, PostedLoan."Loan Account", true);
                             if PostedLoan."Mode of Disbursement" = PostedLoan."Mode of Disbursement"::"Full Disbursement" then begin
                                 LineNumbr[2] := LineNumber;
                                 LoanChargePosted.Reset();
@@ -1378,11 +1374,8 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
                                         ChargeAmt := 0;
                                         ApprvdAmt := 0;
 
-                                        ApprvdAmt := TotalAccruedInt;
-                                        if LoanChargePosted."Charge Type" = LoanChargePosted."Charge Type"::Prorate then
-                                            ChargeAmt := LoanChargePosted."Charge Amount" else
-                                            ChargeAmt := CalculateChargeAmt(LoanChargePosted."Charge Code",
-                                            ApprvdAmt, LoanChargePosted."Product Code", PostedLoan."No.");
+                                        ChargeAmt := GetSavedTopupChargeAmount(LoanChargePosted,
+                                            LoansTopupPosted.Commision, LoansTopupPosted."Settlement Fee", LoansTopupPosted."Ignore Charges");
 
                                         LineNumber := LineNumber + 100;
                                         JnPost.PostJournal(GnlTemplate, GnlJBatch, LineNumber,
@@ -1401,18 +1394,15 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
                                 LineNumbr[2] := LineNumber;
                                 LoanChargePosted.Reset();
                                 LoanChargePosted.SetRange("Loan No.", PostedLoan."No.");
-                                LoanChargePosted.SetFilter("Charge Type", '%1 | %2', LoanChargePosted."Charge Type"::"Top up", LoanChargePosted."Charge Type"::Prorate);
+                                LoanChargePosted.SetFilter("Charge Type", '%1|%2|%3', LoanChargePosted."Charge Type"::"Top up", LoanChargePosted."Charge Type"::Restructure, LoanChargePosted."Charge Type"::Prorate);
                                 if LoanChargePosted.Find('-') then begin
                                     repeat
 
                                         ChargeAmt := 0;
                                         ApprvdAmt := 0;
 
-                                        ApprvdAmt := TotalAccruedInt;
-                                        if LoanChargePosted."Charge Type" = LoanChargePosted."Charge Type"::Prorate then
-                                            ChargeAmt := LoanChargePosted."Charge Amount" else
-                                            ChargeAmt := CalculateChargeAmt(LoanChargePosted."Charge Code",
-                                            ApprvdAmt, LoanChargePosted."Product Code", PostedLoan."No.");
+                                        ChargeAmt := GetSavedTopupChargeAmount(LoanChargePosted,
+                                            LoansTopupPosted.Commision, LoansTopupPosted."Settlement Fee", LoansTopupPosted."Ignore Charges");
 
                                         LineNumber := LineNumber + 100;
                                         JnPost.PostJournal(GnlTemplate, GnlJBatch, LineNumber,

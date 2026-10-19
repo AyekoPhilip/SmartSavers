@@ -568,12 +568,8 @@ codeunit 50065 "Gen.Jnl.+Preview"
                             EndDate := Today;
                             StartDate := CalcDate('-CM', Today);
                             IntDays := (EndDate - StartDate) + 1;
-                            // LoansTopupPosted."Untransfered Interest" := PeriodAct.fnIntEntriesonSpecificLoan(PLoan, Today, PLoan."No.", 1, IntDays, StartDate);
-                            LoansTopupPosted."Outstanding Bill" := PLoan."Outstanding Bill";
-                            LoansTopupPosted."Total Amount" := (LoansTopupPosted."Untransfered Interest" + PLoan."Outstanding Balance");
-                            ChargeAmt[2] := PLoan."Outstanding Balance" + LoansTopupPosted."Settlement Fee" + PLoan."Outstanding Interest";
+                            ChargeAmt[2] := LoansTopupPosted."Outstanding Balance" + LoansTopupPosted."Settlement Fee" + LoansTopupPosted."Outstanding Interest";
                             //  PeriodAct.fnIntEntriesonSpecificLoan(PLoan,Today, PLoan."No.", 1, IntDays, StartDate);
-                            LoansTopupPosted.Modify(true);
                         end;
 
                         if RecRef.Get(LoansTopupPosted."Loan Top Up") then begin
@@ -602,7 +598,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                     GenJournal."Account Type" := GenJournal."Account Type"::Customer;
                                     GenJournal.Validate("Account No.", PLoan."Loan Account");
                                     // GenJournal.Validate(Amount, LoansTopupPosted."Untransfered Interest");
-                                    GenJournal.Validate(Amount, PLoan."Outstanding Interest");
+                                    GenJournal.Validate(Amount, LoansTopupPosted."Untransfered Interest");
                                     GenJournal.Description := CopyStr('Accrued Interest-' + LoansTopupPosted."Loan Top Up", 1, 50);
                                     GenJournal."Transaction Type" := GenJournal."Transaction Type"::"Interest Due";
                                     GenJournal.Validate("Loan No.", LoansTopupPosted."Loan Top Up");
@@ -613,7 +609,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                         GenJournal.Insert(true);
                                 end;
                             end;
-                            if (RecRef."Outstanding Interest") > 0 then begin
+                            if (LoansTopupPosted."Outstanding Interest" + LoansTopupPosted."Untransfered Interest") > 0 then begin
 
                                 Linenum := Linenum + 1000;
 
@@ -626,7 +622,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 GenJournal."Account Type" := GenJournal."Account Type"::Vendor;
                                 GenJournal.Validate("Account No.", AccBanking."No.");
 
-                                GenJournal.Validate(Amount, (RecRef."Outstanding Interest"));
+                                GenJournal.Validate(Amount, (LoansTopupPosted."Outstanding Interest" + LoansTopupPosted."Untransfered Interest"));
                                 GenJournal.Description := CopyStr('Interest Paid-' + LoansTopupPosted."Loan Top Up", 1, 50);
                                 GenJournal.Validate("Shortcut Dimension 1 Code", Dim1);
                                 GenJournal.Validate("Shortcut Dimension 2 Code", Dim2);
@@ -637,7 +633,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 Post.PostJournal(Jtemplate, JBatch, Linenum,
                                 Enum::"Gen. Journal Account Type"::Customer, DocumentNo,
                                 'Interest Paid-' + LoansTopupPosted."Loan Top Up",
-                                (RecRef."Outstanding Interest") * -1,
+                                (LoansTopupPosted."Outstanding Interest" + LoansTopupPosted."Untransfered Interest") * -1,
                                 RecRef."Loan Account", PostingDate, Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                 RecRef."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::"Interest Paid",
                                 LoansTopupPosted."Loan Top Up", RecRef."Group Code", '', Enum::"Gen. Journal Document Type"::" ",
@@ -645,7 +641,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
 
                             end;
 
-                            if RecRef."Outstanding Insurance" > 0 then begin
+                            if LoansTopupPosted."Outstanding Insurance" > 0 then begin
 
                                 Linenum := Linenum + 1000;
 
@@ -658,7 +654,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 GenJournal."Account Type" := GenJournal."Account Type"::Vendor;
                                 GenJournal.Validate("Account No.", AccBanking."No.");
 
-                                GenJournal.Validate(Amount, RecRef."Outstanding Insurance");
+                                GenJournal.Validate(Amount, LoansTopupPosted."Outstanding Insurance");
                                 GenJournal.Description := CopyStr('Insurance Paid-' + LoansTopupPosted."Loan Top Up", 1, 50);
                                 GenJournal.Validate("Shortcut Dimension 1 Code", Dim1);
                                 GenJournal.Validate("Shortcut Dimension 2 Code", Dim2);
@@ -670,7 +666,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 Post.PostJournal(Jtemplate, JBatch,
                                 Linenum, Enum::"Gen. Journal Account Type"::Customer,
                                 DocumentNo, 'Insurance Paid' + LoansTopupPosted."Loan Top Up",
-                                RecRef."Outstanding Insurance" * -1, RecRef."Loan Account", PostingDate,
+                                LoansTopupPosted."Outstanding Insurance" * -1, RecRef."Loan Account", PostingDate,
                                 Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                 RecRef."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::"Insurance Paid",
                                 LoansTopupPosted."Loan Top Up", RecRef."Group Code", '',
@@ -678,7 +674,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 Enum::"Gen. Journal Document Type"::" ");
                             end;
 
-                            if RecRef."Outstanding Bill" > 0 then begin
+                            if LoansTopupPosted."Outstanding Bill" > 0 then begin
 
                                 Linenum := Linenum + 1000;
                                 GenJournal.Init();
@@ -690,7 +686,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 GenJournal."Account Type" := GenJournal."Account Type"::Vendor;
                                 GenJournal.Validate("Account No.", AccBanking."No.");
 
-                                GenJournal.Validate(Amount, RecRef."Outstanding Bill");
+                                GenJournal.Validate(Amount, LoansTopupPosted."Outstanding Bill");
                                 GenJournal.Description := CopyStr('Bill Paid-' + LoansTopupPosted."Loan Top Up", 1, 50);
                                 GenJournal.Validate("Shortcut Dimension 1 Code", Dim1);
                                 GenJournal.Validate("Shortcut Dimension 2 Code", Dim2);
@@ -701,7 +697,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 Post.PostJournal(Jtemplate, JBatch,
                                 Linenum, Enum::"Gen. Journal Account Type"::Customer,
                                 DocumentNo, 'Bills Paid' + LoansTopupPosted."Loan Top Up",
-                                RecRef."Outstanding Bill" * -1, RecRef."Loan Account", PostingDate,
+                                LoansTopupPosted."Outstanding Bill" * -1, RecRef."Loan Account", PostingDate,
                                 Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                 RecRef."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::"Penalty Paid",
                                 LoansTopupPosted."Loan Top Up", RecRef."Group Code", '',
@@ -709,7 +705,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 Enum::"Gen. Journal Document Type"::" ");
                             end;
 
-                            if RecRef."Outstanding Principal" > 0 then begin
+                            if LoansTopupPosted."Outstanding Principle" > 0 then begin
 
                                 Linenum := Linenum + 1000;
                                 GenJournal.Init();
@@ -721,7 +717,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 GenJournal."Account Type" := GenJournal."Account Type"::Vendor;
                                 GenJournal.Validate("Account No.", AccBanking."No.");
 
-                                GenJournal.Validate(Amount, RecRef."Outstanding Principal");
+                                GenJournal.Validate(Amount, LoansTopupPosted."Outstanding Principle");
                                 GenJournal.Description := CopyStr('Bill Paid-' + LoansTopupPosted."Loan Top Up", 1, 50);
                                 GenJournal.Validate("Shortcut Dimension 1 Code", Dim1);
                                 GenJournal.Validate("Shortcut Dimension 2 Code", Dim2);
@@ -732,9 +728,40 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 Post.PostJournal(Jtemplate, JBatch,
                                 Linenum, Enum::"Gen. Journal Account Type"::Customer,
                                 DocumentNo, 'Principal Paid-' + LoansTopupPosted."Loan Top Up",
-                                RecRef."Outstanding Principal" * -1, RecRef."Loan Account", PostingDate,
+                                LoansTopupPosted."Outstanding Principle" * -1, RecRef."Loan Account", PostingDate,
                                 Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                 RecRef."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::Repayment,
+                                LoansTopupPosted."Loan Top Up", RecRef."Group Code", '',
+                                Enum::"Gen. Journal Document Type"::" ", RecRef."Currency Code",
+                                Enum::"Gen. Journal Document Type"::" ");
+
+                            end;
+                            if LoansTopupPosted."Outstanding Fee" > 0 then begin
+
+                                Linenum := Linenum + 1000;
+                                GenJournal.Init();
+                                GenJournal."Line No." := Linenum;
+                                GenJournal."Journal Template Name" := Jtemplate;
+                                GenJournal."Journal Batch Name" := JBatch;
+                                GenJournal."Posting Date" := PostingDate;
+                                GenJournal."Document No." := DocumentNo;
+                                GenJournal."Account Type" := GenJournal."Account Type"::Vendor;
+                                GenJournal.Validate("Account No.", AccBanking."No.");
+
+                                GenJournal.Validate(Amount, LoansTopupPosted."Outstanding Fee");
+                                GenJournal.Description := CopyStr('Bill Paid-' + LoansTopupPosted."Loan Top Up", 1, 50);
+                                GenJournal.Validate("Shortcut Dimension 1 Code", Dim1);
+                                GenJournal.Validate("Shortcut Dimension 2 Code", Dim2);
+                                if GenJournal.Amount <> 0 then
+                                    GenJournal.Insert(true);
+
+                                Linenum := Linenum + 1000;
+                                Post.PostJournal(Jtemplate, JBatch,
+                                Linenum, Enum::"Gen. Journal Account Type"::Customer,
+                                DocumentNo, 'Ledger Fee Paid-' + LoansTopupPosted."Loan Top Up",
+                                LoansTopupPosted."Outstanding Fee" * -1, RecRef."Loan Account", PostingDate,
+                                Enum::"Gen. Journal Account Type"::"G/L Account", '',
+                                RecRef."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::"Ledger Fee Paid",
                                 LoansTopupPosted."Loan Top Up", RecRef."Group Code", '',
                                 Enum::"Gen. Journal Document Type"::" ", RecRef."Currency Code",
                                 Enum::"Gen. Journal Document Type"::" ");
@@ -761,16 +788,16 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 GenJournal."Posting Date" := PostingDate;
                                 GenJournal.Description := CopyStr(LoanProdCharges."Charge Description" + '-' + LoansTopupPosted."Loan Top Up", 1, 50);
                                 GenJournal."External Document No." := RecRef."Account No.";
+                                GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
                                 if LoanProdCharges."Staggered Charge Code" = '' then begin
                                     if LoanProdCharges."Use Percentage" then begin
-                                        LoanProdCharges.TestField(Percentage);
                                         if ((LoanProdCharges.Percentage / 100) * ChargeAmt[2]) < LoanProdCharges.Minimum then begin
-                                            GenJournal.Validate(Amount, (LoanProdCharges.Minimum));
+                                            GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
                                         end else begin
-                                            GenJournal.Validate(Amount, ((LoanProdCharges.Percentage / 100) * ChargeAmt[2]));
+                                            GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
                                         end;
                                     end else begin
-                                        GenJournal.Validate(Amount, LoanProdCharges."Charge Amount");
+                                        GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
                                     end;
                                 end else begin
 
@@ -781,7 +808,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                             if (ChargeAmt[2] >= TieredChargeLine."Lower Limit") and (ChargeAmt[2] <= TieredChargeLine."Upper Limit") then begin
                                                 if TieredChargeLine."Use Percentage" then
                                                     GenJournal.Validate(Amount, Round(ChargeAmt[2] * (TieredChargeLine.Percentage / 100), 0.05, '>')) else
-                                                    GenJournal.Validate(Amount, TieredChargeLine."Charge Amount");
+                                                    GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
                                             end;
                                         until TieredChargeLine.Next() = 0;
                                     end;
@@ -806,16 +833,16 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                 GenJournal.Description := CopyStr(LoanProdCharges."Charge Description" + '-' + LoansTopupPosted."Loan Top Up", 1, 50);
                                 GenJournal."External Document No." := RecRef."Account No.";
 
+                                GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);
                                 if LoanProdCharges."Staggered Charge Code" = '' then begin
                                     if LoanProdCharges."Use Percentage" then begin
-                                        LoanProdCharges.TestField(Percentage);
                                         if ((LoanProdCharges.Percentage / 100) * ChargeAmt[2]) < LoanProdCharges.Minimum then begin
-                                            GenJournal.Validate(Amount, LoanProdCharges.Minimum);
+                                            GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);
                                         end else begin
-                                            GenJournal.Validate(Amount, ((LoanProdCharges.Percentage / 100) * ChargeAmt[2]) * -1);
+                                            GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);
                                         end;
                                     end else begin
-                                        GenJournal.Validate(Amount, LoanProdCharges."Charge Amount" * -1);
+                                        GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);
                                     end;
                                 end else begin
 
@@ -826,7 +853,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                             if (ChargeAmt[2] >= TieredChargeLine."Lower Limit") and (ChargeAmt[2] <= TieredChargeLine."Upper Limit") then begin
                                                 if TieredChargeLine."Use Percentage" then
                                                     GenJournal.Validate(Amount, ChargeAmt[2] * (TieredChargeLine.Percentage / 100) * -1) else
-                                                    GenJournal.Validate(Amount, TieredChargeLine."Charge Amount" * -1);
+                                                    GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);
                                             end;
                                         until TieredChargeLine.Next() = 0;
                                     end;
@@ -1359,10 +1386,6 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                         EndDate := Today;
                                         StartDate := CalcDate('-CM', Today);
                                         IntDays := (EndDate - StartDate) + 1;
-                                        LoansTopupPosted."Untransfered Interest" := PeriodAct.fnIntEntriesonSpecificLoan(PLoan, Today, PLoan."No.", 1, IntDays, StartDate);
-                                        LoansTopupPosted."Outstanding Bill" := PLoan."Outstanding Bill";
-                                        LoansTopupPosted."Total Amount" := (LoansTopupPosted."Untransfered Interest" + PLoan."Outstanding Balance");
-                                        LoansTopupPosted.Modify(true);
 
                                     end;
 
@@ -1399,13 +1422,13 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                                 GenJournal.Insert(true);
                                         end;
 
-                                        if (PLoan."Outstanding Interest" + LoansTopupPosted."Untransfered Interest") > 0 then begin
+                                        if (LoansTopupPosted."Outstanding Interest" + LoansTopupPosted."Untransfered Interest") > 0 then begin
 
                                             Linenum := Linenum + 1000;
                                             Post.PostJournal(Jtemplate, JBatch, Linenum,
                                             Enum::"Gen. Journal Account Type"::Customer, DocumentNo,
                                             'Principal Amount-' + LoansTopupPosted."Loan Top Up",
-                                            (PLoan."Outstanding Interest" + LoansTopupPosted."Untransfered Interest"),
+                                            (LoansTopupPosted."Outstanding Interest" + LoansTopupPosted."Untransfered Interest"),
                                             RecRef."Loan Account", PostingDate, Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                             PLoan."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::Loan,
                                             RecRef."No.", PLoan."Group Code", '',
@@ -1416,7 +1439,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                             Post.PostJournal(Jtemplate, JBatch, Linenum,
                                             Enum::"Gen. Journal Account Type"::Customer, DocumentNo,
                                             'Interest Paid-' + LoansTopupPosted."Loan Top Up",
-                                            (PLoan."Outstanding Interest" + LoansTopupPosted."Untransfered Interest") * -1,
+                                            (LoansTopupPosted."Outstanding Interest" + LoansTopupPosted."Untransfered Interest") * -1,
                                             PLoan."Loan Account", PostingDate, Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                             PLoan."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::"Interest Paid",
                                             LoansTopupPosted."Loan Top Up", PLoan."Group Code", '',
@@ -1424,13 +1447,13 @@ codeunit 50065 "Gen.Jnl.+Preview"
 
                                         end;
 
-                                        if PLoan."Outstanding Insurance" > 0 then begin
+                                        if LoansTopupPosted."Outstanding Insurance" > 0 then begin
 
                                             Linenum := Linenum + 1000;
                                             Post.PostJournal(Jtemplate, JBatch,
                                             Linenum, Enum::"Gen. Journal Account Type"::Customer,
                                             DocumentNo, 'Principal Amount' + LoansTopupPosted."Loan Top Up",
-                                            PLoan."Outstanding Insurance", RecRef."Loan Account", PostingDate,
+                                            LoansTopupPosted."Outstanding Insurance", RecRef."Loan Account", PostingDate,
                                             Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                             PLoan."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::Loan,
                                             RecRef."No.", PLoan."Group Code", '',
@@ -1441,7 +1464,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                             Post.PostJournal(Jtemplate, JBatch,
                                             Linenum, Enum::"Gen. Journal Account Type"::Customer,
                                             DocumentNo, 'Insurance Paid' + LoansTopupPosted."Loan Top Up",
-                                            PLoan."Outstanding Insurance" * -1, PLoan."Loan Account", PostingDate,
+                                            LoansTopupPosted."Outstanding Insurance" * -1, PLoan."Loan Account", PostingDate,
                                             Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                             PLoan."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::"Insurance Paid",
                                             LoansTopupPosted."Loan Top Up", PLoan."Group Code", '',
@@ -1450,14 +1473,14 @@ codeunit 50065 "Gen.Jnl.+Preview"
 
                                         end;
 
-                                        if PLoan."Outstanding Bill" > 0 then begin
+                                        if LoansTopupPosted."Outstanding Bill" > 0 then begin
 
 
                                             Linenum := Linenum + 1000;
                                             Post.PostJournal(Jtemplate, JBatch,
                                             Linenum, Enum::"Gen. Journal Account Type"::Customer,
                                             DocumentNo, 'Principal Amount' + LoansTopupPosted."Loan Top Up",
-                                            PLoan."Outstanding Bill", RecRef."Loan Account", PostingDate,
+                                            LoansTopupPosted."Outstanding Bill", RecRef."Loan Account", PostingDate,
                                             Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                             PLoan."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::"Penalty Paid",
                                             RecRef."No.", PLoan."Group Code", '',
@@ -1468,7 +1491,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                             Post.PostJournal(Jtemplate, JBatch,
                                             Linenum, Enum::"Gen. Journal Account Type"::Customer,
                                             DocumentNo, 'Bills Paid' + LoansTopupPosted."Loan Top Up",
-                                            PLoan."Outstanding Bill" * -1, PLoan."Loan Account", PostingDate,
+                                            LoansTopupPosted."Outstanding Bill" * -1, PLoan."Loan Account", PostingDate,
                                             Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                             PLoan."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::"Penalty Paid",
                                             LoansTopupPosted."Loan Top Up", PLoan."Group Code", '',
@@ -1477,13 +1500,13 @@ codeunit 50065 "Gen.Jnl.+Preview"
 
                                         end;
 
-                                        if PLoan."Outstanding Principal" > 0 then begin
+                                        if LoansTopupPosted."Outstanding Principle" > 0 then begin
 
                                             Linenum := Linenum + 1000;
                                             Post.PostJournal(Jtemplate, JBatch,
                                             Linenum, Enum::"Gen. Journal Account Type"::Customer,
                                             DocumentNo, 'Principal Amount-' + LoansTopupPosted."Loan Top Up",
-                                            PLoan."Outstanding Principal", RecRef."Loan Account", PostingDate,
+                                            LoansTopupPosted."Outstanding Principle", RecRef."Loan Account", PostingDate,
                                             Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                             PLoan."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::Loan,
                                             RecRef."No.", PLoan."Group Code", '',
@@ -1494,9 +1517,34 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                             Post.PostJournal(Jtemplate, JBatch,
                                             Linenum, Enum::"Gen. Journal Account Type"::Customer,
                                             DocumentNo, 'Principal Paid-' + LoansTopupPosted."Loan Top Up",
-                                            PLoan."Outstanding Principal" * -1, PLoan."Loan Account", PostingDate,
+                                            LoansTopupPosted."Outstanding Principle" * -1, PLoan."Loan Account", PostingDate,
                                             Enum::"Gen. Journal Account Type"::"G/L Account", '',
                                             PLoan."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::Repayment,
+                                            LoansTopupPosted."Loan Top Up", PLoan."Group Code", '',
+                                            Enum::"Gen. Journal Document Type"::" ", PLoan."Currency Code",
+                                            Enum::"Gen. Journal Document Type"::" ");
+
+                                        end;
+                                        if LoansTopupPosted."Outstanding Fee" > 0 then begin
+
+                                            Linenum := Linenum + 1000;
+                                            Post.PostJournal(Jtemplate, JBatch,
+                                            Linenum, Enum::"Gen. Journal Account Type"::Customer,
+                                            DocumentNo, 'Principal Amount-' + LoansTopupPosted."Loan Top Up",
+                                            LoansTopupPosted."Outstanding Fee", RecRef."Loan Account", PostingDate,
+                                            Enum::"Gen. Journal Account Type"::"G/L Account", '',
+                                            PLoan."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::Loan,
+                                            RecRef."No.", PLoan."Group Code", '',
+                                            Enum::"Gen. Journal Document Type"::" ", PLoan."Currency Code",
+                                            Enum::"Gen. Journal Document Type"::" ");
+
+                                            Linenum := Linenum + 1000;
+                                            Post.PostJournal(Jtemplate, JBatch,
+                                            Linenum, Enum::"Gen. Journal Account Type"::Customer,
+                                            DocumentNo, 'Ledger Fee Paid-' + LoansTopupPosted."Loan Top Up",
+                                            LoansTopupPosted."Outstanding Fee" * -1, PLoan."Loan Account", PostingDate,
+                                            Enum::"Gen. Journal Account Type"::"G/L Account", '',
+                                            PLoan."Account No.", Dim1, Dim2, Enum::"LoanTransactionType"::"Ledger Fee Paid",
                                             LoansTopupPosted."Loan Top Up", PLoan."Group Code", '',
                                             Enum::"Gen. Journal Document Type"::" ", PLoan."Currency Code",
                                             Enum::"Gen. Journal Document Type"::" ");
@@ -1525,16 +1573,16 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                             GenJournal.Description := CopyStr(LoanProdCharges."Charge Description" + '-' + LoansTopupPosted."Loan Top Up", 1, 50);
                                             GenJournal."External Document No." := PLoan."Account No.";
 
-                                            if LoanProdCharges."Staggered Charge Code" = '' then begin
+                                            GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
+                                if LoanProdCharges."Staggered Charge Code" = '' then begin
                                                 if LoanProdCharges."Use Percentage" then begin
-                                                    LoanProdCharges.TestField(Percentage);
                                                     if ((LoanProdCharges.Percentage / 100) * LoansTopupPosted."Total Amount") < LoanProdCharges.Minimum then begin
-                                                        GenJournal.Validate(Amount, (LoanProdCharges.Minimum));
+                                                        GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
                                                     end else begin
-                                                        GenJournal.Validate(Amount, ((LoanProdCharges.Percentage / 100) * ChargeAmt[2]));
+                                                        GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
                                                     end;
                                                 end else begin
-                                                    GenJournal.Validate(Amount, LoanProdCharges."Charge Amount");
+                                                    GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
                                                 end;
                                             end else begin
 
@@ -1545,7 +1593,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                                         if (LoansTopupPosted."Total Amount" >= TieredChargeLine."Lower Limit") and (LoansTopupPosted."Total Amount" <= TieredChargeLine."Upper Limit") then begin
                                                             if TieredChargeLine."Use Percentage" then
                                                                 GenJournal.Validate(Amount, (LoansTopupPosted."Total Amount" * (TieredChargeLine.Percentage / 100))) else
-                                                                GenJournal.Validate(Amount, TieredChargeLine."Charge Amount");
+                                                                GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
                                                         end;
                                                     until TieredChargeLine.Next() = 0;
                                                 end;
@@ -1573,16 +1621,16 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                             GenJournal.Validate("Account No.", LoanProdCharges."Charges Account");
                                             GenJournal."External Document No." := RecRef."Account No.";
 
-                                            if LoanProdCharges."Staggered Charge Code" = '' then begin
+                                            GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);
+                                if LoanProdCharges."Staggered Charge Code" = '' then begin
                                                 if LoanProdCharges."Use Percentage" then begin
-                                                    LoanProdCharges.TestField(Percentage);
                                                     if ((LoanProdCharges.Percentage / 100) * LoansTopupPosted."Total Amount") < LoanProdCharges.Minimum then begin
-                                                        GenJournal.Validate(Amount, (LoanProdCharges.Minimum) * -1);
+                                                        GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);
                                                     end else begin
-                                                        GenJournal.Validate(Amount, ((LoanProdCharges.Percentage / 100) * ChargeAmt[2]) * -1);
+                                                        GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);
                                                     end;
                                                 end else begin
-                                                    GenJournal.Validate(Amount, LoanProdCharges."Charge Amount" * -1);
+                                                    GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);
                                                 end;
                                             end else begin
 
@@ -1593,7 +1641,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                                         if (LoansTopupPosted."Total Amount" >= TieredChargeLine."Lower Limit") and (LoansTopupPosted."Total Amount" <= TieredChargeLine."Upper Limit") then begin
                                                             if TieredChargeLine."Use Percentage" then
                                                                 GenJournal.Validate(Amount, Round(LoansTopupPosted."Total Amount" * (TieredChargeLine.Percentage / 100), 0.05, '>') * -1) else
-                                                                GenJournal.Validate(Amount, TieredChargeLine."Charge Amount" * -1);
+                                                                GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);
                                                         end;
                                                     until TieredChargeLine.Next() = 0;
                                                 end;
@@ -2337,7 +2385,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                     RecRef.CalcFields("Outstanding Principal", "Outstanding Bill",
                           "Outstanding Interest", "Outstanding Insurance");
 
-                    if RecRef."Outstanding Interest" > 0 then begin
+                    if LoansTopupPosted."Outstanding Interest" > 0 then begin
 
                         GenLines.Reset();
                         GenLines.SetRange("Journal Template Name", Gnltemplate);
@@ -2348,7 +2396,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                         Post.PostJournal(Gnltemplate, GnlJBatch, LineNo,
                         Enum::"Gen. Journal Account Type"::Vendor, DocumentNo,
                         'Interest Cleared on-' + LoansTopupPosted."Loan Top Up",
-                        RecRef."Outstanding Interest",
+                        LoansTopupPosted."Outstanding Interest",
                         RecRef."Disbursement Account No.", PostDate,
                         Enum::"Gen. Journal Account Type"::"G/L Account",
                         '', RecRef."Account No.", Dim1, Dim2,
@@ -2367,7 +2415,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                         Post.PostJournal(Gnltemplate, GnlJBatch, LineNo,
                         Enum::"Gen. Journal Account Type"::Customer, DocumentNo,
                         'Interest Paid-' + LoansTopupPosted."Loan Top Up",
-                        RecRef."Outstanding Interest" * -1,
+                        LoansTopupPosted."Outstanding Interest" * -1,
                         RecRef."Loan Account", PostDate,
                         Enum::"Gen. Journal Account Type"::"G/L Account", '',
                         RecRef."Account No.", Dim1, Dim2,
@@ -2378,7 +2426,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                         Enum::"Gen. Journal Document Type"::" ");
                     end;
 
-                    if RecRef."Outstanding Bill" > 0 then begin
+                    if LoansTopupPosted."Outstanding Bill" > 0 then begin
 
                         GenLines.Reset();
                         GenLines.SetRange("Journal Template Name", Gnltemplate);
@@ -2391,7 +2439,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                         Enum::"Gen. Journal Account Type"::Vendor,
                         DocumentNo,
                         'Bills Cleared-' + LoansTopupPosted."Loan Top Up",
-                        RecRef."Outstanding Bill",
+                        LoansTopupPosted."Outstanding Bill",
                         RecRef."Disbursement Account No.", PostDate,
                         Enum::"Gen. Journal Account Type"::"G/L Account", '',
                         RecRef."Account No.", Dim1, Dim2,
@@ -2412,7 +2460,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                         Enum::"Gen. Journal Account Type"::Customer,
                         DocumentNo,
                         'Bills Paid' + LoansTopupPosted."Loan Top Up",
-                        RecRef."Outstanding Bill" * -1,
+                        LoansTopupPosted."Outstanding Bill" * -1,
                         RecRef."Loan Account", PostDate,
                         Enum::"Gen. Journal Account Type"::"G/L Account", '',
                         RecRef."Account No.", Dim1, Dim2,
@@ -2423,7 +2471,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                         Enum::"Gen. Journal Document Type"::" ");
                     end;
 
-                    if RecRef."Outstanding Principal" > 0 then begin
+                    if LoansTopupPosted."Outstanding Principle" > 0 then begin
                         GenLines.Reset();
                         GenLines.SetRange("Journal Template Name", Gnltemplate);
                         GenLines.SetRange("Journal Batch Name", GnlJBatch);
@@ -2435,7 +2483,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                         Enum::"Gen. Journal Account Type"::Vendor,
                         DocumentNo,
                         'Principal Cleared-' + LoansTopupPosted."Loan Top Up",
-                        RecRef."Outstanding Principal",
+                        LoansTopupPosted."Outstanding Principle",
                         RecRef."Disbursement Account No.", PostDate,
                         Enum::"Gen. Journal Account Type"::"G/L Account", '',
                         RecRef."Account No.", Dim1, Dim2,
@@ -2456,11 +2504,97 @@ codeunit 50065 "Gen.Jnl.+Preview"
                         Enum::"Gen. Journal Account Type"::Customer,
                         DocumentNo,
                         'Principal Paid-' + LoansTopupPosted."Loan Top Up",
-                        RecRef."Outstanding Principal" * -1,
+                        LoansTopupPosted."Outstanding Principle" * -1,
                         RecRef."Loan Account", PostDate,
                         Enum::"Gen. Journal Account Type"::"G/L Account", '',
                         RecRef."Account No.", Dim1, Dim2,
                         Enum::"LoanTransactionType"::Repayment,
+                        RecRef."No.", RecRef."Group Code", '',
+                        Enum::"Gen. Journal Document Type"::" ",
+                        RecRef."Currency Code",
+                        Enum::"Gen. Journal Document Type"::" ");
+                    end;
+                    if LoansTopupPosted."Outstanding Fee" > 0 then begin
+                        GenLines.Reset();
+                        GenLines.SetRange("Journal Template Name", Gnltemplate);
+                        GenLines.SetRange("Journal Batch Name", GnlJBatch);
+                        if GenLines.FindLast() then
+                            LineNo := GenLines."Line No." + 1000;
+
+                        Post.PostJournal(Gnltemplate, GnlJBatch,
+                        LineNo,
+                        Enum::"Gen. Journal Account Type"::Vendor,
+                        DocumentNo,
+                        'Ledger Fee Cleared-' + LoansTopupPosted."Loan Top Up",
+                        LoansTopupPosted."Outstanding Fee",
+                        RecRef."Disbursement Account No.", PostDate,
+                        Enum::"Gen. Journal Account Type"::"G/L Account", '',
+                        RecRef."Account No.", Dim1, Dim2,
+                        Enum::"LoanTransactionType"::" ",
+                        '', RecRef."Group Code", '',
+                        Enum::"Gen. Journal Document Type"::" ",
+                        RecRef."Currency Code",
+                        Enum::"Gen. Journal Document Type"::" ");
+
+                        GenLines.Reset();
+                        GenLines.SetRange("Journal Template Name", Gnltemplate);
+                        GenLines.SetRange("Journal Batch Name", GnlJBatch);
+                        if GenLines.FindLast() then
+                            LineNo := GenLines."Line No." + 1000;
+
+                        Post.PostJournal(Gnltemplate, GnlJBatch,
+                        LineNo,
+                        Enum::"Gen. Journal Account Type"::Customer,
+                        DocumentNo,
+                        'Ledger Fee Paid-' + LoansTopupPosted."Loan Top Up",
+                        LoansTopupPosted."Outstanding Fee" * -1,
+                        RecRef."Loan Account", PostDate,
+                        Enum::"Gen. Journal Account Type"::"G/L Account", '',
+                        RecRef."Account No.", Dim1, Dim2,
+                        Enum::"LoanTransactionType"::"Ledger Fee Paid",
+                        RecRef."No.", RecRef."Group Code", '',
+                        Enum::"Gen. Journal Document Type"::" ",
+                        RecRef."Currency Code",
+                        Enum::"Gen. Journal Document Type"::" ");
+                    end;
+                    if LoansTopupPosted."Outstanding Insurance" > 0 then begin
+                        GenLines.Reset();
+                        GenLines.SetRange("Journal Template Name", Gnltemplate);
+                        GenLines.SetRange("Journal Batch Name", GnlJBatch);
+                        if GenLines.FindLast() then
+                            LineNo := GenLines."Line No." + 1000;
+
+                        Post.PostJournal(Gnltemplate, GnlJBatch,
+                        LineNo,
+                        Enum::"Gen. Journal Account Type"::Vendor,
+                        DocumentNo,
+                        'Insurance Cleared-' + LoansTopupPosted."Loan Top Up",
+                        LoansTopupPosted."Outstanding Insurance",
+                        RecRef."Disbursement Account No.", PostDate,
+                        Enum::"Gen. Journal Account Type"::"G/L Account", '',
+                        RecRef."Account No.", Dim1, Dim2,
+                        Enum::"LoanTransactionType"::" ",
+                        '', RecRef."Group Code", '',
+                        Enum::"Gen. Journal Document Type"::" ",
+                        RecRef."Currency Code",
+                        Enum::"Gen. Journal Document Type"::" ");
+
+                        GenLines.Reset();
+                        GenLines.SetRange("Journal Template Name", Gnltemplate);
+                        GenLines.SetRange("Journal Batch Name", GnlJBatch);
+                        if GenLines.FindLast() then
+                            LineNo := GenLines."Line No." + 1000;
+
+                        Post.PostJournal(Gnltemplate, GnlJBatch,
+                        LineNo,
+                        Enum::"Gen. Journal Account Type"::Customer,
+                        DocumentNo,
+                        'Insurance Paid-' + LoansTopupPosted."Loan Top Up",
+                        LoansTopupPosted."Outstanding Insurance" * -1,
+                        RecRef."Loan Account", PostDate,
+                        Enum::"Gen. Journal Account Type"::"G/L Account", '',
+                        RecRef."Account No.", Dim1, Dim2,
+                        Enum::"LoanTransactionType"::"Insurance Paid",
                         RecRef."No.", RecRef."Group Code", '',
                         Enum::"Gen. Journal Document Type"::" ",
                         RecRef."Currency Code",
