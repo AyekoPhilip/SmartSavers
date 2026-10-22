@@ -115,10 +115,10 @@ page 50385 "Alt. Channel Account"
                         if rec."Mobile Transaction Status" = rec."Mobile Transaction Status"::Registered then begin
                             rec."Mobile Transaction Status" := rec."Mobile Transaction Status"::Deactived;
                             rec.Modify(true);
-                        END;
+                        END else 
 
 
-                        if rec."Mobile Transaction Status" = rec."Mobile Transaction Status"::Deactived then begin
+                if rec."Mobile Transaction Status" = rec."Mobile Transaction Status"::Deactived then begin
                             rec."Mobile Transaction Status" := rec."Mobile Transaction Status"::Registered;
                             rec.Modify(true);
                         END;
