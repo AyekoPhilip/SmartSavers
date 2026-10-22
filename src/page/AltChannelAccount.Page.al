@@ -105,7 +105,7 @@ page 50385 "Alt. Channel Account"
                     end;
                 }
 
-                action(Activate)
+                action("Activate/Deactivate")
                 {
                     Image = CustomerGroup;
                     ApplicationArea = All;
