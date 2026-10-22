@@ -271,21 +271,22 @@ page 51018 "Mobile Registration Page"
         }
 
     }
+
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
 
-        MembApplic.Reset;
+       /*  MembApplic.Reset;
         MembApplic.SetRange("Entered By", UserId);
         MembApplic.SetFilter("Approval Status", '%1|%2', MembApplic."Approval Status"::Open, MembApplic."Approval Status"::"Pending Approval");
         if MembApplic.Count > 5 then begin
             Error(ErrorOnTransactions);
         end;
-
+ */
     end;
 
     trigger OnOpenPage()
     begin
-        if Rec."Approval Status" <> Rec."Approval Status"::Open then CurrPage.Editable := false;
+       // if Rec."Approval Status" <> Rec."Approval Status"::Open then CurrPage.Editable := false;
 
     end;
 

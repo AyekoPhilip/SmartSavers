@@ -211,7 +211,14 @@ table 50322 "Dsc Mobile Application"
         if "No." = '' then begin
             NoSetup.GET;
             NoSetup.TESTFIELD(NoSetup."Mobile Application Nos");
-            
+
+                        "No. Series" :=NoSetup."Mobile Application Nos";
+                        if NoSeriesMgt.AreRelated(NoSetup."Mobile Application Nos", xRec."No. Series") then
+                            "No. Series" := xRec."No. Series";
+                        "No." := NoSeriesMgt.GetNextNo("No. Series")
+                    end else begin
+
+          
         end;
         Temp.Get(UserId);
         Temp.TestField("Global Dimension 1 Code");
