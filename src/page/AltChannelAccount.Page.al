@@ -104,6 +104,30 @@ page 50385 "Alt. Channel Account"
 
                     end;
                 }
+
+                action(Activate)
+                {
+                    Image = CustomerGroup;
+                    ApplicationArea = All;
+
+                    trigger OnAction()
+                    begin
+                        if rec."Mobile Transaction Status" = rec."Mobile Transaction Status"::Registered then begin
+                            rec."Mobile Transaction Status" := rec."Mobile Transaction Status"::Deactived;
+                            rec.Modify(true);
+                        END;
+
+
+                        if rec."Mobile Transaction Status" = rec."Mobile Transaction Status"::Deactived then begin
+                            rec."Mobile Transaction Status" := rec."Mobile Transaction Status"::Registered;
+                            rec.Modify(true);
+                        END;
+
+                    end;
+                }
+
+
+
             }
         }
         area(Promoted)
