@@ -317,7 +317,7 @@ codeunit 50041 "Credit Mgmt."
                         ActionItem::"Loan History":
                             begin
                                 PLoan.SetRange("Account No.", LoansApp."Account No.");
-                                if PLoan.Find('-') then
+                                if PLoan.FindFirst() then
                                     PAGE.Run(PAGE::"Loan Application Posted", PLoan, PLoan."Account No.");
                             end;
                         ActionItem::"Salary Details":
@@ -335,7 +335,7 @@ codeunit 50041 "Credit Mgmt."
                             begin
                                 Applic.Reset();
                                 Applic.SetRange("No.", LoansApp."No.");
-                                if Applic.Find('-') then begin
+                                if Applic.FindFirst() then begin
                                     Codeunit.Run(Codeunit::"CSC Appraisal Parameters", LoansApp);
                                 end;
                             end;
@@ -391,12 +391,10 @@ codeunit 50041 "Credit Mgmt."
                             begin
                                 if Confirm(OnConfirmDialogTxt, true) = false then
                                     exit;
-
                                 LoansRec.Reset();
                                 LoansRec.SetRange("No.", PLoan."No.");
                                 if LoansRec.FindFirst() then begin
                                     LoansRec.TestField("Approval Status", LoansRec."Approval Status"::Approved);
-
                                     case LoansRec."Application Type" of
                                         LoansRec."Application Type"::"Loan Restructure":
                                             begin
@@ -411,16 +409,14 @@ codeunit 50041 "Credit Mgmt."
                                                 case LoansRec."Mode of Disbursement" of
                                                     LoansRec."Mode of Disbursement"::"Full Disbursement":
                                                         begin
-                                                            GenPostMngt.CodePost(LoansRec."No.", true, Today, LoansRec."No.");
+                                                            GenPostMngt.CodePost(LoansRec."No.", LoansRec."Check Line", Today, LoansRec."No.");
                                                         end else begin
-                                                        GenPostMngt.CodePostPartialDisb(LoansRec."No.", true, Today, LoansRec."No.", 1);
+                                                        GenPostMngt.CodePostPartialDisb(LoansRec."No.", LoansRec."Check Line", Today, LoansRec."No.", 1);
                                                     end
                                                 end;
                                                 Commit();
                                                 ValuePost(LoansRec."No.", 0);
-
                                             end;
-
                                     end;
                                 end
 

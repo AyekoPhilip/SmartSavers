@@ -1388,32 +1388,32 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                         EndDate := Today;
                     StartDate := CalcDate('-CM', Today);
                     IntDays := (EndDate - StartDate) + 1;
-                     if PFact."Loan Span" = PFact."Loan Span"::"Mobile Loan" then
-                            AccruedInt := 0
-                        else
-                            AccruedInt := Accrualmgt.CalculateAccruedInterestAtDate(Loans."No.", Today);
-                       
-                        if AccruedInt > 0 then begin
+                    if PFact."Loan Span" = PFact."Loan Span"::"Mobile Loan" then
+                        AccruedInt := 0
+                    else
+                        AccruedInt := Accrualmgt.CalculateAccruedInterestAtDate(Loans."No.", Today);
 
-                            GenJournalLine.LockTable;
-                            LineNo := LineNo + 10000;
-                            TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
-                            JTemplate, JBatch, MobileTrans."Document No.", '',
-                            MobileTrans."Transaction Date", Dim1, Dim2);
-                            GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
-                            GenJournalLine."External Document No." := Loans."No.";
-                            GenJournalLine.Validate(GenJournalLine."Account No.", Loans."Loan Account");
-                            GenJournalLine.Description := 'Interest Accrued-' + Loans."No.";
-                            GenJournalLine.Validate(Amount, AccruedInt);
-                            GenJournalLine.Validate("Bal. Account No.", PFact."Interest Account (G/L)");
-                            GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::"Interest Due";
-                            GenJournalLine.Validate("Loan No.", Loans."No.");
-                            GenJournalLine.Validate("Shortcut Dimension 1 Code", Dim1);
-                            GenJournalLine.Validate("Shortcut Dimension 2 Code", Dim2);
-                            if GenJournalLine.Amount <> 0 then
-                                GenJournalLine.Insert(true);
+                    if AccruedInt > 0 then begin
 
-                        end;
+                        GenJournalLine.LockTable;
+                        LineNo := LineNo + 10000;
+                        TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
+                        JTemplate, JBatch, MobileTrans."Document No.", '',
+                        MobileTrans."Transaction Date", Dim1, Dim2);
+                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
+                        GenJournalLine."External Document No." := Loans."No.";
+                        GenJournalLine.Validate(GenJournalLine."Account No.", Loans."Loan Account");
+                        GenJournalLine.Description := 'Interest Accrued-' + Loans."No.";
+                        GenJournalLine.Validate(Amount, AccruedInt);
+                        GenJournalLine.Validate("Bal. Account No.", PFact."Interest Account (G/L)");
+                        GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::"Interest Due";
+                        GenJournalLine.Validate("Loan No.", Loans."No.");
+                        GenJournalLine.Validate("Shortcut Dimension 1 Code", Dim1);
+                        GenJournalLine.Validate("Shortcut Dimension 2 Code", Dim2);
+                        if GenJournalLine.Amount <> 0 then
+                            GenJournalLine.Insert(true);
+
+                    end;
                 end;
 
                 Loans.Reset();
@@ -3273,9 +3273,9 @@ codeunit 50023 "Mngt. Post Alt. Channels"
     procedure PerformPostOnAccountTransfers(ReceiptNo: Code[20]; IntPost: Integer; PostPreview: Boolean) Response: Text[6048]
     var
         TellerTill: Record "Bank Account";
-        UnclearedEffects: Record "ATM Transaction";
+        altchmgt: Record "ATM Transaction";
         Account: Record "Account Banking";
-        FosaAccount: Record "Account Banking";
+        accmgt: Record "Account Banking";
         TCharges: Decimal;
         TransactionTypes: Record "Transaction Types";
         TransactionCharges: Record "Transaction Charge";
@@ -3324,20 +3324,20 @@ codeunit 50023 "Mngt. Post Alt. Channels"
         LRepayment := 0;
         AccruedInt := 0;
 
-        UnclearedEffects.Reset();
-        UnclearedEffects.SetFilter(Amount, '>0');
-        UnclearedEffects.SetRange(Posted, false);
-        UnclearedEffects.SetRange("Trace ID", ReceiptNo);
-        if UnclearedEffects.FindFirst() then begin
+        altchmgt.Reset();
+        altchmgt.SetFilter(Amount, '>0');
+        altchmgt.SetRange(Posted, false);
+        altchmgt.SetRange("Trace ID", ReceiptNo);
+        if altchmgt.FindFirst() then begin
 
             TellerTill.Reset();
             TellerTill.SetRange(Blocked, false);
             TellerTill.SetRange("No.", Temp."Default Bank C2B");
             IF TellerTill.FindFirst() then begin
                 TellerTill.CalcFields(TellerTill.Balance);
-                Continue := RegMngt.TestNoEntriesExist(UnclearedEffects."Trace ID");
+                Continue := RegMngt.TestNoEntriesExist(altchmgt."Trace ID");
                 if Continue then begin
-                    Response := '99|Entry already Posted' + UnclearedEffects."Trace ID";
+                    Response := '99|Entry already Posted' + altchmgt."Trace ID";
                     exit(Response);
                 end;
 
@@ -3351,7 +3351,7 @@ codeunit 50023 "Mngt. Post Alt. Channels"
 
                 Account.Reset();
                 Account.SetRange(Blocked, Account.Blocked::" ");
-                Account.SetRange("No.", UnclearedEffects."Account No");
+                Account.SetRange("No.", altchmgt."Account No");
                 if Account.FindFirst() then begin
 
                     if AccountType.Get(Account."Product Type") then
@@ -3359,28 +3359,28 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                             JuniorTransType := TellerMgt.getSubsiquenTransType(AccountType."Product ID");
 
                             if JuniorTransType = '' then exit(ErrorOnExistNoCharge);
-                            TotalCharge := BnkMngt.CalculateTransactCharges(UnclearedEffects.Amount, JuniorTransType, 1, true);
+                            TotalCharge := BnkMngt.CalculateTransactCharges(altchmgt.Amount, JuniorTransType, 1, true);
                             if Account."Next Withdrawal Date" <> 0D then begin
 
                                 if Today <= Account."Next Withdrawal Date" then begin
 
-                                    if UnclearedEffects.Amount < TellerMgt.CalcAvailableBal(Account."No.") then begin
+                                    if altchmgt.Amount < TellerMgt.CalcAvailableBal(Account."No.") then begin
 
                                         GenJournalLine.LockTable;
                                         LineNo := LineNo + 10000;
                                         TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
-                                        JTemplate, JBatch, UnclearedEffects."Trace ID", '',
-                                        UnclearedEffects."Transaction Date", Dim1, Dim2);
+                                        JTemplate, JBatch, altchmgt."Trace ID", '',
+                                        altchmgt."Transaction Date", Dim1, Dim2);
                                         GenJournalLine."Account Type" := GenJournalLine."Account Type"::Vendor;
-                                        GenJournalLine.Validate(GenJournalLine."Account No.", UnclearedEffects."Account No");
-                                        GenJournalLine.Validate(Amount, (UnclearedEffects.Amount - TotalCharge));
-                                        GenJournalLine.Description := UnclearedEffects.Description;
-                                        GenJournalLine."External Document No." := UnclearedEffects."Reference No";
+                                        GenJournalLine.Validate(GenJournalLine."Account No.", altchmgt."Account No");
+                                        GenJournalLine.Validate(Amount, (altchmgt.Amount - TotalCharge));
+                                        GenJournalLine.Description := altchmgt.Description;
+                                        GenJournalLine."External Document No." := altchmgt."Reference No";
                                         if GenJournalLine.Amount <> 0 then
                                             GenJournalLine.Insert(true);
 
-                                        TellerMgt.fnPostAccTransferCharges(JuniorTransType, Account."No.", UnclearedEffects.Amount,
-                                        Dim1, Dim2, JTemplate, JBatch, UnclearedEffects."Trace ID", UnclearedEffects."Transaction Date");
+                                        TellerMgt.fnPostAccTransferCharges(JuniorTransType, Account."No.", altchmgt.Amount,
+                                        Dim1, Dim2, JTemplate, JBatch, altchmgt."Trace ID", altchmgt."Transaction Date");
 
                                     end else begin
                                         exit(Text0008)
@@ -3393,39 +3393,38 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                             GenJournalLine.LockTable;
                             LineNo := LineNo + 10000;
                             TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
-                            JTemplate, JBatch, UnclearedEffects."Trace ID", '',
-                            UnclearedEffects."Transaction Date", Dim1, Dim2);
+                            JTemplate, JBatch, altchmgt."Trace ID", '',
+                            altchmgt."Transaction Date", Dim1, Dim2);
                             GenJournalLine."Account Type" := GenJournalLine."Account Type"::Vendor;
-                            GenJournalLine.Validate(GenJournalLine."Account No.", UnclearedEffects."Account No");
-                            GenJournalLine.Validate(Amount, UnclearedEffects.Amount);
-                            GenJournalLine.Description := UnclearedEffects.Description;
-                            GenJournalLine."External Document No." := UnclearedEffects."Reference No";
+                            GenJournalLine.Validate(GenJournalLine."Account No.", altchmgt."Account No");
+                            GenJournalLine.Validate(Amount, altchmgt.Amount);
+                            GenJournalLine.Description := altchmgt.Description;
+                            GenJournalLine."External Document No." := altchmgt."Reference No";
                             if GenJournalLine.Amount <> 0 then
                                 GenJournalLine.Insert(true);
                         end;
 
-                    AmtBal := (UnclearedEffects.Amount - TotalCharge);
+                    AmtBal := (altchmgt.Amount - TotalCharge);
 
                     case IntPost of
                         1:
                             begin
 
-                                FosaAccount.Reset();
-                                FosaAccount.SetRange(Blocked, FosaAccount.Blocked::" ");
-                                FosaAccount.SetRange("No.", UnclearedEffects."Account No.(Credit)");
-                                if FosaAccount.FindFirst() then begin
-                                    if FosaAccount.Blocked = FosaAccount.Blocked::" " then begin
+                                accmgt.Reset();
+                                accmgt.SetRange(Blocked, accmgt.Blocked::" ");
+                                accmgt.SetRange("No.", altchmgt."Account No.(Credit)");
+                                if accmgt.FindFirst() then begin
+                                    if accmgt.Blocked = accmgt.Blocked::" " then begin
 
                                         GenJournalLine.LockTable;
                                         LineNo := LineNo + 10000;
                                         TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
-                                        JTemplate, JBatch, UnclearedEffects."Trace ID", '',
-                                        UnclearedEffects."Transaction Date", Dim1, Dim2);
+                                        JTemplate, JBatch, altchmgt."Trace ID", '', altchmgt."Transaction Date", Dim1, Dim2);
                                         GenJournalLine."Account Type" := GenJournalLine."Account Type"::Vendor;
-                                        GenJournalLine."External Document No." := UnclearedEffects."Reference No";
-                                        GenJournalLine.Validate(GenJournalLine."Account No.", FosaAccount."No.");
+                                        GenJournalLine."External Document No." := altchmgt."Reference No";
+                                        GenJournalLine.Validate(GenJournalLine."Account No.", accmgt."No.");
                                         GenJournalLine.Validate(Amount, AmtBal * -1);
-                                        GenJournalLine.Description := UnclearedEffects.Description;
+                                        GenJournalLine.Description := altchmgt.Description;
                                         if GenJournalLine.Amount <> 0 then
                                             GenJournalLine.Insert(true);
 
@@ -3438,19 +3437,18 @@ codeunit 50023 "Mngt. Post Alt. Channels"
 
                                     AccountCredit.Reset();
                                     AccountCredit.SetRange(Blocked, AccountCredit.Blocked::" ");
-                                    AccountCredit.SetRange("No.", UnclearedEffects."Account No.(Credit)");
+                                    AccountCredit.SetRange("No.", altchmgt."Account No.(Credit)");
                                     if AccountCredit.FindFirst() then begin
 
                                         GenJournalLine.LockTable;
                                         LineNo := LineNo + 10000;
                                         TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
-                                        JTemplate, JBatch, UnclearedEffects."Trace ID", '',
-                                        UnclearedEffects."Transaction Date", Dim1, Dim2);
+                                        JTemplate, JBatch, altchmgt."Trace ID", '', altchmgt."Transaction Date", Dim1, Dim2);
                                         GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
-                                        GenJournalLine."External Document No." := UnclearedEffects."Reference No";
+                                        GenJournalLine."External Document No." := altchmgt."Reference No";
                                         GenJournalLine.Validate(GenJournalLine."Account No.", AccountCredit."No.");
                                         GenJournalLine.Validate(Amount, AmtBal * -1);
-                                        GenJournalLine.Description := UnclearedEffects.Description;
+                                        GenJournalLine.Description := altchmgt.Description;
                                         if GenJournalLine.Amount <> 0 then
                                             GenJournalLine.Insert(true);
                                     end else begin
@@ -3462,12 +3460,12 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                         2:
                             begin
 
-                                RunBal := (UnclearedEffects.Amount - TotalCharge);
+                                RunBal := (altchmgt.Amount - TotalCharge);
 
                                 PLoans.Reset;
                                 Ploans.SetFilter("Outstanding Balance", '>0');
-                                PLoans.SetRange("No.", UnclearedEffects."Account No.(Credit)");
-                                if PLoans.Find('-') then begin
+                                PLoans.SetRange("No.", altchmgt."Account No.(Credit)");
+                                if PLoans.FindFirst() then begin
                                     Ploans.CalcFields("Outstanding Balance");
 
                                     EndDate := Today;
@@ -3475,37 +3473,35 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                                     IntDays := (EndDate - StartDate) + 1;
 
                                     if RunBal >= Ploans."Outstanding Balance" then begin
+
                                         if AccountType.Get(Ploans."Product Type") then
                                             AccountType.TestField("Interest Account (G/L)");
-
-                                        if AccountType."Loan Span" = AccountType."Loan Span"::"Mobile Loan" then
-                                            AccruedInt := 0 else
+                                        if AccountType."Loan Span" <> AccountType."Loan Span"::"Mobile Loan" then begin
                                             AccruedInt := PeriodicMgt.fnIntEntriesonSpecificLoan(Ploans, Today, Ploans."No.", 1, IntDays, StartDate);
 
-                                        GenJournalLine.LockTable;
-                                        LineNo := LineNo + 10000;
-                                        TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
-                                        JTemplate, JBatch, UnclearedEffects."Trace ID", '',
-                                        UnclearedEffects."Transaction Date", Dim1, Dim2);
-                                        GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
-                                        GenJournalLine."External Document No." := UnclearedEffects."Reference No";
-                                        GenJournalLine.Validate(GenJournalLine."Account No.", Ploans."Loan Account");
-                                        GenJournalLine.Validate(Amount, AccruedInt);
-                                        GenJournalLine.Description := UnclearedEffects.Description;
-                                        GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::"Interest Due";
-                                        GenJournalLine.Validate("Loan No.", Ploans."No.");
-                                        GenJournalLine.Validate("Bal. Account No.", AccountType."Interest Account (G/L)");
-                                        if GenJournalLine.Amount <> 0 then
-                                            GenJournalLine.Insert(true);
+                                            GenJournalLine.LockTable;
+                                            LineNo := LineNo + 10000;
+                                            TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
+                                            JTemplate, JBatch, altchmgt."Trace ID", '', altchmgt."Transaction Date", Dim1, Dim2);
+                                            GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
+                                            GenJournalLine."External Document No." := altchmgt."Reference No";
+                                            GenJournalLine.Validate(GenJournalLine."Account No.", Ploans."Loan Account");
+                                            GenJournalLine.Validate(Amount, AccruedInt);
+                                            GenJournalLine.Description := altchmgt.Description;
+                                            GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::"Interest Due";
+                                            GenJournalLine.Validate("Loan No.", Ploans."No.");
+                                            GenJournalLine.Validate("Bal. Account No.", AccountType."Interest Account (G/L)");
+                                            if GenJournalLine.Amount <> 0 then
+                                                GenJournalLine.Insert(true);
+                                        end
                                     end else begin
                                         AccruedInt := 0
-
                                     end;
                                 end;
 
                                 PLoans.Reset;
-                                PLoans.SetRange("No.", UnclearedEffects."Account No.(Credit)");
-                                if PLoans.Find('-') then begin
+                                PLoans.SetRange("No.", altchmgt."Account No.(Credit)");
+                                if PLoans.FindFirst() then begin
                                     PLoans.CalcFields("Outstanding Bill", "Outstanding Principal",
                                     "Outstanding Interest", "Outstanding Balance");
 
@@ -3516,15 +3512,14 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                                             GenJournalLine.LockTable;
                                             LineNo := LineNo + 10000;
                                             TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
-                                            JTemplate, JBatch, UnclearedEffects."Trace ID", '',
-                                            UnclearedEffects."Transaction Date", Dim1, Dim2);
+                                            JTemplate, JBatch, altchmgt."Trace ID", '', altchmgt."Transaction Date", Dim1, Dim2);
                                             GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
-                                            GenJournalLine."External Document No." := UnclearedEffects."Reference No";
+                                            GenJournalLine."External Document No." := altchmgt."Reference No";
                                             GenJournalLine.Validate(GenJournalLine."Account No.", Ploans."Loan Account");
                                             if PLoans."Outstanding Interest" > RunBal then
                                                 GenJournalLine.Validate(Amount, RunBal * -1) else
                                                 GenJournalLine.Validate(Amount, (Ploans."Outstanding Interest" + AccruedInt) * -1);
-                                            GenJournalLine.Description := UnclearedEffects.Description;
+                                            GenJournalLine.Description := altchmgt.Description;
                                             GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::"Interest Paid";
                                             GenJournalLine.Validate("Loan No.", Ploans."No.");
                                             if GenJournalLine.Amount <> 0 then
@@ -3540,8 +3535,8 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                                 end;
 
                                 PLoans.Reset;
-                                PLoans.SetRange("No.", UnclearedEffects."Account No.(Credit)");
-                                if PLoans.Find('-') then begin
+                                PLoans.SetRange("No.", altchmgt."Account No.(Credit)");
+                                if PLoans.FindFirst() then begin
                                     PLoans.CalcFields("Outstanding Bill", "Outstanding Principal",
                                     "Outstanding Interest", "Outstanding Balance");
 
@@ -3552,15 +3547,14 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                                             GenJournalLine.LockTable;
                                             LineNo := LineNo + 10000;
                                             TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
-                                            JTemplate, JBatch, UnclearedEffects."Trace ID", '',
-                                            UnclearedEffects."Transaction Date", Dim1, Dim2);
+                                            JTemplate, JBatch, altchmgt."Trace ID", '', altchmgt."Transaction Date", Dim1, Dim2);
                                             GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
-                                            GenJournalLine."External Document No." := UnclearedEffects."Reference No";
+                                            GenJournalLine."External Document No." := altchmgt."Reference No";
                                             GenJournalLine.Validate(GenJournalLine."Account No.", Ploans."Loan Account");
                                             if PLoans."Outstanding Bill" > RunBal then
                                                 GenJournalLine.Validate(Amount, RunBal * -1) else
                                                 GenJournalLine.Validate(Amount, (Ploans."Outstanding Bill") * -1);
-                                            GenJournalLine.Description := UnclearedEffects.Description;
+                                            GenJournalLine.Description := altchmgt.Description;
                                             GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::"Penalty Paid";
                                             GenJournalLine.Validate("Loan No.", Ploans."No.");
                                             if GenJournalLine.Amount <> 0 then
@@ -3576,8 +3570,8 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                                 end;
 
                                 PLoans.Reset;
-                                PLoans.SetRange("No.", UnclearedEffects."Account No.(Credit)");
-                                if PLoans.Find('-') then begin
+                                PLoans.SetRange("No.", altchmgt."Account No.(Credit)");
+                                if PLoans.FindFirst() then begin
                                     PLoans.CalcFields("Outstanding Bill", "Outstanding Principal",
                                     "Outstanding Interest", "Outstanding Balance");
 
@@ -3588,15 +3582,15 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                                             GenJournalLine.LockTable;
                                             LineNo := LineNo + 10000;
                                             TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
-                                            JTemplate, JBatch, UnclearedEffects."Trace ID", '',
-                                            UnclearedEffects."Transaction Date", Dim1, Dim2);
+                                            JTemplate, JBatch, altchmgt."Trace ID", '',
+                                            altchmgt."Transaction Date", Dim1, Dim2);
                                             GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
-                                            GenJournalLine."External Document No." := UnclearedEffects."Reference No";
+                                            GenJournalLine."External Document No." := altchmgt."Reference No";
                                             GenJournalLine.Validate(GenJournalLine."Account No.", Ploans."Loan Account");
                                             if PLoans."Outstanding Insurance" > RunBal then
                                                 GenJournalLine.Validate(Amount, RunBal * -1) else
                                                 GenJournalLine.Validate(Amount, (Ploans."Outstanding Insurance") * -1);
-                                            GenJournalLine.Description := UnclearedEffects.Description;
+                                            GenJournalLine.Description := altchmgt.Description;
                                             GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::"Insurance Paid";
                                             GenJournalLine.Validate("Loan No.", Ploans."No.");
                                             if GenJournalLine.Amount <> 0 then
@@ -3611,8 +3605,8 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                                 end;
 
                                 PLoans.Reset;
-                                PLoans.SetRange("No.", UnclearedEffects."Account No.(Credit)");
-                                if PLoans.Find('-') then begin
+                                PLoans.SetRange("No.", altchmgt."Account No.(Credit)");
+                                if PLoans.FindFirst() then begin
 
                                     PLoans.CalcFields("Outstanding Bill", "Outstanding Principal",
                                     "Outstanding Interest", "Outstanding Balance");
@@ -3629,15 +3623,15 @@ codeunit 50023 "Mngt. Post Alt. Channels"
                                             GenJournalLine.LockTable;
                                             LineNo := LineNo + 10000;
                                             TellPostMngt.InitializeAccEntry(GenJournalLine, LineNo,
-                                            JTemplate, JBatch, UnclearedEffects."Trace ID", '',
-                                            UnclearedEffects."Transaction Date", Dim1, Dim2);
+                                            JTemplate, JBatch, altchmgt."Trace ID", '',
+                                            altchmgt."Transaction Date", Dim1, Dim2);
                                             GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
-                                            GenJournalLine."External Document No." := UnclearedEffects."Reference No";
+                                            GenJournalLine."External Document No." := altchmgt."Reference No";
                                             GenJournalLine.Validate(GenJournalLine."Account No.", Ploans."Loan Account");
                                             if Ploans."Outstanding Principal" > RunBal then
                                                 GenJournalLine.Validate(Amount, RunBal * -1) else
                                                 GenJournalLine.Validate(Amount, Ploans."Outstanding Principal" * -1);
-                                            GenJournalLine.Description := UnclearedEffects.Description;
+                                            GenJournalLine.Description := altchmgt.Description;
                                             GenJournalLine."Transaction Type" := GenJournalLine."Transaction Type"::Repayment;
                                             GenJournalLine.Validate("Loan No.", Ploans."No.");
                                             if GenJournalLine.Amount <> 0 then
@@ -3660,25 +3654,25 @@ codeunit 50023 "Mngt. Post Alt. Channels"
 
                     JnlPostMngt.CompletePosting(JTemplate, JBatch);
                     Commit();
-                    UnclearedEffects.Posted := true;
-                    UnclearedEffects.Modify(true);
-                    UnclearedEffects."Customer Names" := Account.Name;
-                    UnclearedEffects."Posting Date" := Today;
-                    UnclearedEffects."Posted By" := UserId;
+                    altchmgt.Posted := true;
+                    altchmgt.Modify(true);
+                    altchmgt."Customer Names" := Account.Name;
+                    altchmgt."Posting Date" := Today;
+                    altchmgt."Posted By" := UserId;
                     ReturnedVal := 0;
                     ReturnedVal := TellerMngt.CalcAvailableBal(Account."No.");
                     Response := '00|Success|' + DelChr(format(ReturnedVal), '=', ',');
 
-                    if UnclearedEffects."Transaction Type" = UnclearedEffects."Transaction Type"::"Balance Enquiry" then begin
+                    if altchmgt."Transaction Type" = altchmgt."Transaction Type"::"Balance Enquiry" then begin
                         Docs.CreateSmsNotif(NotifSource::"Cash Withdrawal Confirm", Account."Mobile No.",
                         'You have done a balance enquiry on your account.' + 'Date: ' +
                         Format(Today) + 'Time: ' + Format(Time) + ' . ' + Comp.Name,
-                        UnclearedEffects."Account No", UnclearedEffects."Trace ID", false);
+                        altchmgt."Account No", altchmgt."Trace ID", false);
                     end else begin
                         Docs.CreateSmsNotif(NotifSource::"Cash Withdrawal Confirm", Account."Mobile No.",
-                        'You have done a ' + Format(UnclearedEffects."Transaction Type") + ' on your account.' + 'Date: ' +
+                        'You have done a ' + Format(altchmgt."Transaction Type") + ' on your account.' + 'Date: ' +
                         Format(Today) + 'Time: ' + Format(Time) + ' . ' + Comp.Name,
-                        UnclearedEffects."Account No", UnclearedEffects."Trace ID", false);
+                        altchmgt."Account No", altchmgt."Trace ID", false);
                     end;
                 end else begin
                     Response := '99|Failed.Account Blocked or Not found'

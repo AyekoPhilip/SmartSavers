@@ -547,36 +547,33 @@ page 51038 "Loans"
                     /* if AppraisalParameter.IsEmpty() then
                         Error(NoSavedAppraisalErr, Rec."No."); */
 
-                   /*  LoanApplic.Reset();
-                    LoanApplic.SetRange("No.", Rec."Application No.");
-                    if LoanApplic.FindFirst() then begin
-                        commit();
-                        appraisalParameter.Reset();
-                        AppraisalParameter.SetRange("No.", LoanApplic."No.");
-                        if AppraisalParameter.FindFirst() then
-                            Report.Run(Report::"Loan Appraisal Parameters", true, false, AppraisalParameter);
-                    end; */
+                    /*  LoanApplic.Reset();
+                     LoanApplic.SetRange("No.", Rec."Application No.");
+                     if LoanApplic.FindFirst() then begin
+                         commit();
+                         appraisalParameter.Reset();
+                         AppraisalParameter.SetRange("No.", LoanApplic."No.");
+                         if AppraisalParameter.FindFirst() then
+                             Report.Run(Report::"Loan Appraisal Parameters", true, false, AppraisalParameter);
+                     end; */
                 end;
             }
             action("Post")
             {
                 Image = PostedCreditMemo;
                 Caption = 'Post';
-                Enabled = Rec."Approval Status" = Rec."Approval Status"::Approved;
+                Enabled = false;
                 ApplicationArea = All;
 
                 trigger OnAction()
                 begin
-                    VarVariant := Rec;
-                    Rec.TestField("Approval Status", Rec."Approval Status"::Approved);
-                    PeriodItems.ApplicationDocPane(VarVariant, ActItems::"Post Application")
+                  
                 end;
             }
             action("Loan [File]")
             {
                 Image = Category;
                 ApplicationArea = All;
-
                 trigger OnAction()
                 var
                     FileName: Text;

@@ -32,7 +32,7 @@ codeunit 50032 "Doc. Mngt"
                             begin
                                 LoansR.Reset;
                                 LoansR.SetRange("No.", LoanApplication."No.");
-                                if LoansR.Find('-') then
+                                if LoansR.FindFirst() then
                                     Report.Run(Report::"Repayment Schedule Application", true, true, LoansR);
                             end;
                         2:
@@ -45,13 +45,11 @@ codeunit 50032 "Doc. Mngt"
                                             Prdfact."Product Dimension"::Account:
                                                 begin
                                                     Report.Run(Report::"Loan Appraisal Parameter-IESA", true, true, AppraisalParameter);
-
                                                 end;
                                             Prdfact."Product Dimension"::Credit,
                                             Prdfact."Product Dimension"::"Micro Credit":
                                                 begin
                                                     Report.Run(Report::"Loan Appraisal Parameters", true, true, AppraisalParameter);
-
                                                 end;
                                         end;
                                     end;

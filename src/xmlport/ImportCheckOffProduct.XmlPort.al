@@ -27,6 +27,7 @@ xmlport 50001 "Import CheckOff- Product"
                 }
                 fieldelement(ProductType; CheckoffReceiptLines."Product Type")
                 {
+                    FieldValidate = yes;
                 }
                 fieldelement(Amount; CheckoffReceiptLines.Amount)
                 {

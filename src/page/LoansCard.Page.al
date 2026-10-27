@@ -13,7 +13,7 @@ page 51027 "Loans Card"
             group(General)
             {
                 Caption = 'General';
-                Editable = true;
+                Editable = false;
                 field("Account No."; Rec."Account No.")
                 {
                     Style = StandardAccent;
@@ -174,14 +174,7 @@ page 51027 "Loans Card"
                     ApplicationArea = All;
                 }
 
-                field(Remarks; Rec.Remarks)
-                {
 
-                    ApplicationArea = All;
-                    Style = StandardAccent;
-                    StyleExpr = true;
-                    Importance = Additional;
-                }
                 field("Self Guarantee"; Rec."Self Guarantee")
                 {
                     ApplicationArea = All;
@@ -250,6 +243,14 @@ page 51027 "Loans Card"
                     ApplicationArea = All;
                     Style = StandardAccent;
                     StyleExpr = true;
+                }
+                field(Remarks; Rec.Remarks)
+                {
+
+                    ApplicationArea = All;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                   
                 }
                 field("Cheque Types"; Rec."Cheques Type")
                 {
@@ -741,7 +742,7 @@ page 51027 "Loans Card"
             {
                 Image = PostedCreditMemo;
                 Caption = 'Post';
-                Enabled = Rec."Application Type" <> Rec."Application Type"::Defaulter;
+                Enabled = Rec."Approval Status" = Rec."Approval Status"::Approved;
                 ApplicationArea = All;
                 trigger OnAction()
                 var
@@ -752,7 +753,6 @@ page 51027 "Loans Card"
                     OnConfirmDialogTxt: Label 'Are you sure you want to Post this application?';
                     CredMngt: Codeunit "Credit Mgmt.";
                 begin
-                    Rec.TestField("Approval Status", Rec."Approval Status"::Approved);
                     Rec.OnBeforeValidatePerformPostOnLoansPostMgt(Rec, 0);
                 end;
             }

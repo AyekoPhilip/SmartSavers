@@ -583,7 +583,7 @@ report 50333 "Loan Appraisal Parameters"
             dataitem(LoanCharges; "Loan Application Charge")
             {
                 DataItemLink = "Application No." = FIELD("No.");
-                DataItemTableView = WHERE("Post Charge" = CONST(true));
+                DataItemTableView = where("Post Charge" = const(true));
                 column(PChargeAmt; PChargeAmt)
                 {
                 }

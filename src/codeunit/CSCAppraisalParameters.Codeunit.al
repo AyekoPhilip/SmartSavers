@@ -5,7 +5,7 @@ codeunit 50035 "CSC Appraisal Parameters"
     trigger OnRun()
     begin
 
-        AppCode(Rec, true);
+        appraisalcodemgt(Rec, true);
     end;
 
     var
@@ -39,18 +39,18 @@ codeunit 50035 "CSC Appraisal Parameters"
     procedure RunWithCheck(var LoanApplic2: Record "Loan Application")
     begin
         LoanApplication.Copy(LoanApplic2);
-        AppCode(LoanApplication, true);
+        appraisalcodemgt(LoanApplication, true);
         LoanApplic2 := LoanApplication
     end;
 
     procedure RunWithoutCheck(var LoanApplic2: Record "Loan Application")
     begin
         LoanApplication.Copy(LoanApplic2);
-        AppCode(LoanApplication, false);
+        appraisalcodemgt(LoanApplication, false);
         LoanApplic2 := LoanApplication
     end;
 
-    procedure AppCode(var RecRef: Record "Loan Application"; CheckLine: Boolean)
+    procedure appraisalcodemgt(var RecRef: Record "Loan Application"; CheckLine: Boolean)
     var
         LoanAppcharges: Record "Loan Application Charge";
         MemberDeposits: Decimal;

@@ -132,6 +132,7 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
         LineNo: array[19] of Integer;
         ReferenceRec: Record Loans;
 
+
     begin
 
         PartialDisb.fnCheckMinRequirement(ActionItem::"Post Application");
@@ -160,12 +161,17 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
     var
         LineNo: array[19] of Integer;
         FactP: Record "Product Factory";
+        Loantype: Record "Product Factory";
     begin
         AccruedInt := 0;
         AmountToDisburse := 0;
         ExtDocNo := '';
         ReferenceRec.fnTestFields();
-        ReferenceRec.Modify();
+        Loantype.Get(ReferenceRec."Product Type");
+        if ReferenceRec."Charge Interest on Posting" <> Loantype."Charge Interest Due" then
+            ReferenceRec."Charge Interest on Posting" := Loantype."Charge Interest Due";
+        ReferenceRec.Modify(true);
+
         if ReferenceRec."TopUp Loan" = '' then begin
             if TellMngt.TestNoEntriesExist(ReferenceRec."Account Name", ReferenceRec."No.", 0) then begin
                 Error(Text016, ReferenceRec."Account Name", ReferenceRec."No.");
@@ -203,20 +209,18 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
         if DocPostMngt.CalculateLoanInt(ReferenceRec."No.") > 0 then begin
 
             case ReferenceRec."Charge Interest on Posting" of
-
                 ReferenceRec."Charge Interest on Posting"::"Pro-rate",
                 ReferenceRec."Charge Interest on Posting"::"Full Interest":
                     begin
                         LineNo[2] := PostOnUpfrontInt(ReferenceRec."No.", ReferenceRec."No.",
               PostingDate, DActivity, DBranch, JTemplate, JBatch, DocPostMngt.CalculateLoanInt(ReferenceRec."No."),
               ReferenceRec."Account No.", LineNo[1] + 100, ReferenceRec."Product Type", 0);
-
                     end;
                 ReferenceRec."Charge Interest on Posting"::"Interest Due":
                     begin
                         LineNo[2] := PostOnInterestDue(ReferenceRec."No.", ReferenceRec."No.",
-              PostingDate, DActivity, DBranch, JTemplate, JBatch, DocPostMngt.CalculateLoanInt(ReferenceRec."No."),
-              ReferenceRec."Account No.", LineNo[1] + 100, ReferenceRec."Product Type", 0);
+                  PostingDate, DActivity, DBranch, JTemplate, JBatch, DocPostMngt.CalculateLoanInt(ReferenceRec."No."),
+                  ReferenceRec."Account No.", LineNo[1] + 100, ReferenceRec."Product Type", 0);
                     end;
             end;
         end else begin
@@ -227,17 +231,21 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
 
             LineNo[3] := PostChargeMngt.fnPostLoanCharge(ReferenceRec."No.",
             AmountToDisburse, ReferenceRec."Disbursement Account No.", DActivity, DBranch,
-            JTemplate, JBatch, ReferenceRec."No.", PostingDate, LineNo[2] + 100, ReferenceRec."Account No.");
+            JTemplate, JBatch, ReferenceRec."No.", PostingDate, LineNo[2] + 100,
+            ReferenceRec."Account No.");
             if LineNo[3] = 0 then LineNo[3] := LineNo[2];
         end;
 
-        LineNo[4] := CreatePurchaseGenJLine(ReferenceRec, DActivity, DBranch, JTemplate, JBatch, LineNo[3] + 100, PostingDate);
+        LineNo[4] := CreatePurchaseGenJLine(ReferenceRec, DActivity, DBranch,
+        JTemplate, JBatch, LineNo[3] + 100, PostingDate);
         if LineNo[4] = 0 then LineNo[4] := LineNo[3];
 
-        LineNo[5] := PostLoanLiquidation(ReferenceRec, LineNo[4] + 100, PostingDate, JTemplate, JBatch, DActivity, DBranch);
+        LineNo[5] := PostLoanLiquidation(ReferenceRec, LineNo[4] + 100, PostingDate,
+        JTemplate, JBatch, DActivity, DBranch);
         if LineNo[5] = 0 then LineNo[5] := LineNo[4];
 
-        CreateRevolveFundJnLine(ReferenceRec, JTemplate, JBatch, DActivity, DBranch, LineNo[5] + 100, PostingDate);
+        CreateRevolveFundJnLine(ReferenceRec, JTemplate, JBatch,
+        DActivity, DBranch, LineNo[5] + 100, PostingDate);
 
         if CheckLine then begin
             JnPost.CompletePosting(JTemplate, JBatch);
@@ -507,6 +515,7 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
             PostingDescription += ' - ' + Loan."Account Name";
         exit(CopyStr(PostingDescription, 1, MaxStrLen(GenJournal.Description)));
     end;
+
     procedure InitDebitBankingAcc(AccNo: Code[100]; AmtoPost: Decimal; DocumentNo: Code[20]; PDate: Date; DActivity: Code[20]; DBranch: Code[20]; GnlTemplate: Code[20]; GnlJBatch: Code[20]; BalAccNo: Code[100]; LineNo: Integer; ExtDocNo: Code[100])
     var
         LoanT: Record Loans;
@@ -1233,6 +1242,7 @@ codeunit 50072 "Loan Post Mngt. (Yes/No)"
             exit(Abs(Charge.Percentage));
         exit(1);
     end;
+
     local procedure CreateEntryOnRefLoan(PostedLoan: Record Loans; GnlTemplate: Code[10]; GnlJBatch: Code[10]; PDate: Date; ShortDim1: Code[10]; ShortDim2: Code[10])
     var
 

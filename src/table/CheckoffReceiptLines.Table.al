@@ -39,7 +39,7 @@ table 50456 "Checkoff Receipt Lines"
         {
             Caption = 'Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 "Principle Repayment" := Amount;
@@ -85,11 +85,14 @@ table 50456 "Checkoff Receipt Lines"
             TableRelation = "Product Factory"."Product ID";
             Caption = 'Product Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
-                if ProdFact.Get("Product Type") then
-                    "Product Description" := ProdFact.Description
+                if ProdFact.Get("Product Type") then begin
+                    "Product Description" := ProdFact.Description;
+                    "Account Category" := ProdFact."Account Category";
+                    "Account Dimension" := ProdFact."Account Dimension";
+                end;
             end;
         }
         field(50022; "Monthly Contribution"; Decimal)
@@ -114,7 +117,7 @@ table 50456 "Checkoff Receipt Lines"
             DataClassification = CustomerContent;
             Editable = false;
             Caption = 'Account Category';
-        
+
             trigger OnValidate()
             begin
 
@@ -259,7 +262,7 @@ table 50456 "Checkoff Receipt Lines"
         {
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             begin
                 Description := UpperCase(Description)
@@ -269,7 +272,7 @@ table 50456 "Checkoff Receipt Lines"
         {
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             begin
 

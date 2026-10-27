@@ -1264,9 +1264,9 @@ codeunit 50005 "Post. Checkoff Mngt."
         exit(Linenum)
     end;
 
-    procedure PostPurchPriority(Checkline: Record "Checkoff Receipt Lines"; 
-    PostingDate: Date; TextDescription: Text[150]; CutoffDate: Date; 
-    AmtPost: Decimal; PostBusLoan: Boolean; ProdType: Code[20]; 
+    procedure PostPurchPriority(Checkline: Record "Checkoff Receipt Lines";
+    PostingDate: Date; TextDescription: Text[150]; CutoffDate: Date;
+    AmtPost: Decimal; PostBusLoan: Boolean; ProdType: Code[20];
     LinesNo: Integer): Decimal
     var
         RunBal: Decimal;
@@ -1818,7 +1818,8 @@ codeunit 50005 "Post. Checkoff Mngt."
         end;
     end;
 
-    procedure PostPurchLineAllocAmount(Checkline: Record "Checkoff Receipt Lines"; PostingDate: Date; TextDescription: Text[150]; CutoffDate: Date; LinesNo: Integer): Integer
+    procedure PostPurchLineAllocAmount(Checkline: Record "Checkoff Receipt Lines";
+    PostingDate: Date; TextDescription: Text[150]; CutoffDate: Date; LinesNo: Integer): Integer
     var
         RunBal: Decimal;
         PLoans: Record Loans;
@@ -2334,7 +2335,7 @@ codeunit 50005 "Post. Checkoff Mngt."
                 begin
                     Purchline.Reset;
                     Purchline.SetRange("No.", CheckHeader."No.");
-                    if Purchline.Find('-') then begin
+                    if Purchline.FindSet() then begin
                         ProgressWindow.Open('Validating Lines #1########################');
                         repeat
                             ProgressWindow.Update(1, Purchline."Upload ID" + ':' + Format(Purchline.Amount));
@@ -2362,12 +2363,11 @@ codeunit 50005 "Post. Checkoff Mngt."
                 begin
                     Purchline.Reset;
                     Purchline.SetRange("No.", CheckHeader."No.");
-                    if Purchline.Find('-') then begin
+                    if Purchline.FindSet() then begin
                         ProgressWindow.Open('Validating Lines #1########################');
                         repeat
                             ProgressWindow.Update(1, Purchline."Upload ID" + ':' + Format(Purchline.Amount));
                             ValidateReceiptProdType(Purchline, Purchline."Upload Response", CheckHeader."Application Type");
-
                         until Purchline.Next = 0;
                         ProgressWindow.Close
                     end
@@ -2848,7 +2848,8 @@ codeunit 50005 "Post. Checkoff Mngt."
         end;
     end;
 
-    procedure ValidateReceiptProdType(CheckLine: Record "Checkoff Receipt Lines"; Responce: Integer; ApplicType: Enum CheckoffTypes)
+    procedure ValidateReceiptProdType(CheckLine: Record "Checkoff Receipt Lines";
+    Responce: Integer; ApplicType: Enum CheckoffTypes)
     var
         CustRecord: Record Member;
         RepayAcc: Record "Repayment Account";
@@ -2919,8 +2920,10 @@ codeunit 50005 "Post. Checkoff Mngt."
                     if Loans.FindFirst() then begin
                         Loans.CalcFields("Outstanding Balance");
                         CheckLine."Loan No." := Loans."No.";
+                        CheckLine."Account No." := Loans."Loan Account";
                         CheckLine."Account Dimension" := CheckLine."Account Dimension"::Loan;
                         CheckLine.Validate("Product Type", Loans."Product Type");
+                        CheckLine."Repayment Account" := getPrepaymentAc(Loans."Account No.");
                         CheckLine."Account Found" := true;
                         CheckLine."Line Validated" := true;
                     end;
@@ -2932,6 +2935,7 @@ codeunit 50005 "Post. Checkoff Mngt."
                 if CredAccount.FindFirst() then begin
 
                     CheckLine.Blocked := CredAccount.Blocked;
+                    CheckLine."Account No." := CredAccount."No.";
                     CheckLine."Account Category" := CredAccount."Account Category";
                     CheckLine."Repayment Account" := getPrepaymentAc(CredAccount."Member No.");
                     CheckLine."Account Dimension" := CredAccount."Account Dimension";
@@ -2945,7 +2949,7 @@ codeunit 50005 "Post. Checkoff Mngt."
                     AccBanking.SetRange("Member No.", CheckLine."Member No.");
                     AccBanking.SetRange("Product Type", CheckLine."Product Type");
                     if AccBanking.FindFirst() then begin
-
+                        CheckLine."Account No." := AccBanking."No.";
                         CheckLine.Status := AccBanking.Status;
                         CheckLine.Blocked := AccBanking.Blocked;
                         CheckLine."Account Category" := AccBanking."Account Category";

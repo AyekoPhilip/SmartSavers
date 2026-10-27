@@ -108,6 +108,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
             if TellMngt.TestNoEntriesExist(RecRef."Account Name", RecRef."No.", 0) then begin
                 Error(Text016, RecRef."Account Name", RecRef."No.");
             end;
+            RecRef.TestField("Mode of Disbursement", RecRef."Mode of Disbursement"::"Full Disbursement");
 
             AccBanking.Get(RecRef."Disbursement Account No.");
 
@@ -125,47 +126,11 @@ codeunit 50065 "Gen.Jnl.+Preview"
                 end;
             end;
 
-            CustRecord.Reset();
-            CustRecord.SetRange("No.", RecRef."Loan Account");
-            CustRecord.SetRange("Account Dimension", CustRecord."Account Dimension"::Repayment);
-            if not CustRecord.Find('-') then begin
-
-                CreditAccounts.Reset();
-                CreditAccounts.SetRange("No.", RecRef."Loan Account");
-                if CreditAccounts.FindFirst() then begin
-                    RegMngt.fnCreateCustMemberPostAc(CreditAccounts."No.",
-                        CreditAccounts.Name, '',
-                        CreditAccounts."Global Dimension 1 Code",
-                        CreditAccounts."Global Dimension 2 Code",
-                        CreditAccounts."Customer Posting Group", '',
-                        CreditAccounts.Status, CreditAccounts."Product Type",
-                        CreditAccounts."ID No.",
-                        CreditAccounts."Member No.",
-                        CustomerAccType::"Loan Account",
-                        AccDimension::Repayment, ProdCategory::" "
-                    );
-                end;
-            end;
-
             Amt[1] := 0;
             Amt[2] := 0;
 
             RecRef.CalcFields("Amount to Post");
-            case RecRef."Mode of Disbursement" of
-                RecRef."Mode of Disbursement"::"Full Disbursement":
-                    begin
-                        AmountToDisburse := RecRef."Approved Amount"
-                    end;
-                RecRef."Mode of Disbursement"::"Partial Disbursement":
-                    begin
-                        PartialDisb.Reset();
-                        PartialDisb.SetRange("Loan No.", RecRef."Application No.");
-                        PartialDisb.SetRange("Suggested for Disbursement", true);
-                        if not PartialDisb.FindFirst() then
-                            Error('No Lines suggested for posting');
-                        AmountToDisburse := RecRef."Amount to Post";
-                    end
-            end;
+            AmountToDisburse := RecRef."Approved Amount";
 
             GenJournal.LockTable;
             Linenum := Linenum + 1000;
@@ -188,52 +153,23 @@ codeunit 50065 "Gen.Jnl.+Preview"
                 GenJournal.Insert(true);
 
 
-            if RecRef."Mode of Disbursement" = RecRef."Mode of Disbursement"::"Full Disbursement" then begin
-
-                Linenum := Linenum + 1000;
-                GenJournal.Init();
-                GenJournal."Line No." := Linenum;
-                GenJournal."Journal Template Name" := Jtemplate;
-                GenJournal."Journal Batch Name" := JBatch;
-                GenJournal."Document No." := DocumentNo;
-                GenJournal."Posting Date" := PostingDate;
-                GenJournal."Account Type" := GenJournal."Account Type"::Vendor;
-                GenJournal."External Document No." := RecRef."Account No.";
-                GenJournal.Validate("Account No.", RecRef."Disbursement Account No.");
-                GenJournal.Validate("Currency Code", '');
-                GenJournal.Validate(Amount, AmountToDisburse * -1);
-                GenJournal.Description := CopyStr(Text001Description + DocumentNo, 1, 50);
-                GenJournal.Validate("Shortcut Dimension 1 Code", Dim1);
-                GenJournal.Validate("Shortcut Dimension 2 Code", Dim2);
-                if GenJournal.Amount <> 0 then
-                    GenJournal.Insert(true);
-
-            end else begin
-
-                PartialDisb.Reset();
-                PartialDisb.SetRange("Loan No.", RecRef."Application No.");
-                PartialDisb.SetRange("Suggested for Disbursement", true);
-                if PartialDisb.FindFirst() then begin
-                    Linenum := Linenum + 1000;
-
-                    GenJournal.Init();
-                    GenJournal."Account Type" := PartialDisb."Account Type";
-                    GenJournal."Document No." := DocumentNo;
-                    GenJournal."External Document No." := RecRef."Account No.";
-                    GenJournal.Validate("Account No.", PartialDisb."Account No.");
-                    GenJournal."Line No." := Linenum;
-                    GenJournal."Journal Template Name" := Jtemplate;
-                    GenJournal."Journal Batch Name" := JBatch;
-                    GenJournal."Posting Date" := PostingDate;
-                    GenJournal."Document No." := DocumentNo;
-                    GenJournal.Validate(Amount, AmountToDisburse * -1);
-                    GenJournal.Description := CopyStr(Text001Description + DocumentNo, 1, 50);
-                    GenJournal.Validate("Shortcut Dimension 1 Code", Dim1);
-                    GenJournal.Validate("Shortcut Dimension 2 Code", Dim2);
-                    if GenJournal.Amount <> 0 then
-                        GenJournal.Insert(true);
-                end;
-            end;
+            Linenum := Linenum + 1000;
+            GenJournal.Init();
+            GenJournal."Line No." := Linenum;
+            GenJournal."Journal Template Name" := Jtemplate;
+            GenJournal."Journal Batch Name" := JBatch;
+            GenJournal."Document No." := DocumentNo;
+            GenJournal."Posting Date" := PostingDate;
+            GenJournal."Account Type" := GenJournal."Account Type"::Vendor;
+            GenJournal."External Document No." := RecRef."Account No.";
+            GenJournal.Validate("Account No.", RecRef."Disbursement Account No.");
+            GenJournal.Validate("Currency Code", '');
+            GenJournal.Validate(Amount, AmountToDisburse * -1);
+            GenJournal.Description := CopyStr(Text001Description + DocumentNo, 1, 50);
+            GenJournal.Validate("Shortcut Dimension 1 Code", Dim1);
+            GenJournal.Validate("Shortcut Dimension 2 Code", Dim2);
+            if GenJournal.Amount <> 0 then
+                GenJournal.Insert(true);
 
             LoanChargePosted.Reset;
             LoanChargePosted.SetRange("Loan No.", RecRef."No.");
@@ -266,7 +202,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
             LoanChargePosted.Reset;
             LoanChargePosted.SetRange("Loan No.", RecRef."No.");
             LoanChargePosted.SetRange("Charge Type", LoanChargePosted."Charge Type"::General);
-            if LoanChargePosted.Find('-') then begin
+            if LoanChargePosted.FindSet() then begin
                 repeat
                     LoanChargePosted.TestField("Account No.");
                     ChargeAmt[1] := 0;
@@ -554,7 +490,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                 LoansTopupPosted.Reset;
                 LoansTopupPosted.SetRange("Loan No.", RecRef."No.");
                 LoansTopupPosted.SetRange("Account No.", RecRef."Account No.");
-                if LoansTopupPosted.Find('-') then begin
+                if LoansTopupPosted.FindSet() then begin
                     repeat
                         ChargeAmt[2] := 0;
 
@@ -957,7 +893,6 @@ codeunit 50065 "Gen.Jnl.+Preview"
             if CheckLine then begin
 
                 Post.CompletePosting(Jtemplate, JBatch);
-
                 CrmApplic.Reset();
                 CrmApplic.SetRange("No.", RecRef."CRM Application No.");
                 if CrmApplic.FindFirst() then begin
@@ -1574,7 +1509,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                             GenJournal."External Document No." := PLoan."Account No.";
 
                                             GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
-                                if LoanProdCharges."Staggered Charge Code" = '' then begin
+                                            if LoanProdCharges."Staggered Charge Code" = '' then begin
                                                 if LoanProdCharges."Use Percentage" then begin
                                                     if ((LoanProdCharges.Percentage / 100) * LoansTopupPosted."Total Amount") < LoanProdCharges.Minimum then begin
                                                         GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
@@ -1622,7 +1557,7 @@ codeunit 50065 "Gen.Jnl.+Preview"
                                             GenJournal."External Document No." := RecRef."Account No.";
 
                                             GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);
-                                if LoanProdCharges."Staggered Charge Code" = '' then begin
+                                            if LoanProdCharges."Staggered Charge Code" = '' then begin
                                                 if LoanProdCharges."Use Percentage" then begin
                                                     if ((LoanProdCharges.Percentage / 100) * LoansTopupPosted."Total Amount") < LoanProdCharges.Minimum then begin
                                                         GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission() * -1);

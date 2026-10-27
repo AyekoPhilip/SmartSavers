@@ -14,7 +14,7 @@ report 50222 "Generate Loan Arrears"
         {
             RequestFilterFields = "No.", "Account No.", "Product Type", "Disbursement Date", "Employer Code";
             DataItemTableView = where("Disbursement Date" = filter(<> ''), Installments = filter(<> 0),
-            "Repayment Start Date" = filter(<>''),"Application Date" = filter(<> ''));
+            "Repayment Start Date" = filter(<> ''), "Application Date" = filter(<> ''));
 
             column(No; "No.")
             { }
@@ -105,142 +105,143 @@ report 50222 "Generate Loan Arrears"
 
 
                     PLoans.CALCFIELDS("Outstanding Balance", "Average Payment", "Outstanding Principal");
-IF PLoans."Outstanding Balance" > 0 THEN BEGIN
+                    IF PLoans."Outstanding Balance" > 0 THEN BEGIN
 
-                    IF Ploans."Repayment Start Date" > 0D THEN begin
-                        IF PLoans."Application Date" > 0D THEN Begin
-                            PLoans.Validate("Disbursement Date");
-                            PLOANS.Modify();
-                        ENd;
-                    END;
-                    PLoans.CALCFIELDS("Outstanding Balance", "Average Payment", "Outstanding Principal", "Schedule Principal Payment");
-
-                    TotalAmtPaid := "Approved Amount" - PLoans."Outstanding Principal";
-
-
-
-                    TotExpBalance := 0;
-                    AmountInArrears := 0;
-                    LoanAge := 0;
-                    TotalExpRepayment := 0;
-
-
-                    //DateFilter:='..'+ Cutoffdate;
-
-
-                    Lshedule.RESET;
-                    Lshedule.SETRANGE(Lshedule."No.", PLoans."No.");
-                    Lshedule.SetRange("Repayment Date", 0D, Cutoffdate);
-                    IF Lshedule.FIND('-') THEN
-                        REPEAT
-
-                            TotalExpRepayment := ROUND((TotalExpRepayment + Lshedule."Principal Repayment"), 1, '=');
-                            LoanAge := Lshedule."Instalment No";
-                        UNTIL Lshedule.NEXT = 0;
-
-                    TotalExpRepayment := ROUND(PLoans."Schedule Principal Payment", 1, '=');
-
-
-
-                    /* Lshedule.Reset();
-                    Lshedule.SetRange("No.", "No.");
-                    if not Lshedule.Find('-') then begin
-                        CredMngt.fncreateRepayschedule(false, "No.", 0);
-                    end; */
-
-
-
-
-
-
-                    IF PLoans."Average Payment" > 0 then begin
-
-                        if PLoans."Repayment Start Date" = 0D then begin
+                        IF Ploans."Repayment Start Date" > 0D THEN begin
                             IF PLoans."Application Date" > 0D THEN Begin
-                                PLoans."Disbursement Date" := PLoans."Application Date";
                                 PLoans.Validate("Disbursement Date");
-                                PLoans.Modify(true)
+                                PLOANS.Modify();
+                            ENd;
+                        END;
+                        PLoans.CALCFIELDS("Outstanding Balance", "Average Payment", "Outstanding Principal", "Schedule Principal Payment");
+
+                        TotalAmtPaid := "Approved Amount" - PLoans."Outstanding Principal";
+
+
+
+                        TotExpBalance := 0;
+                        AmountInArrears := 0;
+                        LoanAge := 0;
+                        TotalExpRepayment := 0;
+
+
+                        //DateFilter:='..'+ Cutoffdate;
+
+
+                        Lshedule.RESET;
+                        Lshedule.SETRANGE(Lshedule."No.", PLoans."No.");
+                        Lshedule.SetRange("Repayment Date", 0D, Cutoffdate);
+                        IF Lshedule.FIND('-') THEN
+                            REPEAT
+
+                                TotalExpRepayment := ROUND((TotalExpRepayment + Lshedule."Principal Repayment"), 1, '=');
+                                LoanAge := Lshedule."Instalment No";
+                            UNTIL Lshedule.NEXT = 0;
+
+                        TotalExpRepayment := ROUND(PLoans."Schedule Principal Payment", 1, '=');
+
+
+
+                        /* Lshedule.Reset();
+                        Lshedule.SetRange("No.", "No.");
+                        if not Lshedule.Find('-') then begin
+                            CredMngt.fncreateRepayschedule(false, "No.", 0);
+                        end; */
+
+
+
+
+
+
+                        IF PLoans."Average Payment" > 0 then begin
+
+                            if PLoans."Repayment Start Date" = 0D then begin
+                                IF PLoans."Application Date" > 0D THEN Begin
+                                    PLoans."Disbursement Date" := PLoans."Application Date";
+                                    PLoans.Validate("Disbursement Date");
+                                    PLoans.Modify(true)
+                                END;
+                            end;
+                            TotExpBalance := PLoans."Approved Amount" - TotalExpRepayment;
+
+                            AmountInArrears := TotalExpRepayment - TotalAmtPaid;
+
+
+
+                            IF PLoans."Outstanding Balance" <> 0 THEN begin
+
+                                DaysInArrears := ROUND((AmountInArrears / PLoans."Average Payment"), 1, '=');
+                                DaysArrears := ROUND((AmountInArrears / PLoans."Average Payment") * 30, 1, '=');
                             END;
-                        end;
-                        TotExpBalance := PLoans."Approved Amount" - TotalExpRepayment;
 
-                        AmountInArrears := TotalExpRepayment - TotalAmtPaid;
-
+                            IF DaysArrears < 0 THEN
+                                DaysArrears := 0;
 
 
-                        IF PLoans."Outstanding Balance" <> 0 THEN begin
-
-                            DaysInArrears := ROUND((AmountInArrears / PLoans."Average Payment"), 1, '=');
-                            DaysArrears := ROUND((AmountInArrears / PLoans."Average Payment") * 30, 1, '=');
-                        END;
-
-                        IF DaysArrears < 0 THEN
-                            DaysArrears := 0;
-
-
-                        IF DaysArrears <= 30 THEN
-                            IF PLoans."Outstanding Balance" > 0 THEN
-                                PLoans."Sasra Category" := PLoans."Sasra Category"::Performing;
-                        PLoans."Days in Arrears" := DaysInArrears;
-                        PLoans."Amount in Arrears" := AmountInArrears;
-
-                        PLoans.MODIFY;
-
-                        IF (DaysArrears >= 31) AND (DaysArrears <= 90) THEN BEGIN
-                            IF PLoans."Outstanding Balance" > 0 THEN
-                                PLoans."Sasra Category" := PLoans."Sasra Category"::Watch;
+                            IF DaysArrears <= 30 THEN
+                                IF PLoans."Outstanding Balance" > 0 THEN
+                                    PLoans."Sasra Category" := PLoans."Sasra Category"::Performing;
                             PLoans."Days in Arrears" := DaysInArrears;
                             PLoans."Amount in Arrears" := AmountInArrears;
+
                             PLoans.MODIFY;
 
-                        END ELSE IF (DaysArrears >= 91) AND (DaysArrears <= 180) THEN BEGIN
-                            IF PLoans."Outstanding Balance" > 0 THEN
-                                PLoans."Sasra Category" := PLoans."Sasra Category"::Substandard;
-                            PLoans."Days in Arrears" := DaysInArrears;
-                            PLoans."Amount in Arrears" := AmountInArrears;
-                            PLoans.MODIFY;
-
-                        END ELSE IF (DaysArrears >= 181) AND (DaysArrears <= 360) THEN BEGIN
-                            IF PLoans."Outstanding Balance" > 0 THEN
-                                PLoans."Sasra Category" := PLoans."Sasra Category"::Doubtful;
-                            PLoans."Days in Arrears" := DaysInArrears;
-                            PLoans."Amount in Arrears" := AmountInArrears;
-                            PLoans.MODIFY;
-
-                        END ELSE IF (DaysArrears >= 361) THEN BEGIN
-                            IF PLoans."Outstanding Balance" > 0 THEN
-                                PLoans."Sasra Category" := PLoans."Sasra Category"::loss;
-                            PLoans."Days in Arrears" := DaysInArrears;
-                            PLoans."Amount in Arrears" := AmountInArrears;
-                            PLoans.MODIFY;
-                        END;
-
-
-                        IF PLoans."Outstanding Balance" < 0 THEN begin
-                            PLoans."Sasra Category" := PLoans."Sasra Category"::Performing;
-                            PLoans."Days in Arrears" := DaysInArrears;
-                            PLoans."Amount in Arrears" := AmountInArrears;
-                            PLoans.MODIFY;
-                        end;
-                        IF PLoans."Product Type" <> 'SMARTCASH' then begin
-                            if (PLoans."Outstanding Balance" > 0) and (PLoans."Expected Date of Completion" <= Cutoffdate) then begin
-                                PLoans."Sasra Category" := PLoans."Sasra Category"::loss;
+                            IF (DaysArrears >= 31) AND (DaysArrears <= 90) THEN BEGIN
+                                IF PLoans."Outstanding Balance" > 0 THEN
+                                    PLoans."Sasra Category" := PLoans."Sasra Category"::Watch;
                                 PLoans."Days in Arrears" := DaysInArrears;
-                                PLoans."Amount in Arrears" := "Outstanding Balance";
+                                PLoans."Amount in Arrears" := AmountInArrears;
+                                PLoans.MODIFY;
+
+                            END ELSE IF (DaysArrears >= 91) AND (DaysArrears <= 180) THEN BEGIN
+                                IF PLoans."Outstanding Balance" > 0 THEN
+                                    PLoans."Sasra Category" := PLoans."Sasra Category"::Substandard;
+                                PLoans."Days in Arrears" := DaysInArrears;
+                                PLoans."Amount in Arrears" := AmountInArrears;
+                                PLoans.MODIFY;
+
+                            END ELSE IF (DaysArrears >= 181) AND (DaysArrears <= 360) THEN BEGIN
+                                IF PLoans."Outstanding Balance" > 0 THEN
+                                    PLoans."Sasra Category" := PLoans."Sasra Category"::Doubtful;
+                                PLoans."Days in Arrears" := DaysInArrears;
+                                PLoans."Amount in Arrears" := AmountInArrears;
+                                PLoans.MODIFY;
+
+                            END ELSE IF (DaysArrears >= 361) THEN BEGIN
+                                IF PLoans."Outstanding Balance" > 0 THEN
+                                    PLoans."Sasra Category" := PLoans."Sasra Category"::loss;
+                                PLoans."Days in Arrears" := DaysInArrears;
+                                PLoans."Amount in Arrears" := AmountInArrears;
+                                PLoans.MODIFY;
+                            END;
+
+
+                            IF PLoans."Outstanding Balance" < 0 THEN begin
+                                PLoans."Sasra Category" := PLoans."Sasra Category"::Performing;
+                                PLoans."Days in Arrears" := DaysInArrears;
+                                PLoans."Amount in Arrears" := AmountInArrears;
                                 PLoans.MODIFY;
                             end;
+                            IF PLoans."Product Type" <> 'SMARTCASH' then begin
+                                if (PLoans."Outstanding Balance" > 0) and (PLoans."Expected Date of Completion" <= Cutoffdate) then begin
+                                    PLoans."Sasra Category" := PLoans."Sasra Category"::loss;
+                                    PLoans."Days in Arrears" := DaysInArrears;
+                                    PLoans."Amount in Arrears" := "Outstanding Balance";
+                                    PLoans.MODIFY;
+                                end;
 
 
+                            END;
                         END;
+
+                        if PLoans."Outstanding Balance" = 0 then
+                            CurrReport.Skip();
+
                     END;
-
-                    if PLoans."Outstanding Balance" = 0 then
-                        CurrReport.Skip();
-
                 END;
+
             END;
 
-END;
             trigger OnPostDataItem()
             begin
             end;
