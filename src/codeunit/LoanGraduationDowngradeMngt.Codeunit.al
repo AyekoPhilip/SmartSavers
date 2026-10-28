@@ -305,11 +305,13 @@ codeunit 50074 "Loan Graduation/Downgrade Mngt"
         end;
 
     end;
+
     procedure InitializeQcGradQualAmount(VarVariant: Record Member; var QCDetails: Record "QC. Grad. Qualification")
     begin
         QCDetails.Init;
         QCDetails.CopyFromCustDetail(VarVariant);
     end;
+
     procedure fnGetGraduatedAmt(LoanNo: Code[100]; MemberNo: Code[100]; LoanType: Code[20]; Direction: Enum QCQualificationDirection): Decimal
     var
         CustRecord: Record Member;

@@ -15,7 +15,7 @@ report 90011 "Standard Statement-Alt Channel"
     RDLCLayout = './src/report_layout/AltChannelMgtCustStatement.rdl';
     dataset
     {
-       dataitem(Member; Member)
+        dataitem(Member; Member)
         {
             column(No; "No.")
             {

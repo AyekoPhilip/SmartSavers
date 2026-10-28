@@ -87,7 +87,7 @@ page 50833 "Loan Application Posted"
                 RunObject = page "Loan Appraisal Parameter";
                 RunPageLink = "No." = field("No."),
                                       "Account No." = field("Account No.");
-                                      
+
             }
 
         }

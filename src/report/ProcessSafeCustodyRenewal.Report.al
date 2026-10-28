@@ -3,7 +3,7 @@ report 50342 "Process Safe Custody Renewal"
     ApplicationArea = All;
     Caption = 'Process Safe Custody Renewal';
     UsageCategory = Administration;
-    ProcessingOnly=true;
+    ProcessingOnly = true;
     ShowPrintStatus = false;
     UseRequestPage = true;
     DefaultLayout = RDLC;
@@ -11,7 +11,7 @@ report 50342 "Process Safe Custody Renewal"
     {
         dataitem(CollateralRegister; "Collateral Register")
         {
-            DataItemTableView=where("Approval Status"=const(Posted));
+            DataItemTableView = where("Approval Status" = const(Posted));
             column(No; "No.")
             {
             }
@@ -28,12 +28,14 @@ report 50342 "Process Safe Custody Renewal"
             begin
 
             end;
+
             trigger OnAfterGetRecord()
             begin
-                if "Document Type"="Document Type"::Document then begin
-                RegMngt.PostSafeCustodyAutomated(CollateralRegister);
+                if "Document Type" = "Document Type"::Document then begin
+                    RegMngt.PostSafeCustodyAutomated(CollateralRegister);
                 end;
             end;
+
             trigger OnPreDataItem()
             begin
 
@@ -59,7 +61,7 @@ report 50342 "Process Safe Custody Renewal"
         }
     }
     var
-    RegMngt: Codeunit "Registry Mngt.";
+        RegMngt: Codeunit "Registry Mngt.";
 }
 
 

@@ -10,7 +10,7 @@ table 50563 "Loans (Procedure)"
             Editable = false;
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -28,7 +28,7 @@ table 50563 "Loans (Procedure)"
                                                                   Status = CONST(Active));
             Caption = 'Product Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 CustEmp: Record Customer;
@@ -44,7 +44,7 @@ table 50563 "Loans (Procedure)"
             TableRelation = Member;
             Caption = 'Account No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ObjCust: Record Member;
@@ -61,7 +61,7 @@ table 50563 "Loans (Procedure)"
         {
             Caption = 'Requested Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 UpdateRequestAmt
@@ -71,7 +71,7 @@ table 50563 "Loans (Procedure)"
         {
             Caption = 'Approved Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 RSchedule: Record "Schedule of Loan Payment";
@@ -87,7 +87,7 @@ table 50563 "Loans (Procedure)"
             Editable = false;
             Caption = 'Interest Rate';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Product Type");
@@ -115,7 +115,7 @@ table 50563 "Loans (Procedure)"
         {
             Caption = 'Installments';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ErrorOnMaxThreshTxt: Label 'Member due to retire before loan repayment is complete. Do you wish to continue?';
@@ -126,7 +126,7 @@ table 50563 "Loans (Procedure)"
         {
             Caption = 'Disbursement Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 "Repayment Start Date" := getrepaymentStartDate;
@@ -305,7 +305,7 @@ table 50563 "Loans (Procedure)"
         {
             Caption = 'Repayment Frequency';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 fnValidateFrequencyRepay("Repayment Frequency")
@@ -316,7 +316,7 @@ table 50563 "Loans (Procedure)"
             Editable = false;
             Caption = 'Approval Status';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 CredMngt.OnValidateLoanStatusTxt("Approval Status", "Account No.",
@@ -389,7 +389,7 @@ table 50563 "Loans (Procedure)"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Global Dimension 1 Code")
@@ -402,7 +402,7 @@ table 50563 "Loans (Procedure)"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Global Dimension 2 Code");
@@ -427,7 +427,7 @@ table 50563 "Loans (Procedure)"
                                                                     Posted = CONST(false));
             Caption = 'Batch No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Approval Status", "Approval Status"::Approved);
@@ -438,7 +438,7 @@ table 50563 "Loans (Procedure)"
             Editable = false;
             Caption = 'Self Guarantee';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PFacts: Record "Product Factory";
@@ -484,7 +484,7 @@ table 50563 "Loans (Procedure)"
                                                            "Approval Status" = FILTER(Open | Deffered));
             Caption = 'CRM Application No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 AttachCrmApplicationNo
@@ -517,7 +517,7 @@ table 50563 "Loans (Procedure)"
         {
             Caption = 'Deposit Purchase';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PFactory: Record "General Set-Up";
@@ -618,7 +618,7 @@ table 50563 "Loans (Procedure)"
             Editable = false;
             TableRelation = "Loan Application"."No.";
             Caption = 'Application No.';
-        
+
             trigger OnValidate()
             begin
                 fnValidateApplicationNo

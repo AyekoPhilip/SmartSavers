@@ -27,6 +27,10 @@ page 50488 "Proctected Accounts"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Member No. field.';
                 }
+                field("Mobile Transaction"; Rec."Mobile Transaction") { 
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Mobile Transaction field.';
+                }
                 field("Restrcit Viewship (Record)"; Rec."Restrcit Viewship (Record)")
                 {
                     ApplicationArea = All;

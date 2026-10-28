@@ -510,6 +510,7 @@ page 51049 "Banking Mngt. Role Center"
                 }
 
             }
+
             group("Alternate Channels")
             {
 
@@ -562,14 +563,14 @@ page 51049 "Banking Mngt. Role Center"
                     Caption = 'Active Loans';
                     RunObject = Page "Loans List Posted";
                     ApplicationArea = All;
-                    RunPageView = where("Outstanding Balance" = filter(<> 0), "Product Type" = filter('MSACCOLN'));
+                    RunPageView = where("Outstanding Balance" = filter(<> 0), "Product Type" = filter('SMARTCASH'));
                 }
                 action(ClosedAccounts)
                 {
                     Caption = 'Closed Accounts';
                     RunObject = Page "Loans List Posted";
                     ApplicationArea = All;
-                    RunPageView = where("Outstanding Balance" = filter(0), "Product Type" = filter('MSACCOLN'));
+                    RunPageView = where("Outstanding Balance" = filter(0), "Product Type" = filter('SMARTCASH'));
                 }
                 action(QCLoanMngt)
                 {

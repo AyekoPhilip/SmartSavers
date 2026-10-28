@@ -402,6 +402,7 @@ table 50403 "Loans Top up"
         if not "Ignore Charges" then
             "Total Total Up" += Commision;
     end;
+
     procedure CopyFromLoanEntries(Loans: Record Loans)
     var
         PLoan: Record Loans;
@@ -410,7 +411,7 @@ table 50403 "Loans Top up"
         TempFile: Record "Temp. Files";
         RegMngt: Codeunit "Register Management";
         ChargeType: Enum ChargeType;
-
+AccrualMgt:Codeunit LoanAccrualMgt;
     begin
 
         Gensetup.Get();
@@ -437,8 +438,7 @@ table 50403 "Loans Top up"
             Gensetup."Interest Posting Method"::"Charge Daily":
                 begin
                     if Loans."Interest Calculation Method" <> Loans."Interest Calculation Method"::"Zero Interest" then
-                        "Untransfered Interest" := PeriodAct.fnIntEntriesonSpecificLoan(Loans, Today, Loans."No.", 1,
-                        IntDays, StartDate)
+                        "Untransfered Interest" := AccrualMgt.CalculateAccruedInterestAtDate(Loans."No.", Today)
                     else
                         "Untransfered Interest" := 0;
                 end;

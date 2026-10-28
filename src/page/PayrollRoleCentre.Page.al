@@ -186,7 +186,7 @@ page 50107 "Payroll Role Centre"
                     RunObject = page "Transaction Code List";
                     ApplicationArea = All;
                 }
-            
+
                 action("Pr Period Transactions")
                 {
                     Caption = 'Pr Period Transactions';

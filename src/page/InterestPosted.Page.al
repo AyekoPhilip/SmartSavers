@@ -7,7 +7,7 @@ page 51044 "Interest Posted"
     PageType = List;
     SourceTable = "Interest Header";
     SourceTableView = WHERE("Approval Status" = CONST(Posted));
-    ApplicationArea=All;
+    ApplicationArea = All;
 
     layout
     {

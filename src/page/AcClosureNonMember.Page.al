@@ -363,7 +363,7 @@ page 50046 "Ac. Closure-Non Member"
                 var
                     PeriodicMngt: Codeunit "Periodic Activities Mgt.";
                 begin
-                    PeriodicMngt.PerformPost(Rec,1, 0);
+                    PeriodicMngt.PerformPost(Rec, 1, 0);
                 end;
             }
             action("Post+Print")
@@ -374,7 +374,7 @@ page 50046 "Ac. Closure-Non Member"
                 var
                     PeriodicMngt: Codeunit "Periodic Activities Mgt.";
                 begin
-                    PeriodicMngt.PerformPost(Rec,1, 1);
+                    PeriodicMngt.PerformPost(Rec, 1, 1);
                 end;
             }
             action(PostPreview)
@@ -386,7 +386,7 @@ page 50046 "Ac. Closure-Non Member"
                 var
                     PeriodicMngt: Codeunit "Periodic Activities Mgt.";
                 begin
-                    PeriodicMngt.PerformPost(Rec,0, 0);
+                    PeriodicMngt.PerformPost(Rec, 0, 0);
 
                 end;
             }

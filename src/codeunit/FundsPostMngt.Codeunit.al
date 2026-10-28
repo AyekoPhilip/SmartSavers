@@ -471,6 +471,7 @@ codeunit 50075 "Funds. Post Mngt."
             GenJnlLine.Insert(true);
         fnPostPv(Payment);
     end;
+
     procedure fnPostPv(var Payment: Record "Payments Header")
     var
         PayLine: Record "Payment Lines";

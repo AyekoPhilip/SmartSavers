@@ -4,7 +4,7 @@ page 50874 "Account Transfer List"
     DeleteAllowed = false;
     Editable = false;
     InsertAllowed = false;
-    ModifyAllowed=false;
+    ModifyAllowed = false;
     PageType = List;
     SourceTable = "Account Transfer Header";
     ApplicationArea = All;

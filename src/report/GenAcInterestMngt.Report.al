@@ -45,18 +45,18 @@ report 50045 "Gen. A/c Interest Mngt"
             }
             trigger OnPreDataItem()
             begin
-                DocumentNo:="Dividend Simulation Header"."No.";
+                DocumentNo := "Dividend Simulation Header"."No.";
                 if DocumentNo = '' then Error('Document No. must have a value. It cannot be null');
 
-                
+
                 DividendProgression.SetRange("Header No.", "Dividend Simulation Header"."No.");
                 DividendProgression.DeleteAll();
 
                 DividendSetup.Get();
                 DividendSetup.TestField("Start Date");
                 DividendSetup.TestField("End Date");
-                if DividendSetup."Start Date" > DividendSetup."End Date" then 
-                Error('Start Date cannot be greater than End Date');
+                if DividendSetup."Start Date" > DividendSetup."End Date" then
+                    Error('Start Date cannot be greater than End Date');
             end;
 
             trigger OnAfterGetRecord()
@@ -92,7 +92,7 @@ report 50045 "Gen. A/c Interest Mngt"
                     {
                         ApplicationArea = All;
                         Caption = 'Document No.';
-                        Visible=false;
+                        Visible = false;
                         TableRelation = "Dividend Simulation Header"."No." where(Status = filter(<> Posted));
                     }
                 }

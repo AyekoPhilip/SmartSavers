@@ -103,7 +103,7 @@ page 90005 "Payroll Request LookUp page"
 
     trigger OnAfterGetRecord()
     begin
-        
+
     end;
 
     var

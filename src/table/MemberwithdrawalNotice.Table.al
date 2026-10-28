@@ -11,7 +11,7 @@ table 50461 "Member withdrawal Notice"
         {
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
@@ -22,7 +22,7 @@ table 50461 "Member withdrawal Notice"
             TableRelation = Member where(Status = filter(Active | New | Dormant));
             Caption = 'Member No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 LoanAgreement: Record "Guarantor & Security Posted";
@@ -63,7 +63,7 @@ table 50461 "Member withdrawal Notice"
             Caption = 'Reason for withdrawal';
             DataClassification = CustomerContent;
             TableRelation = "Segment/County/Dividend/Signat".Code where(Type = const(WReason));
-        
+
             trigger OnValidate()
             begin
                 SegmentRec.Reset();
@@ -77,7 +77,7 @@ table 50461 "Member withdrawal Notice"
         {
             Caption = 'Withdrawal Notice Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Withdrawal Notice Date" > today then
@@ -113,7 +113,7 @@ table 50461 "Member withdrawal Notice"
             Editable = false;
             Caption = 'Approval Status';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
             begin
@@ -181,7 +181,7 @@ table 50461 "Member withdrawal Notice"
             DataClassification = CustomerContent;
             OptionMembers = " ","Membership Closure","Account Closure";
             OptionCaption = ' ,Membership Withdrawal,Account Closure';
-        
+
             trigger OnValidate()
             var
                 CreditAc: Record "Account Credit";
@@ -220,7 +220,7 @@ table 50461 "Member withdrawal Notice"
             Caption = 'Closure Type';
             DataClassification = CustomerContent;
             ValuesAllowed = 0, 1, 2, 4;
-        
+
             trigger OnValidate()
             begin
                 case "Closure Type" of
@@ -248,7 +248,7 @@ table 50461 "Member withdrawal Notice"
             TableRelation = if ("Account Dimension" = const(Banking)) "Account Banking"."No." where(Blocked = const(" "), "Member No." = field("Member No."),
             Status = filter(Active | New | Dormant | Defaulter), "Account Category" = filter(Junior | "Money Market" | "Women Savings" | "Specialty Savings" | "Islamic Banking")) else
             if ("Account Dimension" = filter(Credit)) "Account Credit"."No." where(Blocked = const(" "), "Member No." = field("Member No."), "Account Category" = filter("Benevolent Fund"), Status = filter(Active | New | Dormant | Defaulter));
-        
+
             trigger OnValidate()
             var
                 FosaAc: Record "Account Banking";

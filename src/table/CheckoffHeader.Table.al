@@ -11,7 +11,7 @@ table 50455 "Checkoff Header"
         {
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
@@ -46,7 +46,7 @@ table 50455 "Checkoff Header"
         {
             Caption = 'Posting Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Posting Date" > Today then
@@ -62,7 +62,7 @@ table 50455 "Checkoff Header"
         {
             TableRelation = if ("Account Type" = filter(Customer)) Customer."No." where("Account Type" = filter('Employer')) else
             if ("Account Type" = filter("Bank Account")) "Bank Account" where(Blocked = filter(false));
-        
+
             trigger OnValidate()
             begin
 
@@ -118,7 +118,7 @@ table 50455 "Checkoff Header"
             TableRelation = Customer;
             Caption = 'Employer Code';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if Customer.Get("Employer Code") then begin
@@ -177,7 +177,7 @@ table 50455 "Checkoff Header"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 //ValidateShortcutDimCode(1,"Shortcut Dimension 1 Code");
@@ -190,7 +190,7 @@ table 50455 "Checkoff Header"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 //ValidateShortcutDimCode(2,"Shortcut Dimension 2 Code");
@@ -212,7 +212,7 @@ table 50455 "Checkoff Header"
         {
             Caption = 'Interest Cutoff Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -306,7 +306,7 @@ table 50455 "Checkoff Header"
         field(50048; "Deduction Type"; Enum "CheckOffDeductType")
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 

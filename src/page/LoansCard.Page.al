@@ -250,7 +250,7 @@ page 51027 "Loans Card"
                     ApplicationArea = All;
                     Style = StandardAccent;
                     StyleExpr = true;
-                   
+
                 }
                 field("Cheque Types"; Rec."Cheques Type")
                 {

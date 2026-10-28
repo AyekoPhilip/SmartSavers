@@ -44,7 +44,7 @@ table 50322 "Dsc Mobile Application"
         field(50017; "Mobile Phone No."; Text[50])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 AttachApplicationNo();
@@ -59,7 +59,7 @@ table 50322 "Dsc Mobile Application"
         {
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             begin
                 if "Approval Status" = "Approval Status"::Approved then begin
@@ -97,7 +97,7 @@ table 50322 "Dsc Mobile Application"
             OptionCaption = 'Initial,Change,Deactivate,Account Onboarding';
             OptionMembers = "Initial","Change","Deactivate","Account Onboarding";
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -108,7 +108,7 @@ table 50322 "Dsc Mobile Application"
             DataClassification = CustomerContent;
             Caption = 'Account No.';
             TableRelation = "Account Banking" where("Account Category" = const(Savings), "Loan Disbursement Account" = filter(true));
-        
+
             trigger OnValidate()
             begin
                 if AccBanking.Get("Application No") then begin
@@ -163,7 +163,7 @@ table 50322 "Dsc Mobile Application"
             TableRelation = "Transaction Types".Code where(Type = filter("ATM Applications" | "ATM Applications"));
             Caption = 'Transaction Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
             end;
@@ -212,13 +212,13 @@ table 50322 "Dsc Mobile Application"
             NoSetup.GET;
             NoSetup.TESTFIELD(NoSetup."Mobile Application Nos");
 
-                        "No. Series" :=NoSetup."Mobile Application Nos";
-                        if NoSeriesMgt.AreRelated(NoSetup."Mobile Application Nos", xRec."No. Series") then
-                            "No. Series" := xRec."No. Series";
-                        "No." := NoSeriesMgt.GetNextNo("No. Series")
-                    end else begin
+            "No. Series" := NoSetup."Mobile Application Nos";
+            if NoSeriesMgt.AreRelated(NoSetup."Mobile Application Nos", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "No." := NoSeriesMgt.GetNextNo("No. Series")
+        end else begin
 
-          
+
         end;
         Temp.Get(UserId);
         Temp.TestField("Global Dimension 1 Code");

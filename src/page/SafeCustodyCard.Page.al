@@ -197,7 +197,7 @@ page 50001 "Safe Custody Card"
         }
         area(factboxes)
         {
-           
+
             part(Control16; "SC Nominee Picture")
             {
                 SubPageLink = "No." = FIELD("No.");

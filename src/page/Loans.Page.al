@@ -567,7 +567,7 @@ page 51038 "Loans"
 
                 trigger OnAction()
                 begin
-                  
+
                 end;
             }
             action("Loan [File]")

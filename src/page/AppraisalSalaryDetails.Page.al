@@ -116,28 +116,28 @@ page 50835 "Appraisal Salary Details"
     trigger OnModifyRecord(): Boolean
     begin
 
-       LoanApps.Reset;
+        LoanApps.Reset;
         LoanApps.SetRange("Application No.", Rec."Loan Application No.");
         if LoanApps.Find('-') then begin
             if LoanApps."Approval Status" = LoanApps."Approval Status"::Open then begin
                 CurrPage.Editable := true;
             end else
                 CurrPage.Editable := false;
-        end; 
+        end;
 
     end;
 
     trigger OnOpenPage()
     begin
 
-       LoanApps.Reset;
+        LoanApps.Reset;
         LoanApps.SetRange("Application No.", Rec."Loan Application No.");
         if LoanApps.Find('-') then begin
             if LoanApps."Approval Status" = LoanApps."Approval Status"::Open then begin
                 CurrPage.Editable := true;
             end else
                 CurrPage.Editable := false;
-        end; 
+        end;
 
     end;
 
@@ -150,7 +150,7 @@ page 50835 "Appraisal Salary Details"
                 CurrPage.Editable := true;
             end else
                 CurrPage.Editable := false;
-        end; 
+        end;
     end;
 
     var

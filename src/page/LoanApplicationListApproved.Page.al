@@ -97,7 +97,7 @@ page 51031 "Loan Application List-Approved"
 
 
 
-      
+
     trigger OnOpenPage()
     var
         Filterstring: Text[250];
@@ -128,7 +128,7 @@ page 51031 "Loan Application List-Approved"
             Error('User ID not found');
     end;
 
-   
+
 
     var
         ObjEmp: Record Customer;
@@ -136,8 +136,8 @@ page 51031 "Loan Application List-Approved"
         Usersetup: Record "User Setup";
         FilterApproverID: Text[250];
         UserMgt: Codeunit "User Setup Management BR";
-           
-       
+
+
 }
 
 

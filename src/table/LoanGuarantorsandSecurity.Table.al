@@ -23,7 +23,7 @@ table 50400 "Loan Guarantors and Security"
             if ("Security Type" = filter(Lien)) "Account Banking"."No." where(Status = const(Active), "Balance (LCY)" = filter(> 0));
             Caption = 'Account No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 BankingAc: Record "Account Banking";
@@ -75,7 +75,7 @@ table 50400 "Loan Guarantors and Security"
                                     "Deposit Shares" := Account."Balance (LCY)";
                                     "ID No." := Account."ID/Passport No.";
                                     "Member No." := Account."Member No.";
-                                     Name := Account.Name;
+                                    Name := Account.Name;
                                 end;
 
                                 case GenSetUp."Guarantorship Option" of
@@ -125,7 +125,7 @@ table 50400 "Loan Guarantors and Security"
                             end
                     end
                 end;
-                
+
                 if GenSetUp."Guarantorship Option" <> GenSetUp."Guarantorship Option"::"Amount Guaranteed" then
                     Validate("Amount Guaranteed", "Available Shares")
             end;
@@ -153,7 +153,7 @@ table 50400 "Loan Guarantors and Security"
             Editable = false;
             Caption = 'Substituted';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 Date := Today;
@@ -169,7 +169,7 @@ table 50400 "Loan Guarantors and Security"
         {
             Caption = 'Amount Guaranteed';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 GenSetUp.Get();
@@ -183,7 +183,7 @@ table 50400 "Loan Guarantors and Security"
                         begin
                             GenSetUp.TestField("Max. Amount to Guarantee");
                             if "Amount Guaranteed" > GenSetUp."Max. Amount to Guarantee" then
-                                Error(ErrotOnMaxAmountToGuarant,GenSetUp."Max. Amount to Guarantee");
+                                Error(ErrotOnMaxAmountToGuarant, GenSetUp."Max. Amount to Guarantee");
                         end;
                 end;
             end;
@@ -250,7 +250,7 @@ table 50400 "Loan Guarantors and Security"
             TableRelation = "Collateral Register"."No." WHERE("Account No." = FIELD("Account No."), "Approval Status" = const(Approved));
             Caption = 'Collateral Reg. No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 

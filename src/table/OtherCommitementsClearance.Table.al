@@ -10,7 +10,7 @@ table 50404 "Other Commitements Clearance"
             Editable = false;
             Caption = 'Loan No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 LoanApps: Record "Loan Application";
@@ -36,7 +36,7 @@ table 50404 "Other Commitements Clearance"
         {
             Caption = 'Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -61,7 +61,7 @@ table 50404 "Other Commitements Clearance"
         {
             Caption = 'Bankers Cheque No';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Bankers Cheque No" <> '' then begin
@@ -94,7 +94,7 @@ table 50404 "Other Commitements Clearance"
         {
             Caption = 'Monthly Deduction';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Monthly Deduction" > 0 then
@@ -110,7 +110,7 @@ table 50404 "Other Commitements Clearance"
             if ("Account Type" = const("External Bank"), Type = const(Account)) Banks;
             Caption = 'Account No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -144,7 +144,7 @@ table 50404 "Other Commitements Clearance"
         field(50023; "Account Type"; Enum "MicroCredAccountTypes")
         {
             Caption = 'Account Type';
-        
+
             trigger OnValidate()
             begin
 
@@ -161,7 +161,7 @@ table 50404 "Other Commitements Clearance"
             TableRelation = "Cust. Bank Account"."Bank Account No." where(Code = field("Payment Destination Code"));
             DataClassification = CustomerContent;
             Caption = 'Destination A/c';
-        
+
             trigger OnValidate()
             begin
 
@@ -172,7 +172,7 @@ table 50404 "Other Commitements Clearance"
             TableRelation = Banks.Code;
             DataClassification = CustomerContent;
             Caption = 'Pay Point';
-        
+
             trigger OnValidate()
             var
                 BanksList: Record Banks;
@@ -209,7 +209,7 @@ table 50404 "Other Commitements Clearance"
         field(50027; "Mobile Phone No."; Code[20])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PhoneCode: Code[10];
@@ -237,7 +237,7 @@ table 50404 "Other Commitements Clearance"
         {
             Caption = 'External Account No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if StrLen("External Account No.") > 100 then
@@ -250,7 +250,7 @@ table 50404 "Other Commitements Clearance"
             TableRelation = Banks;
             Caption = 'Bank Code';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 BankCodes: Record Banks;
@@ -266,7 +266,7 @@ table 50404 "Other Commitements Clearance"
             TableRelation = Banks."Bank No.";
             Caption = 'Branch Code';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 BankBranch: Record "Bank Branches";
@@ -289,7 +289,7 @@ table 50404 "Other Commitements Clearance"
         {
             Caption = 'External Account Name';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
 
@@ -304,7 +304,7 @@ table 50404 "Other Commitements Clearance"
         field(50037; "EFT Options"; Enum "EFTPaymentOptions")
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 LoanApps: Record "Loan Application";
@@ -337,11 +337,11 @@ table 50404 "Other Commitements Clearance"
         }
         field(50038; "Member No."; Code[20])
         {
-            TableRelation = Member."No." where(Status = filter(Active|New));
+            TableRelation = Member."No." where(Status = filter(Active | New));
             Caption = 'Account No.';
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             var
                 ObjCust: Record Member;
@@ -406,7 +406,7 @@ table 50404 "Other Commitements Clearance"
             Editable = false;
             Caption = 'Approval Status';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 appStatus: Enum ApprovalStatus;
@@ -420,7 +420,7 @@ table 50404 "Other Commitements Clearance"
             Editable = false;
         }
 
-    
+
         field(50049; "No."; Code[50])
         {
             DataClassification = CustomerContent;

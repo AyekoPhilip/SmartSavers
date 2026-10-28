@@ -103,7 +103,7 @@ page 50888 "Remittance Header"
                     ApplicationArea = All;
                     Style = StandardAccent;
                     StyleExpr = true;
-                    Importance = Additional;
+
                     ToolTip = 'Specifies the value of the Balance field.';
                 }
                 field(Amount; Rec.Amount)
@@ -140,7 +140,7 @@ page 50888 "Remittance Header"
                 }
                 field("Accoun Not Found"; Rec."Accoun Not Found")
                 {
-                    Importance = Additional;
+
                     Caption = 'Accounts(Not Found)';
                     Style = StandardAccent;
                     StyleExpr = true;
@@ -450,6 +450,21 @@ page 50888 "Remittance Header"
                         Mgmt.ApplicationDocPane(VarVariant, ActItems::Statement)
                     end;
                 }
+                action("Cancel Document")
+                {
+                    Image = Reject;
+                    Caption = 'Reject Approval Request';
+                    Visible = true;
+                    ApplicationArea = All;
+                    trigger OnAction()
+                    var
+                        ApprvlsMngt: Codeunit "Approval Mgmt.";
+                        ApprovalEntries: Record "Approval Entries";
+                    begin
+                        ApprvlsMngt.CancelDocument(Rec."No.");
+                        CurrPage.Close();
+                    end;
+                }
             }
         }
         area(Reporting)
@@ -562,6 +577,9 @@ page 50888 "Remittance Header"
                 actionref("Open Document_Promoted"; "Open Document")
                 {
                 }
+                actionref("Cancel Document_Promoted"; "Cancel Document")
+                {
+                }
             }
             group(Category_Category5)
             {
@@ -615,11 +633,13 @@ page 50888 "Remittance Header"
         Rec."Application Type" := Rec."Application Type"::"Consolidated Amount";
         Rec."Advice Type" := Rec."Advice Type"::"Full Amount";
     end;
+
     trigger OnModifyRecord(): Boolean
     begin
         if Rec.Posted = true then
             Error('You cannot Modify/Delete a record that is already Posted');
     end;
+
     trigger OnDeleteRecord(): Boolean
     begin
         if Rec.Posted = true then

@@ -7,7 +7,7 @@ page 51004 "Individual App. Approved"
     Editable = false;
     InsertAllowed = false;
     ModifyAllowed = false;
-    ApplicationArea=All;
+    ApplicationArea = All;
     layout
     {
         area(content)
@@ -527,7 +527,7 @@ page 51004 "Individual App. Approved"
         }
         area(factboxes)
         {
-           
+
             part(Control16; "Application Picture")
             {
                 SubPageLink = "No." = FIELD("No.");

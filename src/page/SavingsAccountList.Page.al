@@ -114,7 +114,7 @@ page 50808 "Savings Account List"
                     StyleExpr = true;
                 }
 
-                field("Balance (LCY)";Rec."Balance (LCY)")
+                field("Balance (LCY)"; Rec."Balance (LCY)")
                 {
                     ApplicationArea = All;
                     Style = StandardAccent;
@@ -389,7 +389,7 @@ page 50808 "Savings Account List"
                     TempEmailItem.Send(false, EmailScenario::Default);
                 end;
             }
-           
+
             action("Account Statement")
             {
                 Image = ServiceItemWorksheet;
@@ -398,7 +398,7 @@ page 50808 "Savings Account List"
                 var
                     AccBank: Record "Account Banking";
                 begin
-                     AccBank.SetRange("No.", Rec."No.");
+                    AccBank.SetRange("No.", Rec."No.");
                     if AccBank.FindFirst() then
                         Report.Run(Report::"Standard Statement Banking", true, false, AccBank);
                 end;

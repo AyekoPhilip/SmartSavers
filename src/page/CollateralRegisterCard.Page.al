@@ -300,7 +300,7 @@ page 50954 "Collateral Register Card"
 
         area(factboxes)
         {
-          
+
             systempart(Control10; Notes)
             {
                 ApplicationArea = All;

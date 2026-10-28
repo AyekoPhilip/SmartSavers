@@ -38,7 +38,7 @@ page 50019 "Mc. Ac. Changes Page"
                         end;
                     end;
                 }
-                field("Account Dimension";Rec."Account Dimension")
+                field("Account Dimension"; Rec."Account Dimension")
                 {
                     ApplicationArea = All;
                     ShowMandatory = true;

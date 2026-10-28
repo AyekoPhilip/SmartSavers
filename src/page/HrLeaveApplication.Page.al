@@ -23,45 +23,45 @@ page 50140 "Hr Leave Application"
                 Rec."Applicant Staff No.")
                 {
                     ToolTip = 'Specifies the value of the Staff No. field.', Comment = '%';
-                Style = StandardAccent;
-                StyleExpr = true;
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
+                field(Name; Rec.Name)
+                {
+                    ToolTip = 'Specifies the value of the Name field.', Comment = '%';
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
+                field("Job Title"; Rec."Job Title")
+                {
+                    ToolTip = 'Specifies the value of the Job Title field.', Comment = '%';
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
+                field(Gender; Rec.Gender)
+                {
+                    ToolTip = 'Specifies the value of the Gender field.', Comment = '%';
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                    Editable = false;
+                }
+                field("Alternative CellPhone No."; Rec."Alternative CellPhone No.")
+                {
+                    ToolTip = 'Specifies the value of the Alternative CellPhone No. field.', Comment = '%';
+                    Style = StandardAccent;
+                    Editable = false;
+                    StyleExpr = true;
+                }
+                field("Applicant Comment"; Rec."Applicant Comment")
+                {
+                    ToolTip = 'Specifies the value of the Applicant Comment field.', Comment = '%';
+                    Style = StandardAccent;
+                    StyleExpr = true;
+                }
             }
-            field(Name; Rec.Name)
-            {
-                ToolTip = 'Specifies the value of the Name field.', Comment = '%';
-                Style = StandardAccent;
-                StyleExpr = true;
-            }
-            field("Job Title"; Rec."Job Title")
-            {
-                ToolTip = 'Specifies the value of the Job Title field.', Comment = '%';
-                Style = StandardAccent;
-                StyleExpr = true;
-            }
-            field(Gender; Rec.Gender)
-            {
-                ToolTip = 'Specifies the value of the Gender field.', Comment = '%';
-                Style = StandardAccent;
-                StyleExpr = true;
-                Editable=false;
-            }
-            field("Alternative CellPhone No."; Rec."Alternative CellPhone No.")
-            {
-                ToolTip = 'Specifies the value of the Alternative CellPhone No. field.', Comment = '%';
-                Style = StandardAccent;
-                Editable=false;
-                StyleExpr = true;
-            }
-            field("Applicant Comment"; Rec."Applicant Comment")
-            {
-                ToolTip = 'Specifies the value of the Applicant Comment field.', Comment = '%';
-                Style = StandardAccent;
-                StyleExpr = true;
-            }
-        }
             group("Leave Calculation")
             {
-                Editable=Rec."Approval Status"=Rec."Approval Status"::Open;
+                Editable = Rec."Approval Status" = Rec."Approval Status"::Open;
                 field("Leave Type"; Rec."Leave Type")
                 {
                     ToolTip = 'Specifies the value of the Leave Type field.', Comment = '%';
@@ -120,7 +120,7 @@ page 50140 "Hr Leave Application"
             }
             group("Other Information")
             {
-                Editable=Rec."Approval Status"=Rec."Approval Status"::Open;
+                Editable = Rec."Approval Status" = Rec."Approval Status"::Open;
                 field(Reliever; Rec.Reliever)
                 {
                     ToolTip = 'Specifies the value of the Reliever field.', Comment = '%';

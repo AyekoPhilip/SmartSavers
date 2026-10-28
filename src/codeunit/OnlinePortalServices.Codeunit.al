@@ -118,30 +118,30 @@ codeunit 90002 "Online Portal Services"
         AppMgt.RejectApprovalRequests(ApprovalEntry);
     end;
 
-  /*   procedure SendLeaveApproval(DocNo: Code[50])
-    var
-        HRMgt: Codeunit "HR Management";
-    begin
-        LeaveApplication.Get(DocNo);
+    /*   procedure SendLeaveApproval(DocNo: Code[50])
+      var
+          HRMgt: Codeunit "HR Management";
+      begin
+          LeaveApplication.Get(DocNo);
 
-        HRMgt.CheckIfLeaveRelieversExist(LeaveApplication);
-        if ApprovalMgt.CheckLeaveRequestWorkflowEnabled(LeaveApplication) then
-            ApprovalMgt.OnSendLeaveRequestApproval(LeaveApplication);
-        UpdateApprovalEntries(DocNo, LeaveApplication."User ID");
-    end; */
+          HRMgt.CheckIfLeaveRelieversExist(LeaveApplication);
+          if ApprovalMgt.CheckLeaveRequestWorkflowEnabled(LeaveApplication) then
+              ApprovalMgt.OnSendLeaveRequestApproval(LeaveApplication);
+          UpdateApprovalEntries(DocNo, LeaveApplication."User ID");
+      end; */
 
-   /*  procedure SendLoanApproval(DocNo: Code[50])
-    begin
-        LoanApplication.Get(DocNo);
-        if ApprovalMgt.CheckLoanApplicationWorkflowEnabled(LoanApplication) then
-            ApprovalMgt.OnSendLoanApplicationRequestforApproval(LoanApplication);
-        UpdateApprovalEntries(DocNo, LoanApplication."User ID");
-    end; */
+    /*  procedure SendLoanApproval(DocNo: Code[50])
+     begin
+         LoanApplication.Get(DocNo);
+         if ApprovalMgt.CheckLoanApplicationWorkflowEnabled(LoanApplication) then
+             ApprovalMgt.OnSendLoanApplicationRequestforApproval(LoanApplication);
+         UpdateApprovalEntries(DocNo, LoanApplication."User ID");
+     end; */
     procedure UpdateApprovalEntries(DocNo: Code[100]; SenderID: Code[100])
     var
         ApprovalEntryRec: Record "Approval Entry";
     begin
-        
+
         ApprovalEntryRec.Reset();
         ApprovalEntryRec.SetRange("Document No.", DocNo);
         ApprovalEntryRec.SetFilter(Status, '%1|%2', ApprovalEntryRec.Status::Created, ApprovalEntryRec.Status::Open);
@@ -152,6 +152,7 @@ codeunit 90002 "Online Portal Services"
             until ApprovalEntryRec.Next() = 0;
         end;
     end;
+
     local procedure SetApprovalFilters(DocumentNo: Code[20]; ApproverID: Code[30])
     begin
         ApprovalEntry.Reset();
@@ -160,7 +161,7 @@ codeunit 90002 "Online Portal Services"
         ApprovalEntry.SetRange(Status, ApprovalEntry.Status::Open);
     end;
 
-    
+
     /* procedure GetLeaveBalance(EmpNo: Code[50]; LeaveType: Code[50]) LeaveBalance: array[10] of Decimal
     var
         Employee: Record Employee;
@@ -343,7 +344,7 @@ codeunit 90002 "Online Portal Services"
         Dividendsetup.TestField("End Date");
         InterestOptions := InterestOptions::"Daily Basis";
 
-       // DivProcMgt.fngetIndividualCustDiv(MemberNo, 0, Dividendsetup."Start Date", Dividendsetup."End Date", InterestOptions);
+        // DivProcMgt.fngetIndividualCustDiv(MemberNo, 0, Dividendsetup."Start Date", Dividendsetup."End Date", InterestOptions);
 
         filename := Path + 'DividendSlip_' + '-' + MemberNo + '.pdf';
         Member.Reset();

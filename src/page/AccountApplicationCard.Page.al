@@ -62,8 +62,8 @@ page 50803 "Account Application Card"
                     ShowMandatory = true;
                     Style = StandardAccent;
                     StyleExpr = true;
-                    Editable=false;
-                    Visible=false;
+                    Editable = false;
+                    Visible = false;
                     Caption = 'Kin Name';
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the next of Kin Name. field.';

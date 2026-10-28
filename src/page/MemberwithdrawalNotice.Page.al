@@ -11,7 +11,7 @@ page 50899 "Member withdrawal Notice"
         {
             group(General)
             {
-                 field("Member No."; Rec."Member No.")
+                field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = All;
                     Style = StandardAccent;

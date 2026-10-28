@@ -2,8 +2,8 @@ table 50571 "Loan Agreement-Portal"
 {
     Caption = 'Loan Agreement-Portal';
     DataClassification = ToBeClassified;
-    
-   fields
+
+    fields
     {
         field(50009; "No."; Code[20])
         {
@@ -23,7 +23,7 @@ table 50571 "Loan Agreement-Portal"
             IF ("Security Type" = FILTER(Lien)) "Account Banking"."No." WHERE(Status = CONST(Active), "Balance (LCY)" = FILTER(> 0));
             Caption = 'Account No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
 
             begin
@@ -44,7 +44,7 @@ table 50571 "Loan Agreement-Portal"
                             begin
                                 Account.Reset;
                                 Account.SetRange("No.", "Account No.");
-                                Account.SetRange("Can Guarantee Loan",true);
+                                Account.SetRange("Can Guarantee Loan", true);
                                 if Account.Find('-') then begin
                                     Account.CalcFields("Balance (LCY)");
                                     GenSetUp.TestField("Max Loans To Guarantee");
@@ -52,14 +52,14 @@ table 50571 "Loan Agreement-Portal"
                                         Error(Text005);
                                     Account.CheckBlockedCustOnJnls(Account, Enum::"Gen. Journal Document Type"::" ", true);
                                     CustRecord.Reset();
-                                    CustRecord.SetRange("No.",Account."Member No.");
+                                    CustRecord.SetRange("No.", Account."Member No.");
                                     if CustRecord.FindFirst() then begin
                                         CustRecord.TestField("Member Category");
                                         MembCat.Reset();
-                                        MembCat.SetRange("No.",CustRecord."Member Category");
+                                        MembCat.SetRange("No.", CustRecord."Member Category");
                                         if MembCat.FindFirst() then begin
                                             if MembCat."Cannot Guarantee Loan" then
-                                            Error(Text0005,MembCat."No.");
+                                                Error(Text0005, MembCat."No.");
                                         end;
                                     end;
                                     "Deposit Shares" := Account."Balance (LCY)";
@@ -128,7 +128,7 @@ table 50571 "Loan Agreement-Portal"
             Editable = false;
             Caption = 'Substituted';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 Date := Today;
@@ -144,7 +144,7 @@ table 50571 "Loan Agreement-Portal"
         {
             Caption = 'Amount Guaranteed';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Amount Guaranteed" > "Available Shares" then
@@ -213,7 +213,7 @@ table 50571 "Loan Agreement-Portal"
             TableRelation = "Collateral Register"."No." WHERE("Account No." = FIELD("Account No."), "Approval Status" = const(Approved));
             Caption = 'Collateral Reg. No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 

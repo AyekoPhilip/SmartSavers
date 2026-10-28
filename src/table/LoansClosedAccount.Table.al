@@ -11,7 +11,7 @@ table 50029 "Loans-Closed Account"
             Editable = false;
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -29,7 +29,7 @@ table 50029 "Loans-Closed Account"
                                                                   Status = const(Active));
             Caption = 'Product Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 CustEmp: Record Customer;
@@ -44,7 +44,7 @@ table 50029 "Loans-Closed Account"
             TableRelation = Member."No.";
             Caption = 'Member No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ObjCust: Record Member;
@@ -60,7 +60,7 @@ table 50029 "Loans-Closed Account"
         {
             Caption = 'Requested Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -70,7 +70,7 @@ table 50029 "Loans-Closed Account"
         {
             Caption = 'Approved Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 RSchedule: Record "Schedule of Loan Payment";
@@ -86,7 +86,7 @@ table 50029 "Loans-Closed Account"
             Editable = false;
             Caption = 'Interest Rate';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Product Type");
@@ -108,7 +108,7 @@ table 50029 "Loans-Closed Account"
         {
             Caption = 'Installments';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ErrorOnMaxThreshTxt: Label 'Member due to retire before loan repayment is complete. Do you wish to continue?';
@@ -130,7 +130,7 @@ table 50029 "Loans-Closed Account"
         {
             Caption = 'Disbursement Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -287,7 +287,7 @@ table 50029 "Loans-Closed Account"
         {
             Caption = 'Repayment Frequency';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 fnValidateFrequencyRepay("Repayment Frequency")
@@ -298,7 +298,7 @@ table 50029 "Loans-Closed Account"
             Editable = false;
             Caption = 'Approval Status';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 CredMngt.OnValidateLoanStatusTxt("Approval Status", "Account No.",
@@ -372,7 +372,7 @@ table 50029 "Loans-Closed Account"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Global Dimension 1 Code")
@@ -385,7 +385,7 @@ table 50029 "Loans-Closed Account"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Global Dimension 2 Code");
@@ -410,7 +410,7 @@ table 50029 "Loans-Closed Account"
                                                                     Posted = CONST(false));
             Caption = 'Batch No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Approval Status", "Approval Status"::Approved);
@@ -421,7 +421,7 @@ table 50029 "Loans-Closed Account"
             Editable = false;
             Caption = 'Self Guarantee';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PFacts: Record "Product Factory";
@@ -467,7 +467,7 @@ table 50029 "Loans-Closed Account"
                                                            "Approval Status" = FILTER(Open | Deffered));
             Caption = 'CRM Application No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 AttachCrmApplicationNo
@@ -500,7 +500,7 @@ table 50029 "Loans-Closed Account"
         {
             Caption = 'Deposit Purchase';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PFactory: Record "General Set-Up";
@@ -600,7 +600,7 @@ table 50029 "Loans-Closed Account"
             Editable = false;
             TableRelation = "Loan Application"."No.";
             Caption = 'Application No.';
-        
+
             trigger OnValidate()
             begin
                 fnValidateApplicationNo
@@ -799,7 +799,7 @@ table 50029 "Loans-Closed Account"
             if ("Loan Payment Destination" = const(Supplier)) Vendor where("Account Type" = filter(<> Banking));
             DataClassification = CustomerContent;
             Caption = 'Payment Destination A/c';
-        
+
             trigger OnValidate()
             begin
 
@@ -812,7 +812,7 @@ table 50029 "Loans-Closed Account"
             if ("Loan Payment Destination" = const(Supplier)) Vendor where("Account Type" = filter(<> Banking));
             DataClassification = CustomerContent;
             Caption = 'Pay Point';
-        
+
             trigger OnValidate()
             var
                 AccBanking: Record "Account Banking";
@@ -887,7 +887,7 @@ table 50029 "Loans-Closed Account"
                                                                                                               Cancelled = const(false));
             DataClassification = CustomerContent;
             Caption = 'Cheque No.';
-        
+
             trigger OnValidate()
             var
                 ChequeRegister: Record "Cheque Register";
@@ -901,7 +901,7 @@ table 50029 "Loans-Closed Account"
             DataClassification = CustomerContent;
             Caption = 'Cheque Type';
         }
-         field(50132; "Amount in Arrears"; Decimal)
+        field(50132; "Amount in Arrears"; Decimal)
         {
 
             DataClassification = CustomerContent;

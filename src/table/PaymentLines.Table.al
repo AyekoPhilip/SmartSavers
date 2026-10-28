@@ -45,7 +45,7 @@ table 50009 "Payment Lines"
             "Customer Posting Group" = field(Grouping));
             DataClassification = CustomerContent;
             Caption = 'Account No';
-        
+
             trigger OnValidate()
             var
                 PH: Record "Payments Header";
@@ -141,7 +141,7 @@ table 50009 "Payment Lines"
             Editable = true;
             DataClassification = CustomerContent;
             Caption = 'Amount';
-        
+
             trigger OnValidate()
             begin
 
@@ -181,7 +181,7 @@ table 50009 "Payment Lines"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(1));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 1 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Shortcut Dimension 1 Code");
@@ -193,7 +193,7 @@ table 50009 "Payment Lines"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(2));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 2 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Shortcut Dimension 2 Code");
@@ -203,7 +203,7 @@ table 50009 "Payment Lines"
         {
             TableRelation = "Receipts and Payment Types" where(Type = filter(Payment), Blocked = filter(false));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 GetPaymentLineType();
@@ -214,7 +214,7 @@ table 50009 "Payment Lines"
             TableRelation = "VAT Product Posting Group";
             DataClassification = CustomerContent;
             Caption = 'VAT Code';
-        
+
             trigger OnValidate()
             begin
                 "VAT Rate" := 0;
@@ -227,7 +227,7 @@ table 50009 "Payment Lines"
             TableRelation = "VAT Product Posting Group";
             DataClassification = CustomerContent;
             Caption = 'W/Tax Code';
-        
+
             trigger OnValidate()
             begin
                 Validate(Amount);
@@ -238,7 +238,7 @@ table 50009 "Payment Lines"
             TableRelation = "VAT Product Posting Group";
             DataClassification = CustomerContent;
             Caption = 'Retention Code';
-        
+
             trigger OnValidate()
             begin
                 IF TariffCode.GET("Retention Code") THEN
@@ -263,7 +263,7 @@ table 50009 "Payment Lines"
         {
             DataClassification = CustomerContent;
             Caption = 'Retention Amount';
-        
+
             trigger OnValidate()
             begin
                 Validate(Amount)
@@ -273,7 +273,7 @@ table 50009 "Payment Lines"
         {
             DataClassification = CustomerContent;
             Caption = 'Net Amount';
-        
+
             trigger OnValidate()
             begin
                 IF "Currency Factor" <> 0 THEN
@@ -287,7 +287,7 @@ table 50009 "Payment Lines"
             TableRelation = "VAT Product Posting Group";
             DataClassification = CustomerContent;
             Caption = 'W/T VAT Code';
-        
+
             trigger OnValidate()
             begin
                 Validate(Amount);
@@ -344,7 +344,7 @@ table 50009 "Payment Lines"
         {
             Caption = 'Applies-to Doc. No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnLookup()
             var
                 Amt: Decimal;
@@ -412,7 +412,7 @@ table 50009 "Payment Lines"
                             IF PAGE.RUNMODAL(0, VendLedgEntry) = ACTION::LookupOK THEN BEGIN
 
                                 IF VendLedgEntry."Applies-to ID" <> '' THEN BEGIN
-                                    
+
                                     VendLedger1.RESET;
                                     VendLedger1.SETCURRENTKEY(VendLedger1."Vendor No.", Open, "Applies-to ID");
                                     VendLedger1.SETRANGE(VendLedger1."Vendor No.", "Account No.");
@@ -447,7 +447,7 @@ table 50009 "Payment Lines"
                                         Amount := ABS(VendLedgEntry."Remaining Amount");
                                     VALIDATE(Amount);
                                     "Applies-to Doc. No." := VendLedgEntry."Document No.";
-                                    "Applies-to ID":=VendLedgEntry."Document No.";
+                                    "Applies-to ID" := VendLedgEntry."Document No.";
                                     Description := VendLedgEntry."External Document No.";
                                     VendLedgEntry.RESET;
                                     VendLedgEntry.SETRANGE("Document No.", "Applies-to Doc. No.");
@@ -482,7 +482,7 @@ table 50009 "Payment Lines"
         {
             Caption = 'Applies-to ID';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 CheckPayHeaderApprovalStatus();
@@ -523,7 +523,7 @@ table 50009 "Payment Lines"
         {
             DataClassification = CustomerContent;
             Caption = 'Cash Receipt Amount';
-        
+
             trigger OnValidate()
             begin
 
@@ -543,7 +543,7 @@ table 50009 "Payment Lines"
         {
             DataClassification = CustomerContent;
             Caption = 'VAT Rate';
-        
+
             trigger OnValidate()
             begin
 
@@ -553,7 +553,7 @@ table 50009 "Payment Lines"
         {
             DataClassification = CustomerContent;
             Caption = 'W/Tax Rate';
-        
+
             trigger OnValidate()
             begin
 
@@ -563,7 +563,7 @@ table 50009 "Payment Lines"
         {
             DataClassification = CustomerContent;
             Caption = 'Retention Rate';
-        
+
             trigger OnValidate()
             begin
 
@@ -573,7 +573,7 @@ table 50009 "Payment Lines"
         {
             DataClassification = CustomerContent;
             Caption = 'VAT Withholding Rate';
-        
+
             trigger OnValidate()
             begin
 
@@ -583,7 +583,7 @@ table 50009 "Payment Lines"
         {
             DataClassification = CustomerContent;
             Caption = 'Withholding Tax Amount';
-        
+
             trigger OnValidate()
             begin
 
@@ -593,7 +593,7 @@ table 50009 "Payment Lines"
         {
             DataClassification = CustomerContent;
             Caption = 'VAT Withholding Amount';
-        
+
             trigger OnValidate()
             begin
 
@@ -602,7 +602,7 @@ table 50009 "Payment Lines"
         field(50054; "VAT Deductible"; Boolean)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -611,7 +611,7 @@ table 50009 "Payment Lines"
         field(50055; "Withholding Tax Code"; Code[20])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 CalculateTax();
@@ -621,7 +621,7 @@ table 50009 "Payment Lines"
         field(50061; "VAT Withholding Code"; Code[20])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 CalculateTax();
@@ -631,7 +631,7 @@ table 50009 "Payment Lines"
         field(50062; "Transaction Name"; Code[20])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -641,7 +641,7 @@ table 50009 "Payment Lines"
         field(50056; "Invoice No."; Code[50])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 VendLedgEntry.Reset();
@@ -682,7 +682,7 @@ table 50009 "Payment Lines"
             Editable = false;
             TableRelation = "Dimension Set Entry";
             DataClassification = CustomerContent;
-        
+
             trigger OnLookup()
             begin
                 ShowDimensions();
@@ -700,7 +700,7 @@ table 50009 "Payment Lines"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(3));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 3 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(3, "Shortcut Dimension 3 Code");
@@ -723,7 +723,7 @@ table 50009 "Payment Lines"
         {
             Caption = 'Gen. Posting Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
             end;
@@ -733,7 +733,7 @@ table 50009 "Payment Lines"
             DataClassification = CustomerContent;
             TableRelation = Currency;
             Caption = 'Currency';
-        
+
             trigger OnValidate()
             begin
                 Validate(Amount);

@@ -329,7 +329,7 @@ page 50894 "Receipt Header"
                 Visible = true;
                 ApplicationArea = All;
             }
-           
+
             systempart(Control1900383207; Links)
             {
                 ApplicationArea = RecordLinks;

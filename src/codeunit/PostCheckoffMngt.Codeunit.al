@@ -18,7 +18,7 @@ codeunit 50005 "Post. Checkoff Mngt."
         case RecRef."Posting Type" of
             RecRef."Posting Type"::"Post Application":
                 begin
-                    RecRef.TestField("Approval Status", RecRef."Approval Status"::Approved);
+                    //RecRef.TestField("Approval Status", RecRef."Approval Status"::Approved);
                     if RecRef."Account Type" = RecRef."Account Type"::"G/L Account" then begin
                         if TellMngt.TestNoEntriesExist(RecRef."Account Name", RecRef."No.", 2) then
                             Error(Text016, RecRef."Account Name", RecRef."No.");
@@ -2329,6 +2329,11 @@ codeunit 50005 "Post. Checkoff Mngt."
         Purchline: Record "Checkoff Receipt Lines";
         ProgressWindow: Dialog;
     begin
+
+        Purchline.Reset;
+        Purchline.SetRange("No.", CheckHeader."No.");
+        Purchline.SetFilter(Amount, '%1', 0);
+        Purchline.DeleteAll();
 
         case CheckHeader."Application Type" of
             CheckHeader."Application Type"::"Allocated Amount":

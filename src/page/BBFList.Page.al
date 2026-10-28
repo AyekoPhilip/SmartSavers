@@ -10,7 +10,7 @@ page 50035 "BBF List"
     SourceTable = "Interest Header";
     UsageCategory = Lists;
     SourceTableView = WHERE("Approval Status" = FILTER(<> Posted));
-    
+
     layout
     {
         area(content)

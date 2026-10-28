@@ -447,7 +447,7 @@ page 50742 "Readmission Page"
         }
         area(factboxes)
         {
-           
+
             part(Control16; "Application Picture")
             {
                 SubPageLink = "No." = FIELD("No.");

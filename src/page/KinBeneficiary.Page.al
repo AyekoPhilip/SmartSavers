@@ -5,7 +5,7 @@ page 51102 "Kin Beneficiary"
     PageType = List;
     SourceTable = "Next of KIN";
     UsageCategory = Lists;
-    SourceTableView = where(Type=filter("Benevolent Beneficiary"));
+    SourceTableView = where(Type = filter("Benevolent Beneficiary"));
     layout
     {
         area(content)
@@ -45,7 +45,7 @@ page 51102 "Kin Beneficiary"
                     Style = StandardAccent;
                     StyleExpr = true;
                 }
-                 field("BBF Entitlement"; Rec."BBF Entitlement Code")
+                field("BBF Entitlement"; Rec."BBF Entitlement Code")
                 {
                     ToolTip = 'Specifies the value of the BBF field.';
                     Style = StandardAccent;
@@ -69,7 +69,7 @@ page 51102 "Kin Beneficiary"
                     Style = StandardAccent;
                     StyleExpr = true;
                 }
-               
+
                 field("Type"; Rec."Type")
                 {
                     ToolTip = 'Specifies the value of the Type field.';

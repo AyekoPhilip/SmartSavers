@@ -92,7 +92,7 @@ table 50581 "Product Factory Temp."
         {
             Caption = 'Minimum Balance';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 Text0001: Label 'Minimum balance cannot be less than zero.';
@@ -291,7 +291,7 @@ table 50581 "Product Factory Temp."
         {
             Caption = 'Ordinary Deposits Multiplier';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 "Prefferential Installments" := "Ordinary Default Intallments"
@@ -436,7 +436,7 @@ table 50581 "Product Factory Temp."
             OptionMembers = " ","Daily","Weekly","Monthly","Quarterly","Yearly";
             Caption = 'Repayment Frequency';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 fnValidateFrequencyRepay
@@ -550,7 +550,7 @@ table 50581 "Product Factory Temp."
             DataClassification = CustomerContent;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1),
                                                           Blocked = CONST(false));
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(
@@ -565,7 +565,7 @@ table 50581 "Product Factory Temp."
             DataClassification = CustomerContent;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2),
                                                           Blocked = CONST(false));
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(
@@ -578,7 +578,7 @@ table 50581 "Product Factory Temp."
             DataClassification = CustomerContent;
             Editable = false;
             TableRelation = "Dimension Set Entry";
-        
+
             trigger OnValidate()
             begin
                 DimMgt.UpdateGlobalDimFromDimSetID(
@@ -648,7 +648,7 @@ table 50581 "Product Factory Temp."
             Caption = 'Source Link Account';
             DataClassification = CustomerContent;
             OptionMembers = "Member","Non-Member";
-        
+
             trigger OnValidate()
             begin
                 if "Source Account" = "Source Account"::"Non-Member" then begin

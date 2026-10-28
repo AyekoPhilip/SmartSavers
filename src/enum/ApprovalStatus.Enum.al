@@ -1,7 +1,7 @@
 enum 50048 "ApprovalStatus"
 {
     Extensible = false;
-    value(0; "Open")
+    value(0; Open)
     {
         Caption = 'Open';
     }
@@ -9,32 +9,36 @@ enum 50048 "ApprovalStatus"
     {
         Caption = 'Pending Approval';
     }
-    value(2; "Approved")
+    value(2; Approved)
     {
         Caption = 'Approved';
     }
-    value(3; "Rejected")
+    value(3; Rejected)
     {
         Caption = 'Rejected';
     }
-    value(4; "Deffered")
+    value(4; Deffered)
     {
         Caption = 'Deffered';
     }
-    value(5; "Posted")
+    value(5; Posted)
     {
         Caption = 'Posted';
     }
-    value(6; "Block")
+    value(6; Block)
     {
         Caption = 'Block';
     }
-    value(7; "Transferred")
+    value(7; Transferred)
     {
         Caption = 'Transferred';
     }
-    value(8; "Reversed")
+    value(8; Reversed)
     {
         Caption = 'Reversed';
+    }
+    value(9; Cancelled)
+    {
+        Caption = 'Cancelled';
     }
 }

@@ -43,7 +43,7 @@ report 50183 "Mod. Mgt Validation"
 
             trigger OnAfterGetRecord()
             var
-        
+
             begin
 
                 case ValidationType of

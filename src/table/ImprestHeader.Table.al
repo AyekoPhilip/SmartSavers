@@ -10,11 +10,11 @@ table 50023 "Imprest Header"
             DataClassification = CustomerContent;
             Editable = false;
             Caption = 'No.';
-        
+
             trigger OnValidate()
             begin
 
-              
+
 
             end;
         }
@@ -23,7 +23,7 @@ table 50023 "Imprest Header"
             Editable = false;
             DataClassification = CustomerContent;
             Caption = 'Date';
-        
+
             trigger OnValidate()
             begin
 
@@ -80,7 +80,7 @@ table 50023 "Imprest Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(1));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 1 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Shortcut Dimension 1 Code");
@@ -92,7 +92,7 @@ table 50023 "Imprest Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(2));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 2 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Shortcut Dimension 2 Code");
@@ -115,7 +115,7 @@ table 50023 "Imprest Header"
             TableRelation = "Bank Account" where(Blocked = filter(false));
             DataClassification = CustomerContent;
             Caption = 'Paying Bank Account';
-        
+
             trigger OnValidate()
             begin
                 if Bank.Get("Paying Bank Account") then begin
@@ -135,7 +135,7 @@ table 50023 "Imprest Header"
             TableRelation = Currency;
             DataClassification = CustomerContent;
             Caption = 'Currency';
-        
+
             trigger OnValidate()
             begin
 
@@ -165,7 +165,7 @@ table 50023 "Imprest Header"
             if ("Account Type" = const(Vendor)) Vendor;
             DataClassification = CustomerContent;
             Caption = 'Account No.';
-        
+
             trigger OnValidate()
             begin
                 case "Account Type" of
@@ -223,7 +223,7 @@ table 50023 "Imprest Header"
         {
             DataClassification = CustomerContent;
             Caption = 'Applies- To Doc No.';
-        
+
             trigger OnLookup()
             begin
 
@@ -288,7 +288,7 @@ table 50023 "Imprest Header"
             Caption = 'Responsibility Center';
             TableRelation = "Responsibility Center";
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -342,7 +342,7 @@ table 50023 "Imprest Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(3));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 3 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(3, "Shortcut Dimension 3 Code");
@@ -360,7 +360,7 @@ table 50023 "Imprest Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(4));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 4 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(4, "Shortcut Dimension 4 Code");
@@ -384,7 +384,7 @@ table 50023 "Imprest Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(5));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 5 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(5, "Shortcut Dimension 5 Code");
@@ -407,7 +407,7 @@ table 50023 "Imprest Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(6));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 6 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(6, "Shortcut Dimension 6 Code");
@@ -419,7 +419,7 @@ table 50023 "Imprest Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(7));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 7 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(7, "Shortcut Dimension 7 Code");
@@ -431,7 +431,7 @@ table 50023 "Imprest Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(8));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 8 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(8, "Shortcut Dimension 8 Code");
@@ -441,7 +441,7 @@ table 50023 "Imprest Header"
         {
             DataClassification = CustomerContent;
             OptionMembers = " ","Cash Voucher","Payment Voucher";
-        
+
             trigger OnValidate()
             begin
 
@@ -453,7 +453,7 @@ table 50023 "Imprest Header"
         {
             DataClassification = CustomerContent;
             Caption = 'Remarks';
-        
+
             trigger OnValidate()
             begin
 
@@ -480,7 +480,7 @@ table 50023 "Imprest Header"
             Editable = false;
             TableRelation = "Dimension Set Entry";
             DataClassification = CustomerContent;
-        
+
             trigger OnLookup()
             begin
 
@@ -599,7 +599,7 @@ table 50023 "Imprest Header"
         {
             DataClassification = CustomerContent;
             Caption = 'Imprest Receipt';
-        
+
             trigger OnValidate()
             begin
                 if "Imprest Receipt" = true then
@@ -687,13 +687,13 @@ table 50023 "Imprest Header"
                     begin
                         CashMgt.TestField("Max Open Documents");
                         CashMgt.TestField("Imprest Nos");
-                        
+
                     end;
                 "Payment Type"::"Imprest Surrender":
                     begin
                         CashMgt.TestField("Max Imprests Unsurrendered");
                         CashMgt.TestField("Imprest Surrender Nos");
-                        
+
                     end;
             end;
 

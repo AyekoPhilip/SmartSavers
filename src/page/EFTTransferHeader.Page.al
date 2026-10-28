@@ -260,7 +260,7 @@ page 50815 "EFT Transfer Header"
                 begin
                     Rec.TestField("Approval Status", Rec."Approval Status"::Open);
                     Rec.TestField("Source of funds", Rec."Source of funds"::"Loan Proceed");
-                    eftProcessing.CreateEftLines(Rec."No.",Rec."Product Type", Rec."Date Entered", 1);
+                    eftProcessing.CreateEftLines(Rec."No.", Rec."Product Type", Rec."Date Entered", 1);
                 end;
             }
             action("Clear Lines")

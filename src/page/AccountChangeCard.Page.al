@@ -221,7 +221,7 @@ page 50049 "Account Change-Card"
                     begin
                         VarVariant := Rec;
                         if Rec."Account Type" = Rec."Account Type"::Junior then
-                        RegMngt.fnActionPaneItems(VarVariant, 0);
+                            RegMngt.fnActionPaneItems(VarVariant, 0);
                         CurrPage.Close();
                     end;
                 }

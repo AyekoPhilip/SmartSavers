@@ -153,7 +153,7 @@ page 50065 "Loan Application ListPart"
                 Image = Reject;
                 Caption = 'Reject Approval Request';
                 Visible = true;
-                Enabled=false;
+                Enabled = false;
                 ApplicationArea = All;
                 trigger OnAction()
                 var

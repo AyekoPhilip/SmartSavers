@@ -143,7 +143,7 @@ page 50896 "Membership Closure"
                     Style = StandardAccent;
                     StyleExpr = true;
                 }
-                 field("Account No."; Rec."Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = All;
                     Editable = false;
@@ -212,14 +212,14 @@ page 50896 "Membership Closure"
                     Visible = false;
                     ShowMandatory = true;
                 }
-                field("Cheques Type";Rec."Rcv Cheques Type")
+                field("Cheques Type"; Rec."Rcv Cheques Type")
                 {
                     ApplicationArea = All;
                     Style = StandardAccent;
                     StyleExpr = true;
                     ShowMandatory = true;
                 }
-                field("Cheque No";Rec."Rcv Cheque No")
+                field("Cheque No"; Rec."Rcv Cheque No")
                 {
                     ApplicationArea = All;
                     Style = StandardAccent;

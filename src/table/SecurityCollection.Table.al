@@ -9,7 +9,7 @@ table 50474 "Security Collection"
             Editable = false;
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
@@ -27,14 +27,14 @@ table 50474 "Security Collection"
             TableRelation = Member;
             Caption = 'Account No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 Account.Reset();
-                Account.SetRange("Member No.",Rec."Account No.");
-                Account.SetRange("Account Category",Account."Account Category"::Savings);
+                Account.SetRange("Member No.", Rec."Account No.");
+                Account.SetRange("Account Category", Account."Account Category"::Savings);
                 if Account.FindFirst() then begin
-                    Rec."Savings Account No.":=Account."No.";
+                    Rec."Savings Account No." := Account."No.";
                 end;
 
 
@@ -110,7 +110,7 @@ table 50474 "Security Collection"
             Editable = false;
             Caption = 'Forced Sale Value';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 Text001: Label 'Forced sale value cannot be more than collateral limit';
@@ -136,11 +136,11 @@ table 50474 "Security Collection"
         }
         field(50026; "Collateral Register No."; Code[20])
         {
-            TableRelation = if ("Document Type"=const(Document)) "Collateral Register"."No." where("Approval Status" = const(Posted), "Inward/Outward" = const("In-Store"),"Document Type"=const(Document),"Account No."=field("Account No."))
-        else if ("Document Type"=const(Collateral)) "Collateral Register"."No." where("Approval Status" = filter(Approved| Posted), "Inward/Outward" = const("In-Store"),"Document Type"=const(Collateral),"Account No."=field("Account No."));
+            TableRelation = if ("Document Type" = const(Document)) "Collateral Register"."No." where("Approval Status" = const(Posted), "Inward/Outward" = const("In-Store"), "Document Type" = const(Document), "Account No." = field("Account No."))
+            else if ("Document Type" = const(Collateral)) "Collateral Register"."No." where("Approval Status" = filter(Approved | Posted), "Inward/Outward" = const("In-Store"), "Document Type" = const(Collateral), "Account No." = field("Account No."));
             Caption = 'Collateral Register No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if CollSec.Get("Collateral Register No.") then begin
@@ -180,7 +180,7 @@ table 50474 "Security Collection"
             DataClassification = CustomerContent;
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Global Dimension 1 Code")
@@ -193,7 +193,7 @@ table 50474 "Security Collection"
             DataClassification = CustomerContent;
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Global Dimension 2 Code");
@@ -231,20 +231,20 @@ table 50474 "Security Collection"
             TableRelation = "User Setup"."User ID";
             Caption = 'Posted By';
         }
-         field(50035; "Document Type"; Option)
+        field(50035; "Document Type"; Option)
         {
             OptionMembers = "Collateral","Document","Others";
             DataClassification = CustomerContent;
         }
-         field(50036; "Transaction Type"; Code[20])
+        field(50036; "Transaction Type"; Code[20])
         {
             TableRelation = "Transaction Types".Code where(Type = filter(Collection));
             Caption = 'Transaction Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
-                
+
             end;
         }
         field(50037; "Savings Account No."; Code[20])
@@ -258,7 +258,7 @@ table 50474 "Security Collection"
         {
             OptionMembers = " ","Retrieval","Collection";
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -287,7 +287,7 @@ table 50474 "Security Collection"
             SalesSetup.Get;
             SalesSetup.TestField(SalesSetup."Loan Security Nos.");
             "No. Series" := SalesSetup."Loan Security Collection Nos";
-            if NoSeriesMgt.AreRelated(SalesSetup."Loan Security Collection Nos" , xRec."No. Series") then
+            if NoSeriesMgt.AreRelated(SalesSetup."Loan Security Collection Nos", xRec."No. Series") then
                 "No. Series" := xRec."No. Series";
             "No." := NoSeriesMgt.GetNextNo("No. Series");
             PassDocumentNo
@@ -306,13 +306,13 @@ table 50474 "Security Collection"
 
         if "No." <> xRec."No." then
             if not RecRefHeader.Get(Rec."No.") then begin
-                SalesSetup .Get();
+                SalesSetup.Get();
                 NoSeriesMgt.TestManual(SalesSetup."Loan Security Collection Nos");
                 "No. Series" := '';
             end;
     end;
 
-[IntegrationEvent(false, false)]
+    [IntegrationEvent(false, false)]
     local procedure OnBeforeTestNoSeries(var RecRef: Record "Security Collection"; xRecRef: Record "Security Collection"; var IsHandled: Boolean)
     begin
     end;

@@ -101,7 +101,7 @@ page 51045 "Interest Header Posted"
                 {
                     Caption = 'Create Entry';
                     Image = Allocate;
-                    Enabled=false;
+                    Enabled = false;
                     ApplicationArea = All;
                     trigger OnAction()
                     var
@@ -131,7 +131,7 @@ page 51045 "Interest Header Posted"
                 {
                     Caption = 'Send A&pproval Request';
                     Image = SendApprovalRequest;
-                    Enabled=false;
+                    Enabled = false;
                     ApplicationArea = All;
 
                     trigger OnAction()
@@ -146,7 +146,7 @@ page 51045 "Interest Header Posted"
                 {
                     Caption = 'Cancel Approval Re&quest';
                     Image = CancelApprovalRequest;
-                    Enabled=false;
+                    Enabled = false;
                     ApplicationArea = All;
 
                     trigger OnAction()
@@ -160,7 +160,7 @@ page 51045 "Interest Header Posted"
                 action(OpenApprovalRequest)
                 {
                     Image = Category;
-                    Enabled=false;
+                    Enabled = false;
                     ApplicationArea = All;
 
                     trigger OnAction()
@@ -194,7 +194,7 @@ page 51045 "Interest Header Posted"
                         approvalsMgmt: Codeunit "Approvals Mgmt.";
                         DocPostMgt: Codeunit "Doc-PostMgt";
                     begin
-                        DocPostMgt.fnIntPeriodClosure(Rec."Start Date", Rec."End Date", Rec."No.",Rec."Application Type");
+                        DocPostMgt.fnIntPeriodClosure(Rec."Start Date", Rec."End Date", Rec."No.", Rec."Application Type");
                         Rec."Approval Status" := Rec."Approval Status"::Posted;
                         Rec.Posted := true;
                         Rec.Modify(true)
@@ -290,7 +290,7 @@ page 51045 "Interest Header Posted"
         }
     }
 
-   
+
 
     trigger OnAfterGetRecord()
     begin

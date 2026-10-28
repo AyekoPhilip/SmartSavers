@@ -27,6 +27,9 @@ page 50694 "Account Activation"
                         Rec."Changes Type"::"Membership Details",
                         Rec."Changes Type"::"Account Signatories":
                                 Error('The Option selected is not allowed');
+                        end;
+                        if Rec."Changes Type" = Rec."Changes Type"::"Account Activation" then begin
+                            Rec."Resons for Status Change" := format(Rec."Changes Type");
                         end
                     end;
                 }
@@ -57,7 +60,7 @@ page 50694 "Account Activation"
                     ApplicationArea = All;
 
                 }
-                
+
                 field("Account Type"; Rec."Account Type")
                 {
                     ToolTip = 'Specifies the value of the Account Type field.';
@@ -66,7 +69,7 @@ page 50694 "Account Activation"
                 field("Account No."; Rec."Account No.")
                 {
                     ToolTip = 'Specifies the value of the Account No. field.';
-                    Enabled = Rec."Operation Type"=Rec."Operation Type"::"Single Account";
+                    Enabled = Rec."Operation Type" = Rec."Operation Type"::"Single Account";
                     ApplicationArea = All;
                 }
                 field("Product Type"; Rec."Product Type")

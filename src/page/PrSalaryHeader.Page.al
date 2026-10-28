@@ -293,15 +293,15 @@ page 50109 "Pr Salary Header"
                     ///dfghjkl
                 end;
             }
-             action("Monthly Contribution")
+            action("Monthly Contribution")
             {
                 Image = Category;
-                Caption='Sacco Deductions';
+                Caption = 'Sacco Deductions';
                 RunObject = Page "Member Contribution";
                 RunPageLink = "Account No." = field("Member No.");
                 ApplicationArea = All;
             }
-            
+
             action(AssignEarnings)
             {
                 Image = ElectronicDoc;

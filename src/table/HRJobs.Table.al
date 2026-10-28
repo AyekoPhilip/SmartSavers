@@ -17,7 +17,7 @@ table 50062 "HR Jobs"
         field(50011; "No. Of Posts"; Integer)
         {
             Caption = 'No. Of Posts';
-        
+
             trigger OnValidate()
             begin
 
@@ -32,7 +32,7 @@ table 50062 "HR Jobs"
         {
             Caption = 'Position Reporting To';
             TableRelation = "HR Jobs"."Job ID" where(Status = filter(Approved));
-        
+
             trigger OnValidate()
             begin
 
@@ -45,7 +45,7 @@ table 50062 "HR Jobs"
         field(50014; "Vacant Positions"; Decimal)
         {
             Caption = 'Vacant Positions';
-        
+
             trigger OnValidate()
             begin
                 "Vacant Positions" := "No. of Posts" - "Occupied Position";
@@ -62,7 +62,7 @@ table 50062 "HR Jobs"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Global Dimension 1 Code")
@@ -75,7 +75,7 @@ table 50062 "HR Jobs"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Global Dimension 2 Code");

@@ -164,7 +164,7 @@ codeunit 50021 "Credit Post Mngt."
         //         end;
         //     end;
         // end;
-AccruedInt:=AccrualMgt.CalculateAccruedInterestAtDate(RecRef."No.",PostingDate);
+        AccruedInt := AccrualMgt.CalculateAccruedInterestAtDate(RecRef."No.", PostingDate);
         case RecRef."Charge Interest on Posting" of
             RecRef."Charge Interest on Posting"::"Pro-rate",
             RecRef."Charge Interest on Posting"::"Full Interest":

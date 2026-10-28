@@ -44,35 +44,45 @@ codeunit 50076 LoanAccrualMgt
 
     procedure CalculateAccruedInterestAtDate(LoanNo: Code[20]; AsAtDate: Date) AccruedInterest: Decimal
     var
-        DetCustLedger: Record "Detailed Cust. Ledg. Entry";
+        DetCustLedger: Record "Cust. Ledger Entry";
         LastInterestChargedDate: Date;
         DateFilter: Text;
         Accruals: Record "Loan Accrual Entries";
+        Loans: Record Loans;
+        Amount: Decimal;
+        Days: Integer;
     begin
         AccruedInterest := 0;
-        DetCustLedger.Reset();
-        DetCustLedger.SetRange("Loan No.", LoanNo);
-        DetCustLedger.SetRange("Transaction Type", DetCustLedger."Transaction Type"::"Interest Due");
-        DetCustLedger.SetFilter("Posting Date", '>%1', AsAtDate);
-        if DetCustLedger.FindSet() then
-            exit(0); //No Accrued Interest
-        DetCustLedger.Reset();
-        DetCustLedger.SetRange("Loan No.", LoanNo);
-        DetCustLedger.SetRange("Transaction Type", DetCustLedger."Transaction Type"::"Interest Due");
-        DetCustLedger.SetFilter("Posting Date", '<%1', AsAtDate);
-        if DetCustLedger.FindLast() then
-            LastInterestChargedDate := DetCustLedger."Posting Date"; //Last Interest Charged Date
-        if LastInterestChargedDate <> 0D then
-            DateFilter := Format(LastInterestChargedDate) + '..' + Format(AsAtDate)
-        else
-            DateFilter := Format(0D) + '..' + Format(AsAtDate);
-        Accruals.Reset();
-        Accruals.setRange("Loan No", LoanNo);
-        Accruals.SetFilter("Posting Date", DateFilter);
-        if Accruals.FindSet() then begin
-            Accruals.CalcSums(Amount);
-            AccruedInterest := Accruals.Amount;
+        if Loans.Get(LoanNo) then begin
+            Loans.CalcFields("Outstanding Principal");
+            DetCustLedger.Reset();
+            DetCustLedger.SetRange("Loan No.", LoanNo);
+            DetCustLedger.SetRange("Transaction Type", DetCustLedger."Transaction Type"::"Interest Due");
+            DetCustLedger.SetFilter("Posting Date", '>=%1', AsAtDate);
+            DetCustLedger.SetRange(Reversed, false);
+            if DetCustLedger.FindSet() then
+                exit(0); //No Accrued Interest
+            DetCustLedger.Reset();
+            DetCustLedger.SetRange("Loan No.", LoanNo);
+            DetCustLedger.SetRange("Transaction Type", DetCustLedger."Transaction Type"::"Interest Due");
+            DetCustLedger.SetFilter("Posting Date", '<%1', AsAtDate);
+            DetCustLedger.SetRange(Reversed, false);
+            if DetCustLedger.FindLast() then
+                LastInterestChargedDate := DetCustLedger."Posting Date"; //Last Interest Charged Date
+            if LastInterestChargedDate <> 0D then
+                Days := LastInterestChargedDate - AsAtDate
+            else
+                Days := Loans."Disbursement Date" - AsAtDate;
+            Days := -1 * Days;
+            if Days < 0 then
+                exit(0);
+            Amount := 0;
+            Amount := Loans."Outstanding Principal" * Loans."Interest Rate" * 0.01;
+            Amount := Amount / 365;
+            AccruedInterest := Amount * Days;
         end;
+        if Loans.Installments = 1 then
+            exit(0);
         exit(AccruedInterest);
     end;
 }

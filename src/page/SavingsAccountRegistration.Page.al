@@ -1,7 +1,7 @@
 page 50786 "Savings Account Registration"
 {
     DeleteAllowed = false;
-    Caption='Default Account';
+    Caption = 'Default Account';
     Editable = false;
     InsertAllowed = false;
     ModifyAllowed = false;

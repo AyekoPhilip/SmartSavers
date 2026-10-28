@@ -1250,7 +1250,7 @@ codeunit 90000 "Rcv07 Credit Score Engine Mgt."
         LoanApp.Remarks := RMarks;
         LoanApp.Description := RMarks;
         LoanApp.Status := MStatus;
-       LoanApp."Rcv Application Source" := LoanApp."Rcv Application Source"::Mobile;
+        LoanApp."Rcv Application Source" := LoanApp."Rcv Application Source"::Mobile;
         LoanApp.Insert(true);
     end;
 

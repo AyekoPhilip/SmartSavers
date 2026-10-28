@@ -242,7 +242,7 @@ page 50781 "Application Group"
         }
         area(factboxes)
         {
-            
+
             systempart(Control8; Notes)
             {
                 ApplicationArea = All;

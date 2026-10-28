@@ -7,7 +7,7 @@ table 50352 "Member Application"
         {
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -17,7 +17,7 @@ table 50352 "Member Application"
         {
             Caption = 'Name';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 NameBreakdownTxt;
@@ -45,7 +45,7 @@ table 50352 "Member Application"
             Caption = 'Phone No.';
             ExtendedDatatype = PhoneNo;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Country/Region");
@@ -79,7 +79,7 @@ table 50352 "Member Application"
             Editable = false;
             Caption = 'Second Name';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 "Second Name" := DelChr("Second Name", '=', '0|1|2|3|4|5|6|7|8|9');
@@ -93,7 +93,7 @@ table 50352 "Member Application"
             Editable = false;
             Caption = 'Last Name';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 "Last Name" := DelChr("Last Name", '=', '0|1|2|3|4|5|6|7|8|9');
@@ -112,7 +112,7 @@ table 50352 "Member Application"
             Editable = false;
             Caption = 'Application Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Application Date" > Today then
@@ -130,7 +130,7 @@ table 50352 "Member Application"
             TableRelation = Customer where("Account Type" = const(Employer));
             Caption = 'Employer Code';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if Customer.Get("Employer Code") then begin
@@ -142,7 +142,7 @@ table 50352 "Member Application"
         {
             Caption = 'Date of Birth';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 DateofBirthError: Label 'This date cannot be greater than today.';
@@ -163,7 +163,7 @@ table 50352 "Member Application"
             Caption = 'E-Mail';
             DataClassification = CustomerContent;
             ExtendedDatatype = EMail;
-        
+
             trigger OnValidate()
             var
                 MailManagement: Codeunit "Mail Management";
@@ -184,7 +184,7 @@ table 50352 "Member Application"
             ValidateTableRelation = false;
             Caption = 'Nationality';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 CountCode: Record "Country/Region";
@@ -199,7 +199,7 @@ table 50352 "Member Application"
         {
             Caption = 'Payroll No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Payroll No." <> '' then begin
@@ -222,7 +222,7 @@ table 50352 "Member Application"
         {
             Caption = 'ID No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 fnValidateID();
@@ -233,7 +233,7 @@ table 50352 "Member Application"
             Caption = 'Mobile Phone No';
             DataClassification = CustomerContent;
             ExtendedDatatype = PhoneNo;
-        
+
             trigger OnValidate()
             begin
                 if "Mobile Phone No" <> '' then
@@ -273,7 +273,7 @@ table 50352 "Member Application"
         {
             Caption = 'Passport No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Passport No." <> '' then begin
@@ -304,7 +304,7 @@ table 50352 "Member Application"
             Editable = false;
             Caption = 'First Name';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 "First Name" := DelChr("First Name", '=', '0|1|2|3|4|5|6|7|8|9');
@@ -341,7 +341,7 @@ table 50352 "Member Application"
             IF (Nationality = FILTER(<> '')) "Post Code";
             ValidateTableRelation = false;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 PostCode.ValidatePostCode(City, "Post Code", "Country/Region", Nationality, (CurrFieldNo <> 0) and GuiAllowed);
@@ -355,7 +355,7 @@ table 50352 "Member Application"
             else
             if (Nationality = filter(<> '')) "Post Code".City where("Country/Region Code" = field(Nationality));
             ValidateTableRelation = false;
-        
+
             trigger OnValidate()
             begin
                 PostCode.ValidateCity(City, "Post Code", "Country/Region", Nationality, (CurrFieldNo <> 0) and GuiAllowed);
@@ -435,7 +435,7 @@ table 50352 "Member Application"
         {
             Caption = 'Bank Account No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if StrLen("Bank Account No.") > 14 then
@@ -446,7 +446,7 @@ table 50352 "Member Application"
         {
             Caption = 'Company Registration No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Company Registration No." <> '' then begin
@@ -463,7 +463,7 @@ table 50352 "Member Application"
         {
             Caption = 'Date of Business Reg.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Date of Business Reg." > Today then
@@ -479,7 +479,7 @@ table 50352 "Member Application"
         {
             Caption = 'PIN No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -553,7 +553,7 @@ table 50352 "Member Application"
             CharAllowed = '0123456789';
             Caption = 'Transaction Mobile No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if StrLen("Transaction Mobile No.") > 13 then begin
@@ -585,7 +585,7 @@ table 50352 "Member Application"
             TableRelation = "Member Category"."No.";
             Caption = 'Member Category';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 MembCat: Record "Member Category";
@@ -608,7 +608,7 @@ table 50352 "Member Application"
                                                            Created = CONST(false));
             Caption = 'CRM Application No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -626,7 +626,7 @@ table 50352 "Member Application"
             Caption = 'Pay Point';
             DataClassification = CustomerContent;
             TableRelation = Customer where("Account Type" = filter(Employer));
-        
+
             trigger OnValidate()
             var
                 Cusr: Record Customer;
@@ -657,7 +657,7 @@ table 50352 "Member Application"
             Editable = true;
             Caption = 'Country/Region';
             TableRelation = "Country/Region";
-        
+
             trigger OnValidate()
             var
                 CountryCode: Record "Country/Region";
@@ -682,7 +682,7 @@ table 50352 "Member Application"
         {
             DataClassification = CustomerContent;
             Caption = 'Other Name';
-        
+
             trigger OnValidate()
             begin
 
@@ -692,7 +692,7 @@ table 50352 "Member Application"
         {
             DataClassification = CustomerContent;
             Caption = 'Identification Type';
-        
+
             trigger OnValidate()
             begin
                 "ID No." := '';
@@ -709,7 +709,7 @@ table 50352 "Member Application"
             Caption = 'Secondary E-Mail';
             DataClassification = CustomerContent;
             ExtendedDatatype = EMail;
-        
+
             trigger OnValidate()
             var
                 MailManagement: Codeunit "Mail Management";
@@ -721,7 +721,7 @@ table 50352 "Member Application"
         {
             DataClassification = CustomerContent;
             Caption = 'Indeminty';
-        
+
             trigger OnValidate()
             var
 
@@ -752,7 +752,7 @@ table 50352 "Member Application"
         {
             DataClassification = CustomerContent;
             Caption = 'Expiry Date (Passport)';
-        
+
             trigger OnValidate()
             begin
                 if "Expiry Date" < Today then
@@ -767,7 +767,7 @@ table 50352 "Member Application"
         {
             DataClassification = CustomerContent;
             TableRelation = Member where(Status = const(Withdrawn));
-        
+
             trigger OnValidate()
             begin
                 Cust.Reset();
@@ -781,7 +781,7 @@ table 50352 "Member Application"
         {
             DataClassification = CustomerContent;
             TableRelation = Member;
-        
+
             trigger OnValidate()
             begin
                 Rec.TestField("Member Category");
@@ -813,7 +813,7 @@ table 50352 "Member Application"
         field(50097; "Contract End Date"; Date)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if Rec."Terms of Employment" = Rec."Terms of Employment"::Contract then begin
@@ -826,7 +826,7 @@ table 50352 "Member Application"
         {
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             begin
 
@@ -873,7 +873,7 @@ table 50352 "Member Application"
                     begin
                         SeriesSetup.TestField(SeriesSetup."Group Application Nos.");
                         "No. Series" := SeriesSetup."Group Application Nos.";
-                        
+
                         if NoSeriesMgt.AreRelated(SeriesSetup."Group Application Nos.", xRec."No. Series") then
                             "No. Series" := xRec."No. Series";
                         "No." := NoSeriesMgt.GetNextNo("No. Series")
@@ -895,7 +895,7 @@ table 50352 "Member Application"
 
         if "No." <> xRec."No." then
             if not RecRefHeader.Get(Rec."No.") then begin
-                
+
                 SeriesSetup.Get();
                 case "Customer Type" of
                     "Customer Type"::" ",

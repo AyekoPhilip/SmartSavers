@@ -12,7 +12,7 @@ page 51107 "Benefit Mngt. Role Centre"
                 ApplicationArea = All;
                 Visible = false;
             }
-           
+
             part(Control16; "O365 Activities")
             {
                 AccessByPermission = TableData "Activities Cue" = I;
@@ -187,7 +187,7 @@ page 51107 "Benefit Mngt. Role Centre"
                 action(ApprovedAccountChanges)
                 {
                     RunObject = Page "Account Change List";
-                    Caption='Approved Changes';
+                    Caption = 'Approved Changes';
                     RunPageView = where("Approval Status" = filter(Approved));
                     ApplicationArea = All;
                 }
@@ -346,7 +346,7 @@ page 51107 "Benefit Mngt. Role Centre"
                 action(PostedAccountChanges)
                 {
                     RunObject = Page "Account Change List";
-                    Caption='Posted Changes';
+                    Caption = 'Posted Changes';
                     RunPageView = where("Approval Status" = filter(Posted));
                     ApplicationArea = All;
                 }
@@ -358,7 +358,7 @@ page 51107 "Benefit Mngt. Role Centre"
                     RunObject = Page "Account Transfer List";
                     RunPageView = where(Posted = filter(true));
                 }
-               
+
                 action("EFT Transfers Posted")
                 {
                     RunObject = Page "EFT Receipt List";
@@ -409,15 +409,15 @@ page 51107 "Benefit Mngt. Role Centre"
                     ApplicationArea = All;
                     ToolTip = 'Change Password';
                 }
-                 action("Payroll Requests ")
-                    {
-                        Image = Reuse;
-                        RunObject = page "Payroll Requests-Self Service";
-                        ApplicationArea = All;
-                        ToolTip = 'Executes the Payroll Requests action';
-                        Caption = 'Payroll Request';
-                    }
-              
+                action("Payroll Requests ")
+                {
+                    Image = Reuse;
+                    RunObject = page "Payroll Requests-Self Service";
+                    ApplicationArea = All;
+                    ToolTip = 'Executes the Payroll Requests action';
+                    Caption = 'Payroll Request';
+                }
+
             }
 
 #if not CLEAN18

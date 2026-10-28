@@ -28,7 +28,7 @@ table 50516 "Loan Purpose"
         }
         field(50013; "Amount"; Decimal)
         {
-            CalcFormula = Sum(Loans."Approved Amount" where("Purpose of Loan" = field(Code),"Approval Status" = const(Posted),
+            CalcFormula = Sum(Loans."Approved Amount" where("Purpose of Loan" = field(Code), "Approval Status" = const(Posted),
                                                              "Disbursement Date" = field("Date Filter")));
             Editable = false;
             FieldClass = FlowField;

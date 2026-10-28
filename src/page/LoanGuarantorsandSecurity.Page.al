@@ -104,7 +104,7 @@ page 50826 "Loan Guarantors and Security"
 
     trigger OnClosePage()
     begin
-       
+
     end;
 
     trigger OnDeleteRecord(): Boolean

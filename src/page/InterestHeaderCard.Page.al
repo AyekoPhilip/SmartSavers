@@ -246,7 +246,7 @@ page 50915 "Interest Header Card"
                         approvalsMgmt: Codeunit "Approvals Mgmt.";
                         DocPostMgt: Codeunit "Doc-PostMgt";
                     begin
-                        DocPostMgt.fnIntPeriodClosure(Rec."Start Date", Rec."End Date", Rec."No.",Rec."Application Type");
+                        DocPostMgt.fnIntPeriodClosure(Rec."Start Date", Rec."End Date", Rec."No.", Rec."Application Type");
                         Rec."Approval Status" := Rec."Approval Status"::Posted;
                         Rec.Posted := true;
                         Rec.Modify(true)
@@ -388,6 +388,7 @@ page 50915 "Interest Header Card"
         PageEditable: Boolean;
         ActItems: Enum ActionPanesItems;
         ErrorOnMaxNoTransactions: Label 'There are still pending applications. Please utilize them before you can continue.';
+
     procedure UpdateControls()
     begin
         if (Rec.Posted = true) or (Rec."Approval Status" <> Rec."Approval Status"::Open) then begin

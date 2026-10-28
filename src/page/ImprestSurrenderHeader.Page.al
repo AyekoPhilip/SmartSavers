@@ -241,10 +241,10 @@ page 50084 "Imprest Surrender Header"
                         PLines.Reset();
                         PLines.SetRange(No, PaymentRec."No.");
                         if PLines.FindFirst() then begin
-                           // if PLines."Account Type" <> PLines."Account Type"::Vendor then
+                            // if PLines."Account Type" <> PLines."Account Type"::Vendor then
                             //    Report.Run(Report::"Payment Voucher", true, false, PaymentRec)
                             //else
-                               // Report.Run(Report::"Payment Voucher-Vendor", true, false, PaymentRec);
+                            // Report.Run(Report::"Payment Voucher-Vendor", true, false, PaymentRec);
                         end;
                     end;
                 end;

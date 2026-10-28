@@ -18,7 +18,7 @@ page 50081 "Imprest Header"
                 {
                     ToolTip = 'Specifies the value of the No. field.';
                     StyleExpr = true;
-                    Visible=false;
+                    Visible = false;
                     Style = StandardAccent;
                 }
                 field("Date"; Rec."Date")
@@ -229,10 +229,10 @@ page 50081 "Imprest Header"
                         PLines.Reset();
                         PLines.SetRange(No, PaymentRec."No.");
                         if PLines.FindFirst() then begin
-                           // if PLines."Account Type" <> PLines."Account Type"::Vendor then
+                            // if PLines."Account Type" <> PLines."Account Type"::Vendor then
                             //    Report.Run(Report::"Payment Voucher", true, false, PaymentRec)
                             //else
-                             //   Report.Run(Report::"Payment Voucher-Vendor", true, false, PaymentRec);
+                            //   Report.Run(Report::"Payment Voucher-Vendor", true, false, PaymentRec);
                         end;
                     end;
                 end;

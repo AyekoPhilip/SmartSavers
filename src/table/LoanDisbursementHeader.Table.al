@@ -1,6 +1,6 @@
 table 50397 "Loan Disbursement Header"
 {
-     DataClassification = CustomerContent;
+    DataClassification = CustomerContent;
 
     fields
     {
@@ -9,7 +9,7 @@ table 50397 "Loan Disbursement Header"
             NotBlank = false;
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
@@ -73,7 +73,7 @@ table 50397 "Loan Disbursement Header"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -98,7 +98,7 @@ table 50397 "Loan Disbursement Header"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -116,7 +116,7 @@ table 50397 "Loan Disbursement Header"
             Editable = false;
             TableRelation = "Responsibility Center BR".Code;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -127,7 +127,7 @@ table 50397 "Loan Disbursement Header"
         {
             Caption = 'Issued Date From';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -138,7 +138,7 @@ table 50397 "Loan Disbursement Header"
         {
             Caption = 'Issued Date To';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -150,7 +150,7 @@ table 50397 "Loan Disbursement Header"
             OptionMembers = "No","Yes";
             Caption = 'Subsequent Disbursements';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -167,7 +167,7 @@ table 50397 "Loan Disbursement Header"
         {
             Caption = 'Posting Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Posting Date" > Today then error('Posting Date cannot be greater than today')
@@ -194,7 +194,7 @@ table 50397 "Loan Disbursement Header"
             IF ("Disbursement Destination" = CONST("Bank Account")) "Bank Account"."No.";
             Caption = 'Disburse Accounts';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Disbursement Destination" = "Disbursement Destination"::"Bank Account" then begin
@@ -231,7 +231,7 @@ table 50397 "Loan Disbursement Header"
         {
             Caption = 'Account Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Account Type" <> "Account Type"::Saving then begin
@@ -243,7 +243,7 @@ table 50397 "Loan Disbursement Header"
         {
             TableRelation = if ("Account Type" = filter(Customer)) Customer."No." where("Account Type" = filter('Employer')) else
             if ("Account Type" = filter("Bank Account")) "Bank Account" where(Blocked = filter(false)) else if ("Account Type" = filter(Saving)) "Account Banking"."No." where("Account Category" = filter(Savings | "Specialty Savings"));
-        
+
             trigger OnValidate()
             begin
 
@@ -271,18 +271,18 @@ table 50397 "Loan Disbursement Header"
             OptionMembers = " ","Post Application","Generate Batch";
             OptionCaption = ' ,Post Application,Generate Batch';
         }
-         field(50042; "Loan Product Type"; Code[20])
+        field(50042; "Loan Product Type"; Code[20])
         {
             TableRelation = "Product Factory"."Product ID";
             Caption = 'Loan Product Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
-          
+
             end;
         }
-         field(50043; "No of Loans"; Integer)
+        field(50043; "No of Loans"; Integer)
         {
             CalcFormula = Count(Loans WHERE("Batch No." = FIELD("No.")));
             Editable = false;
@@ -294,7 +294,7 @@ table 50397 "Loan Disbursement Header"
             Caption = 'Posting Remarks';
             DataClassification = CustomerContent;
         }
-        
+
 
     }
 

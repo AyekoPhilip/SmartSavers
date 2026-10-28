@@ -760,7 +760,7 @@ page 51098 "Loan Restructure"
             {
                 Image = PrepaymentCreditMemo;
                 ApplicationArea = All;
-                Enabled = Rec."Approval Status"=Rec."Approval Status"::Approved;
+                Enabled = Rec."Approval Status" = Rec."Approval Status"::Approved;
                 trigger OnAction()
                 begin
                     VarVariant := Rec;

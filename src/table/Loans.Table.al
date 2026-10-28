@@ -1715,6 +1715,7 @@ table 50390 "Loans"
             "Cheque No" := "No.";
         end;
     end;
+
     procedure fnTestFields()
     begin
         SetPostingChequeDetails();

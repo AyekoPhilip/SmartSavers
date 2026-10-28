@@ -91,7 +91,7 @@ codeunit 50038 "Gen.Jnl.-Post Periodic"
                             end;
                         until PurchLines.Next = 0;
                         DocPostMgt.fnIntPeriodClosure(RecRef."Start Date",
-                        RecRef."End Date", RecRef."No.",RecRef."Application Type");
+                        RecRef."End Date", RecRef."No.", RecRef."Application Type");
                         RecRef.Posted := true;
                         RecRef."Posted By" := UserId;
                         RecRef."Time Posted" := Time;

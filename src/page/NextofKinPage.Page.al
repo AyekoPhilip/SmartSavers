@@ -26,7 +26,7 @@ page 51061 "Next of Kin Page"
                 {
                     ToolTip = 'Specifies the value of the Type field.';
                     ApplicationArea = All;
-                    ValuesAllowed=0,2;
+                    ValuesAllowed = 0, 2;
                     Style = StandardAccent;
                     StyleExpr = true;
                 }
@@ -62,7 +62,7 @@ page 51061 "Next of Kin Page"
                     Style = StandardAccent;
                     StyleExpr = true;
                 }
-                field(Beneficiary;Rec.Beneficiary)
+                field(Beneficiary; Rec.Beneficiary)
                 {
                     ToolTip = 'Specifies the value of the Next of Kin field.';
                     ApplicationArea = All;

@@ -52,7 +52,7 @@ codeunit 50058 "DSC Credit Analysis"
     begin
         if (MemberNo = '') or (ProductID = '') or (DocNo = '') or (PhoneNo = '') or (AmtToPost = 0) then begin
             LoanNo := Text0001;
-            AltCtrl.BufferFailedLoanApplication('', MemberNo, PhoneNo, AmtToPost,ProductID, Text0001, LStatus::Failed, LoanNo, DocNo);
+            AltCtrl.BufferFailedLoanApplication('', MemberNo, PhoneNo, AmtToPost, ProductID, Text0001, LStatus::Failed, LoanNo, DocNo);
             exit(LoanNo)
         end else begin
             LoanNo := SuccessfullRequestTxt;
@@ -82,7 +82,7 @@ codeunit 50058 "DSC Credit Analysis"
             AltCtrl.BufferFailedLoanApplication(CustRecord."ID No.",
             MemberNo, PhoneNo, AmtToPost, ProductID, Text0017, LStatus::Failed, LoanNo, DocNo);
             exit(LoanNo);
-            
+
         end else begin
 
             if (CustRecord."Loan Status" = CustRecord."Loan Status"::Defaulter) or (CustRecord."Mobile Status" = CustRecord."Mobile Status"::Defaulter) then begin
@@ -329,7 +329,7 @@ codeunit 50058 "DSC Credit Analysis"
                 Account."Member No.", Account."Mobile No.", AmtToPost,
                 Product."Product ID", Descript, LStatus::Pending, Text0016, DocNo);
             end;
-        
+
 
             ApplicLoan.Reset();
             ApplicLoan.SetRange("API Code", DocNo);

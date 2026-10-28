@@ -207,7 +207,7 @@ page 50825 "Batch"
                     CredJnlMgt: Codeunit "Credit. Jnl.-Post Batch";
                 begin
                     CredJnlMgt.CreateReverseLine(Rec."No.", Enum::BatchPaymentType::Refund, '', '',
-                    Rec."Global Dimension 1 Code", Rec."Global Dimension 2 Code",Enum::BCObjectTypes::System);
+                    Rec."Global Dimension 1 Code", Rec."Global Dimension 2 Code", Enum::BCObjectTypes::System);
                 end;
             }
             action(SendApprovalRequest)

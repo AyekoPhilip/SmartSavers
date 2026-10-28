@@ -2,7 +2,7 @@ page 50779 "Individual Application"
 {
     DeleteAllowed = false;
     PageType = Card;
-    ApplicationArea=All;
+    ApplicationArea = All;
     SourceTable = "Member Application";
     layout
     {
@@ -523,7 +523,7 @@ page 50779 "Individual Application"
         }
         area(factboxes)
         {
-            
+
             part(Control16; "Application Picture")
             {
                 SubPageLink = "No." = FIELD("No.");

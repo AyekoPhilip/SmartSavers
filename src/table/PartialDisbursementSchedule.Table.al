@@ -9,7 +9,7 @@ table 50411 "Partial Disbursement Schedule"
             Caption = 'No.';
             DataClassification = CustomerContent;
             TableRelation = Loans where("Mode of Disbursement" = filter("Partial Disbursement"), "Approval Status" = filter(Posted));
-        
+
             trigger OnValidate()
             var
                 PLoan: Record Loans;
@@ -40,7 +40,7 @@ table 50411 "Partial Disbursement Schedule"
         {
             Caption = 'Disbursement Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if ("Scheduled Disbursement Date" < Today) or ("Scheduled Disbursement Date" > Today) then
@@ -52,7 +52,7 @@ table 50411 "Partial Disbursement Schedule"
             MinValue = 0;
             Caption = 'Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 CredMgt: Codeunit "Credit Mgmt.";
@@ -104,7 +104,7 @@ table 50411 "Partial Disbursement Schedule"
             else
             if ("Account Type" = const("Bank Account")) "Bank Account";
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 Vend: Record Vendor;
@@ -123,7 +123,7 @@ table 50411 "Partial Disbursement Schedule"
             Editable = false;
             Caption = 'Approval Status';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 appStatus: Enum ApprovalStatus;
@@ -174,7 +174,7 @@ table 50411 "Partial Disbursement Schedule"
             Caption = 'Account No.';
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             var
                 ObjCust: Record Member;
@@ -206,7 +206,7 @@ table 50411 "Partial Disbursement Schedule"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Global Dimension 1 Code")
@@ -219,7 +219,7 @@ table 50411 "Partial Disbursement Schedule"
             Editable = false;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Global Dimension 2 Code");
@@ -253,7 +253,7 @@ table 50411 "Partial Disbursement Schedule"
             TableRelation = "Cust. Bank Account"."Bank Account No." where(Code = field("Payment Destination Code"));
             DataClassification = CustomerContent;
             Caption = 'Destination A/c';
-        
+
             trigger OnValidate()
             begin
 
@@ -264,7 +264,7 @@ table 50411 "Partial Disbursement Schedule"
             TableRelation = Banks.Code;
             DataClassification = CustomerContent;
             Caption = 'Pay Point';
-        
+
             trigger OnValidate()
             var
                 BanksList: Record Banks;
@@ -317,7 +317,7 @@ table 50411 "Partial Disbursement Schedule"
         {
             Caption = 'External Account No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if StrLen("External Account No.") > 100 then
@@ -330,7 +330,7 @@ table 50411 "Partial Disbursement Schedule"
             TableRelation = Banks;
             Caption = 'Bank Code';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 BankCodes: Record Banks;
@@ -346,7 +346,7 @@ table 50411 "Partial Disbursement Schedule"
             TableRelation = Banks."Bank No.";
             Caption = 'Branch Code';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 BankBranch: Record "Bank Branches";
@@ -369,7 +369,7 @@ table 50411 "Partial Disbursement Schedule"
         {
             Caption = 'External Account Name';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
 
@@ -429,7 +429,7 @@ table 50411 "Partial Disbursement Schedule"
 
     trigger OnInsert()
     var
-        
+
         ExemptionsApprvl: Record "User Setup";
     begin
 

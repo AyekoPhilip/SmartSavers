@@ -10,8 +10,8 @@ report 90024 "Loans Listing"
     {
         dataitem(Loans; Loans)
         {
-            RequestFilterFields="No.","Account No.","Product Type";
-            DataItemTableView = SORTING("No.") WHERE ("Approval Status" = filter(Approved|Posted));
+            RequestFilterFields = "No.", "Account No.", "Product Type";
+            DataItemTableView = SORTING("No.") WHERE("Approval Status" = filter(Approved | Posted));
             column(AccountNo; "Account No.")
             {
             }
@@ -57,8 +57,8 @@ report 90024 "Loans Listing"
             column(LastPayDate; "Last Pay Date")
             {
             }
-            column(Expected_Date_of_Completion;"Expected Date of Completion"){}
-            column(Repayment;Repayment){}
+            column(Expected_Date_of_Completion; "Expected Date of Completion") { }
+            column(Repayment; Repayment) { }
             column(OutstandingBalance; "Outstanding Balance")
             {
             }
@@ -71,18 +71,18 @@ report 90024 "Loans Listing"
             column(DateOfBirth; DateOfBirth)
             {
             }
-            column(Amount_Guaranteed;"Amount Guaranteed"){}
+            column(Amount_Guaranteed; "Amount Guaranteed") { }
             trigger OnAfterGetRecord()
             begin
-                DateOfBirth:=0D;
+                DateOfBirth := 0D;
                 if custrec.Get("Account No.") then
-                Gender := custrec.Gender;
+                    Gender := custrec.Gender;
                 "Employer Code" := custrec."Employer Code";
                 "ID No." := custrec."ID No.";
                 DateOfBirth := custrec."Date of Birth";
-                if Source=Source::" " then
-                Source:=Source::Credit;
-                
+                if Source = Source::" " then
+                    Source := Source::Credit;
+
             end;
         }
     }

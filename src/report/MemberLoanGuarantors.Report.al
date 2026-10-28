@@ -9,7 +9,7 @@ report 50196 "Member Loan Guarantors"
     {
         dataitem(Loans; Loans)
         {
-            DataItemTableView = where("Approval Status" = const(Posted),"No."=filter(<>''),"Outstanding Balance"=filter('>0'));
+            DataItemTableView = where("Approval Status" = const(Posted), "No." = filter(<> ''), "Outstanding Balance" = filter('>0'));
             column(AccountName; "Account Name")
             {
             }
@@ -87,26 +87,26 @@ report 50196 "Member Loan Guarantors"
                 DataItemLink = "Loan No." = field("No.");
 
                 column(Loan_No_; "Loan No.")
-                {}
+                { }
                 column(Account_No_; "Account No.")
-                {}
+                { }
                 column(Amount_Guaranteed; "Amount Guaranteed")
-                {}
+                { }
                 column(Deposit_Shares; "Deposit Shares")
                 { }
                 column(Member_No_; "Member No.")
                 { }
-                column(Member_No___Loanee_;"Member No. (Loanee)")
-                {}
+                column(Member_No___Loanee_; "Member No. (Loanee)")
+                { }
                 column(No__of_Loans_Guaranteed; "No. of Loans Guaranteed")
-                {}
+                { }
                 column(Name; Name)
                 { }
                 column(Product_TypeG; "Product Type")
                 { }
-                column(Substituted;GuarantStatus)
+                column(Substituted; GuarantStatus)
                 {
-                    
+
                 }
                 trigger OnAfterGetRecord()
                 begin
@@ -117,16 +117,16 @@ report 50196 "Member Loan Guarantors"
                                                                             GuarantStatus := GuarantStatus::Active;
                     end;
 
-                    if "Security Type"="Security Type"::Guarantor then begin
-                    BosaCred.Reset();
-                    BosaCred.SetRange("No.","Guarantor & Security Posted"."Account No.");
-                    if BosaCred.FindFirst() then begin
-                        BosaCred.CalcFields("Balance (LCY)");
-                        "Guarantor & Security Posted"."Deposit Shares":=BosaCred."Balance (LCY)"
-                    end;
+                    if "Security Type" = "Security Type"::Guarantor then begin
+                        BosaCred.Reset();
+                        BosaCred.SetRange("No.", "Guarantor & Security Posted"."Account No.");
+                        if BosaCred.FindFirst() then begin
+                            BosaCred.CalcFields("Balance (LCY)");
+                            "Guarantor & Security Posted"."Deposit Shares" := BosaCred."Balance (LCY)"
+                        end;
                     end;
                     if PLoan.Get("Guarantor & Security Posted"."Loan No.") then
-                    "Guarantor & Security Posted"."Product Type":=PLoan."Product Description";
+                        "Guarantor & Security Posted"."Product Type" := PLoan."Product Description";
                 end;
 
             }
@@ -189,7 +189,7 @@ report 50196 "Member Loan Guarantors"
         CustAddress: Code[100];
         BosaCred: Record "Account Credit";
         PFact: Record "Product Factory";
-        PLoan:Record Loans;
+        PLoan: Record Loans;
         GuarantStatus: Option " ",Active,Substituted;
 
 }

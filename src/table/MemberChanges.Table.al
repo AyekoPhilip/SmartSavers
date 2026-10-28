@@ -9,7 +9,7 @@ table 50413 "Member Changes"
             Caption = 'No.';
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
@@ -19,7 +19,7 @@ table 50413 "Member Changes"
         {
             Caption = 'Name';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 NameBreakdown
@@ -34,7 +34,7 @@ table 50413 "Member Changes"
             if
             ("Changes Type" = filter("Block Account" | "Deceased Account")) Member."No." where(Status = filter(<> Withdrawn));
             Caption = 'Member No.';
-        
+
             trigger OnValidate()
             var
                 MngtRegt: Codeunit "Registry Mngt.";
@@ -153,7 +153,7 @@ table 50413 "Member Changes"
         {
             Caption = 'VAT Registration No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 VATRegNoFormat: Record "VAT Registration No. Format";
@@ -223,7 +223,7 @@ table 50413 "Member Changes"
         {
             DataClassification = CustomerContent;
             Caption = 'Date of Birth';
-        
+
             trigger OnValidate()
             var
                 DateofBirthError: Label 'This date cannot be greater than today.';
@@ -525,7 +525,7 @@ table 50413 "Member Changes"
             DataClassification = CustomerContent;
             TableRelation = Customer;
             Caption = 'Pay Point';
-        
+
             trigger OnValidate()
             var
                 Cusr: Record Customer;
@@ -575,7 +575,7 @@ table 50413 "Member Changes"
         {
             DataClassification = CustomerContent;
             Caption = 'Changes Type';
-        
+
             trigger OnValidate()
             begin
                 if "Changes Type" = "Changes Type"::"Deceased Account" then begin
@@ -631,7 +631,7 @@ table 50413 "Member Changes"
 
             if ("Account Type" = const(Banking), "Changes Type" = filter("Block Account" | "Account Deactivation"),
             "Account Type" = const(Credit)) "Account Credit" where("Member No." = field("Member No."), "Account Category" = filter("Shares Capital" | "Shares Deposit" | "Benevolent Fund"));
-        
+
             trigger OnValidate()
             var
                 TellerMngt: Codeunit "Teller-Post (Yes/No)";
@@ -664,7 +664,7 @@ table 50413 "Member Changes"
         field(50091; "ATM Card No."; Code[20])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -687,7 +687,7 @@ table 50413 "Member Changes"
             TableRelation = "Transaction Types".Code WHERE(Type = filter("ATM Applications"));
             Caption = 'Transaction Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
             end;
@@ -701,7 +701,7 @@ table 50413 "Member Changes"
         field(50096; "Expiry Date (Card)"; Date)
         {
 
-        
+
             trigger OnValidate()
             begin
                 if "Expiry Date (Card)" <= today then
@@ -712,7 +712,7 @@ table 50413 "Member Changes"
         field(50097; "Idemnity"; Boolean)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -721,7 +721,7 @@ table 50413 "Member Changes"
         field(50098; "Other Name"; Text[100])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -730,7 +730,7 @@ table 50413 "Member Changes"
         field(50099; "Passport Expiry Date"; Date)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -740,7 +740,7 @@ table 50413 "Member Changes"
         {
             DataClassification = CustomerContent;
             Caption = 'Identification Type';
-        
+
             trigger OnValidate()
             begin
                 "ID No." := '';
@@ -750,7 +750,7 @@ table 50413 "Member Changes"
         field(50101; "Date Created"; Date)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -767,7 +767,7 @@ table 50413 "Member Changes"
         field(50104; "Contract End Date"; Date)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if Rec."Terms of Employment" = Rec."Terms of Employment"::Contract then begin
@@ -789,7 +789,7 @@ table 50413 "Member Changes"
         field(50107; "Response"; Integer)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 case Response of

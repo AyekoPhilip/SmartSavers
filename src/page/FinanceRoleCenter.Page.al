@@ -68,7 +68,7 @@ page 50133 "Finance Role Center"
                 RunObject = Report "Generate Loan Repayment Schedu";
                 ToolTip = 'Generate Loan Repay Schedule';
             }
-             action("Zerolise Excess Loan Repayment")
+            action("Zerolise Excess Loan Repayment")
             {
                 ApplicationArea = Suite;
                 Caption = 'Zerolise Excess Loan Repayment';
@@ -77,7 +77,7 @@ page 50133 "Finance Role Center"
                 ToolTip = 'Zerolise Excess Loan Repayment';
             }
 
-           
+
             action("Bosa Register")
             {
                 ApplicationArea = Suite;
@@ -154,7 +154,7 @@ page 50133 "Finance Role Center"
                 ApplicationArea = All;
                 Visible = false;
             }
-            
+
 
             action(AccountClosure)
             {
@@ -277,7 +277,7 @@ page 50133 "Finance Role Center"
                 ApplicationArea = All;
                 Caption = 'Receipt  Summary';
             }
-            
+
             action("Application Register")
             {
                 ApplicationArea = Basic, Suite;
@@ -318,7 +318,7 @@ page 50133 "Finance Role Center"
                 Image = "Report";
                 RunObject = Report "Dividend Progression";
             }
-         
+
             action(CashierReceipt)
             {
                 ApplicationArea = Basic, Suite;
@@ -382,13 +382,13 @@ page 50133 "Finance Role Center"
                 Image = "Report";
                 RunObject = Report "Account Banking Listing";
             }
-                action(LoansListing)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Sasra Loans Listing';
-                    Image = "Report";
-                    RunObject = Report "Loans Listing";
-                }
+            action(LoansListing)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Sasra Loans Listing';
+                Image = "Report";
+                RunObject = Report "Loans Listing";
+            }
 
         }
 
@@ -418,11 +418,11 @@ page 50133 "Finance Role Center"
             action("Accounts Credit-Deposits")
             {
                 RunObject = Page "Account Credit List";
-              //  RunPageView = where(Status = filter(Active | New | Dormant | Defaulter | Blocked | "Withdrawal Application"), "Account Category" = filter("Shares Deposit"));
+                //  RunPageView = where(Status = filter(Active | New | Dormant | Defaulter | Blocked | "Withdrawal Application"), "Account Category" = filter("Shares Deposit"));
                 Caption = 'Deposits Account';
                 ApplicationArea = All;
             }
-              
+
             action("Loan Account")
             {
                 RunObject = Page "Loan Account";
@@ -447,14 +447,7 @@ page 50133 "Finance Role Center"
                 ApplicationArea = All;
                 RunPageView = where("Outstanding Balance" = filter(<> 0));
             }
-            action("Mobile Loans")
-            {
-                Caption = 'Mobile Loan Status';
-                Visible = false;
-                // RunObject = Page "dbc Mobile Loan";
-                ApplicationArea = All;
 
-            }
             action("Active MLoans")
             {
                 Caption = 'Mobile Loans';
@@ -520,8 +513,8 @@ page 50133 "Finance Role Center"
                 RunPageView = where("Approval Status" = filter(Open | "Pending Approval"));
                 ToolTip = 'Executes the Customers action';
             }
-            
-           
+
+
             action(RemittanceListPage)
             {
                 Caption = 'Remittance';
@@ -579,7 +572,7 @@ page 50133 "Finance Role Center"
                 ApplicationArea = All;
             }
 
-            
+
             action(LoansList)
             {
                 RunObject = Page "Loan List";
@@ -599,9 +592,9 @@ page 50133 "Finance Role Center"
                 Caption = 'Mobile Loans';
                 RunObject = Page "Loans List Posted";
                 ApplicationArea = All;
-                RunPageView = where("Product Type" = filter('MSACCOLN'), "Outstanding Balance" = filter(<> 0));
+                RunPageView = where("Product Type" = filter('SMARTCASH'), "Outstanding Balance" = filter(<> 0));
             }
-            action(ClosedAccounts)
+            action(ClosedLoanAccounts)
             {
                 Caption = 'Closed Accounts';
                 RunObject = Page "Loans List Posted";
@@ -2899,6 +2892,19 @@ page 50133 "Finance Role Center"
                 }
                 group("Approved Application")
                 {
+                    action("Account Activation App")
+                    {
+                        Caption = 'Account Activation';
+                        RunObject = page "Account Activation List";
+                        RunPageView = where("Approval Status" = filter(Approved));
+                        ApplicationArea = All;
+                    }
+                    action("Mobile Registration Approved")
+                    {
+                        RunObject = Page "Mobile Registration List";
+                        ApplicationArea = All;
+                        RunPageView = where("Approval Status" = filter(Approved));
+                    }
                     action(Action33)
                     {
                         ApplicationArea = Basic, Suite;
@@ -2943,6 +2949,201 @@ page 50133 "Finance Role Center"
                         Caption = 'Entries Lines';
                         ApplicationArea = All;
                         Visible = true;
+                    }
+                }
+            }
+            group("Alternate Channels")
+            {
+
+                Caption = 'Alternate Channels';
+                action("Account Activation Approved")
+                {
+                    Caption = 'Account Activation';
+                    RunObject = page "Account Activation List";
+                    RunPageView = where("Approval Status" = filter(Open | "Pending Approval"));
+                    ApplicationArea = All;
+                }
+                action("Mobile Registration")
+                {
+                    RunObject = Page "Mobile Registration List";
+                    ApplicationArea = All;
+                    RunPageView = where("Approval Status" = filter(Open | "Pending Approval"));
+                }
+                action("Channels Restriction")
+                {
+                    RunObject = Page "Proctected Accounts";
+                    ApplicationArea = All;
+                }
+
+                action(MobAccounts)
+                {
+                    Caption = 'Accounts';
+                    RunObject = Page "Alt. Channel Account";
+                    ApplicationArea = All;
+                }
+
+                action(ChannelTransactions)
+                {
+                    Caption = 'Channel Transactions';
+                    RunObject = Page "Alt. Channels";
+                    ApplicationArea = All;
+                }
+                action(AlternateCallback)
+                {
+                    Caption = 'Channel Callback Entries';
+                    RunObject = Page "Alt.Channel Callback Entry";
+                    ApplicationArea = All;
+                }
+                action(PostCallBack)
+                {
+                    Caption = 'Generate Unposted Entries';
+                    RunObject = page "Temp. Alt. Channels";
+                    ApplicationArea = All;
+                }
+
+                action(CardApplication)
+                {
+                    Caption = 'Card Link';
+                    RunObject = Page "Automated Card Linking List";
+                    ApplicationArea = All;
+                    RunPageView = where("Approval Status" = filter(Open | "Pending Approval"));
+                }
+            }
+            group("Mobile Loans")
+            {
+                action(ActiveMobileLoans)
+                {
+                    Caption = 'Active Loans';
+                    RunObject = Page "Loans List Posted";
+                    ApplicationArea = All;
+                    RunPageView = where("Outstanding Balance" = filter(<> 0), "Product Type" = filter('SMARTCASH'));
+                }
+                action(ClosedAccounts)
+                {
+                    Caption = 'Closed Accounts';
+                    RunObject = Page "Loans List Posted";
+                    ApplicationArea = All;
+                    RunPageView = where("Outstanding Balance" = filter(0), "Product Type" = filter('SMARTCASH'));
+                }
+                action(QCLoanMngt)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Mobile Loans';
+                    RunObject = page "Dsc Mobile Loans-App";
+                    ToolTip = 'Specify Loan Account Posting.';
+                }
+                action(MobTransactions)
+                {
+                    Caption = 'Mobile Transactions';
+                    RunObject = Page "Dsc Mob. Loan Transaction";
+                    ApplicationArea = All;
+                }
+                action("QC Qualification")
+                {
+                    Caption = 'QC Qualification';
+                    RunObject = Page "QC Qualifying Amount";
+                    ApplicationArea = All;
+                }
+                action("Mobile Transaction Types")
+                {
+                    Caption = 'Transaction Types';
+                    RunObject = Page "Transaction Type-Mobile";
+                    RunPageView = where(Posted = const(false));
+                    ApplicationArea = All;
+                }
+                action("AccountChangeList")
+                {
+                    Caption = 'Account Changes';
+                    RunObject = Page "Ac Changes List";
+                    RunPageView = where("Approval Status" = filter(Open | "Pending Approval"));
+                    ApplicationArea = All;
+                }
+                action("DefaulterRecovery")
+                {
+                    Caption = 'QC Recovery List';
+                    RunObject = Page "QC Recovery List";
+                    RunPageView = where("Application Source" = filter(Automated));
+                    ApplicationArea = All;
+                }
+
+                action("Transaction Types Posted")
+                {
+                    Caption = 'Transaction Types-Posted';
+                    RunObject = Page "Transaction Type-Mobile";
+                    RunPageView = where(Posted = const(false));
+                    ApplicationArea = All;
+                }
+
+                action("Interest Due Entries")
+                {
+                    Caption = 'Interest Entries';
+                    RunObject = Page "Interest Due Entry";
+                    ApplicationArea = All;
+                }
+                action("Penalty Due Entries")
+                {
+                    Caption = 'Penalty Entries';
+                    RunObject = Page "Penalty Entres";
+                    ApplicationArea = All;
+                }
+                group("Automated Reports")
+                {
+
+
+                    action("Check Clearance")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Check Clearance';
+                        Image = "Report";
+                        RunObject = Report "Process Cheque Clearance";
+                        ToolTip = 'Cheque Clearance';
+                    }
+                    action("Safe Custody Renewal")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Image = "Report";
+                        RunObject = Report "Process Safe Custody Renewal";
+                        ToolTip = 'Cheque Clearance';
+                    }
+                    action(GenerateDormantAccount)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Generate Dormant Account';
+                        Image = "Report";
+                        RunObject = Report "Generate Dormant Account";
+                        ToolTip = 'Generate Dormant Account';
+                    }
+                    action(GenerateDormantCredAccount)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Generate Dormant Account-Credit';
+                        Image = "Report";
+                        RunObject = Report "Gen. Dormant Ac- Credit";
+                        ToolTip = 'Generate Dormant Account-Credit';
+                    }
+                    action(PostMobileLoanInterest)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Post QC Rollover';
+                        Image = "Report";
+                        RunObject = Report "Post QC Rollover";
+                        ToolTip = 'Generate Loan Interest Due';
+                    }
+                    action(QCReoveries)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Post QC Recoveries(Fosa)';
+                        Image = "Report";
+                        RunObject = Report "Alt. Channel Jnl. Post";
+                        ToolTip = 'QC Recoveries';
+                    }
+                    action(QCPostMobileLoanDefaultRecov)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'QC Generate Defaulters';
+                        Image = "Report";
+                        RunObject = Report "QC Default Recovery";
+                        ToolTip = 'QC Defaulter Recovery';
                     }
                 }
             }
@@ -3085,13 +3286,13 @@ page 50133 "Finance Role Center"
                         Visible = true;
                     }
                     action("Posted Payroll Request")
-                {
-                    Caption = 'Payroll Request';
-                    RunObject = page "Payroll Requests";
-                    RunPageView = where(Status = filter(Posted));
-                    ApplicationArea = All;
-                    ToolTip = 'Payroll Request';
-                }
+                    {
+                        Caption = 'Payroll Request';
+                        RunObject = page "Payroll Requests";
+                        RunPageView = where(Status = filter(Posted));
+                        ApplicationArea = All;
+                        ToolTip = 'Payroll Request';
+                    }
 
                     action("Period Transactions- Consd")
                     {

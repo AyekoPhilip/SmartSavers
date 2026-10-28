@@ -76,7 +76,7 @@ table 50460 "Account Closure Line"
         field(50021; "Accrued Interest"; Decimal)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 case "Account Category" of

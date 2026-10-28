@@ -10,14 +10,14 @@ page 90001 "Loan Liquidation"
         {
             repeater(Group)
             {
-                 field("No."; Rec."No.")
+                field("No."; Rec."No.")
                 {
                     Editable = false;
                     Style = StandardAccent;
                     StyleExpr = true;
                     ApplicationArea = All;
                 }
-                 field("Account No.";Rec."Account No.")
+                field("Account No."; Rec."Account No.")
                 {
                     Editable = false;
                     Style = StandardAccent;
@@ -31,7 +31,7 @@ page 90001 "Loan Liquidation"
                     Style = StandardAccent;
                     StyleExpr = true;
                 }
-               
+
                 field("Product Type"; Rec."Product Type")
                 {
                     ApplicationArea = All;
@@ -61,7 +61,7 @@ page 90001 "Loan Liquidation"
                     Style = StandardAccent;
                     StyleExpr = true;
                 }
-               
+
                 field("Total Total Up"; Rec."Total Total Up")
                 {
                     Editable = false;
@@ -116,6 +116,7 @@ page 90001 "Loan Liquidation"
             if LoanApp."Approval Status" <> LoanApp."Approval Status"::Open then
                 CurrPage.Editable := false
     end;
+
     trigger OnOpenPage()
     begin
         if LoanApp.Get(Rec."No.") then
@@ -123,6 +124,7 @@ page 90001 "Loan Liquidation"
                 CurrPage.Editable := false
 
     end;
+
     trigger OnModifyRecord(): Boolean
     begin
 
@@ -130,12 +132,14 @@ page 90001 "Loan Liquidation"
             if LoanApp."Approval Status" <> LoanApp."Approval Status"::Open then
                 Error('You cannot edit an approved application');
     end;
+
     trigger OnDeleteRecord(): Boolean
     begin
         if LoanApp.Get(Rec."No.") then
             if LoanApp."Approval Status" <> LoanApp."Approval Status"::Open then
                 Error('You cannot edit an approved application');
     end;
+
     var
         LoanApp: Record "Loan Application";
 

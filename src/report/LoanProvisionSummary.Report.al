@@ -13,7 +13,7 @@ report 50225 "Loan Provision Summary"
         {
 
             RequestFilterFields = "No.", "Product Type", "Account No.", "Date Filter";
-             DataItemTableView = where("Approval Status" = CONST(Posted), "Disbursement Date" = filter(<> ''));
+            DataItemTableView = where("Approval Status" = CONST(Posted), "Disbursement Date" = filter(<> ''));
 
             column(No; "No.")
             {
@@ -88,47 +88,47 @@ report 50225 "Loan Provision Summary"
 
             trigger OnAfterGetRecord()
             begin
-                SetRange("Date Filter",0D,CUTOFFDATE);
+                SetRange("Date Filter", 0D, CUTOFFDATE);
                 CalcFields("Outstanding Balance", "Outstanding Principal", "Outstanding Interest");
 
                 if "Outstanding Balance" = 0 then
                     CurrReport.Skip();
 
-                    
-            
 
-                    if "Sasra Category" = "Sasra Category"::Performing then begin
-                        PerformBal := PerformBal + "Outstanding Principal";
-                        PerformBalCount := PerformBalCount + 1;
-                        PerformBalProv := PerformBal * 0.01;
+
+
+                if "Sasra Category" = "Sasra Category"::Performing then begin
+                    PerformBal := PerformBal + "Outstanding Principal";
+                    PerformBalCount := PerformBalCount + 1;
+                    PerformBalProv := PerformBal * 0.01;
+                end else
+                    if "Sasra Category" = "Sasra Category"::Watch then begin
+                        WatchBal := WatchBal + "Outstanding Principal";
+                        WatchBalCount := WatchBalCount + 1;
+                        WatchBalProv := WatchBal * 0.05;
                     end else
-                        if "Sasra Category" = "Sasra Category"::Watch then begin
-                            WatchBal := WatchBal + "Outstanding Principal";
-                            WatchBalCount := WatchBalCount + 1;
-                            WatchBalProv := WatchBal * 0.05;
+                        if "Sasra Category" = "Sasra Category"::Substandard then begin
+                            SubstandardBal := SubstandardBal + "Outstanding Principal";
+                            SubstandardBalCount := SubstandardBalCount + 1;
+                            SubstandardBalProv := SubstandardBal * 0.25;
                         end else
-                            if "Sasra Category" = "Sasra Category"::Substandard then begin
-                                SubstandardBal := SubstandardBal + "Outstanding Principal";
-                                SubstandardBalCount := SubstandardBalCount + 1;
-                                SubstandardBalProv := SubstandardBal * 0.25;
-                            end else
-                                if "Sasra Category" = "Sasra Category"::Doubtful then begin
-                                    DoubtFullBal := DoubtFullBal + "Outstanding Principal";
-                                    DoubtFullBalCount := DoubtFullBalCount + 1;
-                                    DoubtFullBalProv := DoubtFullBal * 0.5;
-                                end else begin
-                                    LossBal := LossBal + "Outstanding Principal";
-                                    LossBalCount := LossBalCount + 1;
-                                    LossBalProv := LossBal * 1.0;
-                                end;
+                            if "Sasra Category" = "Sasra Category"::Doubtful then begin
+                                DoubtFullBal := DoubtFullBal + "Outstanding Principal";
+                                DoubtFullBalCount := DoubtFullBalCount + 1;
+                                DoubtFullBalProv := DoubtFullBal * 0.5;
+                            end else begin
+                                LossBal := LossBal + "Outstanding Principal";
+                                LossBalCount := LossBalCount + 1;
+                                LossBalProv := LossBal * 1.0;
+                            end;
 
-                    Tcount := (PerformBalCount + WatchBalCount + SubstandardBalCount + DoubtFullBalCount + LossBalCount);
-                    Portfolio := (PerformBal + WatchBal + SubstandardBal + DoubtFullBal + LossBal);
-                    Tprovision := (PerformBalProv + WatchBalProv + SubstandardBalProv + DoubtFullBalProv + LossBalProv);
+                Tcount := (PerformBalCount + WatchBalCount + SubstandardBalCount + DoubtFullBalCount + LossBalCount);
+                Portfolio := (PerformBal + WatchBal + SubstandardBal + DoubtFullBal + LossBal);
+                Tprovision := (PerformBalProv + WatchBalProv + SubstandardBalProv + DoubtFullBalProv + LossBalProv);
 
-                
 
-                
+
+
             END;
 
             trigger OnPostDataItem()

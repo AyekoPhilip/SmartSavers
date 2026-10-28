@@ -94,7 +94,7 @@ page 50061 "Ac Changes Card"
                     StyleExpr = true;
                     ToolTip = 'Specifies the value of the Status field.';
                 }
-                
+
 
             }
             group("Trail Information")

@@ -80,9 +80,9 @@ pageextension 50043 "UserSetupPageExt" extends "User Setup"
     begin
         if Rec."Approval Status" = Rec."Approval Status"::Open then
             CurrPage.Editable := true else
-            CurrPage.Editable := false;   
-          // if not DoctMngt.RecordRestrictMngt(UserId, Database::"User Setup", FunctionStrng::Administrator) then
-          // Error(MsgOnPermissionTxt);  
+            CurrPage.Editable := false;
+        // if not DoctMngt.RecordRestrictMngt(UserId, Database::"User Setup", FunctionStrng::Administrator) then
+        // Error(MsgOnPermissionTxt);  
     end;
 
     trigger OnModifyRecord(): Boolean

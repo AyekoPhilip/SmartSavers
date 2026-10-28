@@ -9,11 +9,11 @@ table 50376 "EFT Transfer Header"
             Editable = false;
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
-               
+
             end;
         }
         field(50010; "Date Entered"; Date)
@@ -54,7 +54,7 @@ table 50376 "EFT Transfer Header"
             ("Account Type" = const(Vendor)) Vendor else
             if
             ("Account Type" = const(Savings)) "Account Banking";
-        
+
             trigger OnValidate()
             var
                 BankAccount: Record "Bank Account";
@@ -108,7 +108,7 @@ table 50376 "EFT Transfer Header"
             Caption = 'Document Type';
             Editable = false;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 "Transaction Type" := '';
@@ -134,7 +134,7 @@ table 50376 "EFT Transfer Header"
         {
             Caption = 'Start Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 Bankingsetup: Record "Banking No. Setup";
@@ -154,7 +154,7 @@ table 50376 "EFT Transfer Header"
         {
             Caption = 'End Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "End Date" > Today then
@@ -199,7 +199,7 @@ table 50376 "EFT Transfer Header"
             IF ("Document Type" = CONST(RTGS)) "Transaction Types".Code WHERE(Type = CONST(RTGS));
             Caption = 'Transaction Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 getCharges;
@@ -242,7 +242,7 @@ table 50376 "EFT Transfer Header"
         field(50036; "Source of funds"; Enum "SourceOfFunds")
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -260,7 +260,7 @@ table 50376 "EFT Transfer Header"
             "Account Category" = filter("Specialty Savings")) else
             if ("Application Source" = const(Benefits), "Source of funds" = filter(Junior)) "Product Factory" where("Product Class" = const(Account), Status = const(Active),
             "Account Category" = filter(Junior));
-        
+
             trigger OnValidate()
             begin
                 if "Source of funds" = "Source of funds"::Junior then begin
@@ -271,7 +271,7 @@ table 50376 "EFT Transfer Header"
         field(50038; "EFT Options"; Enum "EFTPaymentOptions")
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -282,7 +282,7 @@ table 50376 "EFT Transfer Header"
         field(50039; "Suggest All Product"; Boolean)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Suggest All Product" then begin
@@ -302,7 +302,7 @@ table 50376 "EFT Transfer Header"
             TableRelation = if ("Source of funds" = filter(Junior)) Member where(Status = filter(Deceased)) else
             if ("Source of funds" = filter(Refunds)) Member where(Status = filter(Deceased | Withdrawn)) else
             Member where(Status = filter(Active | New | Dormant));
-        
+
             trigger OnValidate()
             begin
 
@@ -321,7 +321,7 @@ table 50376 "EFT Transfer Header"
         {
             DataClassification = CustomerContent;
             TableRelation = Loans where("Outstanding Balance" = filter(> 0));
-        
+
             trigger OnValidate()
             var
                 EftLine: Record "EFT Transfer Lines";
@@ -364,7 +364,7 @@ table 50376 "EFT Transfer Header"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."EFT Nos.");
-           
+
         end;
 
         "Date Entered" := Today;

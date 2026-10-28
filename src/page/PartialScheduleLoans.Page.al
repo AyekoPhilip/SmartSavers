@@ -3,7 +3,7 @@ page 51116 "Partial Schedule-Loans"
     ApplicationArea = All;
     Caption = 'Partial Schedule-Loans';
     PageType = List;
-    CardPageId="Partial Schedule Page";
+    CardPageId = "Partial Schedule Page";
     ModifyAllowed = false;
     InsertAllowed = false;
     DeleteAllowed = false;
@@ -17,7 +17,7 @@ page 51116 "Partial Schedule-Loans"
         {
             repeater(General)
             {
-                Editable=false;
+                Editable = false;
                 field("Entry No"; Rec."Entry No")
                 {
                     ToolTip = 'Specifies the value of the Entry No field.';
@@ -58,7 +58,7 @@ page 51116 "Partial Schedule-Loans"
                 {
                     ToolTip = 'Specifies the value of the Account No. field.';
                     Style = StandardAccent;
-                    Caption='Member No.';
+                    Caption = 'Member No.';
                     StyleExpr = true;
                 }
                 field(Repayment; Rec.Repayment)

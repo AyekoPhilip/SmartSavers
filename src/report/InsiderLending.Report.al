@@ -149,6 +149,7 @@ report 50208 "Insider Lending"
                     CurrReport.Skip();
                 end;
             end;
+
             trigger OnPostDataItem()
             begin
 

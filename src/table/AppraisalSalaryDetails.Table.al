@@ -20,7 +20,7 @@ table 50405 "Appraisal Salary Details"
             TableRelation = "Appraisal Salary Set-up";
             Caption = 'Code';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "SalarySet-up".Get(Code) then begin
@@ -45,7 +45,7 @@ table 50405 "Appraisal Salary Details"
         {
             Caption = 'Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if (Type = Type::"Net Pay") or (Type = Type::"Gross Pay") or (Type = Type::"Take Home") or (Type = Type::Banding) or (Type = Type::"Sacco Deduction") then
@@ -116,7 +116,7 @@ table 50405 "Appraisal Salary Details"
             TableRelation = Loans;
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if LoanApp.Get("No.") then

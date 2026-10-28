@@ -217,7 +217,7 @@ page 51047 "Credit Mngt. Role Center"
                 Image = "Report";
                 RunObject = Report "Insurance Report";
             }
-             action(DepositInsurance)
+            action(DepositInsurance)
             {
                 ApplicationArea = Basic, Suite;
                 Caption = 'Deposit Insurance Report';
@@ -239,7 +239,7 @@ page 51047 "Credit Mngt. Role Center"
                 Image = "Report";
                 RunObject = Report "EFT Bank Details";
             }
-           
+
             action(CashierReceipt)
             {
                 ApplicationArea = Basic, Suite;
@@ -307,11 +307,11 @@ page 51047 "Credit Mngt. Role Center"
             action("Accounts Credit-Deposits")
             {
                 RunObject = Page "Account Credit List";
-                RunPageView = where(Status = filter(Active | New | Dormant | Defaulter | Blocked | "Withdrawal Application"),"Account Category"=filter("Shares Deposit"));
+                RunPageView = where(Status = filter(Active | New | Dormant | Defaulter | Blocked | "Withdrawal Application"), "Account Category" = filter("Shares Deposit"));
                 Caption = 'Deposits Account';
                 ApplicationArea = All;
             }
-        
+
 
             action("Loan Account")
             {
@@ -519,6 +519,13 @@ page 51047 "Credit Mngt. Role Center"
                     RunObject = Page "Stop Order List";
                     ApplicationArea = All;
                 }
+                action("Account Activation")
+                {
+                    Caption = 'Account Activation';
+                    RunObject = page "Account Activation List";
+                    RunPageView = where("Approval Status" = filter(Open | "Pending Approval"));
+                    ApplicationArea = All;
+                }
                 action(InterestHeaderList)
                 {
                     Caption = 'Billing';
@@ -526,12 +533,7 @@ page 51047 "Credit Mngt. Role Center"
                     RunPageView = where("Approval Status" = filter(Open | "Pending Approval"));
                     ApplicationArea = All;
                 }
-                action("Defaulter Recovery")
-                {
-                    RunObject = Page "Recovery List";
-                    RunPageView = where("Application Source" = const(Manual), "Approval Status" = filter(Open | "Pending Approval"));
-                    ApplicationArea = All;
-                }
+
                 action("Loan Restructure")
                 {
                     RunObject = Page "Loan Restructure List";
@@ -560,34 +562,7 @@ page 51047 "Credit Mngt. Role Center"
                     RunPageView = where("Approval Status" = filter(Open | "Pending Approval"));
                     ApplicationArea = All;
                 }
-                action(DefaulterRecovery)
-                {
-                    RunObject = Page "Recovery List";
-                    Caption = 'Defaulter Recovery';
-                    RunPageView = where("Application Source" = const(Manual), "Approval Status" = filter(Open | "Pending Approval"));
-                    ApplicationArea = All;
-                }
-                action(DefaulterList)
-                {
-                    RunObject = Page "Loan Application List";
-                    Caption = 'Application List';
-                    RunPageView = where("Application Type" = filter(Defaulter), "Approval Status" = filter(Posted));
-                    ApplicationArea = All;
-                }
-                action(DefaulterLoanList)
-                {
-                    RunObject = Page "Loan List";
-                    Caption = 'Loan List';
-                    RunPageView = where("Application Type" = filter(Defaulter), "Approval Status" = filter(Approved));
-                    ApplicationArea = All;
-                }
-                action(DefaulterLoanListPosted)
-                {
-                    RunObject = Page "Loan List";
-                    Caption = 'Active Defaulter Loan';
-                    RunPageView = where("Application Type" = filter(Defaulter), "Approval Status" = filter(Posted));
-                    ApplicationArea = All;
-                }
+
                 action(WithdrawalNotice)
                 {
                     RunObject = Page "Member withdrawal Notice List";
@@ -636,16 +611,40 @@ page 51047 "Credit Mngt. Role Center"
                     ApplicationArea = All;
                 }
             }
-
-            group("Approved Documents")
+            group("Defaulter Management")
             {
-                Caption = 'Approved Document';
-
-                action(AppInterestHeaderList)
+                action("Defaulter Recovery")
                 {
-                    Caption = 'Billing';
-                    RunObject = Page "Interest Header List";
-                    RunPageView = where("Approval Status" = filter(Approved));
+                    RunObject = Page "Recovery List";
+                    RunPageView = where("Application Source" = const(Manual), "Approval Status" = filter(Open | "Pending Approval"));
+                    ApplicationArea = All;
+                }
+                action(DefaulterRecovery)
+                {
+                    RunObject = Page "Recovery List";
+                    Caption = 'Defaulter Recovery';
+                    RunPageView = where("Application Source" = const(Manual), "Approval Status" = filter(Open | "Pending Approval"));
+                    ApplicationArea = All;
+                }
+                action(DefaulterList)
+                {
+                    RunObject = Page "Loan Application List";
+                    Caption = 'Application List';
+                    RunPageView = where("Application Type" = filter(Defaulter), "Approval Status" = filter(Posted));
+                    ApplicationArea = All;
+                }
+                action(DefaulterLoanList)
+                {
+                    RunObject = Page "Loan List";
+                    Caption = 'Loan List';
+                    RunPageView = where("Application Type" = filter(Defaulter), "Approval Status" = filter(Approved));
+                    ApplicationArea = All;
+                }
+                action(DefaulterLoanListPosted)
+                {
+                    RunObject = Page "Loan List";
+                    Caption = 'Active Defaulter Loan';
+                    RunPageView = where("Application Type" = filter(Defaulter), "Approval Status" = filter(Posted));
                     ApplicationArea = All;
                 }
                 action("Approved Defaulter Recovery")
@@ -655,6 +654,36 @@ page 51047 "Credit Mngt. Role Center"
                     RunPageView = where("Approval Status" = filter(Approved));
                     ApplicationArea = All;
                 }
+
+                action(AprovedDefaulterRecovery)
+                {
+                    RunObject = Page "Recovery List";
+                    Caption = 'Defaulter Recovery';
+                    RunPageView = where("Approval Status" = filter(Approved));
+                    ApplicationArea = All;
+                }
+
+            }
+
+            group("Approved Documents")
+            {
+                Caption = 'Approved Document';
+                action("Account Activation Approved")
+                {
+                    Caption = 'Account Activation';
+                    RunObject = page "Account Activation List";
+                    RunPageView = where("Approval Status" = filter(Approved));
+                    ApplicationArea = All;
+                }
+
+                action(AppInterestHeaderList)
+                {
+                    Caption = 'Billing';
+                    RunObject = Page "Interest Header List";
+                    RunPageView = where("Approval Status" = filter(Approved));
+                    ApplicationArea = All;
+                }
+
                 action("Approved Loan Restructure")
                 {
                     Caption = 'Loan Restructure';
@@ -677,13 +706,7 @@ page 51047 "Credit Mngt. Role Center"
                     RunPageView = where("Approval Status" = filter(Approved));
                     ApplicationArea = All;
                 }
-                action(AprovedDefaulterRecovery)
-                {
-                    RunObject = Page "Recovery List";
-                    Caption = 'Defaulter Recovery';
-                    RunPageView = where("Approval Status" = filter(Approved));
-                    ApplicationArea = All;
-                }
+
                 action(ApprovedWithdrawalNotice)
                 {
                     RunObject = Page "Member withdrawal Notice List";

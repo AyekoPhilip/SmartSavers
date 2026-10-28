@@ -212,6 +212,7 @@ codeunit 50049 "Approval Mgmt."
         PayHeader: Record "Payments Header";
         InterBank: Record "Interbank Transfer";
         ImprestHeader: Record "Imprest Header";
+        RegistrationProcess: Codeunit "Registry Mngt.";
         ObjtEmp: Record "HR Employees";
         PartialDisb: Record "Partial Disbursement Schedule";
         RegisterMngt: Codeunit "Register Management";
@@ -471,7 +472,9 @@ codeunit 50049 "Approval Mgmt."
 
                 if Mchanges.Get(ApprovalEntry."Document No.") then begin
                     Mchanges.validate("Approval Status", Mchanges."Approval Status"::Approved);
-                    Mchanges.Modify(true);
+                    if Mchanges.Modify(true) then begin
+                        RegistrationProcess.fnAccountActivateDeactivate(Mchanges);
+                    end;
                     fnCopyApprovedData(Mchanges."No.", Database::"Member Changes");
                 end;
 
@@ -555,6 +558,176 @@ codeunit 50049 "Approval Mgmt."
         end
 
 
+    end;
+
+    procedure CancelDocument(DocumentNo: Code[100])
+    var
+        ApprovalSetup: Record "Approval Setup";
+        SalesHeader: Record "Sales Header";
+        PurchaseHeader: Record "Purchase Header";
+        NextApprovalEntry: Record "Approval Entries";
+        ReleaseSalesDoc: Codeunit "Release Sales Document";
+        ReleasePurchaseDoc: Codeunit "Release Purchase Document";
+        MembOpening: Record "Member Application";
+        MembAcOpening: Record "Member Application";
+        Acc: Record "Account Application";
+        PFact: Record "Product Factory";
+        Loans: Record Loans;
+        LoanApplication: Record "Loan Application";
+        LoanApplic: Record "Loan Application";
+        LoanApplicationCharges: Record "Loan Application Charge";
+        LoanGuarantorsandSecurity: Record "Loan Guarantors and Security";
+        LoansTopup: Record "Loans Top up";
+        DisbursementHeader: Record "Loan Disbursement Header";
+        CollateralRgt: Record "Collateral Register";
+        InterestHeader: Record "Interest Header";
+        CheckoffHeader: Record "Checkoff Header";
+        RecoveryHeader: Record "Recovery Header";
+        SecurityCollection: Record "Security Collection";
+        TellerTransaction: Record "Teller Transaction";
+        TreasuryTrans: Record "Treasury Cashier Transaction";
+        AccTransfer: Record "Account Transfer Header";
+        BnkCheque: Record "Bankers Cheque Application";
+        StandingOrder: Record "Standing Order Header";
+        EFTHeader: Record "EFT Transfer Header";
+        Mchanges: Record "Member Changes";
+        FileAlloc: Record "File Allocation";
+        Notices: Record "Member withdrawal Notice";
+        MClosure: Record "Membership closure";
+        CustomRecord: Record Member;
+        Accredit: Record "Account Credit";
+        MRegistration: Record "Dsc Mobile Application";
+        ProcedureAcc: Record "Account (Procedure)";
+        DocSubstitution: Record "Guarantors Substitution";
+        Accbanking: Record "Account Banking";
+        RecordChanges: Record "Mc Acc. Changes";
+        Temp: Record "User Setup";
+        PartialDisb: Record "Partial Disbursement Schedule";
+        ObjtEmp: Record "HR Employees";
+        PrPayrollRequest: record "Payroll Requests";
+    begin
+
+        if MembOpening.Get(DocumentNo) then begin
+            MembOpening.Validate("Approval Status", MembOpening."Approval Status"::Cancelled);
+            MembOpening.Modify;
+            MarkCrmApplicStatus(MembOpening."No.", MembOpening."Approval Status");
+
+        end;
+
+        PartialDisb.Reset();
+        PartialDisb.SetRange("Entry No", ApprovalEntry."Document No.");
+        if PartialDisb.FindFirst() then begin
+            PartialDisb.Validate("Approval Status", PartialDisb."Approval Status"::Cancelled);
+            PartialDisb.Modify(true);
+
+        end;
+
+        if Acc.Get(DocumentNo) then begin
+            Acc.Validate("Approval Status", Acc."Approval Status"::Cancelled);
+            Acc.Modify;
+
+        end;
+        if DisbursementHeader.Get(DocumentNo) then begin
+            DisbursementHeader.Validate("Approval Status", DisbursementHeader."Approval Status"::Cancelled);
+            DisbursementHeader.Modify;
+
+        end;
+        if LoanApplication.Get(DocumentNo) then begin
+            LoanApplication.Validate("Approval Status", LoanApplication."Approval Status"::Cancelled);
+            LoanApplication.Modify;
+            MarkCrmApplicStatus(LoanApplication."CRM Application No.", LoanApplication."Approval Status");
+
+        end;
+        if Loans.Get(DocumentNo) then begin
+            Loans.Validate("Approval Status", Loans."Approval Status"::Cancelled);
+            Loans.Modify;
+
+        end;
+        if PrPayrollRequest.Get(ApprovalEntry."Document No.") then begin
+            PrPayrollRequest.Validate(Status, PrPayrollRequest.Status::Cancelled);
+            PrPayrollRequest.Validate("Approval Status", PrPayrollRequest."Approval Status"::Cancelled);
+            PrPayrollRequest.Modify(true)
+        end;
+        if CollateralRgt.Get(DocumentNo) then begin
+            CollateralRgt.Validate("Approval Status", CollateralRgt."Approval Status"::Cancelled);
+            CollateralRgt.Modify;
+
+        end;
+
+        if InterestHeader.Get(DocumentNo) then begin
+            InterestHeader.Validate("Approval Status", InterestHeader."Approval Status"::Cancelled);
+            InterestHeader.Modify;
+
+        end;
+        if CheckoffHeader.Get(DocumentNo) then begin
+            CheckoffHeader.Validate("Approval Status", CheckoffHeader."Approval Status"::Cancelled);
+            CheckoffHeader.Modify;
+
+        end;
+
+        if RecoveryHeader.Get(DocumentNo) then begin
+            RecoveryHeader.Validate("Approval Status", RecoveryHeader."Approval Status"::Cancelled);
+            RecoveryHeader.Modify;
+
+        end;
+
+
+
+        if AccTransfer.Get(DocumentNo) then begin
+            AccTransfer.Validate(Status, AccTransfer.Status::Cancelled);
+            AccTransfer.Modify(true);
+
+        end;
+
+        if EFTHeader.Get(DocumentNo) then begin
+            EFTHeader.Validate("Approval Status", EFTHeader."Approval Status"::Cancelled);
+            EFTHeader.Modify(true);
+
+        end;
+        if Temp.Get(DocumentNo) then begin
+            Temp.Validate("Approval Status", Temp."Approval Status"::Cancelled);
+            Temp.Modify(true);
+
+        end;
+
+        if DocSubstitution.Get(DocumentNo) then begin
+            DocSubstitution.Validate("Approval Status", DocSubstitution."Approval Status"::Cancelled);
+            DocSubstitution.Modify(true);
+        end;
+
+        if Mchanges.Get(DocumentNo) then begin
+            Mchanges.validate("Approval Status", Mchanges."Approval Status"::Cancelled);
+            Mchanges.Modify(true);
+
+        end;
+
+        if RecordChanges.Get(DocumentNo) then begin
+            RecordChanges.validate("Approval Status", RecordChanges."Approval Status"::Cancelled);
+            RecordChanges.Modify(true);
+
+        end;
+
+        if MClosure.Get(DocumentNo) then begin
+            MClosure.Validate("Approval Status", MClosure."Approval Status"::Cancelled);
+            MClosure.Modify(true);
+
+
+        end;
+        if Notices.Get(DocumentNo) then begin
+            Notices.Validate("Approval Status", Notices."Approval Status"::Cancelled);
+            Notices.Modify(true);
+
+        end;
+
+        if MRegistration.Get(DocumentNo) then begin
+            MRegistration.Validate("Approval Status", MRegistration."Approval Status"::Cancelled);
+            MRegistration.Modify(true);
+        end;
+
+        if ObjtEmp.Get(DocumentNo) then begin
+            ObjtEmp.Validate("Approval Status", ObjtEmp."Approval Status"::Cancelled);
+            ObjtEmp.Modify(true)
+        end
     end;
 
     procedure RejectApprovalApplication(DocumentNo: Code[100])

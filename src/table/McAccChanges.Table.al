@@ -10,7 +10,7 @@ table 50573 "Mc Acc. Changes"
             Caption = 'No.';
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
@@ -21,7 +21,7 @@ table 50573 "Mc Acc. Changes"
             Caption = 'Name';
             Editable = false;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 NameBreakdown
@@ -32,7 +32,7 @@ table 50573 "Mc Acc. Changes"
             DataClassification = CustomerContent;
             TableRelation = Member."No." where(Status = filter(<> Deceased | Withdrawn | "Withdrawal Application"));
             Caption = 'Member No.';
-        
+
             trigger OnValidate()
             var
                 MngtRegt: Codeunit "Registry Mngt.";
@@ -136,7 +136,7 @@ table 50573 "Mc Acc. Changes"
             DataClassification = CustomerContent;
             TableRelation = Customer;
             Caption = 'Pay Point';
-        
+
             trigger OnValidate()
             var
                 Cusr: Record Customer;

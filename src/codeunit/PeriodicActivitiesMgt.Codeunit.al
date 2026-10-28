@@ -214,7 +214,9 @@ codeunit 50042 "Periodic Activities Mgt."
 
     end;
 
-    procedure fnIntEntries(VarVariant: Record Loans; IntPostDate: Date; CodeNo: Code[20]; ApplicType: Enum CreditBillingType; IntDays: Integer; intStartDate: Date; InterestFrequency: Enum RepaymentFrequency)
+    procedure fnIntEntries(VarVariant: Record Loans; IntPostDate: Date;
+    CodeNo: Code[20]; ApplicType: Enum CreditBillingType; IntDays: Integer;
+    intStartDate: Date; InterestFrequency: Enum RepaymentFrequency)
     var
         ProductFactory: Record "Product Factory";
         IntDue: array[12] of Decimal;
@@ -6516,8 +6518,8 @@ codeunit 50042 "Periodic Activities Mgt."
 
                             if RunBal > 0 then begin
 
-                                if RunBal > (RecReference."Outstanding Interest"+AccruedAmt) then
-                                    OutInt := (RecReference."Outstanding Interest"+AccruedAmt)
+                                if RunBal > (RecReference."Outstanding Interest" + AccruedAmt) then
+                                    OutInt := (RecReference."Outstanding Interest" + AccruedAmt)
                                 else
                                     OutInt := RunBal;
 

@@ -477,14 +477,14 @@ page 50050 "Accounting Role Centre"
                     ApplicationArea = All;
                     ToolTip = 'Change Password';
                 }
-                 action("Payroll Requests ")
-                    {
-                        Image = Reuse;
-                        RunObject = page "Payroll Requests-Self Service";
-                        ApplicationArea = All;
-                        ToolTip = 'Executes the Payroll Requests action';
-                        Caption = 'Payroll Request';
-                    }
+                action("Payroll Requests ")
+                {
+                    Image = Reuse;
+                    RunObject = page "Payroll Requests-Self Service";
+                    ApplicationArea = All;
+                    ToolTip = 'Executes the Payroll Requests action';
+                    Caption = 'Payroll Request';
+                }
                 group(Incident)
                 {
                     Caption = 'Incidents Management';

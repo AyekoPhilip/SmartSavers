@@ -4,13 +4,13 @@ page 51115 "Loan List-Partial"
     CardPageID = "Loans Card";
     Caption = 'Loan List-Partial';
     PageType = List;
-    Editable=false;
-    ModifyAllowed=false;
-    InsertAllowed=false;
-    DeleteAllowed=false;
+    Editable = false;
+    ModifyAllowed = false;
+    InsertAllowed = false;
+    DeleteAllowed = false;
     SourceTable = Loans;
     UsageCategory = Lists;
-    SourceTableView = where("Approval Status" = filter(Approved|Posted), "Mode of Disbursement" = filter("Partial Disbursement"));
+    SourceTableView = where("Approval Status" = filter(Approved | Posted), "Mode of Disbursement" = filter("Partial Disbursement"));
     layout
     {
         area(content)

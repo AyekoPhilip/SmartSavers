@@ -1,6 +1,6 @@
 page 51003 "Individual Applic. Approved"
 {
-   
+
     CardPageID = "Individual App. Approved";
     DeleteAllowed = false;
     Editable = false;

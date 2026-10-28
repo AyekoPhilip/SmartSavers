@@ -27,7 +27,7 @@ table 50562 "Loans Categorization"
             "Product Factory"."Product ID" where("Product Class" = const(Loan), Status = const(Active), "Nature of Loan Type" = filter(Defaulter));
             Caption = 'Product Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 CustEmp: Record Customer;
@@ -43,7 +43,7 @@ table 50562 "Loans Categorization"
             TableRelation = Member."No.";
             Caption = 'Account No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ObjCust: Record Member;
@@ -60,7 +60,7 @@ table 50562 "Loans Categorization"
         {
             Caption = 'Requested Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 UpdateRequestAmt
@@ -70,7 +70,7 @@ table 50562 "Loans Categorization"
         {
             Caption = 'Approved Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 RSchedule: Record "Schedule of Loan Payment";
@@ -102,7 +102,7 @@ table 50562 "Loans Categorization"
         {
             Caption = 'Installments';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ErrorOnMaxThreshTxt: Label 'Member due to retire before loan repayment is complete. Do you wish to continue?';
@@ -118,7 +118,7 @@ table 50562 "Loans Categorization"
         {
             Caption = 'Disbursement Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -423,7 +423,7 @@ table 50562 "Loans Categorization"
             Editable = false;
             Caption = 'Self Guarantee';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PFacts: Record "Product Factory";
@@ -497,7 +497,7 @@ table 50562 "Loans Categorization"
         {
             Caption = 'Deposit Purchase';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PFactory: Record "General Set-Up";
@@ -619,7 +619,7 @@ table 50562 "Loans Categorization"
         }
         field(50091; "Outstanding Principal"; Decimal)
         {
-            CalcFormula = sum("Detailed Cust. Ledg. Entry"."Amount (LCY)" where("Customer No." = field("Loan Account"), "Loan No." = field("No."), "Posting Date" = field("Date Filter"),"Transaction Type" = filter(Loan | Repayment), "Entry Type" = filter("Initial Entry")));
+            CalcFormula = sum("Detailed Cust. Ledg. Entry"."Amount (LCY)" where("Customer No." = field("Loan Account"), "Loan No." = field("No."), "Posting Date" = field("Date Filter"), "Transaction Type" = filter(Loan | Repayment), "Entry Type" = filter("Initial Entry")));
             Editable = false;
             FieldClass = FlowField;
             Caption = 'Outstanding Principal';

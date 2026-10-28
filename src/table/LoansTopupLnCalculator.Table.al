@@ -2,8 +2,8 @@ table 50593 "Loans Topup-Ln. Calculator"
 {
     Caption = 'Loans Topup-Ln. Calculator';
     DataClassification = CustomerContent;
-    
-   fields
+
+    fields
     {
         field(50009; "No."; Code[50])
         {
@@ -16,7 +16,7 @@ table 50593 "Loans Topup-Ln. Calculator"
             TableRelation = Loans."No." WHERE("Account No." = FIELD("Account No."), "Outstanding Balance" = filter(> 0));
             Caption = 'Loan Top Up';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 LoanApp: Record "Loan Application";
@@ -205,7 +205,7 @@ table 50593 "Loans Topup-Ln. Calculator"
         key("Key1"; "No.", "Loan Top Up", "Account No.")
         {
             Clustered = true;
-            SumIndexFields = "Total Outstanding Amount","Outstanding Principle";
+            SumIndexFields = "Total Outstanding Amount", "Outstanding Principle";
         }
         key("Key2"; "Outstanding Principle")
         {
@@ -310,7 +310,7 @@ table 50593 "Loans Topup-Ln. Calculator"
         "Outstanding Balance" := (Loans."Outstanding Balance" + "Untransfered Interest");
         "Total Outstanding Amount" := (Loans."Outstanding Balance" + "Untransfered Interest");
         "Monthly Repayment" := Loans.Repayment;
-        Commision := RegMngt.ComputeLoanApplicationCharges("Product Type", "No.", 0, "Total Outstanding Amount",ChargeType::"Top up");
+        Commision := RegMngt.ComputeLoanApplicationCharges("Product Type", "No.", 0, "Total Outstanding Amount", ChargeType::"Top up");
         "Total Total Up" := ("Total Outstanding Amount" + Commision + "Settlement Fee");
 
         if Ploan.Get(Loans."No.") then begin

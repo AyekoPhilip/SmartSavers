@@ -11,11 +11,11 @@ table 50025 "Interbank Transfer"
             DataClassification = CustomerContent;
             Caption = 'No.';
             Editable = false;
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
-               
+
             end;
         }
         field(50010; "Date"; Date)
@@ -56,7 +56,7 @@ table 50025 "Interbank Transfer"
         {
             DataClassification = CustomerContent;
             Caption = 'Received From';
-        
+
             trigger OnValidate()
             begin
 
@@ -82,7 +82,7 @@ table 50025 "Interbank Transfer"
             Caption = 'Paying Account No.';
             TableRelation = if ("Account Type" = filter("Bank Account")) "Bank Account" where(Blocked = filter(false));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -96,7 +96,7 @@ table 50025 "Interbank Transfer"
         {
             Caption = 'Paying Account Name.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -110,7 +110,7 @@ table 50025 "Interbank Transfer"
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1),
                                                           "Dimension Value Type" = CONST(Standard));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Global Dimension 1 Code");
@@ -123,7 +123,7 @@ table 50025 "Interbank Transfer"
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2),
                                                           "Dimension Value Type" = CONST(Standard));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Shortcut Dimension 2 Code");
@@ -134,7 +134,7 @@ table 50025 "Interbank Transfer"
             Caption = 'Currency Code';
             TableRelation = Currency;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -197,7 +197,7 @@ table 50025 "Interbank Transfer"
             Caption = 'Responsibility Center';
             TableRelation = "Responsibility Center";
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -209,7 +209,7 @@ table 50025 "Interbank Transfer"
             Caption = 'Shortcut Dimension 3 Code';
             Description = 'Stores the reference of the Third global dimension in the database';
             DataClassification = CustomerContent;
-        
+
             trigger OnLookup()
             begin
 
@@ -226,7 +226,7 @@ table 50025 "Interbank Transfer"
             Caption = 'Shortcut Dimension 4 Code';
             Description = 'Stores the reference of the Third global dimension in the database';
             DataClassification = CustomerContent;
-        
+
             trigger OnLookup()
             begin
                 LookupShortcutDimCode(4, "Shortcut Dimension 4 Code");
@@ -254,7 +254,7 @@ table 50025 "Interbank Transfer"
             Caption = 'Reciving Account No.';
             TableRelation = if ("Account Type" = filter("Bank Account")) "Bank Account" where(Blocked = filter(false));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -280,7 +280,7 @@ table 50025 "Interbank Transfer"
             TableRelation = "Gen. Journal Batch".Name where("Journal Template Name" = field("Interbank Journal Template"));
             Caption = 'Interbank Journal Batch';
             Editable = false;
-        
+
             trigger OnValidate()
             begin
             end;
@@ -292,13 +292,13 @@ table 50025 "Interbank Transfer"
             Editable = false;
             TableRelation = "Dimension Set Entry";
             DataClassification = CustomerContent;
-        
+
             trigger OnLookup()
             begin
                 ShowDimensions
             end;
         }
-         field(50043; "Check Line"; Boolean)
+        field(50043; "Check Line"; Boolean)
         {
             DataClassification = CustomerContent;
             Editable = false;
@@ -318,10 +318,10 @@ table 50025 "Interbank Transfer"
             GenLedgerSetup.Get;
             GenLedgerSetup.TestField("Interbank Nos");
             "No. Series" := GenLedgerSetup."Interbank Nos";
-            if NoSeriesMgt.AreRelated(GenLedgerSetup."Interbank Nos" , xRec."No. Series") then
+            if NoSeriesMgt.AreRelated(GenLedgerSetup."Interbank Nos", xRec."No. Series") then
                 "No. Series" := xRec."No. Series";
             "No." := NoSeriesMgt.GetNextNo("No. Series")
-            
+
         end;
 
         UserTemplate.Get(UserId);
@@ -362,13 +362,13 @@ table 50025 "Interbank Transfer"
 
         if "No." <> xRec."No." then
             if not RecRefHeader.Get(Rec."No.") then begin
-                GenLedgerSetup .Get();
+                GenLedgerSetup.Get();
                 NoSeriesMgt.TestManual(GenLedgerSetup."Interbank Nos");
                 "No. Series" := '';
             end;
     end;
 
-[IntegrationEvent(false, false)]
+    [IntegrationEvent(false, false)]
     local procedure OnBeforeTestNoSeries(var RecRef: Record "Interbank Transfer"; xRecRef: Record "Interbank Transfer"; var IsHandled: Boolean)
     begin
     end;
@@ -429,10 +429,11 @@ table 50025 "Interbank Transfer"
                     TestField("Account No.");
                     TestField("Amount Recieved");
                 end;
-                1:begin
+            1:
+                begin
                     TestField("Account No.");
                     TestField("Amount Recieved");
-                    TestField("Approval Status","Approval Status"::Approved);
+                    TestField("Approval Status", "Approval Status"::Approved);
                 end;
         end;
 

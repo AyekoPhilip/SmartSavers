@@ -96,45 +96,28 @@ report 50315 "Loans Register"
 
             trigger OnAfterGetRecord()
             begin
-/*
-                MinuteNo := '';
-                BalanceLCY := 0;
+                /*
+                                MinuteNo := '';
+                                BalanceLCY := 0;
 
-                CalcFields("Outstanding Balance","Interest Paid","Outstanding Principal");
+                                CalcFields("Outstanding Balance","Interest Paid","Outstanding Principal");
 
-                if Loan.Get("No.") then begin
-                    MinuteNo := Loan."Minute No.";
-                end;
-                if FactP.Get("Product Type") then begin
-                    IntRate := FactP."Interest Rate (Max.)";
-                end;
-
-                CalcFields("Total TopUp", "Outstanding Balance");
-
-                CalcFields("Total TopUp", "Outstanding Balance","Outstanding Principal");
-
-                if "Total TopUp" > 0 then begin
-                    LoanAppcharges.Reset;
-                    LoanAppcharges.SetRange("Product Code", "Product Type");
-                    LoanAppcharges.SetRange("Charge Type", LoanAppcharges."Charge Type"::"Top up");
-                    if LoanAppcharges.FindSet then begin
-                        repeat
-                            if LoanAppcharges."Staggered Charge Code" = '' then begin
-                                if LoanAppcharges."Use Percentage" then begin
-                                    LoanAppcharges.TestField(Percentage);
-                                    TopUpComms := Round((TopUpComms + ("Total TopUp" * (LoanAppcharges.Percentage / 100))), 1, '=');
-                                end else begin
-                                    LoanAppcharges.TestField("Charge Amount");
-                                    TopUpComms := (TopUpComms + LoanAppcharges."Charge Amount")
+                                if Loan.Get("No.") then begin
+                                    MinuteNo := Loan."Minute No.";
                                 end;
-                            end else begin
-                                TransType.Reset();
-                                TransType.SetRange("Staggered Charge Code", LoanAppcharges."Staggered Charge Code");
-                                if TransType.FindFirst() then begin
+                                if FactP.Get("Product Type") then begin
+                                    IntRate := FactP."Interest Rate (Max.)";
+                                end;
 
-                                    TieredChargeLine.Reset();
-                                    TieredChargeLine.SetRange(code, TransType."Staggered Charge Code");
-                                    if TieredChargeLine.FindSet() then begin
+                                CalcFields("Total TopUp", "Outstanding Balance");
+
+                                CalcFields("Total TopUp", "Outstanding Balance","Outstanding Principal");
+
+                                if "Total TopUp" > 0 then begin
+                                    LoanAppcharges.Reset;
+                                    LoanAppcharges.SetRange("Product Code", "Product Type");
+                                    LoanAppcharges.SetRange("Charge Type", LoanAppcharges."Charge Type"::"Top up");
+                                    if LoanAppcharges.FindSet then begin
                                         repeat
                                             if LoanAppcharges."Staggered Charge Code" = '' then begin
                                                 if LoanAppcharges."Use Percentage" then begin
@@ -153,35 +136,52 @@ report 50315 "Loans Register"
                                                     TieredChargeLine.SetRange(code, TransType."Staggered Charge Code");
                                                     if TieredChargeLine.FindSet() then begin
                                                         repeat
-                                                            if ("Total TopUp" >= TieredChargeLine."Lower Limit") and ("Total TopUp" <= TieredChargeLine."Upper Limit") then begin
-                                                                if TieredChargeLine."Use Percentage" then begin
-                                                                    TopUpComms := Round("Total TopUp" * (TieredChargeLine.Percentage / 100), 1, '=');
+                                                            if LoanAppcharges."Staggered Charge Code" = '' then begin
+                                                                if LoanAppcharges."Use Percentage" then begin
+                                                                    LoanAppcharges.TestField(Percentage);
+                                                                    TopUpComms := Round((TopUpComms + ("Total TopUp" * (LoanAppcharges.Percentage / 100))), 1, '=');
                                                                 end else begin
-                                                                    TopUpComms := TieredChargeLine."Charge Amount"
+                                                                    LoanAppcharges.TestField("Charge Amount");
+                                                                    TopUpComms := (TopUpComms + LoanAppcharges."Charge Amount")
+                                                                end;
+                                                            end else begin
+                                                                TransType.Reset();
+                                                                TransType.SetRange("Staggered Charge Code", LoanAppcharges."Staggered Charge Code");
+                                                                if TransType.FindFirst() then begin
+
+                                                                    TieredChargeLine.Reset();
+                                                                    TieredChargeLine.SetRange(code, TransType."Staggered Charge Code");
+                                                                    if TieredChargeLine.FindSet() then begin
+                                                                        repeat
+                                                                            if ("Total TopUp" >= TieredChargeLine."Lower Limit") and ("Total TopUp" <= TieredChargeLine."Upper Limit") then begin
+                                                                                if TieredChargeLine."Use Percentage" then begin
+                                                                                    TopUpComms := Round("Total TopUp" * (TieredChargeLine.Percentage / 100), 1, '=');
+                                                                                end else begin
+                                                                                    TopUpComms := TieredChargeLine."Charge Amount"
+                                                                                end;
+                                                                            end;
+                                                                        until TieredChargeLine.Next() = 0;
+                                                                    end;
                                                                 end;
                                                             end;
-                                                        until TieredChargeLine.Next() = 0;
+
+                                                            if LoanAppcharges."Effect Excise Duty" = LoanAppcharges."Effect Excise Duty"::Yes then begin
+                                                                ExciseDuty := Round((ExciseDuty + (TopUpComms * GeneralSetUp."Excise Duty (%)" / 100)), 1, '=');
+                                                            end;
+                                                        until LoanAppcharges.Next = 0;
                                                     end;
+                                                end else begin
+                                                    TopUpComms := 0
                                                 end;
-                                            end;
 
-                                            if LoanAppcharges."Effect Excise Duty" = LoanAppcharges."Effect Excise Duty"::Yes then begin
-                                                ExciseDuty := Round((ExciseDuty + (TopUpComms * GeneralSetUp."Excise Duty (%)" / 100)), 1, '=');
-                                            end;
-                                        until LoanAppcharges.Next = 0;
-                                    end;
-                                end else begin
-                                    TopUpComms := 0
-                                end;
-
-                                BosaAc.Reset();
-                                BosaAc.SetRange("Member No.", "Account No.");
-                                BosaAc.SetRange("Account Category", BosaAc."Account Category"::"Shares Deposit");
-                                if BosaAc.FindFirst() then begin
-                                    BosaAc.CalcFields("Balance (LCY)");
-                                    BalanceLCY := BosaAc."Balance (LCY)";
-                                end;
-                */
+                                                BosaAc.Reset();
+                                                BosaAc.SetRange("Member No.", "Account No.");
+                                                BosaAc.SetRange("Account Category", BosaAc."Account Category"::"Shares Deposit");
+                                                if BosaAc.FindFirst() then begin
+                                                    BosaAc.CalcFields("Balance (LCY)");
+                                                    BalanceLCY := BosaAc."Balance (LCY)";
+                                                end;
+                                */
 
                 if "Outstanding Balance" = 0 then
                     CurrReport.Skip();
@@ -189,7 +189,7 @@ report 50315 "Loans Register"
                 loannumber := loannumber + 1;
 
             end;
-        
+
             trigger OnPostDataItem()
             begin
 

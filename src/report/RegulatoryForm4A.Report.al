@@ -598,7 +598,7 @@ report 50403 "Regulatory Form 4A"
         Amt[21] := 0;
         Amt[22] := 0;
         Amt[23] := 0;
-        AccCount[24] :=0;
+        AccCount[24] := 0;
         AccCount[1] := 0;
         AccCount[2] := 0;
         AccCount[3] := 0;

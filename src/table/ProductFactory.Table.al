@@ -15,7 +15,7 @@ table 50351 "Product Factory"
         {
             Caption = 'Description';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 Description := UpperCase(Description)
@@ -97,7 +97,7 @@ table 50351 "Product Factory"
         {
             Caption = 'Minimum Balance';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 Text0001: Label 'Minimum balance cannot be less than zero.';
@@ -162,7 +162,7 @@ table 50351 "Product Factory"
         field(50035; "Posting Group"; Code[10])
         {
             TableRelation = if ("Account Dimension" = filter(Credit | "Micro Credit" | Loan)) "Customer Posting Group" else
-            if ("Account Dimension" = filter(Banking| Repayment)) "Vendor Posting Group";
+            if ("Account Dimension" = filter(Banking | Repayment)) "Vendor Posting Group";
             Caption = 'Posting Group';
             DataClassification = CustomerContent;
         }
@@ -295,7 +295,7 @@ table 50351 "Product Factory"
         {
             Caption = 'Ordinary Deposits Multiplier';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 "Prefferential Installments" := "Ordinary Default Intallments"
@@ -438,7 +438,7 @@ table 50351 "Product Factory"
         {
             Caption = 'Repayment Frequency';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 fnValidateFrequencyRepay
@@ -550,7 +550,7 @@ table 50351 "Product Factory"
             DataClassification = CustomerContent;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1),
                                                           Blocked = CONST(false));
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(
@@ -565,7 +565,7 @@ table 50351 "Product Factory"
             DataClassification = CustomerContent;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2),
                                                           Blocked = CONST(false));
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(
@@ -578,7 +578,7 @@ table 50351 "Product Factory"
             DataClassification = CustomerContent;
             Editable = false;
             TableRelation = "Dimension Set Entry";
-        
+
             trigger OnValidate()
             begin
                 DimMgt.UpdateGlobalDimFromDimSetID(
@@ -646,7 +646,7 @@ table 50351 "Product Factory"
             Caption = 'Source Link Account';
             DataClassification = CustomerContent;
             OptionMembers = "Member","Non-Member";
-        
+
             trigger OnValidate()
             begin
                 if "Source Account" = "Source Account"::"Non-Member" then begin
@@ -779,7 +779,7 @@ table 50351 "Product Factory"
             Caption = 'Member Segment';
             DataClassification = CustomerContent;
             TableRelation = "Segment/County/Dividend/Signat".Code where(Type = filter(Segment | Religion));
-        
+
             trigger OnValidate()
             var
                 CustSegment: Record "Segment/County/Dividend/Signat";

@@ -3,7 +3,7 @@ page 50976 "Partial Disbursement Schedule"
     PageType = List;
     SourceTable = "Partial Disbursement Schedule";
     ApplicationArea = All;
-    SourceTableView=where("Approval Status"=filter(Open| "Pending Approval"| Approved));
+    SourceTableView = where("Approval Status" = filter(Open | "Pending Approval" | Approved));
     layout
     {
         area(content)

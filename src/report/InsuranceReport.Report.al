@@ -74,9 +74,9 @@ report 50258 "Insurance Report"
                 remperiod := 0;
 
                 IF Loans."Expected Date of Completion" <> 0D THEN Begin
-                remperiod := round((Loans."Expected Date of Completion" - EndDate) / 30, 1, '=');
+                    remperiod := round((Loans."Expected Date of Completion" - EndDate) / 30, 1, '=');
                 end;
-                
+
                 if remperiod < 0 then
                     remperiod := 0;
                 IF MEM.GET(Loans."Account No.") THEN begin

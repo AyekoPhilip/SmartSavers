@@ -132,7 +132,7 @@ page 50787 "Application Picture"
 
     var
         Camera: Codeunit Camera;
-    
+
         CameraAvailable: Boolean;
         OverrideImageQst: Label 'The existing picture will be replaced. Do you want to continue?';
         DeleteImageQst: Label 'Are you sure you want to delete the picture?';

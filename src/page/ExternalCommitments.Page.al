@@ -38,7 +38,7 @@ page 51082 "External Commitments"
                     ApplicationArea = All;
                     Style = StandardAccent;
                     StyleExpr = true;
-                    Editable=false;
+                    Editable = false;
                 }
                 field(Amount; Rec.Amount)
                 {

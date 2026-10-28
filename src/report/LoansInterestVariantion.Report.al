@@ -10,7 +10,7 @@ report 50345 "Loans Interest Variantion"
     {
         dataitem(Loans; Loans)
         {
-            DataItemTableView=where("Approval Status"=const(Posted));
+            DataItemTableView = where("Approval Status" = const(Posted));
             column(AccountName; "Account Name")
             {
             }
@@ -281,22 +281,24 @@ report 50345 "Loans Interest Variantion"
             column(TotalTopUp; "Total TopUp")
             {
             }
-            column(IntRate;IntRate)
+            column(IntRate; IntRate)
             {
-                
+
             }
             trigger OnPreDataItem()
             begin
 
             end;
+
             trigger OnAfterGetRecord()
             begin
-                IntRate:=0;
+                IntRate := 0;
                 if ProdFact.Get(Loans."Product Type") then begin
-                    IntRate:=ProdFact."Interest Rate (Max.)"
+                    IntRate := ProdFact."Interest Rate (Max.)"
                 end;
 
             end;
+
             trigger OnPostDataItem()
             begin
 
@@ -322,8 +324,8 @@ report 50345 "Loans Interest Variantion"
         }
     }
     var
-    ProdFact: Record "Product Factory";
-    IntRate: Decimal;
+        ProdFact: Record "Product Factory";
+        IntRate: Decimal;
 }
 
 

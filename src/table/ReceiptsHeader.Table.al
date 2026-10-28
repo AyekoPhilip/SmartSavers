@@ -8,7 +8,7 @@ table 50313 "Receipts Header"
             Description = 'Stores the code of the receipt in the database';
             DataClassification = CustomerContent;
             Caption = 'No.';
-        
+
             trigger OnValidate()
             begin
                 TestNoSeriesMgt();
@@ -53,7 +53,7 @@ table 50313 "Receipts Header"
             TableRelation = "Bank Account"."No.";
             DataClassification = CustomerContent;
             Caption = 'Bank Code';
-        
+
             trigger OnValidate()
             begin
                 if PayLinesExist then begin
@@ -67,7 +67,7 @@ table 50313 "Receipts Header"
         {
             DataClassification = CustomerContent;
             Caption = 'Received From';
-        
+
             trigger OnValidate()
             begin
 
@@ -95,7 +95,7 @@ table 50313 "Receipts Header"
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1),
                                                           "Dimension Value Type" = CONST(Standard));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Global Dimension 1 Code");
@@ -108,7 +108,7 @@ table 50313 "Receipts Header"
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2),
                                                           "Dimension Value Type" = CONST(Standard));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Shortcut Dimension 2 Code");
@@ -119,7 +119,7 @@ table 50313 "Receipts Header"
             Caption = 'Currency Code';
             TableRelation = Currency;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 CurrencyExchangerates.GetLastestExchangeRate("Currency Code", "Document Date", ExchangeRate);
@@ -207,7 +207,7 @@ table 50313 "Receipts Header"
             Caption = 'Responsibility Center';
             TableRelation = "Responsibility Center";
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if PayLinesExist then begin
@@ -229,7 +229,7 @@ table 50313 "Receipts Header"
             Caption = 'Shortcut Dimension 3 Code';
             Description = 'Stores the reference of the Third global dimension in the database';
             DataClassification = CustomerContent;
-        
+
             trigger OnLookup()
             begin
                 LookupShortcutDimCode(3, "Shortcut Dimension 3 Code");
@@ -250,7 +250,7 @@ table 50313 "Receipts Header"
             Caption = 'Shortcut Dimension 4 Code';
             Description = 'Stores the reference of the Third global dimension in the database';
             DataClassification = CustomerContent;
-        
+
             trigger OnLookup()
             begin
                 LookupShortcutDimCode(4, "Shortcut Dimension 4 Code");
@@ -316,7 +316,7 @@ table 50313 "Receipts Header"
             else
             if ("Account Type" = const(Loan)) "Credit Account" where(Status = const(Active));
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 BankAccounts.Reset;
@@ -342,7 +342,7 @@ table 50313 "Receipts Header"
             TableRelation = "Gen. Journal Batch".Name where("Journal Template Name" = field("Receipt Journal Template"));
             Caption = 'Receipt Journal Batch';
             Editable = false;
-        
+
             trigger OnValidate()
             begin
             end;
@@ -351,7 +351,7 @@ table 50313 "Receipts Header"
         {
             Caption = 'Transaction Options-Credit Receipts';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 RegMngt: Codeunit "Register Management";
@@ -362,7 +362,7 @@ table 50313 "Receipts Header"
         field(50049; "Accrue Interest"; Boolean)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 RegMngt: Codeunit "Register Management";
@@ -381,7 +381,7 @@ table 50313 "Receipts Header"
             Editable = false;
             TableRelation = "Dimension Set Entry";
             DataClassification = CustomerContent;
-        
+
             trigger OnLookup()
             begin
                 ShowDimensions
@@ -401,7 +401,7 @@ table 50313 "Receipts Header"
         {
             DataClassification = CustomerContent;
             Caption = 'Group Code';
-        
+
             trigger OnValidate()
             begin
                 if Members.Get("Group Code") then
@@ -418,7 +418,7 @@ table 50313 "Receipts Header"
         {
             DataClassification = CustomerContent;
             Caption = 'Bank Transction No';
-        
+
             trigger OnValidate()
             var
 
@@ -435,7 +435,7 @@ table 50313 "Receipts Header"
         {
             DataClassification = CustomerContent;
             Caption = 'Email';
-        
+
             trigger OnValidate()
             begin
 
@@ -446,7 +446,7 @@ table 50313 "Receipts Header"
             DataClassification = CustomerContent;
             TableRelation = Member where(Status = filter(Active | Dormant | New | Defaulter));
             Caption = 'Member No.';
-        
+
             trigger OnValidate()
             Var
                 RegMgt: Codeunit "Register Management";
@@ -478,7 +478,7 @@ table 50313 "Receipts Header"
         {
             DataClassification = CustomerContent;
             Caption = 'From Prepayment';
-        
+
             trigger OnValidate()
             begin
 
@@ -510,7 +510,7 @@ table 50313 "Receipts Header"
             Caption = 'Copy Receipt No.';
             DataClassification = CustomerContent;
             TableRelation = "Receipts Header"."No." where("Member No." = field("Member No."), Posted = const(true));
-        
+
             trigger OnValidate()
             var
                 ReceiptHeader: Record "Receipts Header";
@@ -627,13 +627,13 @@ table 50313 "Receipts Header"
 
         if "No." <> xRec."No." then
             if not RecRefHeader.Get(Rec."No.") then begin
-                 GenLedgerSetup.Get();
+                GenLedgerSetup.Get();
                 NoSeriesMgt.TestManual(GenLedgerSetup."Receipt Nos");
                 "No. Series" := '';
             end;
     end;
 
-[IntegrationEvent(false, false)]
+    [IntegrationEvent(false, false)]
     local procedure OnBeforeTestNoSeries(var RecRef: Record "Receipts Header"; xRecRef: Record "Receipts Header"; var IsHandled: Boolean)
     begin
     end;

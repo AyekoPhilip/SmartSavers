@@ -91,7 +91,7 @@ codeunit 50037 "Gen.Jnl.-Post Line"
         LnPostCharges: Record "Loan Charge Posted";
         Applic: Record "Loan Application";
         ErrorOnMissingCharges: Label 'Topup Charges details missing on this application which attracts topup charges.';
-AccrualMgt: Codeunit LoanAccrualMgt;
+        AccrualMgt: Codeunit LoanAccrualMgt;
     begin
         RecRef.fnTestFields;
         PassDocumentNo;
@@ -310,7 +310,7 @@ AccrualMgt: Codeunit LoanAccrualMgt;
                 begin
                     if LnApplic.Get(RecRef."Application No.") then
                         LnApplic.CalcFields("Accrued Interest");
-                    AccruedInt := AccrualMgt.CalculateAccruedInterestAtDate(RecRef."No.",PostingDate);
+                    AccruedInt := AccrualMgt.CalculateAccruedInterestAtDate(RecRef."No.", PostingDate);
                     Linenum := Linenum + 1000;
                     Linenum := PerformPostOnUpfrontInt(RecRef."No.", RecRef."No.",
                     PostingDate, Dim1, Dim2, Jtemplate, JBatch, AccruedInt,
@@ -642,7 +642,7 @@ AccrualMgt: Codeunit LoanAccrualMgt;
                             GenJournal.Validate("Account No.", RecRef."Disbursement Account No.");
                             GenJournal."External Document No." := RecRef."Account No.";
                             GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());
-                                if LoanProdCharges."Staggered Charge Code" = '' then begin
+                            if LoanProdCharges."Staggered Charge Code" = '' then begin
                                 if LoanProdCharges."Use Percentage" then begin
                                     if Round(((LoanChargePosted.Percentage / 100) * ChargeAmt[2]), 1, '=') < LoanChargePosted.Minimum then begin
                                         GenJournal.Validate(Amount, LoansTopupPosted.GetPayableCommission());

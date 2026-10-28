@@ -7,7 +7,7 @@ table 50008 "Payments Header"
         {
             DataClassification = CustomerContent;
             Caption = 'No.';
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
@@ -18,7 +18,7 @@ table 50008 "Payments Header"
             Editable = false;
             DataClassification = CustomerContent;
             Caption = 'Date';
-        
+
             trigger OnValidate()
             begin
 
@@ -42,7 +42,7 @@ table 50008 "Payments Header"
                                                                                                               Cancelled = const(false));
             DataClassification = CustomerContent;
             Caption = 'Cheque No';
-        
+
             trigger OnValidate()
             begin
 
@@ -120,7 +120,7 @@ table 50008 "Payments Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(1));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 1 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(1, "Shortcut Dimension 1 Code");
@@ -132,7 +132,7 @@ table 50008 "Payments Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(2));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 2 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(2, "Shortcut Dimension 2 Code");
@@ -157,7 +157,7 @@ table 50008 "Payments Header"
             if ("Payment Type" = filter(Normal)) "Bank Account" where("Bank Type" = filter(Normal));
             DataClassification = CustomerContent;
             Caption = 'Paying Bank Account';
-        
+
             trigger OnValidate()
             begin
                 if Bank.Get("Paying Bank Account") then begin
@@ -182,7 +182,7 @@ table 50008 "Payments Header"
             TableRelation = Currency;
             DataClassification = CustomerContent;
             Caption = 'Currency';
-        
+
             trigger OnValidate()
             begin
 
@@ -213,7 +213,7 @@ table 50008 "Payments Header"
             else if ("Account Type" = const(Vendor)) Vendor;
             DataClassification = CustomerContent;
             Caption = 'Account No.';
-        
+
             trigger OnValidate()
             begin
                 case "Account Type" of
@@ -265,7 +265,7 @@ table 50008 "Payments Header"
         {
             DataClassification = CustomerContent;
             Caption = 'Applies- To Doc No.';
-        
+
             trigger OnLookup()
             begin
 
@@ -314,7 +314,7 @@ table 50008 "Payments Header"
             Caption = 'Responsibility Center';
             TableRelation = "Responsibility Center";
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -371,7 +371,7 @@ table 50008 "Payments Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(3));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 3 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(3, "Shortcut Dimension 3 Code");
@@ -406,7 +406,7 @@ table 50008 "Payments Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(4));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 4 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(4, "Shortcut Dimension 4 Code");
@@ -418,7 +418,7 @@ table 50008 "Payments Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(5));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 5 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(5, "Shortcut Dimension 5 Code");
@@ -430,7 +430,7 @@ table 50008 "Payments Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(6));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 6 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(6, "Shortcut Dimension 6 Code");
@@ -442,7 +442,7 @@ table 50008 "Payments Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(7));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 7 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(7, "Shortcut Dimension 7 Code");
@@ -454,7 +454,7 @@ table 50008 "Payments Header"
             TableRelation = "Dimension Value".Code where("Global Dimension No." = const(8));
             DataClassification = CustomerContent;
             Caption = 'Shortcut Dimension 8 Code';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(8, "Shortcut Dimension 8 Code");
@@ -465,7 +465,7 @@ table 50008 "Payments Header"
             TableRelation = "Dimension Set Entry";
             DataClassification = CustomerContent;
             Caption = 'Dimension Set ID';
-        
+
             trigger OnValidate()
             begin
                 ValidateShortcutDimCode(8, "Shortcut Dimension 8 Code");

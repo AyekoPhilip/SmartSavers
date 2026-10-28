@@ -41,17 +41,17 @@ page 50782 "Next of KIN Application"
                     ShowMandatory = true;
                     ApplicationArea = All;
                 }
-                field("Application No.";Rec."Application No.")
+                field("Application No."; Rec."Application No.")
                 {
                     ShowMandatory = true;
                     ApplicationArea = All;
-                    Editable=false;
+                    Editable = false;
 
                 }
-                field("Account No";Rec."Account No")
+                field("Account No"; Rec."Account No")
                 {
                     ShowMandatory = true;
-                    Editable=false;
+                    Editable = false;
                     ApplicationArea = All;
 
                 }

@@ -8,7 +8,7 @@ table 50365 "Account Application"
             Caption = 'No.';
             SQLDataType = Varchar;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
@@ -18,7 +18,7 @@ table 50365 "Account Application"
         {
             Caption = 'Name';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if ("Search Name" = UpperCase(xRec.Name)) or ("Search Name" = '') then
@@ -131,7 +131,7 @@ table 50365 "Account Application"
                                                      Status = CONST(Active), "Auto Open Account" = const(false));
             Caption = 'Product Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 ProductApplicationDocuments: Record "Product Documents";
@@ -197,7 +197,7 @@ table 50365 "Account Application"
         {
             Caption = 'Birth Certificate No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 if "Birth Certificate No." <> '' then begin
@@ -253,7 +253,7 @@ table 50365 "Account Application"
             TableRelation = "Fixed Deposit Type" WHERE(Blocked = CONST(false));
             Caption = 'Fixed Deposit Type';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Application Date");
@@ -274,7 +274,7 @@ table 50365 "Account Application"
         {
             Caption = 'Monthly Contribution';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
             end;
@@ -289,7 +289,7 @@ table 50365 "Account Application"
             Editable = false;
             Caption = 'Negotiated Interest Rate';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 FDTypes: Record "Fixed Deposit Type";
@@ -313,7 +313,7 @@ table 50365 "Account Application"
         {
             Caption = 'FD Duration';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 "FD Maturity Date" := CalcDate("FD Duration", "Application Date");
@@ -343,7 +343,7 @@ table 50365 "Account Application"
             Editable = false;
             Caption = 'Application Date';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Application Date", Today);
@@ -360,7 +360,7 @@ table 50365 "Account Application"
         {
             Caption = 'Fixed Deposit Amount';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 FDCalcRules.Reset;
@@ -404,10 +404,10 @@ table 50365 "Account Application"
         field(50051; "Member No."; Code[20])
         {
             DataClassification = CustomerContent;
-            TableRelation = if ("Document Type" = filter("New Account")) Member."No." where(Status = filter(Active| New)) else
+            TableRelation = if ("Document Type" = filter("New Account")) Member."No." where(Status = filter(Active | New)) else
             if ("Document Type" = filter("Kin Details")) Member."No." where(Status = filter(Active | Deceased));
             Caption = 'Member No.';
-        
+
             trigger OnValidate()
             begin
                 if Cust.Get("Member No.") then begin
@@ -425,7 +425,7 @@ table 50365 "Account Application"
         {
             DataClassification = CustomerContent;
             Caption = 'Date of Birth';
-        
+
             trigger OnValidate()
             var
                 GeneralSetUp: Record "General Set-Up";
@@ -468,7 +468,7 @@ table 50365 "Account Application"
                                                            "Approval Status" = FILTER(Deffered | Open),
                                                            Created = CONST(false));
             Caption = 'CRM Application No.';
-        
+
             trigger OnValidate()
             begin
                 Varvariant := Rec;
@@ -482,7 +482,7 @@ table 50365 "Account Application"
         field(50058; "ID No."; Code[50])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 Cred: Record "Account Banking";
@@ -503,7 +503,7 @@ table 50365 "Account Application"
         field(50060; "Mobile Phone"; Code[50])
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 Cred: Record "Account Banking";
@@ -521,7 +521,7 @@ table 50365 "Account Application"
         {
             Caption = 'E-Mail';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 MailManagement: Codeunit "Mail Management";
@@ -553,7 +553,7 @@ table 50365 "Account Application"
             IF (Nationality = FILTER(<> '')) "Post Code";
             ValidateTableRelation = false;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 PostCode.ValidatePostCode(City, "Post Code", "Country/Region", Nationality, (CurrFieldNo <> 0) and GuiAllowed);
@@ -567,7 +567,7 @@ table 50365 "Account Application"
             else
             if ("Country/Region" = filter(<> '')) "Post Code".City where("Country/Region Code" = field("Country/Region"));
             ValidateTableRelation = false;
-        
+
             trigger OnValidate()
             begin
                 PostCode.ValidateCity(City, "Post Code", "Country/Region", Nationality, (CurrFieldNo <> 0) and GuiAllowed);
@@ -579,7 +579,7 @@ table 50365 "Account Application"
             Editable = true;
             Caption = 'Country/Region';
             TableRelation = "Country/Region";
-        
+
             trigger OnValidate()
             var
                 CountryCode: Record "Country/Region";
@@ -606,7 +606,7 @@ table 50365 "Account Application"
         {
             DataClassification = CustomerContent;
             TableRelation = if ("Document Type" = filter("Kin Details")) "Next of KIN".Name where("Account No" = field("Member No."));
-        
+
             trigger OnValidate()
             var
                 Applic: Record "Account Application";
@@ -649,7 +649,7 @@ table 50365 "Account Application"
         field(50073; "Response"; Integer)
         {
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 case Response of

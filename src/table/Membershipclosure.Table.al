@@ -10,7 +10,7 @@
         {
             Caption = 'No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestNoSeries();
@@ -25,7 +25,7 @@
             if ("Close Account" = const(Specific), "Closure Type" = filter("Withdrawal - Death")) Member where(Status = filter(Deceased));
             Caption = 'Member No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 RegMgt: Codeunit "Register Management";
@@ -232,7 +232,7 @@
         {
             Caption = 'Total Interest';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 Validate("Loans Option");
@@ -253,7 +253,7 @@
             Caption = 'Closure Type';
             DataClassification = CustomerContent;
             ValuesAllowed = 0, 1, 2, 4;
-        
+
             trigger OnValidate()
             begin
 
@@ -301,7 +301,7 @@
             OptionMembers = " ","All","Specific";
             Caption = 'Close Account';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 Regmnt: Codeunit "Register Management";
@@ -476,7 +476,7 @@
             Caption = 'Loans Option';
             DataClassification = CustomerContent;
             Editable = false;
-        
+
             trigger OnValidate()
             begin
                 GenSetup.Get;
@@ -503,7 +503,7 @@
         {
             Caption = 'Benevolent Fund';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 Validate("Loans Option");
@@ -530,7 +530,7 @@
                                                                     "Approval Status" = CONST(Approved));
             Caption = 'Notice No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 PFact: Record "Product Factory";
@@ -594,7 +594,7 @@
             Editable = false;
             Caption = 'Shares Capital';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 Validate("Loans Option");
@@ -606,7 +606,7 @@
                                                "Outstanding Balance" = FILTER(> 0));
             Caption = 'Loan No.';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
                 TestField("Total Interest")
@@ -674,7 +674,7 @@
             OptionMembers = " ","Membership Closure","Account Closure";
             OptionCaption = ' ,Membership Withdrawal,Account Closure';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -706,7 +706,7 @@
             TableRelation = if ("Account Dimension" = const(Banking)) "Account Banking"."No." where(Blocked = const(" "), "Member No." = field("Member No."),
             Status = filter(Active | New | Dormant | Defaulter), "Account Category" = filter(Junior | "Money Market" | "Women Savings" | "Specialty Savings" | "Islamic Banking")) else
             if ("Account Dimension" = filter(Credit)) "Account Credit"."No." where(Blocked = const(" "), "Member No." = field("Member No."), "Account Category" = filter("Benevolent Fund"), Status = filter(Active | New | Dormant | Defaulter));
-        
+
             trigger OnValidate()
             var
                 FosaAc: Record "Account Banking";
@@ -738,7 +738,7 @@
 
             if ("Destination Type" = const(credit), "Transfer Type" = const(Other)) Member."No.";
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             var
                 FosaAc: Record "Account Banking";
@@ -751,7 +751,7 @@
         {
             Caption = 'Transfer To';
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             Var
                 AccountB: Record "Account Banking";
@@ -776,7 +776,7 @@
             Editable = false;
             ValuesAllowed = 1, 4;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -786,7 +786,7 @@
         {
             Editable = false;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -806,7 +806,7 @@
             ("Account Type" = const(Vendor)) Vendor else
             if
             ("Account Type" = const(Savings)) "Account Banking";
-        
+
             trigger OnValidate()
             var
                 BankAccount: Record "Bank Account";
@@ -836,7 +836,7 @@
         {
             Editable = false;
             DataClassification = CustomerContent;
-        
+
             trigger OnValidate()
             begin
 
@@ -848,7 +848,7 @@
             "Member No." = field("Member No."));
             DataClassification = CustomerContent;
             Caption = 'Destination A/c';
-        
+
             trigger OnValidate()
             begin
 
@@ -859,7 +859,7 @@
             TableRelation = "Cust. Bank Account".Code where("Member No." = field("Member No."));
             DataClassification = CustomerContent;
             Caption = 'Pay Point';
-        
+
             trigger OnValidate()
             var
                 AccBanking: Record "Account Banking";
@@ -894,7 +894,7 @@
             DataClassification = CustomerContent;
             TableRelation = "Bank Account";
             Caption = 'EFT Bank Account';
-        
+
             trigger OnValidate()
             begin
                 TestField("Closure Type", "Closure Type"::"Withdrawal - Death");
@@ -905,7 +905,7 @@
             DataClassification = CustomerContent;
             Caption = 'Sum Insured';
             Editable = false;
-        
+
             trigger OnValidate()
             begin
 
@@ -981,7 +981,7 @@
             DataClassification = CustomerContent;
             Caption = 'Cheque Type';
         }
-    
+
         field(50069; "Net Amount"; Decimal)
         {
             Editable = false;

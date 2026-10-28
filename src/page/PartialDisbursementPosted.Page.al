@@ -20,7 +20,7 @@ page 51090 "Partial Disbursement-Posted"
                 {
                     ToolTip = 'Specifies the value of the Entry No field.';
                 }
-                field("Loan No.";Rec."Loan No.")
+                field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = All;
                     Style = StandardAccent;
